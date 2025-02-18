@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91933f7b0b00be04da654b39b494a8fb, type: 3}
+  m_Name: MainGamemode
+  m_EditorClassIdentifier: 
+  _name: MainGamemode
+  _nameID: MainGamemode
+  _isLegitimate: 0
+  _skipPreplayState: 0
+  _disableIntroMessage: 0
+  _disableCutScenes: 0
+  _saveOnSessionEnd: 0
+  _allowCheckpoints: 0
+  _saveHighestPointOnly: 1

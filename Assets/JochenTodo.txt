@@ -1,0 +1,32 @@
+
+
+
+
+
+- What is really missing now is a proper chase sequence (monster comes -> boat speeds up (player interaction) and when close monster attacks boat (not the player), players attack the monster to slow it down!)
+- If something still feels missing its probably the fact that there is no exploration and progression in the environment, this will require some creative ideas, but this will be a thing for almost all singleplayer and coop horror games
+
+- What if you have to dive for stuff instead? With a suit and everything, maybe some underwater light
+    -> The monster would be under water first untill close?
+
+- What if we add way more trash/env and small little islands and have actual obstacles and more of an epxloration feel?
+
+- Doesnt the fun in these kind of games come from story, progression and content?
+    -> Mechanic wise there often isnt that much? Atleast by themselves they serve little purpose and depend on the content for them to be any fun
+
+
+
+- Hash error?
+
+
+
+* Idea 1
+
+Lanterns
+
+-> Stranded on a mysterious dark and foggy island, with only a lantern to protect players from the dark and whatever lurks there, find a way too escape
+-> Lanterns need oil/fuel/... to remain lit and bright. They not only show the path and environment but once your lantern gets too small monsters will come closer and try to get ya
+-> Stay together for more light? Or split up for more efficient resource collection...
+
+
+* Idea 2
