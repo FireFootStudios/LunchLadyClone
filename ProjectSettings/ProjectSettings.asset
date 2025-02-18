@@ -932,10 +932,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: d696d315-8c4b-45e9-85fe-e34f1cf6f121
+  cloudProjectId: 5c104868-dd06-43b5-ad18-ec916d4721b9
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ScaryRaft
+  projectName: LLClone
   organizationId: fifost
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
