@@ -106,8 +106,31 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         base.OnNetworkSpawn();
 
         // Network scene load complete
+        NetworkManager.Singleton.SceneManager.OnLoad += OnNetworkSceneLoad;
         NetworkManager.Singleton.SceneManager.OnLoadComplete += OnNetworkSceneLoadComplete;
         NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnNetworkSceneLoadCompleteAllClients;
+    }
+
+    public void SpawnPlayersNetwork()
+    {
+        if (!IsHost) return;
+
+        // SPAWN PLAYERS
+        List<Transform> spawnTs = SceneData.PlayerSpawnTs;
+
+        var clientIDs = NetworkManager.Singleton.ConnectedClientsIds;
+        for (int i = 0; i < clientIDs.Count; i++)
+        {
+            ulong clientID = clientIDs[i];
+            Transform spawnT = spawnTs[i];
+
+            PlayerN player;
+            if (spawnT) player = Instantiate(_playerNetworkingSpawnTemplate, spawnT);
+            else player = Instantiate(_playerNetworkingSpawnTemplate);
+
+            if (player.TryGetComponent(out NetworkObject networkObject)) networkObject.SpawnAsPlayerObject(clientID, true);
+            else Debug.LogError("Player networking template has not network object component!");
+        }
     }
 
     private void Init()
@@ -147,9 +170,14 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         SoundManager.Instance.PlaySound(_onSessionStartSFX);
     }
 
+    private void OnNetworkSceneLoad(ulong clientId, string sceneName, LoadSceneMode loadSceneMode, AsyncOperation asyncOperation)
+    {
+        Debug.Log("Client " + clientId + " started loading scene.");
+    }
+
     private void OnNetworkSceneLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
     {
-        Debug.Log("Client " + clientId + "Finished loading scene!");
+        Debug.Log("Client " + clientId + " finished loading scene!");
     }
 
     private void OnNetworkSceneLoadCompleteAllClients(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
@@ -284,20 +312,17 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
 
     public async Task<bool> TrySceneChangeNetworkAsync<T>(string sceneName, bool allowReEnter = false, bool skipStartTrans = false) where T : GameState
     {
-        return await TrySceneChangeNetworkAsync(sceneName, GetState<T>(), allowReEnter, skipStartTrans);
+        return await TrySceneChangeNetworkAsync(sceneName, allowReEnter, skipStartTrans);
     }
 
-    public async Task<bool> TrySceneChangeNetworkAsync(string scenename, GameState state = null, bool allowReEnter = false, bool skipStartTrans = false)
+    public async Task<bool> TrySceneChangeNetworkAsync(string scenename, bool allowReEnter = false, bool skipStartTrans = false)
     {
         if (!CanSceneChange()) return false;
 
         if (NetworkManager.Singleton.SceneManager == null) return false;
 
-        // Check if can change state if one is passed
-        if (state && !CanChangeState(state, allowReEnter)) return false;
-
         // Async scene change
-        await ChangeSceneNetworkAsync(scenename, state, allowReEnter, skipStartTrans);
+        await ChangeSceneNetworkAsync(scenename, allowReEnter, skipStartTrans);
 
         return true;
     }
@@ -362,94 +387,32 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         //yield return null;
     }
 
-    // Use the network scenemanager
-    public async Task ChangeSceneNetworkAsync(string scenename, GameState state = null, bool allowReEnter = false, bool skipStartTrans = false)
+    // Use the network scenemanager, this only works for the host as he has to initiate the scene load and others will automatically follow it. Yes this really sucks but ey
+    public async Task ChangeSceneNetworkAsync(string scenename, bool allowReEnter = false, bool skipStartTrans = false)
     {
+        if (!_playerNetworkingSpawnTemplate)
+        {
+            Debug.LogError("No player template to spawn players with!");
+            return;
+        }
+
+        // Only host is allowed to change scenes on the network
+        if (!IsHost) return;
+
         // Make sure to indicate we are changing scenes here 
         SceneChanging = true;
 
         // Will be set to true trough callback
         _networkSceneLoaded = false;
 
-        // If playing state, make sure to unpause as otherwise the loading will be stuck DO THIS BEFORE GAME LOCK :D
-        if (CurrentState == _playingState) _playingState.SetPause(false);
-
-        // Start game lock
-        StartGameLock(true, true, true);
-
-        // SFX
-        SoundManager.Instance.PlaySound(_onSceneChangeStartSFX);
-
-        // Start transition (wait for finish)
-        if (_sceneChangeStartTrans && !skipStartTrans)
-        {
-            //TransitionManager.Instance.DoTransition(_sceneChangeStartTrans, out PlayableDirector director);
-            //if (director) yield return new WaitUntil(() => director.state != PlayState.Playing);
-        }
-
-        // Invoke before load new scene (which is assumed to be called the same frame as this function)
-        OnSceneChangeStart?.Invoke(scenename);
-
         // Start scene change
         NetworkManager.Singleton.SceneManager.LoadScene(scenename, LoadSceneMode.Single);
-       
 
-        // wait untill it is loaded
+        // Wait untill it is loaded
         while (!_networkSceneLoaded)
             await Awaitable.NextFrameAsync();
 
-        // Wait till done
-        //yield return new WaitUntil(() => _sceneChangeOperation.isDone);
-
-        // SFX
-        SoundManager.Instance.PlaySound(_onSceneChangeEndSFX);
-
-        // Ending transition
-        if (_sceneChangeEndingTrans)
-        {
-            //TransitionManager.Instance.DoTransition(_sceneChangeEndingTrans, out PlayableDirector director);
-            //if (director) yield return new WaitUntil(() => director.state != PlayState.Playing);
-        }
-
-        // End game lock
-        EndGameLock(false);
-
-        // Optionally change state
-        if (state) SwitchState(state, allowReEnter);
-
-        // Force a hard reset, this is needed to tell the current gamemode we are in a totally new scene (as example beginner mode only resets partially otherwise sincee it uses checkpoints)
-        //if (CurrentGameMode) CurrentGameMode.TryResetSession(true);
-
-        // End
-        //_sceneChangeOperation = null;
         SceneChanging = false;
-        OnSceneChangeFinish?.Invoke(scenename);
-
-        // Spawn in players
-        if (_playerNetworkingSpawnTemplate) 
-        {
-            List<Transform> spawnTs = SceneData.PlayerSpawnTs;
-
-            var clientIDs = NetworkManager.Singleton.ConnectedClientsIds;
-            for (int i = 0; i < clientIDs.Count; i++)
-            {
-                ulong clientID = clientIDs[i];
-                Transform spawnT = spawnTs[i];
-
-                PlayerN player = null;
-                if (spawnT) player = Instantiate(_playerNetworkingSpawnTemplate, spawnT);
-                else player = Instantiate(_playerNetworkingSpawnTemplate);
-
-                if (player.TryGetComponent(out NetworkObject networkObject)) networkObject.SpawnAsPlayerObject(clientID, true);
-                else Debug.LogError("Player networking template has not network object component!");
-            }
-        }
-        else Debug.LogError("No player template to spawn players with!");
-
-        // Ended transition
-        //TransitionManager.Instance.DoTransition(_sceneChangeEndedTrans, out _);
-
-        //yield return null;
     }
 
     public bool CanChangeState<T>(bool allowReEnter = false) where T : GameState
@@ -494,6 +457,28 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         GameStateChanging = false;
 
         return true;
+    }
+
+    public bool SwitchState(GameStateID stateID, bool allowReEnter = false)
+    {
+        // Find state wth id
+        GameState state = _gameStates.Find(s => s.ID == stateID);
+        if (!state)
+        {
+            Debug.LogError("State with ID " + stateID.ToString() + " not found on the gamemanager!");
+            return false;
+        }
+
+        SwitchState(state, allowReEnter);
+
+        return true;
+    }
+
+    // Host/Server calls this to have ALL clients switch state appropriatly
+    [ClientRpc]
+    public void SwitchStateClientRpc(GameStateID stateID, bool allowReEnter = false)
+    {
+        SwitchState(stateID, allowReEnter);
     }
 
     public bool TrySwitchState<T>(bool allowReEnter = false) where T : GameState

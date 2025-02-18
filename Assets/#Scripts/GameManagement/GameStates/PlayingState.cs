@@ -54,11 +54,11 @@ public sealed class PlayingState : GameState
         SetPause(false);
 
         //Will not be execute if already in session, in that case something probably went wrong
-        if (!_gameManager.CurrentGameMode.TryStartSession())
-        {
-            Debug.Log("Could not start session on entering playing state, this is not ideal");
-            _gameManager.CurrentGameMode.TryResetSession();
-        }
+        //if (!_gameManager.CurrentGameMode.TryStartSession())
+        //{
+        //    Debug.Log("Could not start session on entering playing state, this is not ideal");
+        //    _gameManager.CurrentGameMode.TryResetSession();
+        //}
     }
 
     public override void OnExit()

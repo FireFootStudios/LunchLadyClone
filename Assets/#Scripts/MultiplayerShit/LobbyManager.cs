@@ -30,7 +30,9 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
     private bool _initialized = false;
     private bool _initializing = false;
 
-    public Lobby CurrentLobby {  get { return _currentLobby; } }
+    public Lobby CurrentLobby {  get { return _currentLobby; } } 
+    public List<Lobby> FoundLobbies { get; private set; }
+
     public bool IsHost { get; private set; }
 
 
@@ -61,8 +63,6 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
 
             // Finally, start host
             bool startHost = NetworkManager.Singleton.StartHost();
-
-
 
             // Get relay code for allowing users to join
             string relayCode = await GetRelayJoinCode(allocation);
@@ -141,6 +141,46 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
         try
         {
             _currentLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
+
+            if (_debug && _currentLobby != null) Debug.Log("Succesfully joined lobby now containing a total of " + _currentLobby.Players.Count + " players!");
+            else if (_debug && _currentLobby == null) Debug.LogError("Failed to join lobby!");
+
+            // Get relay join code from lobby data
+            string relayJoinCode = _currentLobby.Data[RelayJoinCodeKey].Value;
+            Debug.Log("Relay join code: " + relayJoinCode);
+
+            JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
+
+            // Set relay server data
+            SetRelayClientData(joinAllocation);
+
+            // Start client
+            NetworkManager.Singleton.StartClient();
+
+            IsHost = false;
+
+            if (_currentLobby != null) return true;
+        }
+        catch (LobbyServiceException ex)
+        {
+            Debug.LogError(ex);
+        }
+
+        return false;
+    }
+
+    public async Task<bool> Join(string lobbyID )
+    {
+        await InitIfNeeded();
+
+        if (string.IsNullOrEmpty(lobbyID)) return false;
+
+        // Return while in a lobby already for now
+        if (_currentLobby != null) return false;
+
+        try
+        {
+            _currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyID);
 
             if (_debug && _currentLobby != null) Debug.Log("Succesfully joined lobby now containing a total of " + _currentLobby.Players.Count + " players!");
             else if (_debug && _currentLobby == null) Debug.LogError("Failed to join lobby!");
@@ -362,6 +402,8 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
 
             QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync(options);
             Debug.Log("Lobby list response with a total of " + response.Results.Count + " open lobbies found!");
+
+            FoundLobbies = response.Results;
             return true;
         }
         catch (LobbyServiceException ex)

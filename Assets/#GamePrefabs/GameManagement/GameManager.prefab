@@ -161,9 +161,9 @@ GameObject:
   - component: {fileID: 4347845134928815887}
   - component: {fileID: 8828647385515271290}
   - component: {fileID: 5525138080666466461}
-  - component: {fileID: 3945995370534579579}
   - component: {fileID: 5846693197597074519}
   - component: {fileID: 6914812828513211630}
+  - component: {fileID: 3945995370534579579}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3933301305
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 8
@@ -313,19 +313,6 @@ MonoBehaviour:
     fadeOut: 0
     maxDuration: 0
     cooldown: 0
---- !u!114 &3945995370534579579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177278367412895181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec3fa63ad0847b4f9e846c60de2bac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _HUD: {fileID: 7531021611709943756}
 --- !u!114 &5846693197597074519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HUD: {fileID: 2288843804728029052}
+  _ID: 1
 --- !u!114 &6914812828513211630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +340,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HUD: {fileID: 7231621326048850068}
+  _ID: 2
+--- !u!114 &3945995370534579579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177278367412895181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec3fa63ad0847b4f9e846c60de2bac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HUD: {fileID: 7531021611709943756}
+  _ID: 3
 --- !u!1 &3584707176286033410
 GameObject:
   m_ObjectHideFlags: 0

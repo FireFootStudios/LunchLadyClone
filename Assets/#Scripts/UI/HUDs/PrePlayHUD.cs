@@ -48,25 +48,24 @@ public sealed class PrePlayHUD : MonoBehaviour
     {
         if (!_toLoadLevel) return;
 
-        // Only host is allowed to startf
+        // Only host is allowed to start
         if (!LobbyManager.Instance.IsHost) return;
 
-        // Start host/client
-        //bool succesNetwork = false;
-        //if (LobbyManager.Instance.IsHost) succesNetwork = NetworkManager.Singleton.StartHost();
-        //else succesNetwork = NetworkManager.Singleton.StartClient();
-
-        // Network fail?
-        //if (!succesNetwork) return;
-
-
+        // Try to load scene for all players 
         bool succes = await GameManager.Instance.TrySceneChangeNetworkAsync<PlayingState>(_toLoadLevel.SceneName);
         if (!succes) return;
 
+        // Switch state sync
+        GameManager.Instance.SwitchStateClientRpc(GameStateID.playing, false);
+
+        // Start gamemode sync (all player should have a gamemode session start)
+        //CurrentGameMode.TryStartSession();
+
+        // Spawn Players
+        GameManager.Instance.SpawnPlayersNetwork();
+
         // Clean up lobby, this is no longer needed (apparently)
         bool succesfulDelete = await LobbyManager.Instance.DeleteLobby();
-        
-        // Start game...
     }
 
     // For now we wait here

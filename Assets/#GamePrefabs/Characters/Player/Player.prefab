@@ -132,9 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetMode: 0
-  _jumpForceMin: {x: 0, y: 7, z: 0}
-  _jumpForceMax: {x: 0, y: 7, z: 0}
-  _coyoteTime: 0.3
+  _jumpForceMin: {x: 0, y: 6, z: 0}
+  _jumpForceMax: {x: 0, y: 6, z: 0}
+  _coyoteTime: 0.1
   _needsGrounded: 1
   _resetYVel: 1
   _moveModOnJump:
@@ -238,6 +238,7 @@ MonoBehaviour:
   _health: {fileID: 1279222214755286175}
   _movement: {fileID: 3453840779508927411}
   _visuals: {fileID: 6659949989822315334}
+  _ignoreMultiplayer: 0
   _enableFlyModeBuild: 0
   _enableScreenshotBuild: 0
   _enableTPBuild: 0
@@ -863,7 +864,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eec3436d93b3914bbac27e938016015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _amountOfWood: {fileID: 0}
+  _amountOfScrap: {fileID: 0}
+  _amountOfPlastic: {fileID: 0}
   _pickupDistance: 3
+  _Raft: {fileID: 0}
 --- !u!1 &4773638158655431949
 GameObject:
   m_ObjectHideFlags: 0

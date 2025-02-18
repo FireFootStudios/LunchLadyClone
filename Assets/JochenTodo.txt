@@ -4,6 +4,18 @@
 
 
 
+- When host starts
+	-> sync gamemode (clients need to know gamemode started)
 
-- Hash error?
 
+
+
+
+
+
+* Test monster network chase AI
+
+
+Start before synchronization complete (maybe it just got stuck)
+	-> Hash error
+[Netcode] renderTime was before m_StartTimeConsumed. This should never happen. renderTime is 49.9632010023001, m_StartTimeConsumed is 49.9666666666667
