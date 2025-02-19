@@ -16,7 +16,7 @@ public sealed class EndState : GameState
         //Needs to happen after session result is created
         //_gameManager.CurrentGameMode.TryEndSession(SessionResult);
 
-        _player = _gameManager.SceneData.Player;
+        // = _gameManager.SceneData.Player;
 
         //disable player input
         //_gameManager.SceneData.Player.DisableMoveInput = true;

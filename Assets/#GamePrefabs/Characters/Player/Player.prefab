@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 6003022489743103240}
   - component: {fileID: 6445643330553603556}
   - component: {fileID: 910366206176634523}
-  - component: {fileID: 4597944271449191195}
+  - component: {fileID: 6857161997436102270}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -542,24 +542,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 4119895581923978553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6040754bb15f84bb163b6a058192e4, type: 3}
+  m_Script: {fileID: 11500000, guid: dd6c3724cf917f448b3bba8fee61788a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _moveData:
   - MoveType: 0
     MoveID: 0
     maxSpeed: 5
-    acceleration: 40
+    acceleration: 50
     deceleration: 40
     gravity: 0
     canMoveVertical: 0
     useSpeedBounds: 1
-    speedBounds: {x: 0.65, y: 1}
+    speedBounds: {x: 0.5, y: 1}
     maxSpeedBuffer: 0
-    maxSpeedBufferAcceleration: 0
-    maxSpeedBufferDeceleration: 0
-    maxSpeedBufferMinTime: 0
-    maxSpeedBufferAccuracy: 0
+    maxSpeedBufferAcceleration: 2
+    maxSpeedBufferDeceleration: 3
+    maxSpeedBufferMinTime: 1
+    maxSpeedBufferAccuracy: 0.75
   - MoveType: 1
     MoveID: 1
     maxSpeed: 5
@@ -568,31 +568,31 @@ MonoBehaviour:
     gravity: -16
     canMoveVertical: 0
     useSpeedBounds: 0
-    speedBounds: {x: 0.65, y: 1}
-    maxSpeedBuffer: 0
-    maxSpeedBufferAcceleration: 0
-    maxSpeedBufferDeceleration: 0
-    maxSpeedBufferMinTime: 0
-    maxSpeedBufferAccuracy: 0
-  - MoveType: 1
-    MoveID: 2
-    maxSpeed: 20
-    acceleration: 200
-    deceleration: 200
-    gravity: 0
-    canMoveVertical: 1
-    useSpeedBounds: 1
     speedBounds: {x: 1, y: 1}
     maxSpeedBuffer: 0
     maxSpeedBufferAcceleration: 0
-    maxSpeedBufferDeceleration: 0
-    maxSpeedBufferMinTime: 0
+    maxSpeedBufferDeceleration: 6
+    maxSpeedBufferMinTime: 1
+    maxSpeedBufferAccuracy: 0.75
+  - MoveType: 1
+    MoveID: 2
+    maxSpeed: 20
+    acceleration: 400
+    deceleration: 400
+    gravity: 0
+    canMoveVertical: 1
+    useSpeedBounds: 1
+    speedBounds: {x: 0.75, y: 1}
+    maxSpeedBuffer: 0
+    maxSpeedBufferAcceleration: 25
+    maxSpeedBufferDeceleration: 300
+    maxSpeedBufferMinTime: 1
     maxSpeedBufferAccuracy: 0
-  _decelerateThreshold: 0.8
-  _decelInputMultiplier: 0.75
-  _allowSoftInput: 1
+  _decelerateThreshold: 0.99
+  _decelInputMultiplier: 1
+  _allowSoftInput: 0
   _mainCollider: {fileID: 0}
-  _maxYVelForGravity: -30
+  _maxYVelForGravity: -50
   _maxLinearVel: 100
   _groundedAngle: 45
   _adjustToSlopes: 1
@@ -600,21 +600,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   _onGroudedVelMultBounds: {x: 1, y: 0}
-  _onGroundedVelocityScaleBounds: {x: 0.05, y: 15}
+  _onGroundedVelocityScaleBounds: {x: 0.05, y: 3}
   _disableStepping: 0
-  _disableSteppingAir: 1
-  _airStepTime: 0.5
+  _disableSteppingAir: 0
+  _airStepTime: 0.2
   _maxYVelForStep: 1
-  _stepHeight: 0.6
-  _stepForceBounds: {x: 0, y: 7}
+  _stepHeight: 0.4
+  _stepForceBounds: {x: 0, y: 2}
   _stepDistanceOffset: 0.5
-  _stepAngleCorrection: 0.08
-  _stepCooldown: 0.5
+  _stepAngleCorrection: 0.2
+  _stepCooldown: 0.2
   _stepLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  _stepDuration: 0
-  _stepForceMode: 2
+    m_Bits: 0
+  _stepDuration: 0.25
+  _stepForceMode: 5
   _maxRotationSpeed: 1400
   _rotationAcceleration: 5000
   _useSnappyRotations: 0
@@ -630,7 +630,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4119895581923978553}
-  m_Material: {fileID: 13400000, guid: 043654dab6a275947a6e34c13bf3da00, type: 2}
+  m_Material: {fileID: 13400000, guid: 9cc81055d1de164429e6885c4d5d5e91, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -690,10 +690,10 @@ MonoBehaviour:
   _data:
     current: 1
     max: 1
-    regen: 0.25
-    regenCDSinceDamage: 3
+    regen: 0
+    regenCDSinceDamage: 0
     canBeDamaged: 1
-    autoRevive: 1
+    autoRevive: 0
     autoReviveTime: 5
     destroyOnDeath: 0
     destroyOnDeathDelay: 3
@@ -852,7 +852,7 @@ MonoBehaviour:
   _windVolumeBounds: {x: 0, y: 1}
   _windPitchBounds: {x: 0.8, y: 1.5}
   _windChangeSpeed: 1
---- !u!114 &4597944271449191195
+--- !u!114 &6857161997436102270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -861,14 +861,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4119895581923978553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eec3436d93b3914bbac27e938016015, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amountOfWood: {fileID: 0}
-  _amountOfScrap: {fileID: 0}
-  _amountOfPlastic: {fileID: 0}
-  _pickupDistance: 3
-  _Raft: {fileID: 0}
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &4773638158655431949
 GameObject:
   m_ObjectHideFlags: 0

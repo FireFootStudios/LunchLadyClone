@@ -39,12 +39,14 @@ public sealed class BasicTargetSystem : TargetSystem
             return;
         }
 
-        PlayerN player = GameManager.Instance.SceneData.Player;
-        if (IsTargetValid(player.gameObject))
+        foreach (PlayerN player in GameManager.Instance.SceneData.Players)
         {
+            if (!IsTargetValid(player.gameObject)) continue;
+         
             effectiveness = EffectivenessTarget(player.gameObject);
             if (effectiveness >= _minEffectivenessForValid) _targetPairs.Add(new TargetPair(player.gameObject, effectiveness));
         }
+
 
         //TODO -> add targets through character manager
         //TODO -> add targets through building/targetable environment manager

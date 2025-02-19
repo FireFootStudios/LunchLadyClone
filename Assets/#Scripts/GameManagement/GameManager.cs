@@ -130,6 +130,11 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
 
             if (player.TryGetComponent(out NetworkObject networkObject)) networkObject.SpawnAsPlayerObject(clientID, true);
             else Debug.LogError("Player networking template has not network object component!");
+
+            _sceneData.Players.Add(player);
+
+            // Set as local player
+            if (NetworkManager.Singleton.LocalClientId == clientID) SceneData.LocalPlayer = player;
         }
     }
 
@@ -157,6 +162,12 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
             if (currentLevel == levelManager.HomeLevel) TrySwitchState<HomeState>();
             else if (currentLevel == levelManager.MenuLevel) TrySwitchState<MainMenuState>();
             else if (currentLevel == levelManager.TestLevel) TrySwitchState<PlayingState>();
+        }
+
+        if (CurrentState is PlayingState)
+        {
+            // If directly load scene, aka no players have been spawned
+            SceneData.Players.AddRange(FindObjectsByType<PlayerN>(FindObjectsSortMode.None));
         }
 
         // Call this as initial scene change
@@ -542,28 +553,28 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         _gameLockSnapshot = default;
 
         //Disable player input
-        PlayerN player = SceneData.Player;
-        if (player && disablePlayerInput)
-        {
-            //Cache player input state before changing
-            _gameLockSnapshot.disablePlayerInput = player.DisableInput;
-            //_gameLockSnapshot.playerRBKinematic = player.Movement.RB.isKinematic;
+        //PlayerN player = SceneData.Player;
+        //if (player && disablePlayerInput)
+        //{
+        //    //Cache player input state before changing
+        //    _gameLockSnapshot.disablePlayerInput = player.DisableInput;
+        //    //_gameLockSnapshot.playerRBKinematic = player.Movement.RB.isKinematic;
             
-            player.DisableInput = true;
-            player.Health.Data.canBeDamaged = false;
+        //    player.DisableInput = true;
+        //    player.Health.Data.canBeDamaged = false;
 
-            //If we set player non kinematic it fucks with physics/trigger stuff
-            //player.Movement.RB.isKinematic = true;
+        //    //If we set player non kinematic it fucks with physics/trigger stuff
+        //    //player.Movement.RB.isKinematic = true;
 
-            _gameLockSnapshot.rbConstraints = player.Movement.RB.constraints;
-            player.Movement.RB.constraints = RigidbodyConstraints.FreezeAll;
+        //    _gameLockSnapshot.rbConstraints = player.Movement.RB.constraints;
+        //    player.Movement.RB.constraints = RigidbodyConstraints.FreezeAll;
 
-            //Cancel any ongoing abilities + stop movement
-            player.AbilityManager.Cancel();
-            //player.Movement.Stop();
-        }
+        //    //Cancel any ongoing abilities + stop movement
+        //    player.AbilityManager.Cancel();
+        //    //player.Movement.Stop();
+        //}
 
-        _gameLockSnapshot.wasPlayer = player != null;
+        //_gameLockSnapshot.wasPlayer = player != null;
 
         //Pause gamemode
         if (CurrentGameMode && pauseGM)
@@ -589,16 +600,16 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         _isGameLock = false;
 
         // Set disable player input to previous state
-        PlayerN player = SceneData.Player;
-        if (player && _gameLockSnapshot.wasPlayer)
-        {
-            player.DisableInput = _gameLockSnapshot.disablePlayerInput;
-            player.Movement.IsStopped = false;
-            player.Health.Data.canBeDamaged = true;
+        //PlayerN player = SceneData.Player;
+        //if (player && _gameLockSnapshot.wasPlayer)
+        //{
+        //    player.DisableInput = _gameLockSnapshot.disablePlayerInput;
+        //    player.Movement.IsStopped = false;
+        //    player.Health.Data.canBeDamaged = true;
 
-            //player.Movement.RB.isKinematic = _gameLockSnapshot.playerRBKinematic;
-            player.Movement.RB.constraints = _gameLockSnapshot.rbConstraints;
-        }
+        //    //player.Movement.RB.isKinematic = _gameLockSnapshot.playerRBKinematic;
+        //    player.Movement.RB.constraints = _gameLockSnapshot.rbConstraints;
+        //}
 
         // Set gamemode pause state
         if (CurrentGameMode) CurrentGameMode.TrySetPause(_gameLockSnapshot.gamemodePauseState);

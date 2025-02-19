@@ -157,7 +157,7 @@ public class Projectile : MonoBehaviour
         if (_initialTarget)
         {
             //predict movement of target, if enabled and target has movement
-            if (_data.predictMovement && _initialTarget.TryGetComponent(out CharMovement movement))
+            if (_data.predictMovement && _initialTarget.TryGetComponent(out FreeMovement movement))
             {
                 _initialTargetPos = Utils.PredictPosition(_initialTargetPos, transform.position,
                     movement.CurrentMoveVelocity, _data.speed);

@@ -17,13 +17,13 @@ public sealed class Jump : Effect
     private float _timeUngrounded = 0.0f;
     private bool _hasJumpedSinceUnGrounded = false;
 
-    public CharMovement Movement { get; private set; }
+    public FreeMovement Movement { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        Movement = GetComponentInParent<CharMovement>();
+        Movement = GetComponentInParent<FreeMovement>();
 
         _moveModOnJump.Source = this.gameObject;
 

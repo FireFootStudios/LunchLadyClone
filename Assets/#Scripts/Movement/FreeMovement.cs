@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public sealed class CharMovement : MonoBehaviour
+public sealed class FreeMovement : MonoBehaviour
 {
     #region Fields
     [Header("General"), SerializeField] private List<MoveData> _moveData = new List<MoveData>();//1st of each move type in list is considered default
@@ -321,15 +321,17 @@ public sealed class CharMovement : MonoBehaviour
 
     private void UpdateCurrentMoveData()
     {
+        if (MoveData.Count == 0) return;
+
         if (IsGrounded)
         {
-            CurrentData = _moveData.Find(x => x.MoveID == _mappedMoveData[MoveType.ground]);
-            if (CurrentData == null) Debug.Log("No move data found for ground movement: " + this.gameObject);
+            if (_mappedMoveData.ContainsKey(MoveType.ground)) _currentData = _moveData.Find(x => x.MoveID == _mappedMoveData[MoveType.ground]);
+            if (_currentData == null) Debug.Log("No move data found for ground movement: " + this.gameObject);
         }
         else
         {
-            CurrentData = _moveData.Find(x => x.MoveID == _mappedMoveData[MoveType.air]);
-            if (CurrentData == null) Debug.Log("No move data found for ground movement: " + this.gameObject);
+            if (_mappedMoveData.ContainsKey(MoveType.air)) _currentData = _moveData.Find(x => x.MoveID == _mappedMoveData[MoveType.air]);
+            if (_currentData == null) Debug.Log("No move data found for ground movement: " + this.gameObject);
         }
 
         //define other movement types here (like swimming when in water volume))
@@ -347,7 +349,7 @@ public sealed class CharMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //cache velocity and speed before making any changes first (will prob get changed during this update)
-        CurrentMoveVelocity = CurrentData.canMoveVertical || IsGrounded ? RB.linearVelocity : Utils.HorizontalVector(RB.linearVelocity);
+        if (CurrentData != null) CurrentMoveVelocity = CurrentData.canMoveVertical || IsGrounded ? RB.linearVelocity : Utils.HorizontalVector(RB.linearVelocity);
         CurrentMoveSpeed = CurrentMoveVelocity.magnitude;
 
         //ORDER IS IMPORTANT
@@ -366,6 +368,8 @@ public sealed class CharMovement : MonoBehaviour
 
     private void CalculateAdjustedDesiredMovement()
     {
+        if (CurrentData == null) return;
+
         //return if zero vec
         if (DesiredMovement == Vector3.zero)
         {
@@ -414,6 +418,8 @@ public sealed class CharMovement : MonoBehaviour
 
     private void CalculateDataAdjustements()
     {
+        if (CurrentData == null) return;
+
         //Reset cached modifiers from data and apply initial modifier
         MaxSpeedAdjusted = _currentData.maxSpeed * _maxSpeedModifier;
         AccelerationAdjusted = _currentData.acceleration * _accelerationModifier;
@@ -498,6 +504,8 @@ public sealed class CharMovement : MonoBehaviour
 
     private void UpdateDeceleration()
     {
+        if (CurrentData == null) return;
+
         //Return if ignore, decelerationAdjusted is 0 or move speed is 0
         if (IgnoreDecelerate || !(DecelerationdAdjusted > 0.0f) || !(CurrentMoveSpeed > 0.0f)) return;
 
@@ -523,6 +531,8 @@ public sealed class CharMovement : MonoBehaviour
 
     private void UpdateGravity()
     {
+        if (CurrentData == null) return;
+
         if (/*IsGrounded || */DisableGravity) return;
         if (RB.linearVelocity.y < _maxYVelForGravity) return;
 

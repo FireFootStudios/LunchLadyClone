@@ -4,6 +4,31 @@
 
 
 
+
+
+- Include line of sight alternative or addition/option in aggro targetsystem for characters
+- Wander/patrol around map
+- Handle player killing
+- Handle player death
+- Setup for networking
+- Game state ending
+- Objective
+- Ressing
+- Hiding
+
+
+
+* Test monster network chase AI
+ -> line of sight w player again
+ -> 
+
+
+-------------------------------------------------------------------------
+
+
+
+- Water behavior?
+
 - When host starts
 	-> sync gamemode (clients need to know gamemode started)
 
@@ -13,7 +38,6 @@
 
 
 
-* Test monster network chase AI
 
 
 Start before synchronization complete (maybe it just got stuck)

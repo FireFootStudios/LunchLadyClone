@@ -292,11 +292,11 @@ public abstract class GameMode : MonoBehaviour
         else
         {
             // Reset player only
-            if (_gameManager.SceneData.Player)
-            {
-                _gameManager.SceneData.Player.Spawner.Resett();
-                Physics.SyncTransforms();
-            }
+            //if (_gameManager.SceneData.Player)
+            //{
+            //    _gameManager.SceneData.Player.Spawner.Resett();
+            //    Physics.SyncTransforms();
+            //}
         }
 
         // Setup new session

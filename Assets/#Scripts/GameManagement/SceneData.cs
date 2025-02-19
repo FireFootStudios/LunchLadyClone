@@ -9,18 +9,32 @@ public class SceneData : MonoBehaviour
 
     private Level _currentLevel = null;
     //private LevelGroup _currentLevelGroup = null;
-    private PlayerN _player = null;
+    private PlayerN _localPlayer = null;
+    private List<PlayerN> _players = new List<PlayerN>();
 
 
-    public PlayerN Player
+    //public PlayerN Player
+    //{
+    //    get
+    //    {
+    //        if (!_player) _player = FindObjectOfType<PlayerN>(true);
+    //        return _player;
+    //    }
+    //    private set { _player = value; }
+    //}
+
+    public PlayerN LocalPlayer
     {
         get
         {
-            if (!_player) _player = FindObjectOfType<PlayerN>(true);
-            return _player;
+            // For offline testing purposes:
+            if (!_localPlayer) _localPlayer = FindObjectOfType<PlayerN>(true);
+
+            return _localPlayer;
         }
-        private set { _player = value; }
+        set { _localPlayer = value; }
     }
+    public List<PlayerN> Players { get { return _players; } }
 
     public Level CurrentLevel
     {

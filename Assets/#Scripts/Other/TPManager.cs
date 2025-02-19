@@ -6,7 +6,7 @@ public sealed class TPManager : SingletonBase<TPManager>
     public bool TryTPToPoint(int index)
     {
         SceneData sceneData = GameManager.Instance.SceneData;
-        PlayerN player = sceneData.Player;
+        PlayerN player = sceneData.LocalPlayer;
         if (!player || index >= sceneData.TPPoints.Count) return false;
 
         

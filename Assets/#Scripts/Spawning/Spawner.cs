@@ -10,7 +10,7 @@ public sealed class Spawner : MonoBehaviour
     [SerializeField, Tooltip("If set, the health comp will be reset on a Respawn")] private Health _linkedHealth = null;
     [Space]
     [SerializeField, Tooltip("Set to unparent all on reset")] private CharacterParent _characterParent = null;
-    [SerializeField, Tooltip("Set to reset movement modifiers + grounded objects on reset")] private CharMovement _charMovement = null;
+    [SerializeField, Tooltip("Set to reset movement modifiers + grounded objects on reset")] private FreeMovement _charMovement = null;
     [SerializeField] private AbilityManager _abilityManager = null;
 
     private SpawnManager _spawnManager = null;

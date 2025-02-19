@@ -5,7 +5,7 @@ public sealed class Sprint : Effect
 {
     [SerializeField, Tooltip("Target move data for when ability is active")] private List<MoveData> _overrideMoveData = new List<MoveData>();
 
-    private CharMovement _movement = null;
+    private FreeMovement _movement = null;
     private List<MoveData> _defaultMoveData = null;
 
 
@@ -14,7 +14,7 @@ public sealed class Sprint : Effect
     {
         base.Awake();
 
-        _movement = Ability.Source.GetComponent<CharMovement>();
+        _movement = Ability.Source.GetComponent<FreeMovement>();
 
         //cache default move data
         _defaultMoveData = _movement.MoveData;

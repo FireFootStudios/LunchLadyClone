@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(FSM))]
 [RequireComponent(typeof(Character))]
 public abstract class CharBehaviour : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] protected HitBoxTargetSystem _aggroTargetSystem = null;
+    [SerializeField] protected TargetSystem _aggroTargetSystem = null;
     [SerializeField] protected GameObject _statesGo = null;
+    //[SerializeField, Tooltip("Is this character a dialogue speaker?")] protected DialogueSpeaker _dialogueSpeaker = null;
 
     [Header("Customization")]
     [SerializeField, Tooltip("Will override distance check behaviour")] protected HitBox _spawnZone = null;
@@ -16,12 +18,15 @@ public abstract class CharBehaviour : MonoBehaviour
     [SerializeField, Tooltip("Time after spawning before the AI can move.")] protected float _spawnDelay = 1f;
 
     [Space]
-    [SerializeField, Tooltip("The minimum required time to be in attack range before going into the combat state. Can help characters attack at the edge of theire hitboxes")] private float _desiredDistanceToTarget = 2.0f;
+    [SerializeField, Tooltip("The minimum required time to be in attack range before going into the combat state. Can help characters attack at the edge of their hitboxes")] private float _desiredDistanceToTarget = 2.0f;
 
 
     private bool _lastAggroCheck = false;
+    private AttackBehaviour _attackBeh = null;
 
-    public HitBoxTargetSystem AggroTargetSystem { get { return _aggroTargetSystem; } }
+    protected FSM FSM { get; private set; }
+
+    public TargetSystem AggroTargetSystem { get { return _aggroTargetSystem; } }
     public bool HasAggroTarget
     {
         get
@@ -30,7 +35,7 @@ public abstract class CharBehaviour : MonoBehaviour
             return true;
         }
     }
-    //public bool IsAggro { get { return HasAggroTarget &&  } }
+    // public bool IsAggro { get { return HasAggroTarget &&  } }
 
     public bool DeAggroOnSpawnExit { get { return _deAggroOnSpawnExit; } }
     public float SpawnDelay { get { return _spawnDelay; } }
@@ -46,14 +51,21 @@ public abstract class CharBehaviour : MonoBehaviour
 
     protected virtual void Awake()
     {
-        //Check if spawner, if so reset FSM on respawn
+        FSM = GetComponent<FSM>();
+        _attackBeh = GetComponent<AttackBehaviour>();
+
+        // Check if spawner, if so reset FSM on respawn
         if (TryGetComponent(out Spawner spawner))
         {
             spawner.OnRespawn += OnRespawn;
         }
 
         // If spawnzone set it as the aggro hitbox (if desired)
-        if (_useSpawnZoneAsAggroHitbox && _spawnZone) _aggroTargetSystem.Hitbox.Add(_spawnZone);
+        if (_useSpawnZoneAsAggroHitbox && _spawnZone  && _aggroTargetSystem is HitBoxTargetSystem)
+        {
+            HitBoxTargetSystem hbts = _aggroTargetSystem as HitBoxTargetSystem;
+            hbts.Hitbox.Add(_spawnZone);
+        }
 
         if (!_statesGo) _statesGo = this.gameObject;
 
@@ -79,6 +91,7 @@ public abstract class CharBehaviour : MonoBehaviour
 
     protected virtual void OnRespawn()
     {
+        FSM.Resett();
         if (_aggroTargetSystem) _aggroTargetSystem.OverrideTarget = null;
     }
 

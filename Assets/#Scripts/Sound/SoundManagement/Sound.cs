@@ -101,7 +101,7 @@ public sealed class Sound : MonoBehaviour
         _followCollider = spawnData.followPlayerAlongCollider;
         if (_followCollider)
         {
-            if (!_player) _player = GameManager.Instance.SceneData.Player;
+            if (!_player) _player = GameManager.Instance.SceneData.LocalPlayer;
             UpdateFollowAlongCollider();
         }
 

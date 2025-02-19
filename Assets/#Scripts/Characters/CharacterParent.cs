@@ -34,7 +34,7 @@ public sealed class CharacterParent : MonoBehaviour
 
     private void OnEnable()
     {
-        _player = GameManager.Instance.SceneData.Player;
+        //_player = GameManager.Instance.SceneData.Player;
     }
 
     private void OnDisable()

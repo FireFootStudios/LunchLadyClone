@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    [SerializeField] private CharMovement _charMovement;
+    [SerializeField] private FreeMovement _charMovement;
 
     [SerializeField] private MovementModifier _movementModifier;
 

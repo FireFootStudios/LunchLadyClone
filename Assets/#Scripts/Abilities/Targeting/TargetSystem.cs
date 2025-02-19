@@ -192,7 +192,7 @@ public abstract class TargetSystem : MonoBehaviour
             effectiveness += ability.GetEffectiveness(target);
         }
 
-        //apply target type multipliers
+        // Apply target type multipliers
         if (target && target.TryGetComponent(out Health targetHealth))
         {
             foreach (TargetType type in targetHealth.TargettingTypes)

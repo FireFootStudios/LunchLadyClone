@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Spawner))]
-[RequireComponent(typeof(CharMovement))]
+[RequireComponent(typeof(FreeMovement))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(AbilityManager))]
 public sealed class PlayerN : NetworkBehaviour
@@ -13,7 +13,7 @@ public sealed class PlayerN : NetworkBehaviour
     #region Fields
     [Header("General"), SerializeField] private PlayerCameras _cameraTemplate = null;
     [SerializeField] private Health _health = null;
-    [SerializeField] private CharMovement _movement = null;
+    [SerializeField] private FreeMovement _movement = null;
     [SerializeField] private GameObject _visuals = null;
     [Space]
     [SerializeField] private bool _ignoreMultiplayer = false;
@@ -51,7 +51,7 @@ public sealed class PlayerN : NetworkBehaviour
     //public float LookSensitivity { get { return InputManager.ControllerMode ? _lookSensitivityController * _controllerSensMult : _lookSensitivity; } }
 
     public Health Health { get { return _health; } }
-    public CharMovement Movement { get { return _movement; } }
+    public FreeMovement Movement { get { return _movement; } }
     public AbilityManager AbilityManager { get { return _abilityManager; } }
     public Spawner Spawner { get; private set; }
 

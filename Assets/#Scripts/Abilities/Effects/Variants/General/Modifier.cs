@@ -25,7 +25,7 @@ public sealed class Modifier : Effect
         }
 
         //create and add modifer to target movement (copy from template)
-        CharMovement movement = target.GetComponent<CharMovement>();
+        FreeMovement movement = target.GetComponent<FreeMovement>();
         if (movement)
         {
             movement.AddOrUpdateModifier(_modifier);
@@ -55,7 +55,7 @@ public sealed class Modifier : Effect
         float eff = 1.0f;
 
         //has a movement comp?
-        CharMovement movement = target.GetComponent<CharMovement>();
+        FreeMovement movement = target.GetComponent<FreeMovement>();
         AbilityManager abilityManager = target.GetComponent<AbilityManager>();
 
         if (!movement && !abilityManager) eff = 0.0f;
