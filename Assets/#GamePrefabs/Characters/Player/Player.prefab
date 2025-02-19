@@ -244,6 +244,7 @@ MonoBehaviour:
   _enableTPBuild: 0
   _resetAfterDeathDelay: 3
   _forceOnDeath: 2
+  _forceT: {fileID: 0}
   _jumpAbility: {fileID: 3077285191713233538}
   _sprintAbility: {fileID: 7503288252341767622}
 --- !u!114 &8103332945508070104
@@ -280,7 +281,7 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &6374051112411405992
 MonoBehaviour:
@@ -685,10 +686,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f074edfeb2a3574c9c709f634ab9404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   _targettingTypes: 0100000000000000
   _focusT: {fileID: 1682781076249970280}
   _data:
-    current: 1
+    start: 1
     max: 1
     regen: 0
     regenCDSinceDamage: 0

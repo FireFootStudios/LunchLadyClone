@@ -79,7 +79,7 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
     public static System.Action<GameMode> OnGameModeChange;
     public static System.Action<string> OnSceneChangeStart; //Scenechange operation + scenename
     public static System.Action<string> OnSceneChangeFinish; //After scene load AND state switch
-
+    public static Action OnNetworkPlayersSpawned;
 
     protected override void Awake()
     {
@@ -136,6 +136,8 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
             // Set as local player
             if (NetworkManager.Singleton.LocalClientId == clientID) SceneData.LocalPlayer = player;
         }
+
+        OnNetworkPlayersSpawned?.Invoke();
     }
 
     private void Init()

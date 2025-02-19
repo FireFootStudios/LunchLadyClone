@@ -64,7 +64,7 @@ public sealed class PrePlayHUD : MonoBehaviour
         // Spawn Players
         GameManager.Instance.SpawnPlayersNetwork();
 
-        // Clean up lobby, this is no longer needed (apparently)
+        // Clean up lobby, this is no longer needed
         bool succesfulDelete = await LobbyManager.Instance.DeleteLobby();
     }
 

@@ -4,8 +4,7 @@
 
 
 
-- Spawn in enemy via scene data after players
-
+- Initial HP?
 
 
 
@@ -27,6 +26,7 @@
 
 
 
+- Spawn in enemy via scene data after players?
 
 
 - Include line of sight alternative or addition/option in aggro targetsystem for characters

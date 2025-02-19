@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
-public abstract class GameMode : MonoBehaviour
+public abstract class GameMode : NetworkBehaviour
 {
     [SerializeField] private GameModeAsset _asset = null;
 
@@ -39,9 +40,12 @@ public abstract class GameMode : MonoBehaviour
     public SessionInfo PrevSessionInfo { get; private set; } 
 
 
+
     public static Action<GameMode> OnGameModeStart;
     public static Action<GameMode> OnSessionStart;
     public static Action<SessionInfo> OnSessionEnd;
+
+
 
     public static void AddColliderIgnorePlayerPostion(Collider collider)
     {
@@ -62,6 +66,15 @@ public abstract class GameMode : MonoBehaviour
         _gameManager = GameManager.Instance;
         _playingState = _gameManager.GetState<PlayingState>();
         _levelEndState = _gameManager.GetState<EndState>();
+
+        GameManager.OnNetworkPlayersSpawned += OnNetworkPlayersSpawned;
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        GameManager.OnNetworkPlayersSpawned -= OnNetworkPlayersSpawned;
     }
 
     private void OnEnable()
@@ -78,6 +91,21 @@ public abstract class GameMode : MonoBehaviour
     {
         // Return if timer is not yet reset, this means we come from a soft reset
         if (Timer > 0.0f) return;
+    }
+
+    private void OnNetworkPlayersSpawned()
+    {
+        if (!IsHost) return;
+
+        foreach (PlayerN player in GameManager.Instance.SceneData.Players)
+        {
+            player.Health.OnDeath += OnPlayerDeath;
+        }
+    }
+
+    private void OnPlayerDeath()
+    {
+        // Need to let appropriate client know they died!
     }
 
     protected virtual void Update()
