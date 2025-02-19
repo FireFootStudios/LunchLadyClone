@@ -4,13 +4,36 @@
 
 
 
+- Spawn in enemy via scene data after players
+
+
+
+
+
+- Make sure to kill the player on the host side and let the client know
+-> Debug when a player is killed with message
+
+
+
+
+
+- Syncing of AI is horrible? Seems like im getting killed without it even getting close, sometimes feels like its lagging behind
+- Make sure to account for pathing issues (if a player is not reachable pick another?)
+
+
+
+
+- Setup for networking
+
+
+
 
 
 - Include line of sight alternative or addition/option in aggro targetsystem for characters
 - Wander/patrol around map
-- Handle player killing
+- Sync player killing?
+
 - Handle player death
-- Setup for networking
 - Game state ending
 - Objective
 - Ressing

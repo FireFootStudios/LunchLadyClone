@@ -1,9 +1,10 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Spawner))]
-public abstract class Character : MonoBehaviour
+public abstract class Character : NetworkBehaviour
 {
     #region Fields
     [SerializeField] private Health _health = null;
@@ -34,7 +35,6 @@ public abstract class Character : MonoBehaviour
             return _movement;
         }
     }
-
     public NavMeshAgent NavMeshAgent
     {
         get

@@ -26,6 +26,7 @@ public sealed class PlayerN : NetworkBehaviour
     [Header("Death")]
     [SerializeField] private float _resetAfterDeathDelay = 3.0f;
     [SerializeField] private float _forceOnDeath = 10.0f;
+    [SerializeField] private Transform _forceT = null;
 
 
     [Header("Abilities"), SerializeField] private Ability _jumpAbility = null;
@@ -447,7 +448,7 @@ public sealed class PlayerN : NetworkBehaviour
         Vector2 randomForce = _forceOnDeath * UnityEngine.Random.insideUnitCircle;
         Vector3 force = new Vector3(randomForce.x, 0.0f, randomForce.y);
         // Movement.RB.AddForce(force, ForceMode.VelocityChange);
-        Movement.RB.AddForceAtPosition(force, _playerCameras.transform.position, ForceMode.VelocityChange);
+        Movement.RB.AddForceAtPosition(force, _forceT ? _forceT.position : transform.position, ForceMode.VelocityChange);
         //Invoke("ResetAfterDeath", _resetAfterDeathDelay);
     }
 

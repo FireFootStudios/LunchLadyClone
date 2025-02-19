@@ -74,7 +74,7 @@ public abstract class CharBehaviour : MonoBehaviour
             _aggroTargetSystem.OnHasFirstTarget += (target) => CheckAggro();
             _aggroTargetSystem.OnLoseLastTarget += CheckAggro;
 
-            //Check if already target inside
+            // Check if already target inside
             CheckAggro();
         }
         InitFSM();
@@ -96,4 +96,16 @@ public abstract class CharBehaviour : MonoBehaviour
     }
 
     protected abstract void InitFSM();
+
+
+    protected void OnEnable()
+    {
+        FSM.Resett();
+        if (FSM) FSM.enabled = true;
+    }
+
+    protected void OnDisable()
+    {
+        if (FSM) FSM.enabled = false;
+    }
 }

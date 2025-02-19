@@ -66,7 +66,14 @@ public sealed class NavMeshMovement : MonoBehaviour
     public float CurrentRotationSpeed { get; private set; }
 
 
-    public bool IsStopped { get { return _agent.isStopped; } set { _agent.isStopped = value; } }
+    public bool IsStopped
+    {
+        get { return _agent.isStopped; }
+        set
+        {
+            if (_agent.isOnNavMesh) _agent.isStopped = value;
+        }
+    }
     public bool CanRotate { get; set; }
     public bool DisableGravity { get; set; }
     public float MinAngleForceRotateOnly { get { return _anglePauseMoveBase; } set { _anglePauseMoveBase = value; } }
