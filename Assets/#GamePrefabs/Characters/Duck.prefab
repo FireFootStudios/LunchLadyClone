@@ -865,6 +865,7 @@ Transform:
   - {fileID: 6148497513456844742}
   - {fileID: 491948737608716176}
   - {fileID: 8746219195230848382}
+  - {fileID: 5921109273101350261}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8133735068919654983
@@ -1263,9 +1264,9 @@ MonoBehaviour:
     randomizeClips: 1
     alwaysUseRandomClip: 1
     randomiseClipsInitially: 1
-    parent: {fileID: 2476174634732176341}
+    parent: {fileID: 9030046931093926502}
     setPosToParent: 1
-    parentUp: 1
+    parentUp: 0
     followPlayerAlongCollider: {fileID: 0}
     volume: 1
     pitch: 0.3
@@ -1490,3 +1491,34 @@ MonoBehaviour:
   _pauseMoveNoAbility: 1
   _tryPredictMovement: 0
   _predictAmountMultiplier: 0.75
+--- !u!1 &9030046931093926502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5921109273101350261}
+  m_Layer: 0
+  m_Name: SoundT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5921109273101350261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9030046931093926502}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.015, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3199338451676257458}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
