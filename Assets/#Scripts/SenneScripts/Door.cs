@@ -1,50 +1,54 @@
-using NUnit.Framework.Constraints;
-using Unity.Services.Lobbies.Models;
+using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+
+public sealed class Door : NetworkBehaviour
 {
+    [SerializeField] private KinematicMovement _movement = null;
+    [SerializeField] private List<ItemN> _unlockItems = null;
+    [Space]
+    [SerializeField] private Transform _moveTargetT = null;
+
+    private NetworkVariable<bool> _isOpened = new NetworkVariable<bool>();
 
 
-    public enum DoorColor
+    public override void OnNetworkSpawn()
     {
-        Green, Blue,Red
+        base.OnNetworkSpawn();
+
+        _isOpened.OnValueChanged += OnOpened;
     }
 
-    public DoorColor color;
-
-    private void Awake()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
-       if(other.TryGetComponent<Inventory>(out var inventory))
-        {
-            TryOpenDoor(inventory);
-        }
+        if (!other.TryGetComponent(out PlayerN playerN)) return;
+        if (!playerN.IsLocalPlayer) return;
+        if (_isOpened.Value) return;
+        if (!IsSpawned) return;
+
+        TryOpenDoorServerRpc();
     }
 
-
-    private void TryOpenDoor(Inventory inventory)
+    [ServerRpc(RequireOwnership = false)]
+    private void TryOpenDoorServerRpc()
     {
-        switch (this.color)
-        {
-            case DoorColor.Green:
-                if(inventory.GreenKey.gameObject != null)
-                    this.gameObject.SetActive(false);
-            break;
-            case DoorColor.Blue:
-                if (inventory.BlueKey.gameObject != null)
-                    this.gameObject.SetActive(false);
-                break;
-            case DoorColor.Red:
-                if (inventory.RedKey.gameObject != null)
-                    this.gameObject.SetActive(false);
-                break;
+        // If already open return
+        if (_isOpened.Value) return;
 
-        }
-        
+        bool itemsUnlocked = _unlockItems.TrueForAll(item => item.IsPickedUp);
+        if (_unlockItems.Count > 0 && !itemsUnlocked) return; 
+
+        _isOpened.Value = true;
     }
 
+
+    private void OnOpened(bool previousValue, bool opened)
+    {
+        // Only host moves
+        if (IsHost && opened && _movement && _moveTargetT)
+        {
+            _movement.MoveToPos(_moveTargetT.position, false);
+        }
+    }
 }
