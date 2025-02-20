@@ -6,6 +6,7 @@ public class SceneData : MonoBehaviour
     [Space]
     [SerializeField] private List<Transform> _playerSpawnTs = new List<Transform>();
     [SerializeField] private List<Transform> _tpPoints = new List<Transform>();
+    [SerializeField] private List<Transform> _wanderPoints = new List<Transform>();
 
     private Level _currentLevel = null;
     //private LevelGroup _currentLevelGroup = null;
@@ -48,6 +49,7 @@ public class SceneData : MonoBehaviour
 
     public List<Transform> TPPoints { get { return _tpPoints; } }
     public List<Transform> PlayerSpawnTs { get { return _playerSpawnTs; } }
+    public List<Transform> WanderPoints { get { return _wanderPoints; } }
 
 
 #if UNITY_EDITOR

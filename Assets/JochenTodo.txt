@@ -15,15 +15,17 @@
 
 
 
+- Aggro sound (state feedback)
 
 
-- Wander/patrol around map
+
+- Objective 
+- AI speed up
 
 
 - Spawn in enemy via scene data after players?
 - Sync gamemode (host manages)
 - Game end state (lose)
-- Objective
 - Ressing
 - Hiding
 

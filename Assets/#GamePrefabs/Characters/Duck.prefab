@@ -302,7 +302,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   _losOriginT: {fileID: 1182604255833935471}
-  _losMaxDistance: 25
+  _losMaxDistance: 50
   _losMissTargetLifetime: 5
   _losTargetYOffset: 1.8
   _onlyTargetSelf: 0
@@ -685,7 +685,7 @@ MonoBehaviour:
     - _effects:
       - {fileID: 5522752183835890240}
       _targettingEffect: {fileID: 0}
-      _time: 0
+      _time: 0.1
       _loops: 0
       _loopDuration: 0
       _pickRandomTarget: 0
@@ -838,6 +838,8 @@ GameObject:
   - component: {fileID: 7790588730286235797}
   - component: {fileID: 4803549052773875441}
   - component: {fileID: 3236823724857446582}
+  - component: {fileID: 1235920103881811791}
+  - component: {fileID: 698674854306870202}
   m_Layer: 0
   m_Name: Duck
   m_TagString: Untagged
@@ -969,7 +971,7 @@ MonoBehaviour:
   _useSpawnZoneAsAggroHitbox: 1
   _deAggroOnSpawnExit: 0
   _maxRangeFromSpawn: 100000
-  _spawnDelay: 1
+  _spawnDelay: 6
   _desiredDistanceToTarget: 2
 --- !u!114 &4616724902125020410
 MonoBehaviour:
@@ -1008,7 +1010,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.25
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1230,6 +1232,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a9ed65c09e76543a2e03667e3e104a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1235920103881811791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085150105009024553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5734733dbf54694da666a8f5aeb9c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &698674854306870202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085150105009024553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc84a6a0e621d143bb0215c13ef5760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeOutOnDisabled: 0
+  _soundData:
+    clips:
+    - {fileID: 8300000, guid: 7090104c3a328a3469c1b9fb41ff715d, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 2476174634732176341}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 0.3
+    randomPitchMultiplier: 2
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 15
+    minDistanceOverride: 2
+    loopAudioSource: 1
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
 --- !u!1 &7553636904131256020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1312,7 @@ Transform:
   m_GameObject: {fileID: 7553636904131256020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1318,9 +1372,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  m_Radius: 1
+  m_Height: 4
+  m_Direction: 2
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4345151186764015898
 MonoBehaviour:
@@ -1346,6 +1400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491948737608716176}
   - component: {fileID: 8189415338302421959}
+  - component: {fileID: 767813246858315147}
   - component: {fileID: 5002247248290326636}
   m_Layer: 0
   m_Name: States
@@ -1382,6 +1437,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minStateTime: 0.25
+--- !u!114 &767813246858315147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617572792063800451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc88c73e1e673a64794953a9bfd7df0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minStateTime: 0.25
+  _randomSeed: {fileID: 0}
+  _wanderSterpDurationBounds: {x: 10, y: 30}
+  _mod:
+    priority: 0
+    duration: 1111111
+    maxSpeedMultiplier: 1.2
+    accelerationMultiplier: 1.2
+    decelerationMultiplier: 1
+    rotationMultiplier: 0.5
+    gravityMultiplier: 1
+    overrideAnglePauseMove: 0
+    anglePauseMove: 0
 --- !u!114 &5002247248290326636
 MonoBehaviour:
   m_ObjectHideFlags: 0

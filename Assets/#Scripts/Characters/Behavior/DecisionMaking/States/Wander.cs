@@ -1,22 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class Wander : FSMState
 {
     [SerializeField] private RandomisationSeed _randomSeed = null;
-    [Space]
-    [SerializeField, Tooltip("How often long should a wander step take")] private Vector2 _wanderStepDurationBounds = Vector2.one;
-    [SerializeField, Tooltip("How long should the agent pause in between steps")] private Vector2 _delayRange = Vector2.one;
-    [SerializeField] private float _maxAngleChangeOnStep = 90.0f;
+    [SerializeField] private Vector2 _wanderSterpDurationBounds = new Vector2(5.0f, 15.0f);
     [Space]
     [SerializeField] private MovementModifier _mod = null;
 
-    [Space]
-    [SerializeField] private bool _useSpawnZone = true;
-
-    
-    private bool _isStepping = false;
+    private bool _inStep = false;
     private Character _char = null;
+
+    private List<Transform> _wanderPoints = new List<Transform>();
 
 
     private void Awake()
@@ -25,9 +21,17 @@ public sealed class Wander : FSMState
         _mod.Source = this.gameObject;
     }
 
+    private void OnEnable()
+    {
+        _inStep = false;
+    }
+
     public override void OnEnter()
     {
         if (!_char) return;
+
+        // Get wander points from scene data
+        _wanderPoints = GameManager.Instance.SceneData.WanderPoints;
 
         StartCoroutine(WanderStep());
 
@@ -43,7 +47,7 @@ public sealed class Wander : FSMState
         if (!_char) return;
 
         // Next update (only when stopped moving/rotating)
-        if (!_isStepping && !(_char.Movement.CurrentMoveSpeed > 0.0f) && !(_char.Movement.CurrentRotationSpeed > 0.0f))
+        if (!_inStep /*&& !(_char.Movement.CurrentMoveSpeed > 0.0f) && !(_char.Movement.CurrentRotationSpeed > 0.0f)*/)
         {
             StopAllCoroutines();
             StartCoroutine(WanderStep());
@@ -54,7 +58,7 @@ public sealed class Wander : FSMState
     {
         StopAllCoroutines();
         
-        _isStepping = false;
+        _inStep = false;
 
         _char.Movement.Stop();
 
@@ -64,44 +68,27 @@ public sealed class Wander : FSMState
 
     private IEnumerator WanderStep()
     {
-        _isStepping = true;
+        if(_wanderPoints.Count == 0) yield break;
+        _inStep = true;
 
-        //// Calculate delay
-        //float delay = _randomSeed ? _randomSeed.RandomRange(_delayRange.x, _delayRange.y) : Random.Range(_delayRange.x, _delayRange.y);
+        Transform wanderT = _wanderPoints.RandomElement();
+        _char.Movement.MoveToPos(wanderT.position);
 
-        //yield return new WaitForSeconds(delay);
+        float duration = Utils.GetRandomFromBounds(_wanderSterpDurationBounds);
 
-        //// If valid spawnzones and usage enabled move inside them
-        //if (_char.Behaviour.HasValidSpawnZone && _useSpawnZone)
-        //{
-        //    // Move to random point inside of a random collider part of the spawnzone
-        //    _char.Movement.MoveToPos(Utils.RandomPointInCollider(_char.Behaviour.SpawnZone.Colliders.RandomElement(), _randomSeed));
-        //}
-        //else
-        //{
-        //    // Get random angles
-        //    //float randomYAngle = Random.Range(_angleYChangeRange.x, _angleYChangeRange.y);
-        //    float randomXAngle = _randomSeed ? _randomSeed.RandomRange(-_maxAngleChangeOnStep, _maxAngleChangeOnStep) : Random.Range(-_maxAngleChangeOnStep, _maxAngleChangeOnStep);
+        // Wait for duration OR until the navmesh agent is no longer moving (dest reached?)
+        float elapsed = 0f;
+        bool destReached = false;
+        while (elapsed < duration && !destReached)
+        {
+            destReached = _char.Movement.DestinationReached();
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
-        //    Vector3 desiredForward = Vector3.RotateTowards(transform.forward, -transform.forward, randomXAngle * Mathf.Deg2Rad, 0.0f);
+        _char.Movement.Stop();
 
-        //    _char.Movement.MoveToPos()
-        //    _char.Movement.DesiredForward = desiredForward;
-        //}
-
-        //_char.Movement.IsStopped = false;
-
-        ////Calculate time for next step
-        //float stepDuration = _randomSeed ? _randomSeed.RandomRange(_wanderStepDurationBounds.x, _wanderStepDurationBounds.y) 
-        //    : Random.Range(_wanderStepDurationBounds.x, _wanderStepDurationBounds.y);
-
-        //yield return new WaitForSeconds(stepDuration);
-
-        ////stop movement
-        //_char.Movement.DesiredMovement = Vector3.zero;
-        //_char.Movement.DesiredForward = _char.transform.forward;
-
-        //_isStepping = false;
+        _inStep = false;
         yield return null;
     }
 }

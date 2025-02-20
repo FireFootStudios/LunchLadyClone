@@ -54,6 +54,7 @@ public sealed class NavMeshMovement : MonoBehaviour
     public float RotationMultiplier { get; private set; }
 
     public Rigidbody RB { get; private set; }
+    public NavMeshAgent Agent { get { return _agent; } }
 
     public Vector3 DesiredMovement { get { return _agent.desiredVelocity; } }
     public Vector3 AdjustedDesiredMovement { get; private set; } //corrected current movement direction (desired movement but changed)
@@ -97,6 +98,13 @@ public sealed class NavMeshMovement : MonoBehaviour
 
         IsStopped = false;
         CanRotate = canRotate;
+    }
+
+    public bool DestinationReached()
+    {
+        if (_agent.pathPending) return false;
+
+        return _agent.remainingDistance < _agent.stoppingDistance;
     }
 
     public void AddOrUpdateModifier(MovementModifier templateMod, bool forceCopy = true, bool forceAdd = false)
@@ -297,7 +305,7 @@ public sealed class NavMeshMovement : MonoBehaviour
 
     private void UpdateRotation()
     {
-        if (!CanRotate || DesiredForward == Vector3.zero) return;
+        if (!CanRotate) return;
 
         Vector3 desiredDir = DesiredForward;
 

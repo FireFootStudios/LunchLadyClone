@@ -82,8 +82,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d161013311e7a4341be14eb1f1fd0d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundTemplates: []
-  _mixer: {fileID: 0}
+  _soundTemplates:
+  - type: 0
+    template: {fileID: 6389733469235728344, guid: 08cff232304831f4ba381c96fdd6b6f4, type: 3}
+  - type: 1
+    template: {fileID: 6389733469235728344, guid: 9ef381184fa3de241b19ef8a31a07dd6, type: 3}
+  - type: 2
+    template: {fileID: 6389733469235728344, guid: 113db3a1ddaf63543a8e2cc702ed2d05, type: 3}
+  - type: 3
+    template: {fileID: 6389733469235728344, guid: 0ee2478ae64a3744c9dd382e071e7473, type: 3}
+  _mixer: {fileID: 24100000, guid: 69ddc04d9e3b42b4f8c0c16c270cd725, type: 2}
   _mixerVolumeBounds: {x: -20, y: 5}
   _dialogueSnapshotTransitionTime: 0.5
 --- !u!114 &3039718112345992721
@@ -399,6 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8788df49e835bd459f95b189bebe18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   _asset: {fileID: 11400000, guid: 4780c8e1a22acdb4585ea5cf79529100, type: 2}
 --- !u!1 &3611729589721313105
 GameObject:
