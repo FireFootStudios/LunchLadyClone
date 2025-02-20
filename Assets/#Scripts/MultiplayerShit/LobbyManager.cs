@@ -41,6 +41,8 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
     {
         await InitIfNeeded();
 
+        if (string.IsNullOrEmpty(lobbyName)) return false;
+
         // Return while in a lobby already for now
         if (_currentLobby != null) return false;
 

@@ -6,6 +6,14 @@
 
 
 
+- Create items that can be picked up
+	- Sync these with host itemmanager (just track which ones have been picked up)
+
+
+
+- Create objective manager, this will track all items concerning the gamestate?
+- Once all items are collected have players walk to exit
+	-> host checks if all there and finishes game 
 
 
 
@@ -13,13 +21,14 @@
 
 
 
+ - Create doors that can open when key is picked up
+	-> Needs to be synced as well
 
 
-- Aggro sound (state feedback)
 
 
 
-- Objective 
+
 - AI speed up
 
 
@@ -32,6 +41,7 @@
 
 - For testing (single player), run in local host mode?
 - Make sure to account for pathing issues (if a player is not reachable pick another?)
+- Aggro sound (state feedback)
 
 
 -------------------------------------------------------------------------
