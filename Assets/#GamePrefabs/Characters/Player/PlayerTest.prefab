@@ -65,5 +65,29 @@ PrefabInstance:
     - {fileID: 8103332945508070104, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4119895581923978553, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1159109257220232037}
   m_SourcePrefab: {fileID: 100100000, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
+--- !u!1 &8666016293029110400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4119895581923978553, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
+  m_PrefabInstance: {fileID: 4715005834578939833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1159109257220232037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666016293029110400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eec3436d93b3914bbac27e938016015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pickupDistance: 3
+  RedKey: {fileID: 0}
+  BlueKey: {fileID: 0}
+  GreenKey: {fileID: 0}
