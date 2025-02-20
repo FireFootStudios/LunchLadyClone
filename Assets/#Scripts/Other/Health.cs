@@ -6,6 +6,7 @@ using UnityEngine;
 public sealed class Health : NetworkBehaviour
 {
     #region fields
+
     [SerializeField] private List<TargetType> _targettingTypes = new List<TargetType>();
     [SerializeField, Tooltip("Used for VFX and targeting")] private Transform _focusT = null;
     [SerializeField] private HealthData _data = new HealthData();
@@ -45,12 +46,16 @@ public sealed class Health : NetworkBehaviour
     public float LifeElapsed { get; private set; }
 
     public float RegenCooldownTimer { get; private set; }
+
     #endregion
+
     #region Events
+
     public Action OnDeath;
     public Action OnRevive;
     public Action<float, GameObject> OnDamaged = null; //amount, source
     public Action<float, GameObject> OnHealed = null; //amount, source
+
     #endregion
 
     //this will reset the component

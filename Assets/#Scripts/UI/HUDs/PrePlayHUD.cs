@@ -58,11 +58,11 @@ public sealed class PrePlayHUD : MonoBehaviour
         // Switch state sync
         GameManager.Instance.SwitchStateClientRpc(GameStateID.playing, false);
 
-        // Start gamemode sync (all player should have a gamemode session start)
-        //CurrentGameMode.TryStartSession();
-
         // Spawn Players
         GameManager.Instance.SpawnPlayersNetwork();
+
+        // Start gamemode sync (all player should have a gamemode session start)
+        GameManager.Instance.CurrentGameMode.TryStartSession();
 
         // Clean up lobby, this is no longer needed
         bool succesfulDelete = await LobbyManager.Instance.DeleteLobby();

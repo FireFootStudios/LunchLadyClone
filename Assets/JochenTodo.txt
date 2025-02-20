@@ -4,44 +4,46 @@
 
 
 
-
-
-- Create items that can be picked up
-	- Sync these with host itemmanager (just track which ones have been picked up)
+- Level and asset not correct?g
 
 
 
-- Create objective manager, this will track all items concerning the gamestate?
+
+
+
+
+
+
+- Can try Restarting when game is over
+
+
+
+
+
 - Once all items are collected have players walk to exit
-	-> host checks if all there and finishes game 
+	-> host checks if all there and finishes game U7
 
 
 
 
+- Game Win State
+
+
+- Can try handling player leave
+
+- Why is AI so slow/inconsistent in speed
+- AI speed up as game progresses (on item pickup)?
+- Reviving?
+- Level sections (doors blocking off AI and players)
 
 
 
- - Create doors that can open when key is picked up
-	-> Needs to be synced as well
-
-
-
-
-
-
-- AI speed up
-
-
-- Spawn in enemy via scene data after players?
-- Sync gamemode (host manages)
-- Game end state (lose)
-- Ressing
-- Hiding
 
 
 - For testing (single player), run in local host mode?
 - Make sure to account for pathing issues (if a player is not reachable pick another?)
 - Aggro sound (state feedback)
+- Spawn in enemy via scene data after players?
 
 
 -------------------------------------------------------------------------

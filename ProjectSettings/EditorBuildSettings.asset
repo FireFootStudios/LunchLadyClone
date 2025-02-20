@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScenes/JochenTest.unity
     guid: 2a51d352c26909f4e8588d919884eb7f
+  - enabled: 1
+    path: Assets/Scenes/SessionEnd.unity
+    guid: f12168ce10c1b154eb6ff1e20f9640b8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
