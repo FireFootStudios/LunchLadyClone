@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bde6ebb8d6bf8bc48b3eb45d2399a3e7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 155143
+  packageName: Dark Fantasy Gigantic Environment
+  packageVersion: 1.0
+  assetPath: Assets/Dark_Fantasy/Assets/Lightings/Baked_Indirect.lighting
+  uploadId: 462348
