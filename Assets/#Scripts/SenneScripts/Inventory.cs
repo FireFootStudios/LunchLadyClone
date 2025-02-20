@@ -6,16 +6,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public int AmountOfWood { get { return _inventoryWood.Count; } }
-
-    [SerializeField] private TextMeshProUGUI _amountOfWood,_amountOfScrap,_amountOfPlastic;
+    
     [SerializeField] private float _pickupDistance = 3f;
-    private List<GameObject> _inventoryWood = new List<GameObject>();
-    private List<GameObject> _inventoryPlastic = new List<GameObject>();
-    private List<GameObject> _inventoryScrap = new List<GameObject>();
-
-    [Space]
-    [SerializeField] private Raft _Raft = null;
+   [HideInInspector] public GameObject RedKey,BlueKey,GreenKey = null;
 
 
     private void Awake()
@@ -25,9 +18,8 @@ public class Inventory : MonoBehaviour
 
     public void UpdateUI()
     {
-      // _amountOfWood.text = _inventoryWood.Count.ToString();
-      // _amountOfScrap.text = _inventoryScrap.Count.ToString();
-      // _amountOfPlastic.text = _inventoryPlastic.Count.ToString();
+
+
     }
 
     void Update()
@@ -48,23 +40,11 @@ public class Inventory : MonoBehaviour
         if (Physics.Raycast(ray, out hit, _pickupDistance))
         {
             //Loot
-            if (hit.collider.TryGetComponent<Loot>(out var lootItem))
+            if (hit.collider.TryGetComponent<Key>(out var keyItem))
             {
                 // Pick up the log
-                PickUp(lootItem.gameObject);
-                AddToInventory(lootItem);
-            }
-            //Raft Start and stoppings
-            else if(hit.collider.TryGetComponent<Motor>(out var motor))
-            {
-                if (_Raft.IsMoving)
-                { 
-                    _Raft.StopRaft();
-                }
-                else
-                {
-                    _Raft.StartRaft();
-                }
+                PickUp(keyItem.gameObject);
+                AddToInventory(keyItem);
             }
         }
     }
@@ -80,18 +60,18 @@ public class Inventory : MonoBehaviour
 
     }
 
-    void AddToInventory(Loot item)
+    void AddToInventory(Key key)
     {
-        switch (item.LootTypeValue)
+        switch (key.KeyColorValue)
         {
-            case Loot.LootType.Wood:
-                _inventoryWood.Add(item.gameObject);
+            case Key.KeyColor.Blue:
+                BlueKey = key.gameObject;
                 break;
-            case Loot.LootType.Scrap:
-                _inventoryScrap.Add(item.gameObject);
+            case Key.KeyColor.Red:
+                RedKey = key.gameObject;
                 break;
-            case Loot.LootType.Plastic:
-                _inventoryPlastic.Add(item.gameObject);
+            case Key.KeyColor.Green:
+                GreenKey = key.gameObject;
                 break;
         }
         
