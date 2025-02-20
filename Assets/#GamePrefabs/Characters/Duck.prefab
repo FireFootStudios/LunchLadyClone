@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6534113376857096856
 Transform:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 100
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1458604324074312896
 GameObject:
@@ -209,6 +209,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2476174634732176341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1182604255833935471}
+  m_Layer: 0
+  m_Name: LosOriginT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1182604255833935471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2476174634732176341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.21, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6731294694435026652}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3068742017635599580
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6731294694435026652}
-  - component: {fileID: 5086739719670989958}
+  - component: {fileID: 5601172669004423016}
   m_Layer: 0
   m_Name: AggroTS
   m_TagString: Untagged
@@ -240,9 +271,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6534113376857096856}
+  - {fileID: 1182604255833935471}
   m_Father: {fileID: 3199338451676257458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5086739719670989958
+--- !u!114 &5601172669004423016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +283,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3068742017635599580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be1b778f075aa846a30a11650a45937, type: 3}
+  m_Script: {fileID: 11500000, guid: e821501c32d34864fb43f5238fc1e37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _abilitiesToCheck:
@@ -265,10 +297,16 @@ MonoBehaviour:
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 180
-  _requireOverrideToBeInHitBox: 1
-  _ignoreOthersOnOverride: 1
-  _hitboxes:
-  - {fileID: 9109427247641911522}
+  _useLineOfSight: 1
+  _losMask:
+    serializedVersion: 2
+    m_Bits: 9
+  _losOriginT: {fileID: 1182604255833935471}
+  _losMaxDistance: 25
+  _losMissTargetLifetime: 5
+  _losTargetYOffset: 1.8
+  _onlyTargetSelf: 0
+  _random: 0
 --- !u!1 &3402032716981716017
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +826,6 @@ GameObject:
   - component: {fileID: 3199338451676257458}
   - component: {fileID: 8133735068919654983}
   - component: {fileID: 7405872244775946537}
-  - component: {fileID: 9004232338494263584}
   - component: {fileID: 5821440926944999368}
   - component: {fileID: 7923664904724292845}
   - component: {fileID: 4616724902125020410}
@@ -889,23 +926,6 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 0
   SlerpPosition: 0
---- !u!114 &9004232338494263584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085150105009024553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkRigidbodyBaseExpanded: 0
-  UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
-  AutoSetKinematicOnDespawn: 1
 --- !u!114 &5821440926944999368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,6 +943,7 @@ MonoBehaviour:
   _hostOnlyGos:
   - {fileID: 8617572792063800451}
   - {fileID: 5699877214236672132}
+  - {fileID: 3068742017635599580}
   _hostOnlyComps:
   - {fileID: 7923664904724292845}
   - {fileID: 4616724902125020410}
@@ -942,12 +963,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f188aafa9c947db40a21b2947d075a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aggroTargetSystem: {fileID: 5086739719670989958}
+  _aggroTargetSystem: {fileID: 5601172669004423016}
   _statesGo: {fileID: 8617572792063800451}
   _spawnZone: {fileID: 0}
   _useSpawnZoneAsAggroHitbox: 1
-  _deAggroOnSpawnExit: 1
-  _maxRangeFromSpawn: 5
+  _deAggroOnSpawnExit: 0
+  _maxRangeFromSpawn: 100000
   _spawnDelay: 1
   _desiredDistanceToTarget: 2
 --- !u!114 &4616724902125020410
@@ -965,8 +986,8 @@ MonoBehaviour:
   _baseMaxSpeed: 5
   _baseAcceleration: 100
   _maxLinearVel: 100
-  _maxRotationSpeed: 1400
-  _rotationAcceleration: 5000
+  _maxRotationSpeed: 1000
+  _rotationAcceleration: 3000
   _useSnappyRotations: 0
   _rotateAroundX: 0
   _anglePauseMoveBase: 360
@@ -1266,6 +1287,14 @@ MonoBehaviour:
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 90
+  _useLineOfSight: 0
+  _losMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _losOriginT: {fileID: 0}
+  _losMaxDistance: 10
+  _losMissTargetLifetime: 5
+  _losTargetYOffset: 0
   _requireOverrideToBeInHitBox: 1
   _ignoreOthersOnOverride: 1
   _hitboxes:
@@ -1367,7 +1396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minStateTime: 0.25
   _allowMove: 1
-  _aggroDelayBounds: {x: 0.5, y: 0.5}
+  _aggroDelayBounds: {x: 1, y: 1}
   _mod:
     priority: 0
     duration: 111111110

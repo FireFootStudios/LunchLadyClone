@@ -6,6 +6,7 @@ public sealed class TargetPair
 {
     public GameObject target = null;
     public float effectiveness = 0.0f;
+
     public TargetPair(GameObject target, float effectiveness)
     {
         this.target = target;
@@ -19,6 +20,18 @@ public sealed class TargetTypeMultiplier
 {
     public TargetType type;
     public float multiplier;
+}
+
+public sealed class LosTarget
+{
+    public GameObject target = null;
+    public float losTimer = 0.0f;
+
+    public LosTarget(GameObject target, float losTimer)
+    {
+        this.target = target;
+        this.losTimer = losTimer;
+    }
 }
 
 public abstract class TargetSystem : MonoBehaviour
@@ -40,11 +53,22 @@ public abstract class TargetSystem : MonoBehaviour
     [Space]
     [SerializeField] private float _maxVerticalAngle = 90.0f;
 
+    [Header("Line of sight")]
+    [SerializeField] private bool _useLineOfSight = false;
+    [SerializeField] private LayerMask _losMask = ~0;
+    [SerializeField] private Transform _losOriginT = null;
+    [SerializeField] private float _losMaxDistance = 10.0f;
+    [SerializeField] private float _losMissTargetLifetime = 5.0f;
+    [SerializeField] private float _losTargetYOffset = 0.0f;
+
+
     private float _updateTargetsTimer = 0.0f;
     private GameObject _overrideTarget = null;
 
     protected List<TargetPair> _targetPairs = new List<TargetPair>();
     private List<GameObject> _targetGameObjects = new List<GameObject>();
+
+    private List<LosTarget> _losTargets = new List<LosTarget>();
 
     #endregion
     #region Properties
@@ -65,7 +89,7 @@ public abstract class TargetSystem : MonoBehaviour
     public Action<GameObject> OnHasFirstTarget;
     public Action OnLoseLastTarget;
 
-    //returns first target if any
+    // Returns first target if any
     public TargetPair GetFirstTarget()
     {
         List<TargetPair> targetPairs = GetTargets();
@@ -92,10 +116,10 @@ public abstract class TargetSystem : MonoBehaviour
         }
         else
         {
-            //do a check if all targets are valid
+            // Do a check if all targets are valid
             for (int i = 0; i < _targetPairs.Count; i++)
             {
-                if (_targetPairs[i] == null || !_targetPairs[i].target)
+                if (_targetPairs[i] == null || !_targetPairs[i].target || !_targetPairs[i].target.activeInHierarchy)
                 {
                     _targetPairs.Remove(_targetPairs[i]);
                     i--;
@@ -115,10 +139,10 @@ public abstract class TargetSystem : MonoBehaviour
     {
         List<TargetPair> targetPairs = GetTargets();
 
-        //clear any prev targets
+        // Clear any prev targets
         _targetGameObjects.Clear();
 
-        //add each target pair's gameobject
+        // Add each target pair's gameobject
         targetPairs.ForEach(p => _targetGameObjects.Add(p.target));
     }
 
@@ -130,6 +154,7 @@ public abstract class TargetSystem : MonoBehaviour
     {
         UpdateOverrideTarget();
         UpdateTargetPairs();
+        UpdateLosTargets();
     }
 
     private void UpdateTargetPairs()
@@ -144,21 +169,21 @@ public abstract class TargetSystem : MonoBehaviour
             PopulateTargetPairs();
             _updateTargetsTimer = _updateInterval;
 
-            //If false, this is only called when asked (so at start of ability)
+            // If false, this is only called when asked (so at start of ability)
             if (_updateTargetsDuringFire) RePopulateGameObjectTargets();
         }
         else
         {
             UpdateCurrentTargetPairs();
 
-            //if a target was removed, repopulate target pairs!
+            // If a target was removed, repopulate target pairs!
             if (targetCount > _targetPairs.Count)
             {
                 _targetPairs.Clear();
                 PopulateTargetPairs();
                 _updateTargetsTimer = _updateInterval;
 
-                //If false, this is only called when asked (so at start of ability)
+                // If false, this is only called when asked (so at start of ability)
                 if (_updateTargetsDuringFire) RePopulateGameObjectTargets();
             }
         }
@@ -211,6 +236,7 @@ public abstract class TargetSystem : MonoBehaviour
 
         if (TargetTags.Count == 0) return _treatNoTagsAsAnyTarget;
 
+        // Validate tag
         bool validTag = false;
         foreach (Tag tag in TargetTags)
         {
@@ -222,6 +248,7 @@ public abstract class TargetSystem : MonoBehaviour
 
         if (!validTag) return validTag;
 
+        // Validate angle
         if (_maxVerticalAngle < 90.0f && Source)
         {
             Vector3 dir = (target.transform.position - Source.transform.position).normalized;
@@ -229,13 +256,84 @@ public abstract class TargetSystem : MonoBehaviour
             dirhorizontal.y = 0.0f;
             dirhorizontal.Normalize();
 
-            //Should be between [-90,90]
+            // Should be between [-90,90]
             float verticalAngle = Vector3.Angle(dir, dirhorizontal);
 
             // Check if the calculated angle is within the allowed max vertical angle
             if (Mathf.Abs(verticalAngle) > _maxVerticalAngle) return false;
         }
 
+        // Validate Line of Sight
+        bool losValid = true;
+        if (_useLineOfSight)
+        {
+            losValid = InLineOfSight(target);
+            
+            // Get target pair to reset timer OR check if still valid
+            LosTarget losTarget = _losTargets.Find(l => l.target == target);
+            if (losTarget == null && losValid)
+            {
+                // Create new los target
+                losTarget = new LosTarget(target, _losMissTargetLifetime);
+                _losTargets.Add(losTarget);
+            }
+            else if (losTarget != null && losValid)
+            {
+                // Reset the timer
+                losTarget.losTimer = _losMissTargetLifetime;
+            }
+            else if (losTarget != null && losTarget.losTimer > 0.0f && !losValid) losValid = true;
+        }
+
+        if (!losValid) return false;
+
         return true;
+    }
+
+    // Gets or creates targetpair 
+    //protected TargetPair CreateOrUpdateTargetPair(GameObject target, float effectiveness)
+    //{
+    //    if (!target) return null;
+
+    //    TargetPair targetPair = _targetPairs.Find(p => p.target == target);
+
+    //    if (targetPair == null)
+    //    {
+    //        targetPair = new TargetPair(target, effectiveness);
+    //        _targetPairs.Add(targetPair);
+    //    }
+    //    else targetPair.effectiveness = effectiveness;
+
+    //    return targetPair;
+    //}
+
+    private bool InLineOfSight(GameObject target)
+    {
+        if (!target) return false;
+
+        Vector3 targetPos = target.transform.position;
+        targetPos.y += _losTargetYOffset;
+        Vector3 dirToTarget = (targetPos - _losOriginT.position).normalized;
+        if (_losOriginT && Physics.Raycast(_losOriginT.transform.position, dirToTarget, out RaycastHit hitInfo, _losMaxDistance, _losMask) && hitInfo.collider.gameObject == target.gameObject)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void UpdateLosTargets()
+    {
+        for (int i = 0; i < _losTargets.Count; i++)
+        {
+            LosTarget losTarget = _losTargets[i];
+
+            losTarget.losTimer -= Time.deltaTime;
+            if (losTarget.target && losTarget.target.activeInHierarchy && losTarget.losTimer > 0.0f) continue;
+
+            // Remove los target
+            _losTargets.RemoveAt(i);
+            i--;
+        }
     }
 }

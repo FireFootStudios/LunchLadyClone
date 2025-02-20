@@ -441,14 +441,15 @@ public sealed class PlayerN : NetworkBehaviour
 
     private void OnDeath()
     {
+        Movement.Stop();
         DisableInput = true;
-        Movement.RB.constraints = RigidbodyConstraints.None;
-        Movement.RB.useGravity = true;
+        //Movement.RB.constraints = RigidbodyConstraints.None;
+        // Movement.RB.useGravity = true;
 
-        Vector2 randomForce = _forceOnDeath * UnityEngine.Random.insideUnitCircle;
-        Vector3 force = new Vector3(randomForce.x, 0.0f, randomForce.y);
+        // Vector2 randomForce = _forceOnDeath * UnityEngine.Random.insideUnitCircle;
+        //Vector3 force = new Vector3(randomForce.x, 0.0f, randomForce.y);
         // Movement.RB.AddForce(force, ForceMode.VelocityChange);
-        Movement.RB.AddForceAtPosition(force, _forceT ? _forceT.position : transform.position, ForceMode.VelocityChange);
+        //Movement.RB.AddForceAtPosition(force, _forceT ? _forceT.position : transform.position, ForceMode.VelocityChange);
         //Invoke("ResetAfterDeath", _resetAfterDeathDelay);
     }
 
@@ -470,9 +471,9 @@ public sealed class PlayerN : NetworkBehaviour
         DisableInput = false;
 
         // Constraints should be set by preplay state?
-        if (_gameManager.CurrentState == _playingState) Movement.RB.constraints = RigidbodyConstraints.FreezeRotation;
+        //if (_gameManager.CurrentState == _playingState) Movement.RB.constraints = RigidbodyConstraints.FreezeRotation;
      
-        Movement.RB.useGravity = false;
+        //Movement.RB.useGravity = false;
         Movement.ClearModifiers();
     }
 

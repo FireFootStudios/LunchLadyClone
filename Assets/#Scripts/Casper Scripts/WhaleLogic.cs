@@ -48,7 +48,7 @@ public class WhaleLogic : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<PlayerN>(out PlayerN player))
         {
-            player.Health.Add(-1, this.gameObject);
+            player.Health.Add_Server(-1, this.gameObject);
         }
     }
 

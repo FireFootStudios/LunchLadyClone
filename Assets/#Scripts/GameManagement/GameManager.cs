@@ -166,9 +166,12 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
             else if (currentLevel == levelManager.TestLevel) TrySwitchState<PlayingState>();
         }
 
+        // If we started in playing state, this means we never made a connection and can just start hosting locally
         if (CurrentState is PlayingState)
         {
-            // If directly load scene, aka no players have been spawned
+            //NetworkManager.Singleton.StartHost();
+            
+            // No players have been spawned and referenced yet, player shouls already be in the scene
             SceneData.Players.AddRange(FindObjectsByType<PlayerN>(FindObjectsSortMode.None));
         }
 

@@ -25,7 +25,7 @@ public sealed class Health : NetworkBehaviour
     [SerializeField] private SoundSpawnData _onDeathSFX = null;
     [SerializeField] private SoundSpawnData _onSpawnSFX = null;
 
-    private NetworkVariable<float> _current = new NetworkVariable<float>(1.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<float> _current = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private NetworkVariable<bool> _isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     private const string _reviveStr = "Revive";
@@ -60,12 +60,12 @@ public sealed class Health : NetworkBehaviour
         Reset();
     }
 
-    public void Add(float delta, GameObject source)
+    public void Add_Server(float delta, GameObject source)
     {
         if (IsDead) return;
 
         // Prevent changing if not host for now 
-        if (NetworkManager.Singleton.IsListening && !IsHost) return;
+        if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
 
         // float prev = Current;
         float newCurrent = Current;
@@ -83,10 +83,24 @@ public sealed class Health : NetworkBehaviour
         _current.Value = newCurrent;
     }
 
+    // Call when a client needs to make a health change, this will go through the server first
+    [ServerRpc]
+    public void Add_ClientServerRpc(float delta)
+    {
+        Add_Server(delta, null);
+    }
+
+    // Call when a client needs to make a health change, this will go through the server first
+    [ServerRpc(RequireOwnership = false)]
+    public void Set_ClientServerRpc(float newValue)
+    {
+        _current.Value = newValue;
+    }
+
     public void Kill()
     {
         if (IsDead) return;
-        if (NetworkManager.Singleton.IsListening && !IsHost) return;
+        if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
 
         _isDead.Value = true;
     }
@@ -95,7 +109,7 @@ public sealed class Health : NetworkBehaviour
     public void Revive()
     {
         if (!IsDead) return;
-        if (NetworkManager.Singleton.IsListening && !IsHost) return;
+        if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
 
         Reset();
     }
@@ -121,7 +135,7 @@ public sealed class Health : NetworkBehaviour
             Debug.LogError("A gameobject with a health component requires atleast 1 target type!");
 
         // For local testing, not sure if this can cause issues
-        if (!NetworkManager.Singleton.IsListening)
+        if (!NetworkManager || !NetworkManager.Singleton.IsListening)
         {
             // Subscribe to Network changes
             _current.OnValueChanged += OnHealthChangedNetwork;
@@ -131,7 +145,7 @@ public sealed class Health : NetworkBehaviour
 
     private void Start()
     {
-        if (!NetworkManager.Singleton.IsListening) _current.Value = _data.start;
+        Set_ClientServerRpc(_data.start);
     }
 
     private void Update()
@@ -153,7 +167,7 @@ public sealed class Health : NetworkBehaviour
         RegenCooldownTimer -= Time.deltaTime;
         if (RegenCooldownTimer > 0.0f) return;
 
-        Add(Data.regen * Time.deltaTime, this.gameObject);
+        Add_Server(Data.regen * Time.deltaTime, this.gameObject);
     }
 
     private void EvaluateWhileDeathOrAlive()

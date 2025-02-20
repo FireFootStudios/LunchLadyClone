@@ -11,7 +11,7 @@ public sealed class Damage : Effect
         Health health = target.GetComponent<Health>();
         if (!health || health.IsDead) return;
 
-        health.Add(-_amount, Ability.Source);
+        health.Add_Server(-_amount, Ability.Source);
     }
 
     protected override float Effectiveness(GameObject target)

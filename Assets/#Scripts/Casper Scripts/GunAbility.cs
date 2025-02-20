@@ -34,7 +34,7 @@ public class GunAbility : MonoBehaviour
             {
                 if (hit.transform.TryGetComponent<WhaleLogic>(out WhaleLogic whale))
                 {
-                    whale.Health.Add(-_gunDamage, this.gameObject);
+                    whale.Health.Add_Server(-_gunDamage, this.gameObject);
                     whale.Speed = whale.Speed + 1f;
                 }
             }
