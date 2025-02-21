@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.33898306}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.20911294}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0.27118653}
@@ -52,16 +52,16 @@ MonoBehaviour:
     m_Value: -0.02
   contrast:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: -7.9
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 0.93962264, g: 0.9201211, b: 0.9201211, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: -7
+    m_Value: -5
   saturation:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: -5
 --- !u!114 &-2783806394003576898
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -197,13 +197,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {r: 0.25868985, g: 0.25909457, b: 0.3735848, a: 1}
+    m_Value: {r: 0.1505874, g: 0.1505874, b: 0.2264151, a: 1}
   highlights:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.94905657, b: 0.94905657, a: 1}
+    m_Value: {r: 0.5943396, g: 0.41211286, b: 0.41211286, a: 1}
   balance:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 20.7
 --- !u!114 &8457055279898963265
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -218,29 +218,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   mode:
-    m_OverrideState: 0
-    m_Value: 2
+    m_OverrideState: 1
+    m_Value: 1
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
   acesPreset:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 3
   hueShiftAmount:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   detectPaperWhite:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   paperWhite:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 300
   detectBrightnessLimits:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   minNits:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.005
   maxNits:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1000
