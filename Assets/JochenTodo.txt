@@ -7,26 +7,22 @@
 
 
 
+
+
+
+
+
+
+- Aggro on key take
+- Wander very speed
+- Extra speed
+
 - Once all items are collected have players walk to exit
 	-> host checks if all there and finishes game U7
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - Reviving?
 - Game Win State
-
+- Player name
 
 
 
