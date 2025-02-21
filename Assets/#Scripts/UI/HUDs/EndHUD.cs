@@ -26,8 +26,7 @@ public sealed class EndHUD : MonoBehaviour
         if (_prevSessionInfo == null) return;
 
         // Try to load scene for all players 
-        bool succes = await GameManager.Instance.TrySceneChangeNetworkAsync<PlayingState>("JochenTest");
-
+        bool succes = await GameManager.Instance.TrySceneChangeNetworkAsync<PlayingState>(_prevSessionInfo.Level.Asset.SceneName);
         if (!succes) return;
 
         // Switch state sync

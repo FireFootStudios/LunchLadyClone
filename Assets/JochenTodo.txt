@@ -4,19 +4,6 @@
 
 
 
-- Level and asset not correct?g
-
-
-
-
-
-
-
-
-
-- Can try Restarting when game is over
-
-
 
 
 
@@ -26,15 +13,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+- Reviving?
 - Game Win State
 
 
-- Can try handling player leave
+
+
+
+
 
 - Why is AI so slow/inconsistent in speed
 - AI speed up as game progresses (on item pickup)?
-- Reviving?
+
+
 - Level sections (doors blocking off AI and players)
+
+
+- Can try handling player leave
 
 
 

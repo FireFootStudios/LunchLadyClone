@@ -52,7 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30892d9535818343afbeac94d6b0b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelAssets: []
+  _levelAssets:
+  - {fileID: 11400000, guid: fc92f402603443242a032eca93ad5c21, type: 2}
+  - {fileID: 11400000, guid: cafebbce6e4cac040816b3dc048e829f, type: 2}
   _homeLevelAsset: {fileID: 0}
   _menuLevelAsset: {fileID: 11400000, guid: 9cfa53bfcdd57784db5107d14af74c81, type: 2}
   _testLevelAsset: {fileID: 11400000, guid: 1495151a287ce39449e236022a06fd68, type: 2}

@@ -1191,7 +1191,7 @@ MonoBehaviour:
   _useSpawnZoneAsAggroHitbox: 1
   _deAggroOnSpawnExit: 0
   _maxRangeFromSpawn: 100000
-  _spawnDelay: 6
+  _spawnDelay: 10
   _desiredDistanceToTarget: 2
 --- !u!114 &4616724902125020410
 MonoBehaviour:
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb99f67f36bceb48ba79319c3631d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxSpeed: 5
+  _baseMaxSpeed: 6
   _baseAcceleration: 100
   _maxLinearVel: 100
   _maxRotationSpeed: 1000
@@ -1488,7 +1488,7 @@ MonoBehaviour:
     parentUp: 0
     followPlayerAlongCollider: {fileID: 0}
     volume: 1
-    pitch: 0.3
+    pitch: 3
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}
     frequency: 1
@@ -1821,8 +1821,8 @@ MonoBehaviour:
   _mod:
     priority: 0
     duration: 111111110
-    maxSpeedMultiplier: 1.5
-    accelerationMultiplier: 1.5
+    maxSpeedMultiplier: 1.4
+    accelerationMultiplier: 1.4
     decelerationMultiplier: 1
     rotationMultiplier: 1
     gravityMultiplier: 1

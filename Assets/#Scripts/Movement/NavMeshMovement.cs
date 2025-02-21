@@ -89,21 +89,24 @@ public sealed class NavMeshMovement : MonoBehaviour
 
     #region Public Functions
 
-    public void MoveToPos(Vector3 pos, bool canRotate = true, bool setRotationToMovement = true)
+    public bool MoveToPos(Vector3 pos, bool canRotate = true, bool setRotationToMovement = true)
     {
         //DesiredMovement = pos - transform.position;
         //if (setRotationToMovement) DesiredForward = DesiredMovement;
 
-        _agent.SetDestination(pos);
+        bool succes = _agent.SetDestination(pos);
+        if (!succes) return false;
 
         IsStopped = false;
         CanRotate = canRotate;
+
+        return true;
     }
 
     public bool DestinationReached()
     {
         if (_agent.pathPending) return false;
-
+        
         return _agent.remainingDistance < _agent.stoppingDistance;
     }
 
