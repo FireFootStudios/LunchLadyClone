@@ -5,15 +5,17 @@
 
 
 
+
+- Fix lobby
+- Player name rotate around y only
+
+
 * Reviving (duration next to player)
 	-> progress bar
-
-* Player name tag
 
 * Game progression on items collect
 	-> AI speed increases
 	-> Aggro player who took it (how long?)
-
 
 
 

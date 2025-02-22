@@ -1,4 +1,6 @@
 using System;
+using TMPro;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +17,11 @@ public sealed class PlayerN : NetworkBehaviour
     [SerializeField] private Health _health = null;
     [SerializeField] private FreeMovement _movement = null;
     [SerializeField] private GameObject _visuals = null;
+
+    [Space]
+    [SerializeField] private Transform _rotateToLocalPlayerT = null;
+    [SerializeField] private TextMeshProUGUI _nameTMP = null;
+
     [Space]
     [SerializeField] private bool _ignoreMultiplayer = false;
 
@@ -43,7 +50,9 @@ public sealed class PlayerN : NetworkBehaviour
     private GameManager _gameManager = null;
     private InputManager _inputManager = null;
 
-    //Cached from input manager
+    private NetworkVariable<FixedString64Bytes> _playerName = new NetworkVariable<FixedString64Bytes> ("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    // Cached from input manager
     private Controls _controls = null;
 
     #endregion
@@ -312,6 +321,16 @@ public sealed class PlayerN : NetworkBehaviour
         base.OnNetworkSpawn();
 
         OwnerOnly();
+
+        _playerName.OnValueChanged += OnPlayerNameValueChanged;
+
+        // Update initially
+        if (_nameTMP) _nameTMP.text = _playerName.Value.ToString();
+    }
+
+    private void OnPlayerNameValueChanged(FixedString64Bytes previousValue, FixedString64Bytes newValue)
+    {
+        if (_nameTMP) _nameTMP.text = newValue.ToString();
     }
 
     private void OwnerOnly()
@@ -327,6 +346,9 @@ public sealed class PlayerN : NetworkBehaviour
 
         // Disable visuals if we are the owner
         if (_visuals) _visuals.gameObject.SetActive(false);
+
+        // Set player name to one set in lobby manager, this way we can sync our name with others
+        _playerName.Value = LobbyManager.Instance.GetPlayerName();
 
         // Init input events
         InitInput();
@@ -384,37 +406,37 @@ public sealed class PlayerN : NetworkBehaviour
 
         if (_controls == null) return;
 
-        //Move
+        // Move
         _controls.Player.Move.performed -= MoveInput;
         _controls.Player.Move.canceled -= MoveInput;
 
-        //Look
+        // Look
         _controls.Player.LookMouse.performed -= LookInputMouse;
         _controls.Player.LookMouse.canceled -= LookInputMouse;
 
         _controls.Player.LookGamepad.performed -= LookInputGamepad;
         _controls.Player.LookGamepad.canceled -= LookInputGamepad;
 
-        //Jump 
+        // Jump 
         _controls.Player.Jump.performed -= JumpInput;
 
-        //Sprint
+        // Sprint
         _controls.Player.Sprint.performed -= SprintInput;
         _controls.Player.Sprint.canceled -= SprintInput;
 
-        //Toggle Pause
+        // Toggle Pause
         _controls.Player.TogglePauseMenu.performed -= TogglePause;
 
-        //Restart level
+        // Restart level
         _controls.Player.QuickRestart.performed -= RestartLevel;
 
-        //Toggle Fly Mode
+        // Toggle Fly Mode
         _controls.Player.ToggleFlyMode.performed -= ToggleFlyMode;
 
-        //Screenshot
+        // Screenshot
         _controls.Player.TakeScreenshot.performed -= TakeScreenshot;
 
-        //TP
+        // TP
         _controls.Player.TP1.performed -= TPP1;
         _controls.Player.TP2.performed -= TPP2;
         _controls.Player.TP3.performed -= TPP3;
@@ -483,6 +505,12 @@ public sealed class PlayerN : NetworkBehaviour
     #region Updates
     private void Update()
     {
+        UpdateInput();
+        UpdateUI();
+    }
+
+    private void UpdateInput()
+    {
         if (!IsOwner && !_ignoreMultiplayer) return;
 
         if (!DisableInput && !DisableMoveInput)
@@ -500,6 +528,20 @@ public sealed class PlayerN : NetworkBehaviour
             // Update sprinting with input (sprint might have been disabled but while it is still pressed we keep trying to use it again)
             if (_sprintInput && !_sprintIsToggle && !IsSprinting) _abilityManager.TryUseAbility(_sprintAbility);
         }
+    }
+
+    // We want the name to rotate to the local player
+    private void UpdateUI()
+    {
+        if (!_rotateToLocalPlayerT) return;
+        if (!_nameTMP || !_nameTMP.gameObject.activeInHierarchy) return;
+
+        PlayerN localPlayer = _gameManager.SceneData.LocalPlayer;
+        if (!localPlayer || !localPlayer.PlayerCameras) return;
+
+        // Rotate
+        Vector3 dir = localPlayer.PlayerCameras.transform.position - _rotateToLocalPlayerT.position;
+        _rotateToLocalPlayerT.forward = dir;
     }
     #endregion
 }

@@ -26,12 +26,12 @@ public sealed class PrePlayHUD : MonoBehaviour
     {
         if (_startBtn) _startBtn.onClick.AddListener(OnStartBtnClick);
 
-        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
+        //NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
     }
 
     private void OnDestroy()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
+        //NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
     }
 
     private void OnEnable()
@@ -44,6 +44,14 @@ public sealed class PrePlayHUD : MonoBehaviour
         }
 
         UpdateUI();
+    }
+
+    private void Update()
+    {
+        if (_currentLobby == null) return;
+
+        // Lobby player count
+        if (_lobbyPlayersTMP) _lobbyPlayersTMP.text = _currentLobby.Players.Count + "/" + _currentLobby.MaxPlayers;
     }
 
     private void OnClientConnect(ulong obj)
