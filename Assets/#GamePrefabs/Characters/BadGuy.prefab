@@ -411,8 +411,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   _losOriginT: {fileID: 1182604255833935471}
-  _losMaxDistance: 50
-  _losMissTargetLifetime: 5
+  _losMaxDistance: 15
+  _losMissTargetLifetime: 3
   _losTargetYOffset: 1.8
   _onlyTargetSelf: 0
   _random: 0
@@ -904,7 +904,7 @@ MonoBehaviour:
     - _effects:
       - {fileID: 5522752183835890240}
       _targettingEffect: {fileID: 0}
-      _time: 0.1
+      _time: 0.25
       _loops: 0
       _loopDuration: 0
       _pickRandomTarget: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
   _animationChains: []
   _cancelAbilities: []
   _rotateToTarget: 1
-  _maxRotationDiffBetweenTarget: 5
+  _maxRotationDiffBetweenTarget: 15
   _rotateWhileFiring: 1
   _includeXRotation: 0
   _ignoreForAttackRange: 0
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 1235920103881811791}
   - component: {fileID: 698674854306870202}
   m_Layer: 0
-  m_Name: Duck
+  m_Name: BadGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1205,8 +1205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb99f67f36bceb48ba79319c3631d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxSpeed: 6
-  _baseAcceleration: 100
+  _baseMaxSpeed: 8
+  _baseAcceleration: 600
   _maxLinearVel: 100
   _maxRotationSpeed: 1000
   _rotationAcceleration: 3000
@@ -1225,7 +1225,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7085150105009024553}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.75
+  m_Radius: 0.5
   m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1488,7 +1488,7 @@ MonoBehaviour:
     parentUp: 0
     followPlayerAlongCollider: {fileID: 0}
     volume: 1
-    pitch: 3
+    pitch: 1
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}
     frequency: 1
@@ -1714,9 +1714,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Height: 4
-  m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.25, z: 0.25}
 --- !u!114 &4345151186764015898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,8 +1796,8 @@ MonoBehaviour:
   _mod:
     priority: 0
     duration: 1111111
-    maxSpeedMultiplier: 1.2
-    accelerationMultiplier: 1.2
+    maxSpeedMultiplier: 1
+    accelerationMultiplier: 1
     decelerationMultiplier: 1
     rotationMultiplier: 0.5
     gravityMultiplier: 1
@@ -1821,8 +1821,8 @@ MonoBehaviour:
   _mod:
     priority: 0
     duration: 111111110
-    maxSpeedMultiplier: 1.4
-    accelerationMultiplier: 1.4
+    maxSpeedMultiplier: 1.25
+    accelerationMultiplier: 1.25
     decelerationMultiplier: 1
     rotationMultiplier: 1
     gravityMultiplier: 1
@@ -2046,7 +2046,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 445a02015bc606f4ab659950f5e97a7c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b91e101363448d04f8b7373959350f8f, type: 2}
+      objectReference: {fileID: 2100000, guid: 33b2e8e7095df02459ea138f9c98c059, type: 2}
     - target: {fileID: 919132149155446097, guid: 445a02015bc606f4ab659950f5e97a7c, type: 3}
       propertyPath: m_Name
       value: Jester_of_Shadows_0221102545_texture

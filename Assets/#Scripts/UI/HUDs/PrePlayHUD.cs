@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,30 +19,36 @@ public sealed class PrePlayHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _playerNameTMP = null;
 
 
+    private Lobby _currentLobby = null;
+
+
     private void Awake()
     {
         if (_startBtn) _startBtn.onClick.AddListener(OnStartBtnClick);
 
-        GameManager.OnSceneChangeFinish += OnSceneChangeFinish;
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
+    }
+
+    private void OnDestroy()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
     }
 
     private void OnEnable()
     {
-        Lobby currentLobby = LobbyManager.Instance.CurrentLobby;
-        if (currentLobby == null)
+        _currentLobby = LobbyManager.Instance.CurrentLobby;
+        if (_currentLobby == null)
         {
             ResetUI();
             return;
         }
 
-        // Update lobby info
-        if (_lobbyNameTMP) _lobbyNameTMP.text = currentLobby.Name;
-        if (_lobbyCodeTMP) _lobbyCodeTMP.text = currentLobby.LobbyCode;
-        if (_lobbyPlayersTMP) _lobbyPlayersTMP.text = currentLobby.Players.Count + "/" + currentLobby.MaxPlayers;
+        UpdateUI();
+    }
 
-        if (_playerNameTMP) _playerNameTMP.text = LobbyManager.Instance.GetPlayerName();
-
-        if (_startBtn) _startBtn.gameObject.SetActive(LobbyManager.Instance.IsHost);
+    private void OnClientConnect(ulong obj)
+    {
+        UpdateUI();
     }
 
     private async void OnStartBtnClick()
@@ -62,16 +69,10 @@ public sealed class PrePlayHUD : MonoBehaviour
         GameManager.Instance.SpawnPlayersNetwork();
 
         // Start gamemode sync (all player should have a gamemode session start)
-        GameManager.Instance.CurrentGameMode.TryStartSession();
+        GameManager.Instance.CurrentGameMode.TryStartSessionNetwork();
 
         // Clean up lobby, this is no longer needed
         bool succesfulDelete = await LobbyManager.Instance.DeleteLobby();
-    }
-
-    // For now we wait here
-    private void OnSceneChangeFinish(string obj)
-    {
-
     }
 
     private void ResetUI()
@@ -81,5 +82,19 @@ public sealed class PrePlayHUD : MonoBehaviour
         if (_lobbyCodeTMP) _lobbyCodeTMP.text = "XXX";
         if (_lobbyPlayersTMP) _lobbyPlayersTMP.text = "X";
         if (_playerNameTMP) _playerNameTMP.text = "PlayerX";
+    }
+
+    private void UpdateUI()
+    {
+        if (_currentLobby == null) return;
+
+        // Update lobby info
+        if (_lobbyNameTMP) _lobbyNameTMP.text = _currentLobby.Name;
+        if (_lobbyCodeTMP) _lobbyCodeTMP.text = _currentLobby.LobbyCode;
+        if (_lobbyPlayersTMP) _lobbyPlayersTMP.text = _currentLobby.Players.Count + "/" + _currentLobby.MaxPlayers;
+
+        if (_playerNameTMP) _playerNameTMP.text = LobbyManager.Instance.GetPlayerName();
+
+        if (_startBtn) _startBtn.gameObject.SetActive(LobbyManager.Instance.IsHost);
     }
 }

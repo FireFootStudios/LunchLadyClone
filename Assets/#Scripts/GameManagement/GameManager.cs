@@ -140,6 +140,24 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         OnNetworkPlayersSpawned?.Invoke();
     }
 
+    public void DeSpawnPlayers()
+    {
+        if (!IsHost) return;
+
+        // Despawn players
+        for (int i = 0; i < _sceneData.Players.Count; i++)
+        {
+            PlayerN player = _sceneData.Players[i];
+
+            // Despawn and destroy player object
+            if (player.TryGetComponent(out NetworkObject networkObject))
+                networkObject.Despawn(true);
+        }
+
+        // Clear sceneData list
+        _sceneData.Players.Clear();
+    }
+
     private void Init()
     {
         if (Initialized) return;

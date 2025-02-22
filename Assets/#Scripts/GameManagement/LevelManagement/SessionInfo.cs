@@ -10,7 +10,6 @@ public sealed class SessionInfo
     public SessionData Data { get; private set; } // Serializable (to save) data
 
     public bool ValidComplete {  get; set; } // Was this a valid (completed) session?
-    public bool HighScoreBeaten { get; set; }
     public bool Played { get; set; }
 
     public Level Level { get; set; } // What level was session played in
@@ -69,17 +68,5 @@ public sealed class SessionData
     public string gamemodeID = null; // Unique gamemode ID
     public double time = 123456789.0f;
 
-    public int checkpointIndex = -1; // Index of best checkpoint reached
-
-    // Player Position
-    public Vector3 playerPos = Vector3.zero;
-    public bool validPlayerPos = false; // Indicates wheter the player position has been set already
-
     public bool completed;
-
-    // Completed only
-    public float timeDiff = 0.0f; // Time difference between previous session
-
-    // We need to know for ongoing sessions whether to enable other dialogue
-    public bool satanIntroPlayed = false;
 }

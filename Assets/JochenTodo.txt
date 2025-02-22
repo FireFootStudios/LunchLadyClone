@@ -5,24 +5,14 @@
 
 
 
+* Reviving (duration next to player)
+	-> progress bar
 
+* Player name tag
 
-
-
-
-
-
-
-- Aggro on key take
-- Wander very speed
-- Extra speed
-
-- Once all items are collected have players walk to exit
-	-> host checks if all there and finishes game U7
-
-- Reviving?
-- Game Win State
-- Player name
+* Game progression on items collect
+	-> AI speed increases
+	-> Aggro player who took it (how long?)
 
 
 
@@ -31,11 +21,7 @@
 
 - Why is AI so slow/inconsistent in speed
 - AI speed up as game progresses (on item pickup)?
-
-
-- Level sections (doors blocking off AI and players)
-
-
+- Does AI get stuck if try to wander to pos it cant reach
 - Can try handling player leave
 
 
