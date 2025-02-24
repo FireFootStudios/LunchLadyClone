@@ -17,15 +17,15 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.11764706, g: 0.118869826, b: 0.19215687, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.024
+  m_FogDensity: 0.03
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.081568174, g: 0.09525929, b: 0.122641504, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.31198823, g: 0.375879, b: 0.5377358, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -3117,7 +3117,7 @@ PrefabInstance:
       objectReference: {fileID: 907887793}
     - target: {fileID: 2704566567602418725, guid: ca73ca07892e2884aaa00c7cb13c3f3d, type: 3}
       propertyPath: m_VersionIndex
-      value: 191
+      value: 194
       objectReference: {fileID: 0}
     - target: {fileID: 2913272762883508232, guid: ca73ca07892e2884aaa00c7cb13c3f3d, type: 3}
       propertyPath: m_Mesh
@@ -3125,7 +3125,7 @@ PrefabInstance:
       objectReference: {fileID: 1748840649}
     - target: {fileID: 2913272762883508232, guid: ca73ca07892e2884aaa00c7cb13c3f3d, type: 3}
       propertyPath: m_VersionIndex
-      value: 83
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: 3295459687008565697, guid: ca73ca07892e2884aaa00c7cb13c3f3d, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -3137,7 +3137,7 @@ PrefabInstance:
       objectReference: {fileID: 1238952884}
     - target: {fileID: 3392370126410521309, guid: ca73ca07892e2884aaa00c7cb13c3f3d, type: 3}
       propertyPath: m_VersionIndex
-      value: 1361
+      value: 1364
       objectReference: {fileID: 0}
     - target: {fileID: 4542784243978122990, guid: ca73ca07892e2884aaa00c7cb13c3f3d, type: 3}
       propertyPath: m_Mesh
