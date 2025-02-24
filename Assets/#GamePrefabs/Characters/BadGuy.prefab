@@ -1263,7 +1263,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &433387482734204724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,7 +1514,7 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 0
     followPlayerAlongCollider: {fileID: 0}
-    volume: 0.5
+    volume: 0.25
     pitch: 1.5
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}

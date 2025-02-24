@@ -320,10 +320,11 @@ public sealed class PlayerN : NetworkBehaviour
         PlayingState.OnPauseChange += OnPauseChange;
 
         // Spawner
-        Spawner.OnRespawn += OnRespawn;
+        //Spawner.OnRespawn += OnRespawn;
 
         // End game on death
         Health.OnDeath += OnDeath;
+        Health.OnRevive += OnRevive;
 
         // Check if game is locked on Awake, in that case we need to start with input disabled!
         if (_gameManager.IsGameLock) DisableInput = true;
@@ -507,6 +508,11 @@ public sealed class PlayerN : NetworkBehaviour
         // Movement.RB.AddForce(force, ForceMode.VelocityChange);
         //Movement.RB.AddForceAtPosition(force, _forceT ? _forceT.position : transform.position, ForceMode.VelocityChange);
         //Invoke("ResetAfterDeath", _resetAfterDeathDelay);
+    }
+
+    private void OnRevive()
+    {
+        Movement.ClearModifiers();
     }
 
     private void ResetAfterDeath()
