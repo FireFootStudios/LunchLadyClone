@@ -910,7 +910,33 @@ MonoBehaviour:
       _pickRandomTarget: 0
       _ignoreTargets: 0
       _checkInRange: 0
-      _sounds: []
+      _sounds:
+      - clips:
+        - {fileID: 8300000, guid: 632948fe049a2e9419a7d6b5cf5795bc, type: 3}
+        randomizeClips: 0
+        alwaysUseRandomClip: 0
+        randomiseClipsInitially: 0
+        parent: {fileID: 7553636904131256020}
+        setPosToParent: 0
+        parentUp: 0
+        followPlayerAlongCollider: {fileID: 0}
+        volume: 0
+        pitch: 0
+        randomPitchMultiplier: 0
+        delayBounds: {x: 0, y: 0}
+        frequency: 0
+        is2D: 0
+        ignoreReverb: 0
+        soundType: 0
+        overideGroup: {fileID: 0}
+        spread: 0
+        maxDistanceOverride: 0
+        minDistanceOverride: 0
+        loopAudioSource: 0
+        fadeIn: 0
+        fadeOut: 0
+        maxDuration: 0
+        cooldown: 0
       _soundRequireTarget: 0
       _soundUseTargetPos: 0
       _vfxSpawners: []
@@ -1100,7 +1126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 169510549
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 169510549
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -1205,11 +1231,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb99f67f36bceb48ba79319c3631d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxSpeed: 8
+  _baseMaxSpeed: 9
   _baseAcceleration: 600
   _maxLinearVel: 100
-  _maxRotationSpeed: 1000
-  _rotationAcceleration: 3000
+  _maxRotationSpeed: 1400
+  _rotationAcceleration: 2000
   _useSnappyRotations: 0
   _rotateAroundX: 0
   _anglePauseMoveBase: 360
@@ -1440,6 +1466,7 @@ MonoBehaviour:
   _abilities:
   - {fileID: 8500101951128170744}
   _inputBuffer: 0.2
+  _health: {fileID: 0}
 --- !u!114 &3236823724857446582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1479,7 +1506,7 @@ MonoBehaviour:
   _fadeOutOnDisabled: 0
   _soundData:
     clips:
-    - {fileID: 8300000, guid: 7090104c3a328a3469c1b9fb41ff715d, type: 3}
+    - {fileID: 8300000, guid: 9c2da425c6b1a584d92fe9c9eac098bb, type: 3}
     randomizeClips: 1
     alwaysUseRandomClip: 1
     randomiseClipsInitially: 1
@@ -1487,8 +1514,8 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 0
     followPlayerAlongCollider: {fileID: 0}
-    volume: 1
-    pitch: 1
+    volume: 0.5
+    pitch: 1.5
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}
     frequency: 1
@@ -1817,7 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minStateTime: 0.25
   _allowMove: 1
-  _aggroDelayBounds: {x: 1, y: 1}
+  _aggroDelayBounds: {x: 0.5, y: 0.5}
   _mod:
     priority: 0
     duration: 111111110
@@ -1830,7 +1857,7 @@ MonoBehaviour:
     anglePauseMove: 0
   _pauseMoveNoAbility: 1
   _tryPredictMovement: 0
-  _predictAmountMultiplier: 0.75
+  _predictAmountMultiplier: 0
 --- !u!1 &8653749972687218284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,6 +1988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5921109273101350261}
+  - component: {fileID: 6306147161775213135}
   m_Layer: 0
   m_Name: SoundT
   m_TagString: Untagged
@@ -1983,6 +2011,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3199338451676257458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6306147161775213135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9030046931093926502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc52c5aaa31a29f4b866deed1a257a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnMode: 1
+  _intervalBounds: {x: 15, y: 45}
+  _playImmediate: 0
+  _maxDistFromPlayer: 50
+  _soundData:
+    clips:
+    - {fileID: 8300000, guid: 9a64f9d3284a1b24cba23602e069d707, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 9030046931093926502}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.4
+    pitch: 1.5
+    randomPitchMultiplier: 5
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 100
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _visualize: 0
+  _targetVisualizer: {fileID: 0}
+  _spawnTs:
+  - {fileID: 5921109273101350261}
+  _radiusBounds: {x: 5, y: 50}
+  _overrideYOffset: 1
+  _overrideYOffsetAmount: 0
+  _collider: {fileID: 4724567279015733911}
+  _rayOrigin: {fileID: 5921109273101350261}
+  _rayOriginOffset: {x: 0, y: 0, z: 0}
+  _rayDirection: {fileID: 5921109273101350261}
+  _rayDistanceBounds: {x: 1, y: 50}
+  _rayLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _rayXRangeBounds: {x: 30, y: 90}
+  _rayYRangeBounds: {x: 30, y: 90}
 --- !u!1001 &6415675981776716655
 PrefabInstance:
   m_ObjectHideFlags: 0

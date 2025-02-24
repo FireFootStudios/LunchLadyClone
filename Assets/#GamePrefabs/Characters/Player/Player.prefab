@@ -785,7 +785,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -921,7 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentSpawner: {fileID: 0}
-  _respawnOnRevive: 1
+  _respawnOnRevive: 0
   _linkedHealth: {fileID: 1279222214755286175}
   _characterParent: {fileID: 0}
   _charMovement: {fileID: 0}

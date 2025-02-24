@@ -7,11 +7,10 @@
 
 
 
+* UI element papiertjes
+* Item per player sync
+* Light turn on/off + aggro?
 
-
-
-* Reviving (duration next to player)
-	-> progress bar
 
 * Game progression on items collect
 	-> AI speed increases
