@@ -70,6 +70,7 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
     public bool SceneChanging { get; private set; }
     public bool GameStateChanging { get; private set; } //True if in middle of a game state change (can be check so to not fire state changes when arleady in one)
     public bool IsGameLock { get { return _isGameLock; } }
+    public bool SpawningPlayers { get; private set; } // Waiting for all players to be spawned and ready to start
 
     #endregion
 
@@ -81,25 +82,9 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
     public static System.Action<string> OnSceneChangeFinish; //After scene load AND state switch
     public static Action OnNetworkPlayersSpawned;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        if (_isDestroying) return;
 
-        // Retrieve game states
-        _gameStates.AddRange(GetComponentsInChildren<GameState>());
-        _playingState = GetState<PlayingState>();
 
-        // Disable all gamestates (should only be enabled when we are in that state)
-        foreach (GameState gameState in _gameStates)
-            gameState.enabled = false;
-
-        // Disable all gamemodes initially
-        foreach (GameMode gameMode in _gameModes)
-            gameMode.enabled = false;
-
-        GameMode.OnSessionStart += OnGameSessionStart;
-    }
+    #region PublicMethods
 
     public override void OnNetworkSpawn()
     {
@@ -111,9 +96,11 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnNetworkSceneLoadCompleteAllClients;
     }
 
-    public void SpawnPlayersNetwork()
+    public async Task<bool> SpawnPlayersNetwork()
     {
-        if (!IsHost) return;
+        if (!IsHost) return false;
+        if (SpawningPlayers) return false;
+        SpawningPlayers = true;
 
         // SPAWN PLAYERS
         List<Transform> spawnTs = SceneData.PlayerSpawnTs;
@@ -133,12 +120,34 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
 
             _sceneData.Players.Add(player);
 
-            // Set as local player
-            if (NetworkManager.Singleton.LocalClientId == clientID) SceneData.LocalPlayer = player;
+            //if (NetworkManager.Singleton.LocalClientId == clientID) SceneData.LocalPlayer = player;
+        }
+
+        // Wait for players to spawn
+        int playersReady = 0;
+        while (playersReady != SceneData.Players.Count)
+        {
+            foreach (PlayerN player in SceneData.Players)
+            {
+                if (!player.IsSpawned || !player.IsReady)
+                    continue;
+
+                playersReady++;
+            }
+
+            await Awaitable.NextFrameAsync();
         }
 
         OnNetworkPlayersSpawned?.Invoke();
+        SpawningPlayers = false;
+        return true;
     }
+
+    //[ClientRpc(RequireOwnership = false)]
+    //public void NotifyServerPlayerSpawnedClientRPC()
+    //{
+
+    //}
 
     public void DeSpawnPlayers()
     {
@@ -156,6 +165,30 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
 
         // Clear sceneData list
         _sceneData.Players.Clear();
+    }
+    #endregion
+
+
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (_isDestroying) return;
+
+        // Retrieve game states
+        _gameStates.AddRange(GetComponentsInChildren<GameState>());
+        _playingState = GetState<PlayingState>();
+
+        // Disable all gamestates (should only be enabled when we are in that state)
+        foreach (GameState gameState in _gameStates)
+            gameState.enabled = false;
+
+        // Disable all gamemodes initially
+        foreach (GameMode gameMode in _gameModes)
+            gameMode.enabled = false;
+
+        GameMode.OnSessionStart += OnGameSessionStart;
     }
 
     private void Init()

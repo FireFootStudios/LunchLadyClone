@@ -8,8 +8,8 @@ public sealed class PlayerLamp : MonoBehaviour
     {
         if (!_player || !_player.PlayerCameras) return;
 
-        // Only host needs to do this
-        if (!_player.IsHost) return;
+        // Only for player owner
+        if (!_player.IsOwner) return;
 
         // Set rotation equal to player look direction for now
         transform.forward = _player.PlayerCameras.transform.forward;

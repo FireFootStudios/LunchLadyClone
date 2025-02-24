@@ -38,7 +38,7 @@ public sealed class EndHUD : MonoBehaviour
         if (!succes) return;
 
         // Spawn Players
-        GameManager.Instance.SpawnPlayersNetwork();
+        bool playersSpawned = await GameManager.Instance.SpawnPlayersNetwork();
 
         // Switch state sync
         GameManager.Instance.SwitchStateClientRpc(GameStateID.playing, false);

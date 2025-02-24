@@ -51,6 +51,7 @@ public sealed class PlayerN : NetworkBehaviour
     private InputManager _inputManager = null;
 
     private NetworkVariable<FixedString64Bytes> _playerName = new NetworkVariable<FixedString64Bytes> ("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<bool> _isReady = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     // Cached from input manager
     private Controls _controls = null;
@@ -59,6 +60,7 @@ public sealed class PlayerN : NetworkBehaviour
 
     #region Properties
     //public float LookSensitivity { get { return InputManager.ControllerMode ? _lookSensitivityController * _controllerSensMult : _lookSensitivity; } }
+    public bool IsReady { get { return _isReady.Value; } }
 
     public Health Health { get { return _health; } }
     public FreeMovement Movement { get { return _movement; } }
@@ -77,6 +79,9 @@ public sealed class PlayerN : NetworkBehaviour
 
     public Ability JumpAbility { get { return _jumpAbility; } }
     public Ability SprintAbility { get { return _sprintAbility; } }
+
+
+
 
     public Action<bool> OnMoveInputChange;
 
@@ -352,6 +357,13 @@ public sealed class PlayerN : NetworkBehaviour
 
         // Init input events
         InitInput();
+
+        // Set ourselves as local player
+        _gameManager.SceneData.LocalPlayer = this;
+        //_gameManager.NotifyServerPlayerSpawnedClientRPC();
+
+        // Set spawned to true, this means this clients is now fully functional on the network
+        _isReady.Value = true;
     }
 
     private void InitInput()

@@ -29,9 +29,15 @@ public class SceneData : MonoBehaviour
     {
         get
         {
-            // For offline testing purposes:
-            if (!_localPlayer) _localPlayer = FindObjectOfType<PlayerN>(true);
+            if (!_localPlayer)
+            {
+                _players.Clear();
+                _players.AddRange(FindObjectsByType<PlayerN>(FindObjectsSortMode.None));
+                _localPlayer = _players.Find(player => player.IsSpawned && player.IsOwner);
 
+                // For offline testing purposes
+                //if (!LocalPlayer && _players.Count > 0) _localPlayer = _players[0];
+            }
             return _localPlayer;
         }
         set { _localPlayer = value; }
