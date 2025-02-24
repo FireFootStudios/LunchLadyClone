@@ -103,7 +103,6 @@ public sealed class Sprint : Effect
 
         if (_currentStamina < _minStaminaForUse) return false;
 
-
         //if we are in air and mapped id for air is not flying, dont allow sprint to be started
         //if (!_movement.IsGrounded && _movement.GetMappedMoveID(MoveType.air) != MoveID.flying) return false;
 

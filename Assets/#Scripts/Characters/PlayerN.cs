@@ -31,13 +31,16 @@ public sealed class PlayerN : NetworkBehaviour
     [SerializeField] private bool _enableTPBuild = false;
 
     [Header("Death")]
-    [SerializeField] private float _resetAfterDeathDelay = 3.0f;
-    [SerializeField] private float _forceOnDeath = 10.0f;
-    [SerializeField] private Transform _forceT = null;
+    [SerializeField] private MovementModifier _deathMoveMod = null;
+
+    //[SerializeField] private float _resetAfterDeathDelay = 3.0f;
+    //[SerializeField] private float _forceOnDeath = 10.0f;
+    //[SerializeField] private Transform _forceT = null;
 
 
     [Header("Abilities"), SerializeField] private Ability _jumpAbility = null;
     [SerializeField] private Ability _sprintAbility = null;
+    [SerializeField] private Ability _reviveAbility = null;
 
 
     private PlayerInput _input = null;
@@ -79,7 +82,7 @@ public sealed class PlayerN : NetworkBehaviour
 
     public Ability JumpAbility { get { return _jumpAbility; } }
     public Ability SprintAbility { get { return _sprintAbility; } }
-
+    public Ability ReviveAbility { get { return _reviveAbility; } }
 
 
 
@@ -131,6 +134,14 @@ public sealed class PlayerN : NetworkBehaviour
         if (!context.performed || DisableInput || DisableMoveInput) return;
 
         _abilityManager.TryUseAbilityInputBuffer(_jumpAbility);
+    }
+
+    public void ReviveInput(InputAction.CallbackContext context)
+    {
+        if (!IsOwner && !_ignoreMultiplayer) return;
+        if (!context.performed || DisableInput || DisableMoveInput) return;
+
+        _abilityManager.TryUseAbilityInputBuffer(_reviveAbility);
     }
 
     public void SprintInput(InputAction.CallbackContext context)
@@ -317,6 +328,8 @@ public sealed class PlayerN : NetworkBehaviour
         // Check if game is locked on Awake, in that case we need to start with input disabled!
         if (_gameManager.IsGameLock) DisableInput = true;
 
+        _deathMoveMod.Source = this.gameObject;
+
         // In case testing
         OwnerOnly();
     }
@@ -385,6 +398,9 @@ public sealed class PlayerN : NetworkBehaviour
         // Jump 
         _controls.Player.Jump.performed += JumpInput;
 
+        // Revive
+        _controls.Player.Revive.performed += ReviveInput;
+
         // Sprint
         _controls.Player.Sprint.performed += SprintInput;
         _controls.Player.Sprint.canceled += SprintInput;
@@ -432,6 +448,9 @@ public sealed class PlayerN : NetworkBehaviour
         // Jump 
         _controls.Player.Jump.performed -= JumpInput;
 
+        // Revive
+        _controls.Player.Revive.performed -= ReviveInput;
+
         // Sprint
         _controls.Player.Sprint.performed -= SprintInput;
         _controls.Player.Sprint.canceled -= SprintInput;
@@ -475,8 +494,11 @@ public sealed class PlayerN : NetworkBehaviour
 
     private void OnDeath()
     {
-        Movement.Stop();
-        DisableInput = true;
+        //Movement.Stop();
+        //DisableInput = true;
+
+        Movement.AddOrUpdateModifier(_deathMoveMod);
+
         //Movement.RB.constraints = RigidbodyConstraints.None;
         // Movement.RB.useGravity = true;
 
@@ -502,7 +524,7 @@ public sealed class PlayerN : NetworkBehaviour
         //Unparent??
         //Parent(null);
 
-        DisableInput = false;
+        //DisableInput = false;
 
         // Constraints should be set by preplay state?
         //if (_gameManager.CurrentState == _playingState) Movement.RB.constraints = RigidbodyConstraints.FreezeRotation;

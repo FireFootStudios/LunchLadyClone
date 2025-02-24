@@ -113,7 +113,7 @@ public class Projectile : MonoBehaviour
         _hitCount = 0;
 
         //Reset health comp
-        _health.Reset();
+        _health.Resett();
 
         //Initial + last target pos
         if (_initialTargetHealth) _initialTargetPos = _initialTargetHealth.FocusPos;
