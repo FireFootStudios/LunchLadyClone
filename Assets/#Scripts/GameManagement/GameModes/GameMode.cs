@@ -87,7 +87,6 @@ public abstract class GameMode : NetworkBehaviour
     {
         if (IsActiveAndPlaying) return false;
         if (!CanStartGame()) return false;
-        if (!IsHost) return false;
 
         IsActiveAndPlaying = true;
         StartGame();
@@ -99,7 +98,6 @@ public abstract class GameMode : NetworkBehaviour
     public bool TryEndGame()
     {
         if (!IsActiveAndPlaying) return false;
-        if (!IsHost) return false;
 
         IsActiveAndPlaying = false;
 

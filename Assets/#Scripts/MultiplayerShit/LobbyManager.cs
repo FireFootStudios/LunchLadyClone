@@ -322,8 +322,6 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
 
     public string GetPlayerName()
     {
-        if (_currentLobby == null) return null;
-
         string playerName = "Player";
         if (!string.IsNullOrEmpty(_playerName))
         {

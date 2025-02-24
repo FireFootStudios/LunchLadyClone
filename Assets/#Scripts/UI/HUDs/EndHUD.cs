@@ -37,11 +37,11 @@ public sealed class EndHUD : MonoBehaviour
         bool succes = await GameManager.Instance.TrySceneChangeNetworkAsync<PlayingState>(_prevSessionInfo.Level.Asset.SceneName);
         if (!succes) return;
 
-        // Switch state sync
-        GameManager.Instance.SwitchStateClientRpc(GameStateID.playing, false);
-
         // Spawn Players
         GameManager.Instance.SpawnPlayersNetwork();
+
+        // Switch state sync
+        GameManager.Instance.SwitchStateClientRpc(GameStateID.playing, false);
 
         // Start gamemode sync (all player should have a gamemode session start)
         GameManager.Instance.CurrentGameMode.TryStartSessionNetwork();

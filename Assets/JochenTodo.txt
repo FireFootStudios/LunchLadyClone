@@ -1,10 +1,12 @@
 
 
+- ReEnable movement if dead, add modifier?
+- Disable jump/sprint if dead
+- Disable item pickup if dead
+- Ignore doors if dead
+- Add UI Darken feedback if dead
 
-
-
-
-* Stamina
+- 
 
 
 * Reviving (duration next to player)
