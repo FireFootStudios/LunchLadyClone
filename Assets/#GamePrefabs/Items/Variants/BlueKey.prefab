@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a2aadb56168a86c43a5b2fd839c6efaf, type: 2}
     - target: {fileID: 3707647990738631276, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_Name
-      value: BlueKey Variant
+      value: BlueKey
       objectReference: {fileID: 0}
     - target: {fileID: 6321582309269666200, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,11 +58,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7511500014216158150, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2006940736
+      value: 2891802921
       objectReference: {fileID: 0}
     - target: {fileID: 7511500014216158150, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 781175095
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608671225207016988, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5546940888850326318, guid: 4830dc5cd534a694a8cf0e61ba36e955, type: 3}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3165
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514998684692570051, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_Name
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

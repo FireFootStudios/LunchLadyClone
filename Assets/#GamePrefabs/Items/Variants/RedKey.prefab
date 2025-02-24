@@ -64,6 +64,34 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 781175095
       objectReference: {fileID: 0}
+    - target: {fileID: 7608671225207016988, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5546940888850326318, guid: 4830dc5cd534a694a8cf0e61ba36e955, type: 3}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3165
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514998684692570051, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_Name
+      value: Key
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
