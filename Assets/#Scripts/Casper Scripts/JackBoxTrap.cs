@@ -16,6 +16,7 @@ public class JackBoxTrap : MonoBehaviour
             {
                 _scaryObject.SetActive(true);
                 StartCoroutine(StunPlayer(player));
+                this.GetComponent<Collider>().enabled = false;
             }
         }
     }
