@@ -4,10 +4,7 @@
 
 
 
-
-
-- Fix lobby
-- Player name rotate around y only
+* Stamina
 
 
 * Reviving (duration next to player)
@@ -19,15 +16,13 @@
 
 
 
-
+- Fix lobby
+- Player name rotate around y only
 
 - Why is AI so slow/inconsistent in speed
 - AI speed up as game progresses (on item pickup)?
 - Does AI get stuck if try to wander to pos it cant reach
 - Can try handling player leave
-
-
-
 
 
 - For testing (single player), run in local host mode?
@@ -41,7 +36,6 @@
 
 
 - Water behavior?
-
 - When host starts
 	-> sync gamemode (clients need to know gamemode started)
 

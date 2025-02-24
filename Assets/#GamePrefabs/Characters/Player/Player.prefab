@@ -1616,6 +1616,11 @@ MonoBehaviour:
     maxSpeedBufferDeceleration: 300
     maxSpeedBufferMinTime: 1
     maxSpeedBufferAccuracy: 0
+  _staminaUsage: 1
+  _staminaRegen: 2
+  _maxStamina: 5
+  _staminaRegenCD: 2
+  _minStaminaForUse: 0.5
 --- !u!1001 &1366064882062574910
 PrefabInstance:
   m_ObjectHideFlags: 0
