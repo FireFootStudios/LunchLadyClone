@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7a7c4a158b736694aa6d00aa9f1b77a3, type: 2}
     - target: {fileID: 3707647990738631276, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_Name
-      value: GreenKey Variant
+      value: GreenKey
       objectReference: {fileID: 0}
     - target: {fileID: 6321582309269666200, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7511500014216158150, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3410256579
+      value: 1435528208
       objectReference: {fileID: 0}
     - target: {fileID: 7511500014216158150, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
