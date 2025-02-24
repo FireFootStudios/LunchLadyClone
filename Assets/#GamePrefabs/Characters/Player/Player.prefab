@@ -697,7 +697,7 @@ MonoBehaviour:
   _moveData:
   - MoveType: 0
     MoveID: 0
-    maxSpeed: 4
+    maxSpeed: 3.5
     acceleration: 50
     deceleration: 40
     gravity: 0
@@ -1810,7 +1810,7 @@ MonoBehaviour:
   _overrideMoveData:
   - MoveType: 0
     MoveID: 0
-    maxSpeed: 6
+    maxSpeed: 7
     acceleration: 50
     deceleration: 40
     gravity: 0
@@ -1852,8 +1852,8 @@ MonoBehaviour:
     maxSpeedBufferAccuracy: 0
   _staminaUsage: 1
   _staminaRegen: 2
-  _maxStamina: 5
-  _staminaRegenCD: 2
+  _maxStamina: 7
+  _staminaRegenCD: 1
   _minStaminaForUse: 0.5
 --- !u!1001 &1366064882062574910
 PrefabInstance:
