@@ -4,7 +4,6 @@
 - Disable jump/sprint if dead
 - Disable item pickup if dead
 - Ignore doors if dead
-- Add UI Darken feedback if dead
 
 - 
 
