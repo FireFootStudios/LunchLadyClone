@@ -24,6 +24,7 @@ public sealed class Door : NetworkBehaviour
     {
         if (!other.TryGetComponent(out PlayerN playerN)) return;
         if (!playerN.IsLocalPlayer) return;
+        if (playerN.Health.IsDead) return;
         if (_isOpened.Value) return;
         if (!IsSpawned) return;
 

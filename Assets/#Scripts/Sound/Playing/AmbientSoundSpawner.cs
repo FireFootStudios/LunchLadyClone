@@ -122,11 +122,11 @@ public sealed class AmbientSoundSpawner : MonoBehaviour
             return;
 
         //do distance check, return if too far
-        if (!_soundData.is2D && _spawnMode != SpawnMode.aroundPlayer)
-        {
-            float distanceSqr = (_player.transform.position - _soundData.StartPos).sqrMagnitude;
-            if (distanceSqr > _maxDistFromPlayer * _maxDistFromPlayer) return;
-        }
+        //if (!_soundData.is2D && _spawnMode != SpawnMode.aroundPlayer)
+        //{
+        //    float distanceSqr = (_player.transform.position - _soundData.StartPos).sqrMagnitude;
+        //    if (distanceSqr > _maxDistFromPlayer * _maxDistFromPlayer) return;
+        //}
 
         //Play sound
         _soundManager.PlaySound(_soundData);

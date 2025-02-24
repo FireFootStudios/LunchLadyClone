@@ -1,11 +1,13 @@
 
 
-- ReEnable movement if dead, add modifier?
-- Disable jump/sprint if dead
-- Disable item pickup if dead
-- Ignore doors if dead
 
-- 
+
+
+
+
+
+
+
 
 
 * Reviving (duration next to player)

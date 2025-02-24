@@ -62,7 +62,7 @@ public sealed class Health : NetworkBehaviour
     public void SetData(HealthData data)
     {
         Data = data;
-        Reset();
+        Resett();
     }
 
     public void Add_Server(float delta, GameObject source)
@@ -88,6 +88,13 @@ public sealed class Health : NetworkBehaviour
         _current.Value = newCurrent;
     }
 
+    // Call when a client needs to revive someone
+    [ServerRpc(RequireOwnership = false)]
+    public void ReviveClientServerRpc()
+    {
+        Resett();
+    }
+
     // Call when a client needs to make a health change, this will go through the server first
     [ServerRpc]
     public void Add_ClientServerRpc(float delta)
@@ -110,16 +117,16 @@ public sealed class Health : NetworkBehaviour
         _isDead.Value = true;
     }
 
-    // Same as Reset() but invokes event and is ignored if not dead
-    public void Revive()
+    // Same as Reset() but is ignored if not dead
+    public void Revive_Server()
     {
         if (!IsDead) return;
         if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
 
-        Reset();
+        Resett();
     }
 
-    public void Reset()
+    public void Resett()
     {
         if (!IsHost) return;
 

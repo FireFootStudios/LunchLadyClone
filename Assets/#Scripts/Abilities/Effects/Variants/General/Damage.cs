@@ -29,7 +29,7 @@ public sealed class Damage : Effect
         Damage dmgTemplate = template as Damage;
         if (!dmgTemplate) return;
 
-        //TODO
+        // TODO
         //_amount = dmgTemplate._amount;
     }
 }

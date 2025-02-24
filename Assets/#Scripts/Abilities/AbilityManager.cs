@@ -7,6 +7,8 @@ public sealed class AbilityManager : MonoBehaviour
 {
     [SerializeField] private List<Ability> _abilities = new List<Ability>();
     [SerializeField] private float _inputBuffer = 0.2f;
+    [Space]
+    [SerializeField] private Health _health = null;
 
     public Action<Ability> OnFire;
 
@@ -51,6 +53,8 @@ public sealed class AbilityManager : MonoBehaviour
 
     public bool CanUseAbility(Ability ability, bool checkRotation = true)
     {
+         if (_health && _health.IsDead) return false;
+
         return ability && DisableTimer < 0.001f && ability.CanFire(GeneralAbilityCDTimer, checkRotation);
     }
 
@@ -85,7 +89,9 @@ public sealed class AbilityManager : MonoBehaviour
 
     private bool TryUse(Ability ability)
     {
-        if (ability && DisableTimer < 0.001f && ability.TryFire(GeneralAbilityCDTimer))
+        if (!CanUseAbility(ability)) return false;
+
+        if (ability.TryFire(GeneralAbilityCDTimer))
         {
             if (GeneralAbilityCDTimer > 0.0f) GeneralAbilityCDTimer += ability.GeneralCooldown;
             else GeneralAbilityCDTimer = ability.GeneralCooldown;

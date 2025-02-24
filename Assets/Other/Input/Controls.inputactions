@@ -45,7 +45,16 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f762988d-df8e-4b44-a8cb-c4b0b5aaeb8f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Revive",
+                    "type": "Button",
+                    "id": "3cf52570-17eb-4612-bb88-8b86ee585110",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -296,6 +305,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "134ac583-0997-4e5d-9427-8d9dfac7b46d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Revive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dd8ee88-af0f-4a69-8b55-33b5492eabe8",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Revive",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
