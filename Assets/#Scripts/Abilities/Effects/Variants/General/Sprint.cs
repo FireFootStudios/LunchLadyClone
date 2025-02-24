@@ -34,6 +34,15 @@ public sealed class Sprint : Effect
 
         // Cancel ability on exit grounded
         //_movement.OnStopGrounded += Ability.Cancel;
+
+        _currentStamina = _maxStamina;
+    }
+
+    public override void OnCleanUp()
+    {
+        base.OnCleanUp();
+
+        _currentStamina = _maxStamina;
     }
 
     private void Update()
