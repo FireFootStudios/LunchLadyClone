@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public sealed class MainGamemode : GameMode
@@ -9,9 +10,76 @@ public sealed class MainGamemode : GameMode
     private List<PlayerN> _playersEscaped = new List<PlayerN>();
 
 
+    private NetworkVariable<int> _papersCollected = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<int> _papersTotal= new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+    public int PapersCollected { get { return _papersCollected.Value; } }
+    public int PapersTotal { get { return _papersTotal.Value; } }
+
+
+    public static Action<ItemN> OnPaperPickedUp;
+    public static Action OnPaperRegistered;
+
+    public static Action OnPapersChangeClient;
+
     public override bool CanStartGame()
     {
         return true;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        ItemManager.OnItemPickedUp += OnItemPickedUp;
+        ItemManager.OnItemRegister += OnItemRegister;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        _papersTotal.OnValueChanged += OnPapersRegister;
+        _papersCollected.OnValueChanged += OnPapersPickedUp;
+    }
+
+    private void OnPapersRegister(int previousValue, int newValue)
+    {
+        OnPapersChangeClient?.Invoke();
+    }
+
+    private void OnPapersPickedUp(int previousValue, int newValue)
+    {
+        OnPapersChangeClient?.Invoke();
+    }
+
+    private void OnItemRegister(ItemN item)
+    {
+        if (item.ID != itemID.paper) return;
+        if (!IsHost) return;
+
+        _papersTotal.Value = ItemManager.Instance.GetItemsByType(itemID.paper).Count;
+    }
+
+    private void OnItemPickedUp(ItemN item)
+    {
+        if (item.ID != itemID.paper) return;
+        if (!IsHost) return;
+
+        List<ItemN> papers = ItemManager.Instance.GetItemsByType(itemID.paper);
+        _papersTotal.Value = papers.Count;
+
+        int collected = 0;
+        foreach (ItemN paper in papers)
+        {
+            if (!paper.IsPickedUp) continue;
+
+            collected++;
+        }
+
+        _papersCollected.Value = collected;
+
+        OnPaperPickedUp?.Invoke(item);
     }
 
     protected override void Update()

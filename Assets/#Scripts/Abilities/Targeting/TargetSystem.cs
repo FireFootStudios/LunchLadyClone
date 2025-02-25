@@ -60,6 +60,8 @@ public abstract class TargetSystem : MonoBehaviour
     [SerializeField] private float _losMaxDistance = 10.0f;
     [SerializeField] private float _losMissTargetLifetime = 5.0f;
     [SerializeField] private float _losTargetYOffset = 0.0f;
+    [SerializeField] private float _xMinAccuracy = 0.0f;
+    [SerializeField] private float _yMinAccuracy = 0.0f;
 
 
     private float _updateTargetsTimer = 0.0f;

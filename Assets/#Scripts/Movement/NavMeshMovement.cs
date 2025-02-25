@@ -138,7 +138,7 @@ public sealed class NavMeshMovement : MonoBehaviour
         ReCalculateModifiers();
     }
 
-    //removes all mods which have source equal to param
+    // Removes all mods which have source equal to param
     public void RemoveMod(GameObject source)
     {
         for (int i = 0; i < _modifiers.Count; i++)

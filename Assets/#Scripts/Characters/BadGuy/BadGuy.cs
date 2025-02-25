@@ -28,7 +28,6 @@ public sealed class BadGuy : Character
     {
         base.OnNetworkSpawn();
 
-
         foreach (GameObject go in _hostOnlyGos)
             go.SetActive(IsHost);
 
@@ -36,13 +35,5 @@ public sealed class BadGuy : Character
 
         foreach (MonoBehaviour comp in _hostOnlyComps)
             comp.enabled = IsHost;
-        // Behaviors indicating
-        //if (!IsHost)
-        //{
-        //    Behaviour.enabled = false;
-        //    NavMeshAgent.enabled = false;
-        //    Movement.enabled = false;
-        //    AttackBehaviour.enabled = false;
-        //}
     }
 }
