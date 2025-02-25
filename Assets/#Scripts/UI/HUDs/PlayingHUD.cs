@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public sealed class PlayingHUD : MonoBehaviour
 {
     [SerializeField] private GameObject _deathGo = null;
+
 
     private void OnEnable()
     {

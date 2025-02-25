@@ -1,20 +1,42 @@
 
 
 
+* Fix line of sight to check angle with player
+
+
+
+* Make new monster state t
+* Change override targets in aggro system to have prio + max duration?
 
 
 
 
 
 
-* UI element papiertjes
-* Item per player sync
-* Light turn on/off + aggro?
+
+
+
+
+
+
+
+
+
+
 
 
 * Game progression on items collect
 	-> AI speed increases
 	-> Aggro player who took it (how long?)
+
+* Item per player sync
+* Light turn on/off + aggro?
+
+
+
+
+
+
 
 
 
@@ -52,3 +74,8 @@
 Start before synchronization complete (maybe it just got stuck)
 	-> Hash error
 [Netcode] renderTime was before m_StartTimeConsumed. This should never happen. renderTime is 49.9632010023001, m_StartTimeConsumed is 49.9666666666667
+
+
+
+
+*

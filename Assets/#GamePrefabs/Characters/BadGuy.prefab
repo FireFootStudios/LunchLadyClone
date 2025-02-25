@@ -413,7 +413,9 @@ MonoBehaviour:
   _losOriginT: {fileID: 1182604255833935471}
   _losMaxDistance: 15
   _losMissTargetLifetime: 3
-  _losTargetYOffset: 1.8
+  _losTargetYOffset: 1.6
+  _xMinAccuracy: 0
+  _yMinAccuracy: 0
   _onlyTargetSelf: 0
   _random: 0
 --- !u!1 &3402032716981716017
@@ -1085,6 +1087,7 @@ GameObject:
   - component: {fileID: 3236823724857446582}
   - component: {fileID: 1235920103881811791}
   - component: {fileID: 698674854306870202}
+  - component: {fileID: 6091579893311147414}
   m_Layer: 0
   m_Name: BadGuy
   m_TagString: Untagged
@@ -1531,6 +1534,111 @@ MonoBehaviour:
     fadeOut: 0
     maxDuration: 0
     cooldown: 0
+--- !u!114 &6091579893311147414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085150105009024553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb3a15fe2f42f54bbfa4f3aa772d353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _badGuy: {fileID: 5821440926944999368}
+  _paperEvents:
+  - moveMod:
+      priority: 0
+      duration: 1111111
+      maxSpeedMultiplier: 1.05
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+    aggroRandom: 0
+    aggroSource: 0
+    paperCount: 1
+  - moveMod:
+      priority: 0
+      duration: 1111111
+      maxSpeedMultiplier: 1.05
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+    aggroRandom: 0
+    aggroSource: 0
+    paperCount: 2
+  - moveMod:
+      priority: 0
+      duration: 1111111
+      maxSpeedMultiplier: 1.05
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+    aggroRandom: 0
+    aggroSource: 0
+    paperCount: 3
+  - moveMod:
+      priority: 0
+      duration: 1111111
+      maxSpeedMultiplier: 1.05
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+    aggroRandom: 0
+    aggroSource: 0
+    paperCount: 4
+  - moveMod:
+      priority: 0
+      duration: 1111111
+      maxSpeedMultiplier: 1.05
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+    aggroRandom: 0
+    aggroSource: 0
+    paperCount: 5
+  - moveMod:
+      priority: 0
+      duration: 1111111
+      maxSpeedMultiplier: 1.05
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+    aggroRandom: 0
+    aggroSource: 0
+    paperCount: 6
+  - moveMod:
+      priority: 0
+      duration: 1111111
+      maxSpeedMultiplier: 1.05
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+    aggroRandom: 0
+    aggroSource: 0
+    paperCount: 7
 --- !u!1 &7266541800953419062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,6 +1825,8 @@ MonoBehaviour:
   _losMaxDistance: 10
   _losMissTargetLifetime: 5
   _losTargetYOffset: 0
+  _xMinAccuracy: 0
+  _yMinAccuracy: 0
   _requireOverrideToBeInHitBox: 1
   _ignoreOthersOnOverride: 1
   _hitboxes:
