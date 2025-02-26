@@ -28,7 +28,10 @@ public sealed class Modifier : Effect
         FreeMovement movement = target.GetComponent<FreeMovement>();
         if (movement)
         {
-            movement.AddOrUpdateModifier(_modifier);
+            // If target is networked and not the host, we have to add the modifier through a client rpc
+            if (movement.IsSpawned && !movement.IsHost) movement.AddOrUpdateModifierClientRPC(_modifier);
+            else movement.AddOrUpdateModifier(_modifier);
+
             if (_stopTarget) movement.RB.linearVelocity = Vector3.zero;
         }
 

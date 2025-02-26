@@ -16,10 +16,10 @@ public sealed class JackBox : BadGuy
     {
         base.Awake();
 
-        if (_activateAbility) _activateAbility.OnFire += OnActivateAbFire;
+        if (_activateAbility) _activateAbility.OnFireFinish += OnActivateAbFired;
     }
 
-    private void OnActivateAbFire()
+    private void OnActivateAbFired()
     {
         if (!_activateSpawnTemplate) return;
 

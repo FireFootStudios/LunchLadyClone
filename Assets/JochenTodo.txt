@@ -2,10 +2,10 @@
 
 
 
+- Fix los attack hb
 
-
-
-- Make jackbox activating, spawn other prefab and disable ourselves
+- Test jackbox activating
+- Test jackbox modifier networking
 
 
 
