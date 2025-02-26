@@ -1,11 +1,16 @@
 
 
+- Make jackbox activating, spawn other prefab and disable ourselves
+
 
 
 * Jackbox
-- spawning
-- activate feedback (visual + sound)
-- deactivate after firing (only visual should remain, maybe just spawn mesh object + sound and delete AI)
+- Activate feedback (visual + sound)
+- Deactivate after firing (only visual should remain, maybe just spawn mesh object + sound and delete AI)
+- Main AI aggro event on activate
+- Spawning
+	-> Network object!
+	-> Every x seconds, spawn a new one from the main AI
 
 
 

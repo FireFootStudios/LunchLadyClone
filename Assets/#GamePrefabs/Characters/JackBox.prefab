@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 4664329850619238523}
   - component: {fileID: 6325626011151341613}
   - component: {fileID: 649492940086829872}
-  - component: {fileID: 9027856033394076726}
+  - component: {fileID: 708443842857328422}
   - component: {fileID: 9148783348386281351}
   - component: {fileID: 1247832912939348832}
   - component: {fileID: 2476299620835440931}
@@ -919,7 +919,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 0
   SlerpPosition: 0
---- !u!114 &9027856033394076726
+--- !u!114 &708443842857328422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -928,7 +928,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8520392211074572841}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a2fec9349c0584084d2e2e9505075a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a3a3c4f1413ce64db7ed5bb994dd082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -944,6 +944,34 @@ MonoBehaviour:
   - {fileID: 7852623267569379097}
   - {fileID: 7553564523720158519}
   _offlineMode: 0
+  _activateAbility: {fileID: 0}
+  _activateSpawnTemplate: {fileID: 0}
+  _activateSFX:
+    clips: []
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomPitchMultiplier: 1
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
 --- !u!114 &9148783348386281351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,8 +1068,8 @@ MonoBehaviour:
   _data:
     start: 1
     max: 1
-    regen: 0.25
-    regenCDSinceDamage: 3
+    regen: 0
+    regenCDSinceDamage: 0
     canBeDamaged: 0
     autoRevive: 0
     autoReviveTime: 5

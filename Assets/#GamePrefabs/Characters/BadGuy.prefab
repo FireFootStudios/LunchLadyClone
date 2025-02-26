@@ -415,7 +415,7 @@ MonoBehaviour:
     m_Bits: 9
   _losOriginT: {fileID: 1182604255833935471}
   _losMaxDistance: 15
-  _losMissTargetLifetime: 3
+  _losMissTargetLifetime: 0
   _losTargetYOffset: 1.6
   _onlyTargetSelf: 0
 --- !u!1 &3402032716981716017
@@ -1750,7 +1750,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   _losOriginT: {fileID: 0}
   _losMaxDistance: 10
-  _losMissTargetLifetime: 5
+  _losMissTargetLifetime: 3
   _losTargetYOffset: 0
   _requireOverrideToBeInHitBox: 1
   _ignoreOthersOnOverride: 1
@@ -1881,7 +1881,7 @@ MonoBehaviour:
   _minStateTime: 0.25
   _allowMove: 1
   _useLastValidPos: 1
-  _useLastValidPosTime: 1
+  _useLastValidPosTime: 0.5
   _aggroDelayBounds: {x: 0.5, y: 0.5}
   _mod:
     priority: 0

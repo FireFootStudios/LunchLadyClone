@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class BadGuy : Character
+public class BadGuy : Character
 {
     [SerializeField] private List<GameObject> _hostOnlyGos = new List<GameObject>();
     [SerializeField] private List<MonoBehaviour> _hostOnlyComps = new List<MonoBehaviour>();
