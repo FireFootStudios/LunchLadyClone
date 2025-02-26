@@ -958,6 +958,7 @@ GameObject:
   - component: {fileID: 298240805467482205}
   - component: {fileID: 3443890254962378660}
   - component: {fileID: 2616046733406682352}
+  - component: {fileID: 4536991090844734411}
   m_Layer: 0
   m_Name: JumpScare
   m_TagString: Untagged
@@ -1055,6 +1056,19 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &4536991090844734411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7313606308740963873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c145dd25eee7e514587ec57964544649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _videoPlayer: {fileID: 298240805467482205}
 --- !u!1 &7442874902120965408
 GameObject:
   m_ObjectHideFlags: 0
