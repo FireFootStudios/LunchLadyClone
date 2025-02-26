@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public sealed class PlayingHUD : MonoBehaviour
 {
     [SerializeField] private GameObject _deathGo = null;
+    [SerializeField] private GameObject _jumpScareGo = null;
 
 
     private void OnEnable()
@@ -20,7 +22,11 @@ public sealed class PlayingHUD : MonoBehaviour
 
     private void OnPlayerRevive()
     {
-        if (_deathGo) _deathGo.SetActive(false);
+        if (_deathGo)
+        {
+            _deathGo.SetActive(false);
+            _jumpScareGo.SetActive(true);
+        }
     }
 
     private void OnPlayerDeath()

@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathGo: {fileID: 4977985423530999184}
+  _jumpScareGo: {fileID: 7313606308740963873}
 --- !u!1 &4959670967594778388
 GameObject:
   m_ObjectHideFlags: 0
