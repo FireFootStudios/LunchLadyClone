@@ -2,8 +2,10 @@
 
 
 
-
-
+* Jackbox
+- spawning
+- activate feedback (visual + sound)
+- deactivate after firing (only visual should remain, maybe just spawn mesh object + sound and delete AI)
 
 
 

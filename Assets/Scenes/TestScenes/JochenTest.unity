@@ -259,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7085150105009024553, guid: 8c3996734f5f43e4c9ada8d6085f3ee6, type: 3}
       propertyPath: m_Name
-      value: Duck
+      value: BadGuy
       objectReference: {fileID: 0}
     - target: {fileID: 8133735068919654983, guid: 8c3996734f5f43e4c9ada8d6085f3ee6, type: 3}
       propertyPath: GlobalObjectIdHash
