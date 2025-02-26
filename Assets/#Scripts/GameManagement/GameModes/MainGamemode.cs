@@ -96,7 +96,8 @@ public sealed class MainGamemode : GameMode
 
         if (!IsHost) return;
 
-        _gameManager.SceneData.EscapeHitBox.OnTargetEnter += OnEnterEscapeHB;
+        //_gameManager.SceneData.EscapeHitBox.OnTargetEnter += OnEnterEscapeHB;
+        _gameManager.SceneData.EscapeHitBox.OnTargetsChange += OnEscapeHBChange;
     }
 
     private void OnEnterEscapeHB(Collider coll)
@@ -105,8 +106,41 @@ public sealed class MainGamemode : GameMode
         if (!InSession) return;
         if (!IsHost) return;
 
-        //if (_playersEscaped.Contains(player)) return;
+        if (_playersEscaped.Contains(player)) return;
 
+        // Win con
+        if (PapersCollected != PapersTotal) return;
+
+        EndSessionWin();
+        //player.gameObject.SetActive(false);
+
+        // Disable player and mark as escaped
+        //_playersEscaped.Add(player);
+    }
+
+    private void OnEscapeHBChange()
+    {
+        //if (!coll.TryGetComponent(out PlayerN player)) return;
+        if (!InSession) return;
+        if (!IsHost) return;
+
+        // Win con
+        if (PapersCollected != PapersTotal) return;
+
+        int playersInsideHB = 0;
+        foreach (PlayerN player in _gameManager.SceneData.Players)
+        {
+            if (!player) continue;
+            if (player.Health.IsDead) continue;
+
+            if (_gameManager.SceneData.EscapeHitBox.Targets.Exists(go => go == player.gameObject))
+                playersInsideHB++;
+        }
+
+        // Return aslong as all players are not alive and well inside escape hitbox
+        if (playersInsideHB < _gameManager.SceneData.Players.Count)
+            return;
+            
         EndSessionWin();
         //player.gameObject.SetActive(false);
 

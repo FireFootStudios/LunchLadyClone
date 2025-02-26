@@ -4,6 +4,7 @@ public sealed class Aggro : FSMState
 {
     [SerializeField] private bool _allowMove = true;
     [SerializeField] private bool _useLastValidPos = true;
+    [SerializeField] private float _useLastValidPosTime = 1.0f; // if above this time, we use last valid (seen) pos of target instead
     [SerializeField, Tooltip("Time after entering the aggro state before the AI will move")] private Vector2 _aggroDelayBounds = new Vector2(0.5f, 2.0f);
     [Space]
     [SerializeField] private MovementModifier _mod = null;
@@ -92,7 +93,7 @@ public sealed class Aggro : FSMState
         Vector3 targetPos = targetP.target.transform.position;
 
         // Use the last position when the target was valid (ie in range or fov, ...)
-        if (_useLastValidPos) 
+        if (_useLastValidPos && targetP.lifeElapsed > _useLastValidPosTime) 
             targetPos = targetP.lastValidPos;
 
         // Pos prediction (this works pretty horribly for now)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
 {
@@ -49,10 +50,25 @@ public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
         return _returnItemsList;
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+
+        NetworkManager.Singleton.SceneManager.OnLoad += OnNetworkSceneLoad;
     }
+
+    private void OnNetworkSceneLoad(ulong clientId, string sceneName, LoadSceneMode loadSceneMode, AsyncOperation asyncOperation)
+    {
+        if (!IsHost) return;
+
+        _registeredItems.Clear();
+    }
+
 
     private void OnItemPickUp(ItemN item)
     {

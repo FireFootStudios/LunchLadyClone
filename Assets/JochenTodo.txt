@@ -1,9 +1,6 @@
 
 
 
-* Check if all papers collected on host
-* Coyote time  
-* Can we support aggroing to a last seen position instead?
 
 
 
@@ -17,39 +14,16 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-* Game progression on items collect
-	-> AI speed increases
-	-> Aggro player who took it (how long?)
 
 * Item per player sync
 * Light turn on/off + aggro?
-* Jackboxes aggro monster?
+* Jackboxes
+	-> Get spawned by monster
+	-> Wander around map
+	-> Aggro monster
 
 
 
-
-- Fix lobby
-- Player name rotate around y only
-
-- Why is AI so slow/inconsistent in speed
-- AI speed up as game progresses (on item pickup)?
-- Does AI get stuck if try to wander to pos it cant reach
-- Can try handling player leave
 
 
 - For testing (single player), run in local host mode?
@@ -57,6 +31,9 @@
 - Aggro sound (state feedback)
 - Spawn in enemy via scene data after players?
 - Wander to close point, bad guy should wander around current place more?
+- Fix lobbyx
+- Player name rotate around y only
+- Can try handling player leave
 
 
 -------------------------------------------------------------------------
