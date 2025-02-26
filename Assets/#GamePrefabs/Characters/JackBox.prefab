@@ -123,7 +123,7 @@ MonoBehaviour:
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 30
-  _maxHorizontalAngle: 90
+  _maxHorizontalAngle: 145
   _useLineOfSight: 0
   _losMask:
     serializedVersion: 2
@@ -134,7 +134,8 @@ MonoBehaviour:
   _losTargetYOffset: 0
   _requireOverrideToBeInHitBox: 1
   _ignoreOthersOnOverride: 1
-  _hitboxes: []
+  _hitboxes:
+  - {fileID: 6568552953980152695}
 --- !u!1 &3599538194352200516
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,9 +267,9 @@ MonoBehaviour:
     gravityMultiplier: 1
     overrideAnglePauseMove: 0
     anglePauseMove: 0
-  _stopTarget: 1
-  _abilityDisableTime: 2
-  _cancelAbilities: 1
+  _stopTarget: 0
+  _abilityDisableTime: 0
+  _cancelAbilities: 0
   _ignoreDead: 1
 --- !u!1 &4794675759825954141
 GameObject:
@@ -917,8 +918,8 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   SwitchTransformSpaceWhenParented: 0
-  Interpolate: 0
-  SlerpPosition: 0
+  Interpolate: 1
+  SlerpPosition: 1
 --- !u!114 &708443842857328422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,8 +945,8 @@ MonoBehaviour:
   - {fileID: 7852623267569379097}
   - {fileID: 7553564523720158519}
   _offlineMode: 0
-  _activateAbility: {fileID: 0}
-  _activateSpawnTemplate: {fileID: 0}
+  _activateAbility: {fileID: 6744694507712056679}
+  _activateSpawnTemplate: {fileID: 1391118666694959784}
   _activateSFX:
     clips: []
     randomizeClips: 1
@@ -955,9 +956,9 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 1
+    volume: 0.35
     pitch: 1
-    randomPitchMultiplier: 1
+    randomPitchMultiplier: 4
     delayBounds: {x: 0, y: 0}
     frequency: 1
     is2D: 0
@@ -965,7 +966,7 @@ MonoBehaviour:
     soundType: 0
     overideGroup: {fileID: 0}
     spread: 0
-    maxDistanceOverride: 0
+    maxDistanceOverride: 15
     minDistanceOverride: 0
     loopAudioSource: 0
     fadeIn: 0
@@ -990,7 +991,7 @@ MonoBehaviour:
   _useSpawnZoneAsAggroHitbox: 0
   _deAggroOnSpawnExit: 0
   _maxRangeFromSpawn: 1e+12
-  _spawnDelay: 1
+  _spawnDelay: 2
   _desiredDistanceToTarget: 2
 --- !u!114 &1247832912939348832
 MonoBehaviour:
@@ -1218,7 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilities:
   - {fileID: 6744694507712056679}
-  _inputBuffer: 0.2
+  _inputBuffer: 0
   _health: {fileID: 2899262902492675971}
 --- !u!114 &7553564523720158519
 MonoBehaviour:

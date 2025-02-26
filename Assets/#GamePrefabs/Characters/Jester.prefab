@@ -1089,7 +1089,7 @@ GameObject:
   - component: {fileID: 698674854306870202}
   - component: {fileID: 6091579893311147414}
   m_Layer: 0
-  m_Name: BadGuy
+  m_Name: Jester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

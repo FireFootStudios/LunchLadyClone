@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public sealed class FreeMovement : MonoBehaviour
+public sealed class FreeMovement : NetworkBehaviour
 {
     #region Fields
     [Header("General"), SerializeField] private List<MoveData> _moveData = new List<MoveData>();//1st of each move type in list is considered default
@@ -48,7 +49,7 @@ public sealed class FreeMovement : MonoBehaviour
     [SerializeField] private float _rotateForSlopesSphereCastRadius = 0.5f;
     [SerializeField] private Transform _rotateForSlopesT = null;
 
-    //current mapped move ids to each move type (can be changed as desired, defaults will be set)
+    // Current mapped move ids to each move type (can be changed as desired, defaults will be set)
     private Dictionary<MoveType, MoveID> _mappedMoveData = new Dictionary<MoveType, MoveID>(); 
     private MoveData _currentData = null;
 
@@ -68,7 +69,7 @@ public sealed class FreeMovement : MonoBehaviour
     private float _maxSpeedBufferCurrent = 0.0f;
     private float _maxSpeedBufferElapsed = 0.0f;
 
-    //Modifiers
+    // Modifiers
     private List<MovementModifier> _modifiers = new List<MovementModifier>();
     private float _maxSpeedModifier = 0.0f;
     private float _accelerationModifier = 0.0f;
@@ -200,7 +201,7 @@ public sealed class FreeMovement : MonoBehaviour
         }
 
         //Reset elapsed in case it was reused
-        moveMod.Elapsed = 0.0f;
+        moveMod.elapsed = 0.0f;
 
         //sort on priority if more than 1 element
         if (_modifiers.Count > 1)
@@ -213,6 +214,13 @@ public sealed class FreeMovement : MonoBehaviour
 
         ReCalculateModifiers();
     }
+
+    [ClientRpc(RequireOwnership = false)]
+    public void AddOrUpdateModifierClientRPC(MovementModifier modifier)
+    {
+
+    }
+
 
     //removes all mods which have source equal to param
     public void RemoveMod(GameObject source)
@@ -620,8 +628,8 @@ public sealed class FreeMovement : MonoBehaviour
             MovementModifier mod = _modifiers[i];
 
             //update mod activeness
-            mod.Elapsed += Time.deltaTime;
-            if (mod.Elapsed >= mod.duration /*&& !mod.keepAlive*/)
+            mod.elapsed += Time.deltaTime;
+            if (mod.elapsed >= mod.duration /*&& !mod.keepAlive*/)
             {
                 _modifiers.Remove(mod);
                 i--;
@@ -891,7 +899,7 @@ public sealed class MoveData
 }
 
 [System.Serializable]
-public sealed class MovementModifier
+public sealed class MovementModifier : INetworkSerializable
 {
     [Tooltip("Only set when non multipliers used and there could be overlapping")] public int priority = 0;
     public float duration = 1.0f;
@@ -906,10 +914,45 @@ public sealed class MovementModifier
     public bool overrideAnglePauseMove = false;
     public float anglePauseMove = 0.0f;
 
-    public float Elapsed { get; set; }
+    public float elapsed = 0.0f;
     public GameObject Source { get; set; }
 
-    //option to remove on source null?
+    // Option to remove on source null?
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref priority);
+        serializer.SerializeValue(ref duration);
+        serializer.SerializeValue(ref maxSpeedMultiplier);
+        serializer.SerializeValue(ref accelerationMultiplier);
+        serializer.SerializeValue(ref decelerationMultiplier);
+        serializer.SerializeValue(ref rotationMultiplier);
+        serializer.SerializeValue(ref gravityMultiplier);
+        serializer.SerializeValue(ref overrideAnglePauseMove);
+        serializer.SerializeValue(ref anglePauseMove);
+        serializer.SerializeValue(ref elapsed);
+
+        // For Source, we'll serialize its NetworkObjectId.
+        // If Source is null, we send 0.
+        ulong sourceNetworkId = 0;
+        if (serializer.IsWriter)
+        {
+            if (Source != null)
+            {
+                var netObj = Source.GetComponent<NetworkObject>();
+                if (netObj != null)
+                    sourceNetworkId = netObj.NetworkObjectId;
+            }
+            serializer.SerializeValue(ref sourceNetworkId);
+        }
+        else
+        {
+            serializer.SerializeValue(ref sourceNetworkId);
+            // Optionally, you can resolve the source on the reader side using:
+            // if (sourceNetworkId != 0 && NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(sourceNetworkId, out var netObj))
+            //     Source = netObj.gameObject;
+        }
+    }
 
     public MovementModifier Copy()
     {
@@ -927,7 +970,7 @@ public sealed class MovementModifier
         modifier.overrideAnglePauseMove = overrideAnglePauseMove;
         modifier.anglePauseMove = anglePauseMove;
 
-        modifier.Elapsed = 0.0f;
+        modifier.elapsed = 0.0f;
         modifier.Source = Source;
 
         return modifier;
