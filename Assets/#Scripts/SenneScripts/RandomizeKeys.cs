@@ -8,20 +8,35 @@ using Random = UnityEngine.Random;
 
 public class RandomizeKeys : NetworkBehaviour
 {
-    [SerializeField] private List<GameObject> _paperSOne = null;
-    [SerializeField] private List<GameObject> _paperSOneTrans = null;
+    [SerializeField] private List<GameObject> _paperOne = null;
+    [SerializeField] private List<GameObject> _paperOneTrans = null;
     [Space]
-    [SerializeField] private List<GameObject> _paperSTwo = null;
-    [SerializeField] private List<GameObject> _paperSTwoTrans = null;
+    [SerializeField] private List<GameObject> _paperTwo = null;
+    [SerializeField] private List<GameObject> _paperTwoTrans = null;
     [Space]
-    [SerializeField] private List<GameObject> _paperSThree = null;
-    [SerializeField] private List<GameObject> _paperSThreeTrans = null;
+    [SerializeField] private List<GameObject> _paperThree = null;
+    [SerializeField] private List<GameObject> _paperThreeTrans = null;
     [Space]
-    [SerializeField] private List<GameObject> _paperSFour = null;
-    [SerializeField] private List<GameObject> _paperSFourTrans = null;
+    [SerializeField] private List<GameObject> _paperFour = null;
+    [SerializeField] private List<GameObject> _paperFourTrans = null;
     [Space]
-    [SerializeField] private List<GameObject> _paperSFive = null;
-    [SerializeField] private List<GameObject> _paperSFiveTrans = null;
+    [SerializeField] private List<GameObject> _paperFive = null;
+    [SerializeField] private List<GameObject> _paperFiveTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _paperSix = null;
+    [SerializeField] private List<GameObject> _paperSixTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _paperSeven = null;
+    [SerializeField] private List<GameObject> _paperSevenTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _paperEight = null;
+    [SerializeField] private List<GameObject> _paperEightTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _paperNine = null;
+    [SerializeField] private List<GameObject> _paperNineTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _paperTen = null;
+    [SerializeField] private List<GameObject> _paperTenTrans = null;
     [Space]
     [SerializeField] private List<GameObject> _keysSOne = null;
     [SerializeField] private List<GameObject> _keysSOneTrans = null;
@@ -43,11 +58,16 @@ public class RandomizeKeys : NetworkBehaviour
         if (!IsHost)
             return;
 
-        RandomizeObjectPositions(_paperSOne, _paperSOneTrans);
-        RandomizeObjectPositions(_paperSTwo, _paperSTwoTrans);
-        RandomizeObjectPositions(_paperSThree, _paperSThreeTrans);
-        RandomizeObjectPositions(_paperSFour, _paperSFourTrans);
-        RandomizeObjectPositions(_paperSFive, _paperSFiveTrans);
+        RandomizeObjectPositions(_paperOne, _paperOneTrans);
+        RandomizeObjectPositions(_paperTwo, _paperTwoTrans);
+        RandomizeObjectPositions(_paperThree, _paperThreeTrans);
+        RandomizeObjectPositions(_paperFour, _paperFourTrans);
+        RandomizeObjectPositions(_paperFive, _paperFiveTrans);
+        RandomizeObjectPositions(_paperSix, _paperSixTrans);
+        RandomizeObjectPositions(_paperSeven, _paperSevenTrans);
+        RandomizeObjectPositions(_paperEight, _paperEightTrans);
+        RandomizeObjectPositions(_paperNine, _paperNineTrans);
+        RandomizeObjectPositions(_paperTen, _paperTenTrans);
         RandomizeObjectPositions(_keysSOne, _keysSOneTrans);
         RandomizeObjectPositions(_keysSTwo, _keysSTwoTrans);
         RandomizeObjectPositions(_keysSThree, _keysSThreeTrans);
@@ -74,6 +94,7 @@ public class RandomizeKeys : NetworkBehaviour
             }
 
             objects[i].transform.position = shuffledTransforms[i].transform.position;
+            objects[i].transform.rotation = shuffledTransforms[i].transform.rotation;
         }
     }
 }
