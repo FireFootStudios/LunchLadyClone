@@ -414,9 +414,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   _losOriginT: {fileID: 1182604255833935471}
-  _losMaxDistance: 15
+  _losMaxDistance: 20
   _losMissTargetLifetime: 0
-  _losTargetYOffset: 1.6
+  _losTargetYOffset: 1
   _onlyTargetSelf: 0
 --- !u!1 &3402032716981716017
 GameObject:
@@ -1518,7 +1518,7 @@ MonoBehaviour:
     parentUp: 0
     followPlayerAlongCollider: {fileID: 0}
     volume: 0.25
-    pitch: 1.2
+    pitch: 2
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}
     frequency: 1
@@ -1551,7 +1551,7 @@ MonoBehaviour:
     moveMod:
       priority: 0
       duration: 11111
-      maxSpeedMultiplier: 1.05
+      maxSpeedMultiplier: 1.08
       accelerationMultiplier: 1
       decelerationMultiplier: 1
       rotationMultiplier: 1
@@ -1560,9 +1560,9 @@ MonoBehaviour:
       anglePauseMove: 0
     aggroRandom: 0
     aggroSource: 1
-    aggroDurBounds: {x: 10, y: 50}
+    aggroDurBounds: {x: 10, y: 40}
     paperCount: 0
-  _aggroDurDistScaleBounds: {x: 10, y: 100}
+  _aggroDurDistScaleBounds: {x: 10, y: 150}
 --- !u!1 &7266541800953419062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,14 +1744,14 @@ MonoBehaviour:
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 90
   _maxHorizontalAngle: 90
-  _useLineOfSight: 0
+  _useLineOfSight: 1
   _losMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  _losOriginT: {fileID: 0}
-  _losMaxDistance: 10
-  _losMissTargetLifetime: 3
-  _losTargetYOffset: 0
+    m_Bits: 9
+  _losOriginT: {fileID: 1182604255833935471}
+  _losMaxDistance: 20
+  _losMissTargetLifetime: 0
+  _losTargetYOffset: 1
   _requireOverrideToBeInHitBox: 1
   _ignoreOthersOnOverride: 1
   _hitboxes:
@@ -1859,7 +1859,7 @@ MonoBehaviour:
   _mod:
     priority: 0
     duration: 1111111
-    maxSpeedMultiplier: 1
+    maxSpeedMultiplier: 0.7
     accelerationMultiplier: 1
     decelerationMultiplier: 1
     rotationMultiplier: 0.5
@@ -2076,13 +2076,13 @@ MonoBehaviour:
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
     volume: 0.4
-    pitch: 1.5
+    pitch: 1.1
     randomPitchMultiplier: 5
     delayBounds: {x: 0, y: 0}
     frequency: 1
     is2D: 0
     ignoreReverb: 0
-    soundType: 0
+    soundType: 2
     overideGroup: {fileID: 0}
     spread: 0
     maxDistanceOverride: 100

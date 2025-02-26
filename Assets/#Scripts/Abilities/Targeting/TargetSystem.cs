@@ -21,8 +21,8 @@ public abstract class TargetSystem : MonoBehaviour
     [SerializeField, Tooltip("The default behavior (if set to false) will only update the target list when asked, if set to true it will be updated live")] private bool _updateTargetsDuringFire = false;
 
     [Space]
-    [SerializeField] private float _maxVerticalAngle = 90.0f;
-    [SerializeField] private float _maxHorizontalAngle = 90.0f;
+    [SerializeField, Range(0.0f, 90.0f)] private float _maxVerticalAngle = 90.0f;
+    [SerializeField, Range(0.0f, 180.0f)] private float _maxHorizontalAngle = 180.0f;
 
     [Header("Line of sight")]
     [SerializeField] private bool _useLineOfSight = false;
@@ -315,24 +315,29 @@ public abstract class TargetSystem : MonoBehaviour
         Vector3 dirToTarget = (target.transform.position - Source.transform.position).normalized;
 
         // Check horizontal angle
-        //if (_maxHorizontalAngle < 89.0f && Source)
-        Vector3 forwardXZ = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
-        Vector3 dirToTargetXZ = new Vector3(dirToTarget.x, 0, dirToTarget.z).normalized;
+        if (_maxHorizontalAngle < 179.0f && Source)
+        {
+            Vector3 forwardXZ = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+            Vector3 dirToTargetXZ = new Vector3(dirToTarget.x, 0, dirToTarget.z).normalized;
 
-        float horizontalAngle = Vector3.Angle(forwardXZ, dirToTargetXZ);
-        if (horizontalAngle > _maxHorizontalAngle)
-            return false;
+            float horizontalAngle = Vector3.Angle(forwardXZ, dirToTargetXZ);
+            if (horizontalAngle > _maxHorizontalAngle)
+                return false;
+        }
 
         // Check vertical angle
 
         // One way is to compute the elevation angle for both vectors.
         // Elevation is defined as the angle above the XZ plane.
-        float targetElevation = Mathf.Atan2(dirToTarget.y, new Vector2(dirToTarget.x, dirToTarget.z).magnitude) * Mathf.Rad2Deg;
-        float forwardElevation = Mathf.Atan2(transform.forward.y, new Vector2(transform.forward.x, transform.forward.z).magnitude) * Mathf.Rad2Deg;
+        if (_maxVerticalAngle < 89.0f && Source)
+        {
+            float targetElevation = Mathf.Atan2(dirToTarget.y, new Vector2(dirToTarget.x, dirToTarget.z).magnitude) * Mathf.Rad2Deg;
+            float forwardElevation = Mathf.Atan2(transform.forward.y, new Vector2(transform.forward.x, transform.forward.z).magnitude) * Mathf.Rad2Deg;
 
-        float verticalAngle = Mathf.Abs(targetElevation - forwardElevation);
-        if (verticalAngle > _maxVerticalAngle)
-            return false;
+            float verticalAngle = Mathf.Abs(targetElevation - forwardElevation);
+            if (verticalAngle > _maxVerticalAngle)
+                return false;
+        }
 
         return true;
     }

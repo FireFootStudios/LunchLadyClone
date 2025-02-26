@@ -1,5 +1,10 @@
 
 
+
+
+
+
+
 - Make jackbox activating, spawn other prefab and disable ourselves
 
 
@@ -38,19 +43,20 @@
 - Aggro sound (state feedback)
 - Spawn in enemy via scene data after players?
 - Wander to close point, bad guy should wander around current place more?
-- Fix lobbyx
-- Player name rotate around y only
+
 - Can try handling player leave
 
 
+# BUGS
+* Fix lobby player count update
+* Player name rotate around y only
+* Revive error
+* AI stuck at door
+
+
+
+
 -------------------------------------------------------------------------
-
-
-
-- Water behavior?
-- When host starts
-	-> sync gamemode (clients need to know gamemode started)
-
 
 
 
