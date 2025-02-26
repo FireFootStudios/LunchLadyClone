@@ -1,13 +1,15 @@
 
 
 
-
-
-
-
-- Wander to close point, bad guy should wander around current place more?
-- Put used wander points in list, while in wander state, go over each one and ignore already used ones
+* Check if all papers collected on host
+* Coyote time  
 * Can we support aggroing to a last seen position instead?
+
+
+
+
+
+
 
 
 
@@ -54,6 +56,7 @@
 - Make sure to account for pathing issues (if a player is not reachable pick another?)
 - Aggro sound (state feedback)
 - Spawn in enemy via scene data after players?
+- Wander to close point, bad guy should wander around current place more?
 
 
 -------------------------------------------------------------------------

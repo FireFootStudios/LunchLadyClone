@@ -6,6 +6,7 @@ public sealed class Wander : FSMState
 {
     [SerializeField] private RandomisationSeed _randomSeed = null;
     [SerializeField] private Vector2 _wanderSterpDurationBounds = new Vector2(5.0f, 15.0f);
+    [SerializeField] private int _wanderPointShuffleCount = 15;
     [Space]
     [SerializeField] private MovementModifier _mod = null;
 
@@ -13,7 +14,7 @@ public sealed class Wander : FSMState
     private Character _char = null;
 
     private List<Transform> _wanderPoints = new List<Transform>();
-
+    private int _wanderIndex = 0;
 
     private void Awake()
     {
@@ -32,6 +33,8 @@ public sealed class Wander : FSMState
 
         // Get wander points from scene data
         _wanderPoints = GameManager.Instance.SceneData.WanderPoints;
+        _wanderPoints.Shuffle();
+        _wanderIndex = 0;
 
         StartCoroutine(WanderStep());
 
@@ -71,7 +74,16 @@ public sealed class Wander : FSMState
         if(_wanderPoints.Count == 0) yield break;
         _inStep = true;
 
-        Transform wanderT = _wanderPoints.RandomElement();
+        // Manage wander index
+        if (_wanderIndex >= _wanderPoints.Count || _wanderIndex >= _wanderPointShuffleCount)
+        {
+            _wanderPoints.Shuffle();
+            _wanderIndex = 0;
+        }
+
+        Transform wanderT = _wanderPoints[_wanderIndex];
+        _wanderIndex++;
+
         _char.Movement.MoveToPos(wanderT.position);
 
         float duration = Utils.GetRandomFromBounds(_wanderSterpDurationBounds);

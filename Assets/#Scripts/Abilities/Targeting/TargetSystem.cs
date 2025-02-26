@@ -42,7 +42,6 @@ public abstract class TargetSystem : MonoBehaviour
     private List<GameObject> _targetGameObjects = new List<GameObject>();
 
     private List<LosTarget> _losTargets = new List<LosTarget>();
-    private List<OverrideTarget> _overrideTargets = new List<OverrideTarget>();
 
     #endregion
     #region Properties
@@ -152,6 +151,7 @@ public abstract class TargetSystem : MonoBehaviour
         {
             pair.effectiveness = eff;
             pair.lifeElapsed = 0.0f;
+            pair.lastValidPos = target.transform.position;
 
             // Pick best lifetime
             if (lifeTime > pair.lifetime) pair.lifetime = lifeTime;
@@ -165,8 +165,6 @@ public abstract class TargetSystem : MonoBehaviour
 
     protected virtual void UpdateCurrentTargetPairs()
     {
-        GameObject source = Source;
-
         // Check if target null or has 0 effectiveness, remove if any true
         for (int i = 0; i < _targetPairs.Count; i++)
         {
@@ -395,6 +393,9 @@ public sealed class TargetPair
     public float lifetime = 0.0f;
     public float lifeElapsed = 0.0f;
 
+    // Last target pos while valid
+    public Vector3 lastValidPos = Vector3.zero;
+
     public TargetPair(GameObject target, float effectiveness)
     {
         this.target = target;
@@ -406,6 +407,7 @@ public sealed class TargetPair
         this.target = target;
         this.effectiveness = effectiveness;
         this.lifetime = lifetime;
+        this.lastValidPos = target.transform.position;
     }
 }
 
@@ -427,22 +429,5 @@ public sealed class LosTarget
     {
         this.target = target;
         this.losTimer = losTimer;
-        this.lastSeenPos = lastSeenPos;
-    }
-}
-
-public sealed class OverrideTarget
-{
-    public GameObject target = null;
-    public float durationTimer = 0.0f;
-
-    // ignore los
-    // ignore angles
-    // ...
-
-    public OverrideTarget(GameObject target, float duration)
-    {
-        this.target = target;
-        this.durationTimer = duration;
     }
 }

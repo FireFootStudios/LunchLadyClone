@@ -3,6 +3,7 @@ using UnityEngine;
 public sealed class Aggro : FSMState
 {
     [SerializeField] private bool _allowMove = true;
+    [SerializeField] private bool _useLastValidPos = true;
     [SerializeField, Tooltip("Time after entering the aggro state before the AI will move")] private Vector2 _aggroDelayBounds = new Vector2(0.5f, 2.0f);
     [Space]
     [SerializeField] private MovementModifier _mod = null;
@@ -88,26 +89,28 @@ public sealed class Aggro : FSMState
             return;
         }
 
-        // Pos prediction (this works pretty horribly for now)
         Vector3 targetPos = targetP.target.transform.position;
+
+        // Use the last position when the target was valid (ie in range or fov, ...)
+        if (_useLastValidPos) 
+            targetPos = targetP.lastValidPos;
+
+        // Pos prediction (this works pretty horribly for now)
         if (_tryPredictMovement && targetP.target.TryGetComponent(out FreeMovement movement))
         {
             targetPos = Utils.PredictPosition(targetPos, transform.position, movement.CurrentMoveVelocity, _char.Movement.CurrentMoveSpeed * _predictAmountMultiplier);
         }
 
-        // Return if delayed
+        // Return if delayed (update rot only)
         if (_aggroElapsed < _currentDelay)
         {
-            // Update rotation only
             _char.Movement.DesiredForward = targetPos - transform.position;
-
             return;
         }
 
-        // Pause move when no ability can be used? If abilities are disabled or none could be used due to CD  
+        // Pause move when no ability can be used? If abilities are disabled or none could be used due to CD (update rot only)
         if (_pauseMoveNoAbility && _char.AttackBehaviour && (!_char.AttackBehaviour.CouldUseAbilityIfInRange() || _char.AbilityManager.DisableTimer > 0.0f))
         {
-            // Update rotation only
             _char.Movement.DesiredForward = targetPos - transform.position;
             _char.Movement.Stop();
             return;
