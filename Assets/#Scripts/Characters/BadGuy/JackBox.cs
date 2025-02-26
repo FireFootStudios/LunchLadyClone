@@ -10,6 +10,9 @@ public sealed class JackBox : BadGuy
     [SerializeField] private GameObject _activateSpawnTemplate = null;
     [SerializeField] private SoundSpawnData _activateSFX = null;
     [Space]
+    [SerializeField] private HitBox _preventMoveHB = null;
+    [SerializeField] private MovementModifier _preventMoveMod = null;
+    [Space]
     [SerializeField] private float _disableDelay = 5.0f;
 
     public GameObject FireTarget { get; private set; }
@@ -24,6 +27,16 @@ public sealed class JackBox : BadGuy
 
         if (_activateAbility) _activateAbility.OnFireFinish += OnActivateAbFired;
         if (_activateAbility) _activateAbility.OnBeforeFire += OnBeforeFire;
+
+        if (_preventMoveHB) _preventMoveHB.OnTargetsChange += OnPreventMoveHBTargetsChange;
+    }
+
+    private void OnPreventMoveHBTargetsChange()
+    {
+        bool preventMove = _preventMoveHB.Targets.Count > 0;
+        _preventMoveMod.Source = this.gameObject; 
+        if (preventMove) Movement.AddOrUpdateModifier(_preventMoveMod, false);
+        else Movement.RemoveMod(_preventMoveMod);
     }
 
     private void OnActivateAbFired()
@@ -52,7 +65,7 @@ public sealed class JackBox : BadGuy
         go.SetActive(true);
 
         // Set to cleanup after delay
-        Destroy(go, _disableDelay);
+        if (_disableDelay > 0.0f) Destroy(go, _disableDelay);
 
         // SFX
         SoundManager.Instance.PlaySound(_activateSFX);

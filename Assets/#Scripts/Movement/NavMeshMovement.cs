@@ -327,7 +327,8 @@ public sealed class NavMeshMovement : MonoBehaviour
 
         // If moving, use agent velocity as desired forward (this overrides desired forward set by default for now)
         if (_agent.desiredVelocity.magnitude > 0.0f) desiredDir = _agent.desiredVelocity;
-        
+        else desiredDir = DesiredForward.normalized;
+
         // Could be zero vector
         if (desiredDir == Vector3.zero) return;
 
@@ -374,7 +375,7 @@ public sealed class NavMeshMovement : MonoBehaviour
 
     private void ReCalculateModifiers()
     {
-        //Reset
+        // Reset
         _maxSpeedModifier = 1.0f;
         _accelerationModifier = 1.0f;
         _decelerationModifier = 1.0f;
@@ -382,12 +383,12 @@ public sealed class NavMeshMovement : MonoBehaviour
         RotationMultiplier = 1.0f;
         _anglePauseMoveCurrent = _anglePauseMoveBase;
 
-        //Loop over active mods (sorted on priority)
+        // Loop over active mods (sorted on priority)
         for (int i = 0; i < _modifiers.Count; i++)
         {
             MovementModifier mod = _modifiers[i];
 
-            //apply mod
+            // Apply mod
             _maxSpeedModifier *= mod.maxSpeedMultiplier;
             _accelerationModifier *= mod.accelerationMultiplier;
             _decelerationModifier *= mod.decelerationMultiplier;
@@ -396,9 +397,10 @@ public sealed class NavMeshMovement : MonoBehaviour
 
             if (mod.overrideAnglePauseMove) _anglePauseMoveCurrent = mod.anglePauseMove;
         }
+
+        bool speedZero = _maxSpeedModifier < 0.01f;
+        if (speedZero) _agent.isStopped = true;
     }
 
     #endregion
-
-
 }

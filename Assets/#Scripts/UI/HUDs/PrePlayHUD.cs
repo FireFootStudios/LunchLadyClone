@@ -51,7 +51,7 @@ public sealed class PrePlayHUD : MonoBehaviour
         if (_currentLobby == null) return;
 
         // Lobby player count
-        if (_lobbyPlayersTMP) _lobbyPlayersTMP.text = _currentLobby.Players.Count + "/" + _currentLobby.MaxPlayers;
+        if (_lobbyPlayersTMP) _lobbyPlayersTMP.text = NetworkManager.Singleton.ConnectedClients + "/" + _currentLobby.MaxPlayers;
     }
 
     private void OnClientConnect(ulong obj)

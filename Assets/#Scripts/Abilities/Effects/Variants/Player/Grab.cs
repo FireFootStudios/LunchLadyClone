@@ -16,7 +16,7 @@ public sealed class Grab : Effect
     {
         if (!target) return 0.0f;
 
-        if (!target.TryGetComponent(out ItemN item)) return 0.0f;
+        if (!target.TryGetComponent(out ItemN item) || item.IsPickedUp) return 0.0f;
 
         return 1.0f;
     }
