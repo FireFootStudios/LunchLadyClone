@@ -1220,7 +1220,7 @@ MonoBehaviour:
   _useSpawnZoneAsAggroHitbox: 1
   _deAggroOnSpawnExit: 0
   _maxRangeFromSpawn: 100000
-  _spawnDelay: 42
+  _spawnDelay: 30
   _desiredDistanceToTarget: 2
 --- !u!114 &4616724902125020410
 MonoBehaviour:
@@ -1255,7 +1255,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1406,8 +1406,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
@@ -1518,7 +1518,7 @@ MonoBehaviour:
     parentUp: 0
     followPlayerAlongCollider: {fileID: 0}
     volume: 0.25
-    pitch: 1.5
+    pitch: 1.2
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}
     frequency: 1
@@ -1881,6 +1881,7 @@ MonoBehaviour:
   _minStateTime: 0.25
   _allowMove: 1
   _useLastValidPos: 1
+  _useLastValidPosTime: 1
   _aggroDelayBounds: {x: 0.5, y: 0.5}
   _mod:
     priority: 0
