@@ -4,9 +4,6 @@ using UnityEngine;
 //[RequireComponent(typeof(HitBox))]
 public sealed class HitBoxTargetSystem : TargetSystem
 {
-    [SerializeField] private bool _requireOverrideToBeInHitBox = true; //for abilities set to true, aggro to false
-    [SerializeField] private bool _ignoreOthersOnOverride = true; //only ignores others as a first target
-
     [Space]
     [SerializeField] private List<HitBox> _hitboxes = null;
 

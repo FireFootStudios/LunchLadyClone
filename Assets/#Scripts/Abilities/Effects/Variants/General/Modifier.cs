@@ -24,14 +24,18 @@ public sealed class Modifier : Effect
             if (!health || health.IsDead) return;
         }
 
-        //create and add modifer to target movement (copy from template)
+        // Create and add modifer to target movement (copy from template)
         FreeMovement movement = target.GetComponent<FreeMovement>();
         if (movement)
         {
-            movement.AddOrUpdateModifier(_modifier);
+            // If target is networked and not the host, we have to add the modifier through a client rpc
+            if (movement.IsSpawned && !movement.IsHost) movement.AddOrUpdateModifierClientRPC(_modifier);
+            else movement.AddOrUpdateModifier(_modifier);
+
             if (_stopTarget) movement.RB.linearVelocity = Vector3.zero;
         }
-        //set ability disable timer
+
+        // Set ability disable timer
         AbilityManager abilityManager = target.GetComponent<AbilityManager>();
         if (abilityManager)
         {
@@ -44,7 +48,7 @@ public sealed class Modifier : Effect
     {
         if (!target) return 0.0f;
 
-        //target dead?
+        // Target dead?
         if (_ignoreDead)
         {
             Health health = target.GetComponent<Health>();
@@ -54,7 +58,7 @@ public sealed class Modifier : Effect
 
         float eff = 1.0f;
 
-        //has a movement comp?
+        // Has a movement comp?
         FreeMovement movement = target.GetComponent<FreeMovement>();
         AbilityManager abilityManager = target.GetComponent<AbilityManager>();
 

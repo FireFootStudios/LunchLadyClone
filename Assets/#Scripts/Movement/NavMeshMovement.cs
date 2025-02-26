@@ -124,7 +124,7 @@ public sealed class NavMeshMovement : MonoBehaviour
         }
 
         //Reset elapsed in case it was reused
-        moveMod.Elapsed = 0.0f;
+        moveMod.elapsed = 0.0f;
 
         //sort on priority if more than 1 element
         if (_modifiers.Count > 1)
@@ -359,8 +359,8 @@ public sealed class NavMeshMovement : MonoBehaviour
             MovementModifier mod = _modifiers[i];
 
             //update mod activeness
-            mod.Elapsed += Time.deltaTime;
-            if (mod.Elapsed >= mod.duration /*&& !mod.keepAlive*/)
+            mod.elapsed += Time.deltaTime;
+            if (mod.elapsed >= mod.duration /*&& !mod.keepAlive*/)
             {
                 _modifiers.Remove(mod);
                 i--;

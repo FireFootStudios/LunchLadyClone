@@ -860,7 +860,8 @@ MonoBehaviour:
   _onSpawnTemplate: {fileID: 0}
   _onSpawnPsScale: 1
   _onDeathSFX:
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 632948fe049a2e9419a7d6b5cf5795bc, type: 3}
     randomizeClips: 1
     alwaysUseRandomClip: 1
     randomiseClipsInitially: 1
@@ -868,7 +869,7 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     randomPitchMultiplier: 1
     delayBounds: {x: 0, y: 0}

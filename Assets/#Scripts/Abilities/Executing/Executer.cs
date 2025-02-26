@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,19 +16,23 @@ public sealed class Executer : MonoBehaviour
 
     private Transform OriginT { get { return Data.originT ? Data.originT : this.transform; } }
 
-    //TODO, right now all effects are copied over for each time they are referenced for each execute, this needs to be fixed in future versions
+
+    public Action OnFinish;
+
+
+    // TODO, right now all effects are copied over for each time they are referenced for each execute, this needs to be fixed in future versions
     public Executer Copy(GameObject targetGo)
     {
         if (!targetGo) return null;
 
-        //create copy and set data
+        // Create copy and set data
         Executer copy = targetGo.AddComponent<Executer>();
         copy.IsExecuting = false;
         copy.Data = new ExecuterData();
         copy.Data.maxTargets = Data.maxTargets;
         copy.Data.minTargets = Data.minTargets;
 
-        //copy executes, make new list and add individual copies of each execute
+        // Copy executes, make new list and add individual copies of each execute
         foreach (Execute execute in Data.executes)
         {
             Execute executeCopy = execute.Copy(targetGo);
@@ -51,14 +56,14 @@ public sealed class Executer : MonoBehaviour
     {
         if (!CanExecute()) return;
 
-        //Stop any remaining coroutines
+        // Stop any remaining coroutines
         StopAllCoroutines();
 
-        //Reset executes first
+        // Reset executes first
         foreach (Execute execute in Data.executes)
             execute.Reset();
 
-        //Start new coroutine
+        // Start new coroutine
         StartCoroutine(ExecuteCo(targets));
     }
 
@@ -66,14 +71,14 @@ public sealed class Executer : MonoBehaviour
     {
         if (!CanExecute()) return;
 
-        //Stop any remaining coroutines
+        // Stop any remaining coroutines
         StopAllCoroutines();
 
-        //Reset executes first
+        // Reset executes first
         foreach (Execute execute in Data.executes)
             execute.Reset();
 
-        //Start new coroutine
+        // Start new coroutine
         StartCoroutine(ExecuteCo(target));
     }
 
@@ -138,6 +143,7 @@ public sealed class Executer : MonoBehaviour
         }
 
         IsExecuting = false;
+        OnFinish?.Invoke();
         yield return null;
     }
 
@@ -170,6 +176,7 @@ public sealed class Executer : MonoBehaviour
         }
 
         IsExecuting = false;
+        OnFinish?.Invoke();
         yield return null;
     }
 

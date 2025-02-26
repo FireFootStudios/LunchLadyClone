@@ -60,18 +60,20 @@ public class Ability : MonoBehaviour
     #endregion
 
     public Action OnFire;
+    public Action OnFireFinish;
     public Action OnCancel;
 
     private void Awake()
     {
-        //Cache potential targetsystem
+        // Cache potential targetsystem
         TargetSystem = GetComponentInChildren<TargetSystem>();
 
-        //create executer and set data
+        // Create executer and set data
         _executer = this.gameObject.AddComponent<Executer>();
         _executer.Data = _executeData;
+        _executer.OnFinish += () => { OnFireFinish?.Invoke(); };
 
-        //cancel abilities
+        // Cancel abilities
         foreach (Ability ability in _cancelAbilities)
             ability.OnFire += Cancel;
     }
@@ -101,13 +103,13 @@ public class Ability : MonoBehaviour
     {
         if (!CanFire(generalCooldownTimer)) return false;
 
-        //set cooldown
+        // Set cooldown
         CooldownTimer = _cooldown + Utils.GetRandomFromBounds(0.0f, _randomCooldown);
 
-        //reset
+        // Reset
         ElapsedFiring = 0.0f;
 
-        //execute
+        // Execute
         _executer.Execute(TargetSystem ? TargetSystem.GetTargetsAsGameObjects() : null);
 
         OnFire?.Invoke();
@@ -145,10 +147,10 @@ public class Ability : MonoBehaviour
 
     protected virtual void UpdateFiring()
     {
-        //cooldown timer
+        // Cooldown timer
         if (_updateCooldownDuringFire || !IsFiring) CooldownTimer -= Time.deltaTime;
 
-        //general elapsed since fired
+        // General elapsed since fired
         if (IsFiring) ElapsedFiring += Time.deltaTime;
     }
 

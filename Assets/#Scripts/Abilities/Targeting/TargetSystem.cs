@@ -391,6 +391,7 @@ public abstract class TargetSystem : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public sealed class TargetPair
 {
     public GameObject target = null;
