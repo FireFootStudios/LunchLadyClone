@@ -2,38 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class TargetPair
-{
-    public GameObject target = null;
-    public float effectiveness = 0.0f;
-
-    public TargetPair(GameObject target, float effectiveness)
-    {
-        this.target = target;
-        this.effectiveness = effectiveness;
-    }
-}
-
-public enum TargetType { player, character, prop, platform, projectile }
-[System.Serializable]
-public sealed class TargetTypeMultiplier
-{
-    public TargetType type;
-    public float multiplier;
-}
-
-public sealed class LosTarget
-{
-    public GameObject target = null;
-    public float losTimer = 0.0f;
-
-    public LosTarget(GameObject target, float losTimer)
-    {
-        this.target = target;
-        this.losTimer = losTimer;
-    }
-}
-
 public abstract class TargetSystem : MonoBehaviour
 {
     #region Fields
@@ -42,6 +10,8 @@ public abstract class TargetSystem : MonoBehaviour
     [SerializeField, Tooltip("Which tags to target, leave empty to target none")] protected List<Tag> _targetTags = new List<Tag>();
     [SerializeField] protected List<TargetTypeMultiplier> _targetTypeMultipliers = null;
     [SerializeField] private bool _treatNoTagsAsAnyTarget = false;
+    [SerializeField] private bool _random = false;
+    [SerializeField, Tooltip("How long do targets stay in target system after becoming invalid?")] private float _targetLifeTime = 0.0f;
 
     [Space]
     [SerializeField] protected float _minEffectivenessForValid = 0.01f;
@@ -52,6 +22,7 @@ public abstract class TargetSystem : MonoBehaviour
 
     [Space]
     [SerializeField] private float _maxVerticalAngle = 90.0f;
+    [SerializeField] private float _maxHorizontalAngle = 90.0f;
 
     [Header("Line of sight")]
     [SerializeField] private bool _useLineOfSight = false;
@@ -60,32 +31,27 @@ public abstract class TargetSystem : MonoBehaviour
     [SerializeField] private float _losMaxDistance = 10.0f;
     [SerializeField] private float _losMissTargetLifetime = 5.0f;
     [SerializeField] private float _losTargetYOffset = 0.0f;
-    [SerializeField] private float _xMinAccuracy = 0.0f;
-    [SerializeField] private float _yMinAccuracy = 0.0f;
+
 
 
     private float _updateTargetsTimer = 0.0f;
-    private GameObject _overrideTarget = null;
 
     protected List<TargetPair> _targetPairs = new List<TargetPair>();
+    private List<TargetPair> _outputBuffer = new List<TargetPair>();
+
     private List<GameObject> _targetGameObjects = new List<GameObject>();
 
     private List<LosTarget> _losTargets = new List<LosTarget>();
+    private List<OverrideTarget> _overrideTargets = new List<OverrideTarget>();
 
     #endregion
     #region Properties
 
     public List<Tag> TargetTags { get { return _targetTags; } }
-    public GameObject OverrideTarget
-    {
-        get { return _overrideTarget; }
-        set
-        {
-            if (!value) _overrideTarget = value;
-            else if (IsTargetValid(value)) _overrideTarget = value;
-        }
-    }
+
     public GameObject Source { get { return _abilitiesToCheck.Count > 0 ? _abilitiesToCheck[0].Source : null; } }
+    public float DefaultTargetLifeTime { get { return _updateInterval + _targetLifeTime; } }
+
     #endregion
 
     public Action<GameObject> OnHasFirstTarget;
@@ -96,6 +62,12 @@ public abstract class TargetSystem : MonoBehaviour
     {
         List<TargetPair> targetPairs = GetTargets();
         return targetPairs.Count > 0 ? targetPairs[0] : null;
+    }
+
+    // Force adds a target to this target system, this does not check if it is a valid target in any way!
+    public void AddOverrideTarget(GameObject target, float effectiveness, float duration)
+    {
+        AddOrUpdateTarget(target, effectiveness, duration);
     }
 
     public bool HasSpecificTarget(GameObject target)
@@ -111,11 +83,7 @@ public abstract class TargetSystem : MonoBehaviour
 
     public List<TargetPair> GetTargets()
     {
-        if (_updateOnAskInstead)
-        {
-            _targetPairs.Clear();
-            PopulateTargetPairs();
-        }
+        if (_updateOnAskInstead) RePopulateTargetPairs();
         else
         {
             // Do a check if all targets are valid
@@ -148,18 +116,96 @@ public abstract class TargetSystem : MonoBehaviour
         targetPairs.ForEach(p => _targetGameObjects.Add(p.target));
     }
 
-    protected abstract void UpdateCurrentTargetPairs();
+    private void RePopulateTargetPairs()
+    {
+        _outputBuffer.Clear();
+        PopulateTargetPairs(ref _outputBuffer);
 
-    protected abstract void PopulateTargetPairs();
+        // Add/Update new targets
+        foreach (TargetPair outputTarget in _outputBuffer)
+            AddOrUpdateTarget(outputTarget);
+
+        // Sort OR randomise list
+        if (_targetPairs.Count > 1)
+        {
+            if (_random) _targetPairs.Shuffle();
+            else
+            {
+                // Sort targets based on caculated effectivenesses
+                _targetPairs.Sort((a, b) =>
+                {
+                    return b.effectiveness.CompareTo(a.effectiveness);
+                });
+            }
+        }
+    }
+
+    protected void AddOrUpdateTarget(GameObject target, float eff, float lifeTime)
+    {
+        TargetPair pair = _targetPairs.Find(p => p.target == target);
+        if (pair == null)
+        {
+            pair = new TargetPair(target, eff, lifeTime);
+            _targetPairs.Add(pair);
+        }
+        else
+        {
+            pair.effectiveness = eff;
+            pair.lifeElapsed = 0.0f;
+
+            // Pick best lifetime
+            if (lifeTime > pair.lifetime) pair.lifetime = lifeTime;
+        }
+    }
+
+    protected void AddOrUpdateTarget(TargetPair pair)
+    {
+        AddOrUpdateTarget(pair.target, pair.effectiveness, pair.lifetime);
+    }
+
+    protected virtual void UpdateCurrentTargetPairs()
+    {
+        GameObject source = Source;
+
+        // Check if target null or has 0 effectiveness, remove if any true
+        for (int i = 0; i < _targetPairs.Count; i++)
+        {
+            TargetPair targetPair = _targetPairs[i];
+
+            if (!targetPair.target || !targetPair.target.activeInHierarchy)
+            {
+                _targetPairs.Remove(targetPair);
+                i--;
+                continue;
+            }
+
+            // Lifetime
+            targetPair.lifeElapsed += Time.deltaTime;
+            if (targetPair.lifeElapsed > targetPair.lifetime)
+            {
+                _targetPairs.Remove(targetPair);
+                i--;
+            }
+
+            // Recalculate effectiveness
+            targetPair.effectiveness = EffectivenessTarget(targetPair.target);
+            if (targetPair.effectiveness < _minEffectivenessForValid)
+            {
+                _targetPairs.Remove(targetPair);
+                i--;
+            }
+        }
+    }
+
+    protected abstract void PopulateTargetPairs(ref List<TargetPair> targetPairs);
 
     private void Update()
     {
-        UpdateOverrideTarget();
-        UpdateTargetPairs();
+        UpdatePopulating();
         UpdateLosTargets();
     }
 
-    private void UpdateTargetPairs()
+    private void UpdatePopulating()
     {
         if (_updateOnAskInstead) return;
 
@@ -167,8 +213,7 @@ public abstract class TargetSystem : MonoBehaviour
         int targetCount = _targetPairs.Count;
         if (_updateTargetsTimer < 0.0f)
         {
-            _targetPairs.Clear();
-            PopulateTargetPairs();
+            RePopulateTargetPairs();
             _updateTargetsTimer = _updateInterval;
 
             // If false, this is only called when asked (so at start of ability)
@@ -178,11 +223,10 @@ public abstract class TargetSystem : MonoBehaviour
         {
             UpdateCurrentTargetPairs();
 
-            // If a target was removed, repopulate target pairs!
+            // If a target was removed, repopulate target pairs also!
             if (targetCount > _targetPairs.Count)
             {
-                _targetPairs.Clear();
-                PopulateTargetPairs();
+                RePopulateTargetPairs();
                 _updateTargetsTimer = _updateInterval;
 
                 // If false, this is only called when asked (so at start of ability)
@@ -198,12 +242,6 @@ public abstract class TargetSystem : MonoBehaviour
         {
             OnLoseLastTarget?.Invoke();
         }
-    }
-
-    private void UpdateOverrideTarget()
-    {
-        if (OverrideTarget && !OverrideTarget.activeInHierarchy && (OverrideTarget.TryGetComponent(out Health health) && health.IsDead))
-            OverrideTarget = null;
     }
 
     protected virtual void Awake()
@@ -250,44 +288,53 @@ public abstract class TargetSystem : MonoBehaviour
 
         if (!validTag) return validTag;
 
-        // Validate angle
-        if (_maxVerticalAngle < 90.0f && Source)
-        {
-            Vector3 dir = (target.transform.position - Source.transform.position).normalized;
-            Vector3 dirhorizontal = dir;
-            dirhorizontal.y = 0.0f;
-            dirhorizontal.Normalize();
-
-            // Should be between [-90,90]
-            float verticalAngle = Vector3.Angle(dir, dirhorizontal);
-
-            // Check if the calculated angle is within the allowed max vertical angle
-            if (Mathf.Abs(verticalAngle) > _maxVerticalAngle) return false;
-        }
-
-        // Validate Line of Sight
+        // Validate/Update Line of Sight
         bool losValid = true;
         if (_useLineOfSight)
         {
             losValid = InLineOfSight(target);
-            
+
             // Get target pair to reset timer OR check if still valid
             LosTarget losTarget = _losTargets.Find(l => l.target == target);
             if (losTarget == null && losValid)
             {
                 // Create new los target
-                losTarget = new LosTarget(target, _losMissTargetLifetime);
+                losTarget = new LosTarget(target, _losMissTargetLifetime, target.transform.position);
                 _losTargets.Add(losTarget);
             }
             else if (losTarget != null && losValid)
             {
-                // Reset the timer
+                // Reset timer + update last seen pos
                 losTarget.losTimer = _losMissTargetLifetime;
+                losTarget.lastSeenPos = target.transform.position;
             }
             else if (losTarget != null && losTarget.losTimer > 0.0f && !losValid) losValid = true;
         }
 
         if (!losValid) return false;
+
+
+        Vector3 dirToTarget = (target.transform.position - Source.transform.position).normalized;
+
+        // Check horizontal angle
+        //if (_maxHorizontalAngle < 89.0f && Source)
+        Vector3 forwardXZ = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+        Vector3 dirToTargetXZ = new Vector3(dirToTarget.x, 0, dirToTarget.z).normalized;
+
+        float horizontalAngle = Vector3.Angle(forwardXZ, dirToTargetXZ);
+        if (horizontalAngle > _maxHorizontalAngle)
+            return false;
+
+        // Check vertical angle
+
+        // One way is to compute the elevation angle for both vectors.
+        // Elevation is defined as the angle above the XZ plane.
+        float targetElevation = Mathf.Atan2(dirToTarget.y, new Vector2(dirToTarget.x, dirToTarget.z).magnitude) * Mathf.Rad2Deg;
+        float forwardElevation = Mathf.Atan2(transform.forward.y, new Vector2(transform.forward.x, transform.forward.z).magnitude) * Mathf.Rad2Deg;
+
+        float verticalAngle = Mathf.Abs(targetElevation - forwardElevation);
+        if (verticalAngle > _maxVerticalAngle)
+            return false;
 
         return true;
     }
@@ -316,6 +363,7 @@ public abstract class TargetSystem : MonoBehaviour
         Vector3 targetPos = target.transform.position;
         targetPos.y += _losTargetYOffset;
         Vector3 dirToTarget = (targetPos - _losOriginT.position).normalized;
+
         if (_losOriginT && Physics.Raycast(_losOriginT.transform.position, dirToTarget, out RaycastHit hitInfo, _losMaxDistance, _losMask) && hitInfo.collider.gameObject == target.gameObject)
         {
             return true;
@@ -337,5 +385,64 @@ public abstract class TargetSystem : MonoBehaviour
             _losTargets.RemoveAt(i);
             i--;
         }
+    }
+}
+
+public sealed class TargetPair
+{
+    public GameObject target = null;
+    public float effectiveness = 0.0f;
+    public float lifetime = 0.0f;
+    public float lifeElapsed = 0.0f;
+
+    public TargetPair(GameObject target, float effectiveness)
+    {
+        this.target = target;
+        this.effectiveness = effectiveness;
+    }
+
+    public TargetPair(GameObject target, float effectiveness, float lifetime)
+    {
+        this.target = target;
+        this.effectiveness = effectiveness;
+        this.lifetime = lifetime;
+    }
+}
+
+public enum TargetType { player, character, prop, platform, projectile }
+[System.Serializable]
+public sealed class TargetTypeMultiplier
+{
+    public TargetType type;
+    public float multiplier;
+}
+
+public sealed class LosTarget
+{
+    public GameObject target = null;
+    public float losTimer = 0.0f;
+    public Vector3 lastSeenPos = Vector3.zero;
+
+    public LosTarget(GameObject target, float losTimer, Vector3 lastSeenPos)
+    {
+        this.target = target;
+        this.losTimer = losTimer;
+        this.lastSeenPos = lastSeenPos;
+    }
+}
+
+public sealed class OverrideTarget
+{
+    public GameObject target = null;
+    public float durationTimer = 0.0f;
+
+    // ignore los
+    // ignore angles
+    // ...
+
+    public OverrideTarget(GameObject target, float duration)
+    {
+        this.target = target;
+        this.durationTimer = duration;
     }
 }

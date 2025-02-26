@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public sealed class BadGuyEvents : MonoBehaviour
 {
     [SerializeField] private BadGuy _badGuy = null;
-    [SerializeField] private List<BGPaperEventData> _paperEvents = new List<BGPaperEventData>();
-
+    //[SerializeField] private List<BGPaperEventData> _paperEvents = new List<BGPaperEventData>();
+    [SerializeField] private BGPaperEventData _paperEventData = null;
+    [SerializeField] private Vector2 _aggroDurDistScaleBounds = new Vector2(10.0f, 50.0f);
 
     private MainGamemode _gamemode = null;
     private List<BadGuyEvent> _activeEvents = new List<BadGuyEvent>();
@@ -30,11 +32,11 @@ public sealed class BadGuyEvents : MonoBehaviour
         if (!_badGuy.IsHost) return;
 
         // Look for events with current paper
-        BGPaperEventData eventData = _paperEvents.Find(e => e.paperCount == _gamemode.PapersCollected);
-        if (eventData == null) return;
+        //BGPaperEventData eventData = _paperEvents.Find(e => e.paperCount == _gamemode.PapersCollected);
+        //if (eventData == null) return;
 
         // Create event from data
-        AddEvent(eventData, item.PickUpSource);
+        AddEvent(_paperEventData, item.PickUpSource);
     }
 
     private void AddEvent(BadGuyEventData eventData, PlayerN source)
@@ -51,11 +53,37 @@ public sealed class BadGuyEvents : MonoBehaviour
         // Move Mod
         _badGuy.Movement.AddOrUpdateModifier(eventData.moveMod, false, true);
 
-        // Aggro players?
-        //if(eventData.aggroSource && source)
-        //{
-        //    _badGuy.Behaviour.AggroTargetSystem.over
-        //}
+        // Aggro players
+        if (eventData.aggroSource && source)
+        {
+            _badGuy.Behaviour.AggroTargetSystem.AddOverrideTarget(source.gameObject, 10.0f, AggroDur(eventData.aggroDurBounds, source.transform.position));
+        }
+        else if (eventData.aggroRandom)
+        {
+            PlayerN randomPlayer = GameManager.Instance.SceneData.Players.RandomElement();
+            if (randomPlayer) _badGuy.Behaviour.AggroTargetSystem.AddOverrideTarget(randomPlayer.gameObject, 10.0f, AggroDur(eventData.aggroDurBounds, source.transform.position));
+        }
+    }
+
+    private float AggroDur(Vector2 durBounds, Vector3 targetPos)
+    {
+        float duration = durBounds.x;
+
+        // Calculate the path to the target position.
+        NavMeshPath path = new NavMeshPath();
+        if (NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path))
+        {
+            float distance = 0f;
+
+            // Sum the distances between consecutive corners.
+            for (int i = 1; i < path.corners.Length; i++)
+                distance += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+
+            float scalePerc = Mathf.InverseLerp(_aggroDurDistScaleBounds.x, _aggroDurDistScaleBounds.y, distance);
+            duration = Mathf.Lerp(durBounds.x, durBounds.y, scalePerc);
+        }
+
+        return duration;
     }
 
     //private void Update()
@@ -88,6 +116,7 @@ public class BadGuyEventData
     public MovementModifier moveMod = null;
     public bool aggroRandom = false;
     public bool aggroSource = false;
+    public Vector2 aggroDurBounds = new Vector2(5.0f, 50.0f);
 }
 
 [System.Serializable]

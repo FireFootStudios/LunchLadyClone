@@ -1,12 +1,17 @@
 
 
 
-* Fix line of sight to check angle with player
 
 
 
-* Make new monster state t
-* Change override targets in aggro system to have prio + max duration?
+
+- Wander to close point, bad guy should wander around current place more?
+- Put used wander points in list, while in wander state, go over each one and ignore already used ones
+* Can we support aggroing to a last seen position instead?
+
+
+
+
 
 
 
@@ -31,11 +36,7 @@
 
 * Item per player sync
 * Light turn on/off + aggro?
-
-
-
-
-
+* Jackboxes aggro monster?
 
 
 

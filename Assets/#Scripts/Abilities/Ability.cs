@@ -134,8 +134,8 @@ public class Ability : MonoBehaviour
 
         _executer.CleanUp();
 
-        //Reset override target if any
-        if (TargetSystem) TargetSystem.OverrideTarget = null;
+        // Reset override target if any
+        // if (TargetSystem) TargetSystem.OverrideTarget = null;
     }
 
     private void Update()
@@ -167,11 +167,6 @@ public class Ability : MonoBehaviour
     public bool RequiresTargets()
     {
         return TargetSystem && _executer && _executer.MinTargets > 0 && _executer.MaxTargets > 0;
-    }
-
-    public void SetOverrideTarget(GameObject target)
-    {
-        if (TargetSystem) TargetSystem.OverrideTarget = target;
     }
 
     public float GetEffectiveness(GameObject target)

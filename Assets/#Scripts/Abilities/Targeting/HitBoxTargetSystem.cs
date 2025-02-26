@@ -32,86 +32,70 @@ public sealed class HitBoxTargetSystem : TargetSystem
         base.Awake();
     }
 
-    protected override void UpdateCurrentTargetPairs()
-    {
-        GameObject source = Source;
+    //protected override void UpdateCurrentTargetPairs()
+    //{
+    //    GameObject source = Source;
 
-        //check if target null or has 0 effectiveness, remove if any true
-        for (int i = 0; i < _targetPairs.Count; i++)
-        {
-            TargetPair targetPair = _targetPairs[i];
-            if (!targetPair.target) _targetPairs.Remove(targetPair);
-            else if (_requireOverrideToBeInHitBox && !_hitboxes.Exists(hitBox => hitBox.Targets.Contains(targetPair.target) && targetPair.target != source)) _targetPairs.Remove(targetPair);
-            else
-            {
-                //recalculate effectiveness
-                targetPair.effectiveness = EffectivenessTarget(targetPair.target);
-                if (targetPair.effectiveness < _minEffectivenessForValid)
-                {
-                    _targetPairs.Remove(targetPair);
-                }
-            }
+    //    // Check if target null or has 0 effectiveness, remove if any true
+    //    for (int i = 0; i < _targetPairs.Count; i++)
+    //    {
+    //        TargetPair targetPair = _targetPairs[i];
+    //        if (!targetPair.target) _targetPairs.Remove(targetPair);
+    //        else if (_requireOverrideToBeInHitBox && !_hitboxes.Exists(hitBox => hitBox.Targets.Contains(targetPair.target) && targetPair.target != source)) _targetPairs.Remove(targetPair);
+    //        else
+    //        {
+    //            // Recalculate effectiveness
+    //            targetPair.effectiveness = EffectivenessTarget(targetPair.target);
+    //            if (targetPair.effectiveness < _minEffectivenessForValid)
+    //            {
+    //                _targetPairs.Remove(targetPair);
+    //            }
+    //        }
 
-            //if targetpair got removed, decrement index
-            if (!_targetPairs.Contains(targetPair)) i--;
-        }
-    }
+    //        // If targetpair got removed, decrement index
+    //        if (!_targetPairs.Contains(targetPair)) i--;
+    //    }
+    //}
 
-    protected override void PopulateTargetPairs()
+    protected override void PopulateTargetPairs(ref List<TargetPair> targets)
     {
         if (_hitboxes.Count == 0) return;
 
-        //is override in hitbox?
-        bool overrideInHitbox = OverrideTarget && _hitboxes.Exists(hitBox => hitBox.Targets.Contains(OverrideTarget));
+        // Is override in hitbox?
+        //bool overrideInHitbox = OverrideTarget && _hitboxes.Exists(hitBox => hitBox.Targets.Contains(OverrideTarget));
 
-        //check if ignore others on override and if so return
-        if (OverrideTarget && !overrideInHitbox && _requireOverrideToBeInHitBox && _ignoreOthersOnOverride) return;
+        // Check if ignore others on override and if so return
+        //if (OverrideTarget && !overrideInHitbox && _requireOverrideToBeInHitBox && _ignoreOthersOnOverride) return;
 
-        //update target pairs with targets in hitbox
+        // Update target pairs with targets in hitbox
         foreach (HitBox hitbox in _hitboxes)
         {
             if (hitbox.Targets.Count == 0) continue;
 
-            //calculate effectiveness of every target
+            // Calculate effectiveness of every target
             for (int i = 0; i < hitbox.Targets.Count; i++)
             {
                 GameObject target = hitbox.Targets[i];
 
-                //skip if override target (will be added later)
-                if (target == OverrideTarget) continue;
+                // Skip if override target (will be added later)
+                //if (target == OverrideTarget) continue;
 
                 if (!IsTargetValid(target)) continue;
 
-                //calc effectiveness and add to targetpairs if enough
+                // Calc effectiveness and add to targetpairs if enough
                 float effectiveness = EffectivenessTarget(target);
                 if (effectiveness < _minEffectivenessForValid) continue;
 
-                _targetPairs.Add(new TargetPair(target, effectiveness));
+                targets.Add(new TargetPair(target, effectiveness, DefaultTargetLifeTime));
             }
         }
 
-        //add self
+        // Add self
         GameObject source = Source;
         if (_canIncludeSelf && source && IsTargetValid(source))
         {
             float effectiveness = EffectivenessTarget(source);
-            if (effectiveness >= _minEffectivenessForValid) _targetPairs.Add(new TargetPair(source, effectiveness));
-        }
-
-        //sort targets based on caculated effectivenesses
-        if (_targetPairs.Count > 1)
-        {
-            _targetPairs.Sort((a, b) =>
-            {
-                return b.effectiveness.CompareTo(a.effectiveness);
-            });
-        }
-
-        //calc effectiveness for override target, insert at beginning if at all effective
-        if (OverrideTarget && (overrideInHitbox || !_requireOverrideToBeInHitBox))
-        {
-            float overrideEffectiveness = EffectivenessTarget(OverrideTarget);
-            if (overrideEffectiveness >= _minEffectivenessForValid) _targetPairs.Insert(0, new TargetPair(OverrideTarget, 1.0f));
+            if (effectiveness >= _minEffectivenessForValid) targets.Add(new TargetPair(source, effectiveness, DefaultTargetLifeTime));
         }
     }
 }

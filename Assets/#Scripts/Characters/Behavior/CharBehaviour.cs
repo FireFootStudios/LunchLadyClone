@@ -92,7 +92,7 @@ public abstract class CharBehaviour : MonoBehaviour
     protected virtual void OnRespawn()
     {
         FSM.Resett();
-        if (_aggroTargetSystem) _aggroTargetSystem.OverrideTarget = null;
+        //if (_aggroTargetSystem) _aggroTargetSystem.OverrideTarget = null;
     }
 
     protected abstract void InitFSM();

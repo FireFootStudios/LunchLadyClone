@@ -343,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 2476174634732176341}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.21, z: 0}
+  m_LocalPosition: {x: 0, y: 2.087, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -400,12 +400,15 @@ MonoBehaviour:
   _targetTags: 01000000
   _targetTypeMultipliers: []
   _treatNoTagsAsAnyTarget: 0
+  _random: 0
+  _targetLifeTime: 3
   _minEffectivenessForValid: 0.01
   _canIncludeSelf: 0
   _updateInterval: 0.2
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
-  _maxVerticalAngle: 180
+  _maxVerticalAngle: 45
+  _maxHorizontalAngle: 120
   _useLineOfSight: 1
   _losMask:
     serializedVersion: 2
@@ -414,10 +417,7 @@ MonoBehaviour:
   _losMaxDistance: 15
   _losMissTargetLifetime: 3
   _losTargetYOffset: 1.6
-  _xMinAccuracy: 0
-  _yMinAccuracy: 0
   _onlyTargetSelf: 0
-  _random: 0
 --- !u!1 &3402032716981716017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,10 +1547,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _badGuy: {fileID: 5821440926944999368}
-  _paperEvents:
-  - moveMod:
+  _paperEventData:
+    moveMod:
       priority: 0
-      duration: 1111111
+      duration: 11111
       maxSpeedMultiplier: 1.05
       accelerationMultiplier: 1
       decelerationMultiplier: 1
@@ -1559,86 +1559,10 @@ MonoBehaviour:
       overrideAnglePauseMove: 0
       anglePauseMove: 0
     aggroRandom: 0
-    aggroSource: 0
-    paperCount: 1
-  - moveMod:
-      priority: 0
-      duration: 1111111
-      maxSpeedMultiplier: 1.05
-      accelerationMultiplier: 1
-      decelerationMultiplier: 1
-      rotationMultiplier: 1
-      gravityMultiplier: 1
-      overrideAnglePauseMove: 0
-      anglePauseMove: 0
-    aggroRandom: 0
-    aggroSource: 0
-    paperCount: 2
-  - moveMod:
-      priority: 0
-      duration: 1111111
-      maxSpeedMultiplier: 1.05
-      accelerationMultiplier: 1
-      decelerationMultiplier: 1
-      rotationMultiplier: 1
-      gravityMultiplier: 1
-      overrideAnglePauseMove: 0
-      anglePauseMove: 0
-    aggroRandom: 0
-    aggroSource: 0
-    paperCount: 3
-  - moveMod:
-      priority: 0
-      duration: 1111111
-      maxSpeedMultiplier: 1.05
-      accelerationMultiplier: 1
-      decelerationMultiplier: 1
-      rotationMultiplier: 1
-      gravityMultiplier: 1
-      overrideAnglePauseMove: 0
-      anglePauseMove: 0
-    aggroRandom: 0
-    aggroSource: 0
-    paperCount: 4
-  - moveMod:
-      priority: 0
-      duration: 1111111
-      maxSpeedMultiplier: 1.05
-      accelerationMultiplier: 1
-      decelerationMultiplier: 1
-      rotationMultiplier: 1
-      gravityMultiplier: 1
-      overrideAnglePauseMove: 0
-      anglePauseMove: 0
-    aggroRandom: 0
-    aggroSource: 0
-    paperCount: 5
-  - moveMod:
-      priority: 0
-      duration: 1111111
-      maxSpeedMultiplier: 1.05
-      accelerationMultiplier: 1
-      decelerationMultiplier: 1
-      rotationMultiplier: 1
-      gravityMultiplier: 1
-      overrideAnglePauseMove: 0
-      anglePauseMove: 0
-    aggroRandom: 0
-    aggroSource: 0
-    paperCount: 6
-  - moveMod:
-      priority: 0
-      duration: 1111111
-      maxSpeedMultiplier: 1.05
-      accelerationMultiplier: 1
-      decelerationMultiplier: 1
-      rotationMultiplier: 1
-      gravityMultiplier: 1
-      overrideAnglePauseMove: 0
-      anglePauseMove: 0
-    aggroRandom: 0
-    aggroSource: 0
-    paperCount: 7
+    aggroSource: 1
+    aggroDurBounds: {x: 10, y: 50}
+    paperCount: 0
+  _aggroDurDistScaleBounds: {x: 10, y: 100}
 --- !u!1 &7266541800953419062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,12 +1735,15 @@ MonoBehaviour:
   _targetTags: 01000000
   _targetTypeMultipliers: []
   _treatNoTagsAsAnyTarget: 0
+  _random: 0
+  _targetLifeTime: 0
   _minEffectivenessForValid: 0.01
   _canIncludeSelf: 0
   _updateInterval: 0.2
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 90
+  _maxHorizontalAngle: 90
   _useLineOfSight: 0
   _losMask:
     serializedVersion: 2
@@ -1825,8 +1752,6 @@ MonoBehaviour:
   _losMaxDistance: 10
   _losMissTargetLifetime: 5
   _losTargetYOffset: 0
-  _xMinAccuracy: 0
-  _yMinAccuracy: 0
   _requireOverrideToBeInHitBox: 1
   _ignoreOthersOnOverride: 1
   _hitboxes:
