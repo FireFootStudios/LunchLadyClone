@@ -8,14 +8,20 @@ using Random = UnityEngine.Random;
 
 public class RandomizeKeys : NetworkBehaviour
 {
-    [SerializeField] private List<GameObject> _normalObjectsSOne = null;
-    [SerializeField] private List<GameObject> _normalObjectsSOneTrans = null;
+    [SerializeField] private List<GameObject> _paperSOne = null;
+    [SerializeField] private List<GameObject> _paperSOneTrans = null;
     [Space]
-    [SerializeField] private List<GameObject> _normalObjectsSTwo = null;
-    [SerializeField] private List<GameObject> _normalObjectsSTwoTrans = null;
+    [SerializeField] private List<GameObject> _paperSTwo = null;
+    [SerializeField] private List<GameObject> _paperSTwoTrans = null;
     [Space]
-    [SerializeField] private List<GameObject> _normalObjectsSThree = null;
-    [SerializeField] private List<GameObject> _normalObjectsSThreeTrans = null;
+    [SerializeField] private List<GameObject> _paperSThree = null;
+    [SerializeField] private List<GameObject> _paperSThreeTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _paperSFour = null;
+    [SerializeField] private List<GameObject> _paperSFourTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _paperSFive = null;
+    [SerializeField] private List<GameObject> _paperSFiveTrans = null;
     [Space]
     [SerializeField] private List<GameObject> _keysSOne = null;
     [SerializeField] private List<GameObject> _keysSOneTrans = null;
@@ -25,6 +31,9 @@ public class RandomizeKeys : NetworkBehaviour
     [Space]
     [SerializeField] private List<GameObject> _keysSThree = null;
     [SerializeField] private List<GameObject> _keysSThreeTrans = null;
+    [Space]
+    [SerializeField] private List<GameObject> _keysSFour = null;
+    [SerializeField] private List<GameObject> _keysSFourTrans = null;
 
 
     public override void OnNetworkSpawn()
@@ -34,12 +43,15 @@ public class RandomizeKeys : NetworkBehaviour
         if (!IsHost)
             return;
 
-        RandomizeObjectPositions(_normalObjectsSOne, _normalObjectsSOneTrans);
-        RandomizeObjectPositions(_normalObjectsSTwo, _normalObjectsSTwoTrans);
-        RandomizeObjectPositions(_normalObjectsSThree, _normalObjectsSThreeTrans);
+        RandomizeObjectPositions(_paperSOne, _paperSOneTrans);
+        RandomizeObjectPositions(_paperSTwo, _paperSTwoTrans);
+        RandomizeObjectPositions(_paperSThree, _paperSThreeTrans);
+        RandomizeObjectPositions(_paperSFour, _paperSFourTrans);
+        RandomizeObjectPositions(_paperSFive, _paperSFiveTrans);
         RandomizeObjectPositions(_keysSOne, _keysSOneTrans);
         RandomizeObjectPositions(_keysSTwo, _keysSTwoTrans);
         RandomizeObjectPositions(_keysSThree, _keysSThreeTrans);
+        RandomizeObjectPositions(_keysSFour, _keysSFourTrans);
 
     }
 
