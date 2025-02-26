@@ -1,12 +1,8 @@
 
 
-
-
-- Fix los attack hb
-
-- Test jackbox activating
+- Fix jackbox sync visual + SFX
 - Test jackbox modifier networking
-
+- Test interaction boxes vs jester
 
 
 * Jackbox

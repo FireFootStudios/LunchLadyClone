@@ -59,6 +59,7 @@ public class Ability : MonoBehaviour
     public TargetSystem TargetSystem { get; private set; } //optional
     #endregion
 
+    public Action<List<GameObject>> OnBeforeFire;
     public Action OnFire;
     public Action OnFireFinish;
     public Action OnCancel;
@@ -110,7 +111,11 @@ public class Ability : MonoBehaviour
         ElapsedFiring = 0.0f;
 
         // Execute
-        _executer.Execute(TargetSystem ? TargetSystem.GetTargetsAsGameObjects() : null);
+        List<GameObject> targets = TargetSystem ? TargetSystem.GetTargetsAsGameObjects() : null;
+
+        OnBeforeFire?.Invoke(targets);
+
+        _executer.Execute(targets);
 
         OnFire?.Invoke();
         return true;

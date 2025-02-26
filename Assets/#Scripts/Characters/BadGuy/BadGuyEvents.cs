@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,6 +9,8 @@ public sealed class BadGuyEvents : MonoBehaviour
     //[SerializeField] private List<BGPaperEventData> _paperEvents = new List<BGPaperEventData>();
     [SerializeField] private BGPaperEventData _paperEventData = null;
     [SerializeField] private Vector2 _aggroDurDistScaleBounds = new Vector2(10.0f, 50.0f);
+    [Space]
+    [SerializeField] private BadGuyEventData _jackBoxActivateEvent = null;
 
     private MainGamemode _gamemode = null;
     private List<BadGuyEvent> _activeEvents = new List<BadGuyEvent>();
@@ -16,6 +19,7 @@ public sealed class BadGuyEvents : MonoBehaviour
     private void Awake()
     {
         MainGamemode.OnPaperPickedUp += OnPaperPickedUp;
+        JackBox.OnJackBoxActivate += OnJackBoxActivate;
 
         GameMode currentGM = GameManager.Instance.CurrentGameMode;
         _gamemode = currentGM is MainGamemode ? currentGM as MainGamemode : null;
@@ -37,6 +41,22 @@ public sealed class BadGuyEvents : MonoBehaviour
 
         // Create event from data
         AddEvent(_paperEventData, item.PickUpSource);
+    }
+
+    private void OnJackBoxActivate(JackBox jackbox)
+    {
+        if (!_gamemode) return;
+        if (!_badGuy.IsHost) return;
+
+        // Look for events with current paper
+        //BGPaperEventData eventData = _paperEvents.Find(e => e.paperCount == _gamemode.PapersCollected);
+        //if (eventData == null) return;
+
+        PlayerN source = null;
+        if (jackbox.FireTarget) jackbox.FireTarget.TryGetComponent(out source);
+
+        // Create event from data
+        AddEvent(_jackBoxActivateEvent, source);
     }
 
     private void AddEvent(BadGuyEventData eventData, PlayerN source)
@@ -85,6 +105,7 @@ public sealed class BadGuyEvents : MonoBehaviour
 
         return duration;
     }
+
 
     //private void Update()
     //{

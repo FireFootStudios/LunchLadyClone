@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public sealed class JackBox : BadGuy
@@ -7,6 +9,8 @@ public sealed class JackBox : BadGuy
     [SerializeField] private Ability _activateAbility = null;
     [SerializeField] private GameObject _activateSpawnTemplate = null;
     [SerializeField] private SoundSpawnData _activateSFX = null;
+
+    public GameObject FireTarget { get; private set; }
 
 
     public static Action<JackBox> OnJackBoxActivate;
@@ -17,17 +21,35 @@ public sealed class JackBox : BadGuy
         base.Awake();
 
         if (_activateAbility) _activateAbility.OnFireFinish += OnActivateAbFired;
+        if (_activateAbility) _activateAbility.OnBeforeFire += OnBeforeFire;
     }
 
+
+
     private void OnActivateAbFired()
+    {
+        // Event
+        OnJackBoxActivate?.Invoke(this);
+
+        NotifyActiveClientRPC();
+    }
+
+    private void OnBeforeFire(List<GameObject> targets)
+    {
+        if (targets == null || targets.Count == 0) return;
+
+        // Save fire target
+        FireTarget = targets[0];
+    }
+
+    [ClientRpc]
+    public void NotifyActiveClientRPC()
     {
         if (!_activateSpawnTemplate) return;
 
         // Spawn activate gameobject
-        Instantiate(_activateSpawnTemplate);
-
-        // Event
-        OnJackBoxActivate?.Invoke(this);
+        GameObject go = Instantiate(_activateSpawnTemplate, transform.position, transform.rotation);
+        go.SetActive(true);
 
         // SFX
         SoundManager.Instance.PlaySound(_activateSFX);

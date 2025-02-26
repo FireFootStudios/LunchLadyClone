@@ -1346,6 +1346,21 @@ MonoBehaviour:
     aggroDurBounds: {x: 10, y: 40}
     paperCount: 0
   _aggroDurDistScaleBounds: {x: 10, y: 150}
+  _jackBoxActivateEvent:
+    moveMod:
+      priority: 0
+      duration: 10
+      maxSpeedMultiplier: 1.25
+      accelerationMultiplier: 1
+      decelerationMultiplier: 1
+      rotationMultiplier: 1
+      gravityMultiplier: 1
+      overrideAnglePauseMove: 0
+      anglePauseMove: 0
+      elapsed: 0
+    aggroRandom: 0
+    aggroSource: 1
+    aggroDurBounds: {x: 10, y: 40}
 --- !u!1 &7553636904131256020
 GameObject:
   m_ObjectHideFlags: 0

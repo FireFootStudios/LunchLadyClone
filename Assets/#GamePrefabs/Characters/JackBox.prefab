@@ -132,8 +132,6 @@ MonoBehaviour:
   _losMaxDistance: 10
   _losMissTargetLifetime: 5
   _losTargetYOffset: 0
-  _requireOverrideToBeInHitBox: 1
-  _ignoreOthersOnOverride: 1
   _hitboxes:
   - {fileID: 6568552953980152695}
 --- !u!1 &3599538194352200516
@@ -259,7 +257,7 @@ MonoBehaviour:
   _targetMode: 0
   _modifier:
     priority: 0
-    duration: 2
+    duration: 3
     maxSpeedMultiplier: 0
     accelerationMultiplier: 0
     decelerationMultiplier: 1
@@ -267,6 +265,7 @@ MonoBehaviour:
     gravityMultiplier: 1
     overrideAnglePauseMove: 0
     anglePauseMove: 0
+    elapsed: 0
   _stopTarget: 0
   _abilityDisableTime: 0
   _cancelAbilities: 0
@@ -314,6 +313,7 @@ GameObject:
   - component: {fileID: 492661851797364780}
   - component: {fileID: 4874383705661306722}
   - component: {fileID: 3336307435016217034}
+  - component: {fileID: 225396558787356921}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -392,6 +392,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &225396558787356921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373048982588415372}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2, y: 1.2, z: 1.2}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1 &5870446832368311766
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,8 +600,6 @@ MonoBehaviour:
   _losMaxDistance: 10
   _losMissTargetLifetime: 5
   _losTargetYOffset: 0
-  _requireOverrideToBeInHitBox: 1
-  _ignoreOthersOnOverride: 1
   _hitboxes:
   - {fileID: 3672878286707926754}
 --- !u!136 &9106632102039622938
@@ -948,13 +967,14 @@ MonoBehaviour:
   _activateAbility: {fileID: 6744694507712056679}
   _activateSpawnTemplate: {fileID: 1391118666694959784}
   _activateSFX:
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 2a61da571deb9354a9523449e6314b8e, type: 3}
     randomizeClips: 1
     alwaysUseRandomClip: 1
     randomiseClipsInitially: 1
-    parent: {fileID: 0}
+    parent: {fileID: 8854273547926728162}
     setPosToParent: 1
-    parentUp: 1
+    parentUp: 2
     followPlayerAlongCollider: {fileID: 0}
     volume: 0.35
     pitch: 1
@@ -1005,7 +1025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb99f67f36bceb48ba79319c3631d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxSpeed: 3
+  _baseMaxSpeed: 1
   _baseAcceleration: 100
   _maxLinearVel: 100
   _maxRotationSpeed: 1400
@@ -1357,6 +1377,7 @@ MonoBehaviour:
     gravityMultiplier: 1
     overrideAnglePauseMove: 0
     anglePauseMove: 0
+    elapsed: 0
 --- !u!114 &1107928601562485012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,6 +1405,7 @@ MonoBehaviour:
     gravityMultiplier: 1
     overrideAnglePauseMove: 0
     anglePauseMove: 0
+    elapsed: 0
   _pauseMoveNoAbility: 1
   _tryPredictMovement: 0
   _predictAmountMultiplier: 0

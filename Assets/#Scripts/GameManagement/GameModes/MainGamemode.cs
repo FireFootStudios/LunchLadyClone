@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
 
 public sealed class MainGamemode : GameMode
 {
     [SerializeField] private LevelAsset _sessionEndLevel = null;
+    [SerializeField] private float _finishGameDelay = 5.0f;
 
     private List<PlayerN> _playersEscaped = new List<PlayerN>();
 
@@ -193,7 +195,10 @@ public sealed class MainGamemode : GameMode
 
     private async void EndSessionFailed()
     {
-        TryEndSessionNetwork(false);
+        await Task.Delay((int)(_finishGameDelay * 1000.0f));
+
+        bool endSucces = TryEndSessionNetwork(false);
+        if (!endSucces) return;
 
         // Make sure to clean up players, as they will migrate to scene otherwise, not really sure why
         _gameManager.DeSpawnPlayers();
