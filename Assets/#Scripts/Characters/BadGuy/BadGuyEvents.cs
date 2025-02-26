@@ -81,7 +81,7 @@ public sealed class BadGuyEvents : MonoBehaviour
         else if (eventData.aggroRandom)
         {
             PlayerN randomPlayer = GameManager.Instance.SceneData.Players.RandomElement();
-            if (randomPlayer) _badGuy.Behaviour.AggroTargetSystem.AddOverrideTarget(randomPlayer.gameObject, 10.0f, AggroDur(eventData.aggroDurBounds, source.transform.position));
+            if (randomPlayer) _badGuy.Behaviour.AggroTargetSystem.AddOverrideTarget(randomPlayer.gameObject, .1f, AggroDur(eventData.aggroDurBounds, source.transform.position));
         }
     }
 

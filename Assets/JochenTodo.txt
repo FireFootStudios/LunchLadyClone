@@ -1,5 +1,10 @@
 
 
+- Move to aggro last valid pos is kinda buggy and gets him stuck for a long time
+- Move mod dont work on client
+- Door issue
+
+
 - Fix jackbox sync visual + SFX
 - Test jackbox modifier networking
 - Test interaction boxes vs jester

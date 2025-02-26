@@ -20,6 +20,8 @@ public sealed class Aggro : FSMState
     private float _currentDelay = 0.0f;
     private bool _wasAggroBefore = false;
 
+    private bool _targetTrackStarted = false;
+
     private Character _char = null;
 
 
@@ -59,6 +61,8 @@ public sealed class Aggro : FSMState
 
         // Add mod
         _char.Movement.AddOrUpdateModifier(_mod, false);
+
+        _targetTrackStarted = false;
     }
 
     public override void OnExit()
@@ -93,8 +97,12 @@ public sealed class Aggro : FSMState
         Vector3 targetPos = targetP.target.transform.position;
 
         // Use the last position when the target was valid (ie in range or fov, ...)
-        if (_useLastValidPos && targetP.lifeElapsed > _useLastValidPosTime) 
+        bool trackingTarget = false;
+        if (_useLastValidPos && targetP.lifeElapsed > _useLastValidPosTime)
+        {
             targetPos = targetP.lastValidPos;
+            trackingTarget = true;
+        }
 
         // Pos prediction (this works pretty horribly for now)
         if (_tryPredictMovement && targetP.target.TryGetComponent(out FreeMovement movement))
@@ -118,6 +126,23 @@ public sealed class Aggro : FSMState
         }
 
         // Update movement
-        if (_allowMove) _char.Movement.MoveToPos(targetPos);
+        if (_allowMove)
+        {
+            if (trackingTarget && _targetTrackStarted && _char.Movement.DestinationReached())
+            {
+                // Remove target since we reached the last 'seen' position
+                _char.Behaviour.AggroTargetSystem.RemoveOverrideTarget(targetP.target);
+                return;
+            }
+
+            _char.Movement.MoveToPos(targetPos);
+            _targetTrackStarted = true;
+            // If we are not tracking a moving/live target, only set when stopped and not already there!
+            //if (trackingTarget && _char.Movement.DestinationReached()) _char.Movement.MoveToPos(targetPos);
+            //else if (!trackingTarget)
+            //{
+            //    _char.Movement.MoveToPos(targetPos);
+            //}
+        }
     }
 }

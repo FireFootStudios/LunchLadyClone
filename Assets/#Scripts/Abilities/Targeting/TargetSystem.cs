@@ -69,6 +69,14 @@ public abstract class TargetSystem : MonoBehaviour
         AddOrUpdateTarget(target, effectiveness, duration);
     }
 
+    public void RemoveOverrideTarget(GameObject target)
+    {
+        if (!target) return;
+
+        TargetPair targetPair = _targetPairs.Find(p => p.target == target);
+        RePopulateTargetPairs();
+    }
+
     public bool HasSpecificTarget(GameObject target)
     {
         List<TargetPair> targetPairs = GetTargets();

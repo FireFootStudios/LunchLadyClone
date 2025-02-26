@@ -218,7 +218,7 @@ public sealed class FreeMovement : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     public void AddOrUpdateModifierClientRPC(MovementModifier modifier)
     {
-
+        AddOrUpdateModifier(modifier);
     }
 
 
