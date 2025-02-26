@@ -41,6 +41,7 @@ public sealed class PlayerN : NetworkBehaviour
     [Header("Abilities"), SerializeField] private Ability _jumpAbility = null;
     [SerializeField] private Ability _sprintAbility = null;
     [SerializeField] private Ability _reviveAbility = null;
+    [SerializeField] private Ability _grabAbility = null;
 
 
     private PlayerInput _input = null;
@@ -83,7 +84,7 @@ public sealed class PlayerN : NetworkBehaviour
     public Ability JumpAbility { get { return _jumpAbility; } }
     public Ability SprintAbility { get { return _sprintAbility; } }
     public Ability ReviveAbility { get { return _reviveAbility; } }
-
+    public Ability GrabAbility { get { return _grabAbility; } }
 
 
     public Action<bool> OnMoveInputChange;
@@ -142,6 +143,14 @@ public sealed class PlayerN : NetworkBehaviour
         if (!context.performed || DisableInput || DisableMoveInput) return;
 
         _abilityManager.TryUseAbilityInputBuffer(_reviveAbility);
+    }
+
+    public void GrabInput(InputAction.CallbackContext context)
+    {
+        if (!IsOwner && !_ignoreMultiplayer) return;
+        if (!context.performed || DisableInput || DisableMoveInput) return;
+
+        _abilityManager.TryUseAbilityInputBuffer(_grabAbility);
     }
 
     public void SprintInput(InputAction.CallbackContext context)
@@ -399,6 +408,9 @@ public sealed class PlayerN : NetworkBehaviour
         // Jump 
         _controls.Player.Jump.performed += JumpInput;
 
+        // Grab 
+        _controls.Player.Grab.performed += GrabInput;
+
         // Revive
         _controls.Player.Revive.performed += ReviveInput;
 
@@ -448,6 +460,9 @@ public sealed class PlayerN : NetworkBehaviour
 
         // Jump 
         _controls.Player.Jump.performed -= JumpInput;
+
+        // Grab 
+        _controls.Player.Grab.performed -= GrabInput;
 
         // Revive
         _controls.Player.Revive.performed -= ReviveInput;

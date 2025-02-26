@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "33935b29-7d2f-4b3d-a9d1-b800480d26e3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Revive",
                     "type": "Button",
                     "id": "3cf52570-17eb-4612-bb88-8b86ee585110",
@@ -72,7 +81,7 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "84222767-7f12-4f72-8a30-f34519782b1d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -305,6 +314,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70093c28-db18-4d80-9a24-9d303758d378",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b64b2621-1739-430a-8f3d-ff00bd478195",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

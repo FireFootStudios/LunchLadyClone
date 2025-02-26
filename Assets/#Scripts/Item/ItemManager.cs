@@ -25,7 +25,6 @@ public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
     {
         if (_registeredItems.Contains(item)) return;
 
-
         OnItemRegisteredClientRPC(item.ID);
 
         if (!IsHost) return;
@@ -68,7 +67,6 @@ public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
 
         _registeredItems.Clear();
     }
-
 
     private void OnItemPickUp(ItemN item)
     {

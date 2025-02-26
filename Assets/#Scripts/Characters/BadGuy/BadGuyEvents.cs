@@ -7,8 +7,11 @@ public sealed class BadGuyEvents : MonoBehaviour
 {
     [SerializeField] private BadGuy _badGuy = null;
     //[SerializeField] private List<BGPaperEventData> _paperEvents = new List<BGPaperEventData>();
+
+    [Space]
     [SerializeField] private BGPaperEventData _paperEventData = null;
     [SerializeField] private Vector2 _aggroDurDistScaleBounds = new Vector2(10.0f, 50.0f);
+    [SerializeField] private int _paperCountForAggro = 5;
     [Space]
     [SerializeField] private BadGuyEventData _jackBoxActivateEvent = null;
 
@@ -39,6 +42,9 @@ public sealed class BadGuyEvents : MonoBehaviour
         //BGPaperEventData eventData = _paperEvents.Find(e => e.paperCount == _gamemode.PapersCollected);
         //if (eventData == null) return;
 
+        bool aggroSource = _gamemode.PapersCollected >= _paperCountForAggro;
+        _paperEventData.aggroSource = aggroSource;
+
         // Create event from data
         AddEvent(_paperEventData, item.PickUpSource);
     }
@@ -68,7 +74,7 @@ public sealed class BadGuyEvents : MonoBehaviour
         gEvent.Init(eventData);
         _activeEvents.Add(gEvent);
 
-        // Execute Event
+        // Execute Event stuff \/\/\/
         
         // Move Mod
         _badGuy.Movement.AddOrUpdateModifier(eventData.moveMod, false, true);

@@ -54,7 +54,7 @@ public sealed class ItemN : NetworkBehaviour
 
     // Try pick up item through server
     [ServerRpc(RequireOwnership = false)]
-    private void PickUpItemServerRpc(ulong clientID)
+    public void PickUpItemServerRpc(ulong clientID)
     {
         if (_isPickedUp.Value) return;
 

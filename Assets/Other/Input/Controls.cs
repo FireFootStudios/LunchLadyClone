@@ -137,6 +137,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Grab"",
+                    ""type"": ""Button"",
+                    ""id"": ""33935b29-7d2f-4b3d-a9d1-b800480d26e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Revive"",
                     ""type"": ""Button"",
                     ""id"": ""3cf52570-17eb-4612-bb88-8b86ee585110"",
@@ -158,7 +167,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""84222767-7f12-4f72-8a30-f34519782b1d"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -391,6 +400,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70093c28-db18-4d80-9a24-9d303758d378"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b64b2621-1739-430a-8f3d-ff00bd478195"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1170,6 +1201,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_LookGamepad = m_Player.FindAction("LookGamepad", throwIfNotFound: true);
         m_Player_BasicKick = m_Player.FindAction("BasicKick", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
         m_Player_Revive = m_Player.FindAction("Revive", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
@@ -1283,6 +1315,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LookGamepad;
     private readonly InputAction m_Player_BasicKick;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Grab;
     private readonly InputAction m_Player_Revive;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Dash;
@@ -1329,6 +1362,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Grab".
+        /// </summary>
+        public InputAction @Grab => m_Wrapper.m_Player_Grab;
         /// <summary>
         /// Provides access to the underlying input action "Player/Revive".
         /// </summary>
@@ -1430,6 +1467,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Grab.started += instance.OnGrab;
+            @Grab.performed += instance.OnGrab;
+            @Grab.canceled += instance.OnGrab;
             @Revive.started += instance.OnRevive;
             @Revive.performed += instance.OnRevive;
             @Revive.canceled += instance.OnRevive;
@@ -1501,6 +1541,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Grab.started -= instance.OnGrab;
+            @Grab.performed -= instance.OnGrab;
+            @Grab.canceled -= instance.OnGrab;
             @Revive.started -= instance.OnRevive;
             @Revive.performed -= instance.OnRevive;
             @Revive.canceled -= instance.OnRevive;
@@ -1881,6 +1924,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Grab" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGrab(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Revive" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

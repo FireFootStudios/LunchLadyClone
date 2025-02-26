@@ -73,6 +73,8 @@ MonoBehaviour:
   _tagPairs:
   - <ID>k__BackingField: 1
     <Value>k__BackingField: Player
+  - <ID>k__BackingField: 4
+    <Value>k__BackingField: Item
 --- !u!114 &5010576257629682701
 MonoBehaviour:
   m_ObjectHideFlags: 0

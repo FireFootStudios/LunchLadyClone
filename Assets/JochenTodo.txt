@@ -1,19 +1,12 @@
 
 
-- Move to aggro last valid pos is kinda buggy and gets him stuck for a long time
-- Move mod dont work on client
-- Door issue
+- Move to aggro last valid pos is kinda buggy and gets him stuck for a long time?
+- Move mod dont work on client?
+- Test jackbox delay
 
-
-- Fix jackbox sync visual + SFX
-- Test jackbox modifier networking
-- Test interaction boxes vs jester
 
 
 * Jackbox
-- Activate feedback (visual + sound)
-- Deactivate after firing (only visual should remain, maybe just spawn mesh object + sound and delete AI)
-- Main AI aggro event on activate
 - Spawning
 	-> Network object!
 	-> Every x seconds, spawn a new one from the main AI

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 911736550935826424}
   m_Layer: 0
   m_Name: ItemN
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   _visuals: {fileID: 6559663067738816759}
+  _itemID: 0
 --- !u!135 &3800388519904206915
 SphereCollider:
   m_ObjectHideFlags: 0
