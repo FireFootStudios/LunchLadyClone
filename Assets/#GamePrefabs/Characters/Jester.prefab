@@ -215,7 +215,7 @@ MonoBehaviour:
     minTargets: 0
     maxTargets: 0
   _cooldown: 45
-  _startCooldown: 30
+  _startCooldown: 5
   _generalCooldown: 0
   _randomCooldown: 0
   _ignoreGeneralCooldown: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
       _loopDuration: 0
       _pickRandomTarget: 0
       _ignoreTargets: 0
-      _checkInRange: 0
+      _checkInRange: 1
       _sounds:
       - clips:
         - {fileID: 8300000, guid: 632948fe049a2e9419a7d6b5cf5795bc, type: 3}

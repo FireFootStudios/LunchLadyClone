@@ -293,7 +293,7 @@ MonoBehaviour:
     - _effects:
       - {fileID: 3939906536831351275}
       _targettingEffect: {fileID: 0}
-      _time: 0.1
+      _time: 0
       _loops: 0
       _loopDuration: 0
       _pickRandomTarget: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   _cancelAbilities: []
   _rotateToTarget: 1
   _maxRotationDiffBetweenTarget: 30
-  _rotateWhileFiring: 1
+  _rotateWhileFiring: 0
   _includeXRotation: 0
   _ignoreForAttackRange: 0
   _requireAggro: 0

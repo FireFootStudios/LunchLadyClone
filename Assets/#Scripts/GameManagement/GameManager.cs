@@ -159,7 +159,7 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
             PlayerN player = _sceneData.Players[i];
 
             // Despawn and destroy player object
-            if (player.TryGetComponent(out NetworkObject networkObject))
+            if (player && player.TryGetComponent(out NetworkObject networkObject))
                 networkObject.Despawn(true);
         }
 

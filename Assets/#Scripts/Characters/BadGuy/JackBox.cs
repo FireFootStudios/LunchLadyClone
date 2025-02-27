@@ -45,6 +45,7 @@ public sealed class JackBox : BadGuy
 
             // Speed changes arent instant so we need to also clear the path for recalculating
             _agent.ResetPath();
+            _agent.velocity = Vector3.zero;
         }
         else Movement.RemoveMod(_preventMoveMod);
 
@@ -81,6 +82,7 @@ public sealed class JackBox : BadGuy
 
         // Spawn activate gameobject
         GameObject go = Instantiate(_activateSpawnTemplate, transform.position, transform.rotation);
+        go.transform.forward = transform.forward;
         go.SetActive(true);
 
         // Set to cleanup after delay
