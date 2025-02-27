@@ -1,9 +1,7 @@
 
 
 
-* 
-* Navmesh agent Speed still really inconsistent
-* Jackboxes rotation fucked + dont stop instantly!
+* Jackboxes not stunning clients now...
 
 
 

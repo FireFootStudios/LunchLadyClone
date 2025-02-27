@@ -35,6 +35,7 @@ public sealed class JackBox : BadGuy
 
     private void Update()
     {
+        if (!IsHost) return;
         if (!_preventMoveTS) return;
 
         bool preventMove = _preventMoveTS.HasTarget();

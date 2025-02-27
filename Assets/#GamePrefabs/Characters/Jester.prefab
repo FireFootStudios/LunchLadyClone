@@ -214,8 +214,8 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 0
     maxTargets: 0
-  _cooldown: 40
-  _startCooldown: 5
+  _cooldown: 60
+  _startCooldown: 30
   _generalCooldown: 0
   _randomCooldown: 0
   _ignoreGeneralCooldown: 0
@@ -1522,7 +1522,7 @@ Transform:
   m_GameObject: {fileID: 7553636904131256020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.56}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1586,10 +1586,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.9
   m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 1.25, z: 0.25}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &4345151186764015898
 MonoBehaviour:
   m_ObjectHideFlags: 0

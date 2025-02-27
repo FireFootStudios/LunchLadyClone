@@ -342,7 +342,7 @@ MonoBehaviour:
   _animationChains: []
   _cancelAbilities: []
   _rotateToTarget: 1
-  _maxRotationDiffBetweenTarget: 30
+  _maxRotationDiffBetweenTarget: 15
   _rotateWhileFiring: 0
   _includeXRotation: 0
   _ignoreForAttackRange: 0
@@ -437,8 +437,8 @@ Transform:
   m_GameObject: {fileID: 5373048982588415372}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1827336625378823117}
@@ -548,7 +548,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1806193121271227339}
@@ -813,7 +813,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 1.2
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7836112906727834169
 GameObject:
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb99f67f36bceb48ba79319c3631d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxSpeed: 1.5
+  _baseMaxSpeed: 1
   _baseAcceleration: 100
   _maxLinearVel: 100
   _maxRotationSpeed: 1400
@@ -1658,7 +1658,7 @@ MonoBehaviour:
   _mod:
     priority: 0
     duration: 111111110
-    maxSpeedMultiplier: 2
+    maxSpeedMultiplier: 1.25
     accelerationMultiplier: 1
     decelerationMultiplier: 1
     rotationMultiplier: 10
