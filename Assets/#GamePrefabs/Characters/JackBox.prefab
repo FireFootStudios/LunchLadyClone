@@ -58,8 +58,8 @@ MonoBehaviour:
   _updateInterval: 0.2
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
-  _maxVerticalAngle: 60
-  _maxHorizontalAngle: 90
+  _maxVerticalAngle: 75
+  _maxHorizontalAngle: 135
   _useLineOfSight: 1
   _losData:
     _mask:
