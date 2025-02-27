@@ -713,6 +713,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2555159846958461870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1222152938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8257614802337392262, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
+  m_PrefabInstance: {fileID: 1655862366}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1265075011 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6444688570312512854, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
@@ -887,6 +892,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 81849478
       objectReference: {fileID: 0}
+    - target: {fileID: 1783917862285123736, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 368776659
+      objectReference: {fileID: 0}
     - target: {fileID: 1824655214960260696, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4024072752
@@ -1031,6 +1040,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1420574897
       objectReference: {fileID: 0}
+    - target: {fileID: 4867950107379429199, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2792227851
+      objectReference: {fileID: 0}
     - target: {fileID: 4903961360721920594, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1657558810
@@ -1050,6 +1063,10 @@ PrefabInstance:
     - target: {fileID: 5035172068724783078, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 434373633
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632457398137763195, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1425891091
       objectReference: {fileID: 0}
     - target: {fileID: 5682321653934845996, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -1871,7 +1888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784082609863494286, guid: edaaed7376244f34ead293220ebf7bc0, type: 3}
       propertyPath: _paperFiveTrans.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 784082609863494286, guid: edaaed7376244f34ead293220ebf7bc0, type: 3}
       propertyPath: _paperFourTrans.Array.size
@@ -2109,6 +2126,10 @@ PrefabInstance:
       propertyPath: '_paperFiveTrans.Array.data[2]'
       value: 
       objectReference: {fileID: 1655862372}
+    - target: {fileID: 784082609863494286, guid: edaaed7376244f34ead293220ebf7bc0, type: 3}
+      propertyPath: '_paperFiveTrans.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1222152938}
     - target: {fileID: 784082609863494286, guid: edaaed7376244f34ead293220ebf7bc0, type: 3}
       propertyPath: '_paperFourTrans.Array.data[0]'
       value: 

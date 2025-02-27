@@ -10,6 +10,8 @@ public sealed class Door : NetworkBehaviour
     [Space]
     [SerializeField] private Transform _moveTargetT = null;
 
+    private Transform _startT = null;
+
     private NetworkVariable<bool> _isOpened = new NetworkVariable<bool>();
 
 
@@ -18,6 +20,7 @@ public sealed class Door : NetworkBehaviour
         base.OnNetworkSpawn();
 
         _isOpened.OnValueChanged += OnOpened;
+        _startT = this.transform;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,4 +55,5 @@ public sealed class Door : NetworkBehaviour
             _movement.MoveToPos(_moveTargetT.position, false);
         }
     }
+   
 }
