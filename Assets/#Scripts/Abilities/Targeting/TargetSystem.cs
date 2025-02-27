@@ -26,12 +26,11 @@ public abstract class TargetSystem : MonoBehaviour
 
     [Header("Line of sight")]
     [SerializeField] private bool _useLineOfSight = false;
-    [SerializeField] private LayerMask _losMask = ~0;
-    [SerializeField] private Transform _losOriginT = null;
-    [SerializeField] private float _losMaxDistance = 10.0f;
-    [SerializeField] private float _losMissTargetLifetime = 5.0f;
-    [SerializeField] private float _losTargetYOffset = 0.0f;
+    [SerializeField] private LineOfSight _losData = null;
+    [SerializeField] private float _losTargetLifetime = 0.0f;
 
+    [Space]
+    [SerializeField] private bool _reverseTargetValidation = false;
 
 
     private float _updateTargetsTimer = 0.0f;
@@ -294,25 +293,33 @@ public abstract class TargetSystem : MonoBehaviour
 
         if (!validTag) return validTag;
 
+        GameObject fromGo = Source;
+        GameObject toTarget = target;
+        if (_reverseTargetValidation)
+        {
+            fromGo = target;
+            toTarget = Source;
+        }
+
         // Validate/Update Line of Sight
         bool losValid = true;
         if (_useLineOfSight)
         {
-            losValid = InLineOfSight(target);
+            losValid = _losData.InLineOfSight(toTarget, toTarget.transform.position, fromGo.transform.position);
 
             // Get target pair to reset timer OR check if still valid
-            LosTarget losTarget = _losTargets.Find(l => l.target == target);
+            LosTarget losTarget = _losTargets.Find(l => l.target == toTarget);
             if (losTarget == null && losValid)
             {
                 // Create new los target
-                losTarget = new LosTarget(target, _losMissTargetLifetime, target.transform.position);
+                losTarget = new LosTarget(toTarget, _losTargetLifetime, toTarget.transform.position);
                 _losTargets.Add(losTarget);
             }
             else if (losTarget != null && losValid)
             {
                 // Reset timer + update last seen pos
-                losTarget.losTimer = _losMissTargetLifetime;
-                losTarget.lastSeenPos = target.transform.position;
+                losTarget.losTimer = _losTargetLifetime;
+                losTarget.lastSeenPos = toTarget.transform.position;
             }
             else if (losTarget != null && losTarget.losTimer > 0.0f && !losValid) losValid = true;
         }
@@ -320,12 +327,12 @@ public abstract class TargetSystem : MonoBehaviour
         if (!losValid) return false;
 
 
-        Vector3 dirToTarget = (target.transform.position - Source.transform.position).normalized;
+        Vector3 dirToTarget = (toTarget.transform.position - fromGo.transform.position).normalized;
 
         // Check horizontal angle
-        if (_maxHorizontalAngle < 179.0f && Source)
+        if (_maxHorizontalAngle < 179.0f && fromGo)
         {
-            Vector3 forwardXZ = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+            Vector3 forwardXZ = new Vector3(fromGo.transform.forward.x, 0, fromGo.transform.forward.z).normalized;
             Vector3 dirToTargetXZ = new Vector3(dirToTarget.x, 0, dirToTarget.z).normalized;
 
             float horizontalAngle = Vector3.Angle(forwardXZ, dirToTargetXZ);
@@ -337,10 +344,10 @@ public abstract class TargetSystem : MonoBehaviour
 
         // One way is to compute the elevation angle for both vectors.
         // Elevation is defined as the angle above the XZ plane.
-        if (_maxVerticalAngle < 89.0f && Source)
+        if (_maxVerticalAngle < 89.0f && fromGo)
         {
             float targetElevation = Mathf.Atan2(dirToTarget.y, new Vector2(dirToTarget.x, dirToTarget.z).magnitude) * Mathf.Rad2Deg;
-            float forwardElevation = Mathf.Atan2(transform.forward.y, new Vector2(transform.forward.x, transform.forward.z).magnitude) * Mathf.Rad2Deg;
+            float forwardElevation = Mathf.Atan2(fromGo.transform.forward.y, new Vector2(fromGo.transform.forward.x, fromGo.transform.forward.z).magnitude) * Mathf.Rad2Deg;
 
             float verticalAngle = Mathf.Abs(targetElevation - forwardElevation);
             if (verticalAngle > _maxVerticalAngle)
@@ -366,22 +373,6 @@ public abstract class TargetSystem : MonoBehaviour
 
     //    return targetPair;
     //}
-
-    private bool InLineOfSight(GameObject target)
-    {
-        if (!target) return false;
-
-        Vector3 targetPos = target.transform.position;
-        targetPos.y += _losTargetYOffset;
-        Vector3 dirToTarget = (targetPos - _losOriginT.position).normalized;
-
-        if (_losOriginT && Physics.Raycast(_losOriginT.transform.position, dirToTarget, out RaycastHit hitInfo, _losMaxDistance, _losMask) && hitInfo.collider.gameObject == target.gameObject)
-        {
-            return true;
-        }
-
-        return false;
-    }
 
     private void UpdateLosTargets()
     {
@@ -443,5 +434,46 @@ public sealed class LosTarget
     {
         this.target = target;
         this.losTimer = losTimer;
+    }
+}
+
+[System.Serializable]
+public sealed class LineOfSight
+{
+    public LayerMask _mask = ~0;
+    public Transform _originT = null;
+    public float _maxDistance = 10.0f;
+    public float _targetOffset = 0.0f;
+    public float _fromOffset = 0.0f;
+
+
+    //public bool InLineOfSight(GameObject target)
+    //{
+    //    if (!target) return false;
+
+    //    return InLineOfSight(target.transform.position);
+    //}
+
+    public bool InLineOfSight(GameObject target, Vector3 targetPos)
+    {
+        if (!_originT) return false;
+
+        return InLineOfSight(target, targetPos, _originT.position);
+    }
+
+    public bool InLineOfSight(GameObject target, Vector3 targetPos, Vector3 fromPos)
+    {
+        if (!target) return false;
+
+        targetPos.y += _targetOffset;
+        fromPos.y += _fromOffset;
+        Vector3 dirToTarget = (targetPos - fromPos).normalized;
+
+        if (Physics.Raycast(fromPos, dirToTarget, out RaycastHit hitInfo, _maxDistance, _mask) && hitInfo.collider.gameObject == target.gameObject)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

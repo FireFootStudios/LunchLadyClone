@@ -10,10 +10,12 @@ public sealed class JackBox : BadGuy
     [SerializeField] private GameObject _activateSpawnTemplate = null;
     [SerializeField] private SoundSpawnData _activateSFX = null;
     [Space]
-    [SerializeField] private HitBox _preventMoveHB = null;
+    //[SerializeField] private HitBox _preventMoveHB = null;
     [SerializeField] private MovementModifier _preventMoveMod = null;
+    [SerializeField] private TargetSystem _preventMoveTS = null;
     [Space]
     [SerializeField] private float _disableDelay = 5.0f;
+
 
     public GameObject FireTarget { get; private set; }
 
@@ -28,16 +30,35 @@ public sealed class JackBox : BadGuy
         if (_activateAbility) _activateAbility.OnFireFinish += OnActivateAbFired;
         if (_activateAbility) _activateAbility.OnBeforeFire += OnBeforeFire;
 
-        if (_preventMoveHB) _preventMoveHB.OnTargetsChange += OnPreventMoveHBTargetsChange;
+        //if (_preventMoveHB) _preventMoveHB.OnTargetsChange += OnPreventMoveHBTargetsChange;
     }
 
-    private void OnPreventMoveHBTargetsChange()
+    private void Update()
     {
-        bool preventMove = _preventMoveHB.Targets.Count > 0;
-        _preventMoveMod.Source = this.gameObject; 
-        if (preventMove) Movement.AddOrUpdateModifier(_preventMoveMod, false);
+        if (!_preventMoveTS) return;
+
+        bool preventMove = _preventMoveTS.HasTarget();
+        _preventMoveMod.Source = this.gameObject;
+        if (preventMove)
+        {
+            Movement.AddOrUpdateModifier(_preventMoveMod, false);
+
+            // Speed changes arent instant so we need to also clear the path for recalculating
+            Vector3 dest = _agent.destination;
+            _agent.ResetPath();
+            _agent.SetDestination(dest);
+        }
         else Movement.RemoveMod(_preventMoveMod);
+
     }
+
+    //private void OnPreventMoveHBTargetsChange()
+    //{
+    //    bool preventMove = _preventMoveHB.Targets.Count > 0;
+    //    _preventMoveMod.Source = this.gameObject; 
+    //    if (preventMove) Movement.AddOrUpdateModifier(_preventMoveMod, false);
+    //    else Movement.RemoveMod(_preventMoveMod);
+    //}
 
     private void OnActivateAbFired()
     {

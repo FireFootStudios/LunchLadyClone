@@ -398,8 +398,9 @@ public sealed class NavMeshMovement : MonoBehaviour
             if (mod.overrideAnglePauseMove) _anglePauseMoveCurrent = mod.anglePauseMove;
         }
 
-        bool speedZero = _maxSpeedModifier < 0.01f;
-        if (speedZero) _agent.isStopped = true;
+
+        //bool speedZero = _maxSpeedModifier < 0.01f;
+        //if (speedZero) _agent.isStopped = true;
     }
 
     #endregion

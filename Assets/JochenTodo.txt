@@ -4,10 +4,7 @@
 * Item per player sync
 
 * Light turn on/off + aggro?
-* Jackboxes
-	-> Get spawned by monster
-	-> Wander around map
-	-> Aggro monster
+
 
 * Crouch
 
