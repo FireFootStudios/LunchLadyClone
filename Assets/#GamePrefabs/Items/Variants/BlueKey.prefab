@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a2aadb56168a86c43a5b2fd839c6efaf, type: 2}
+    - target: {fileID: 911736550935826424, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: SyncRotAngleX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911736550935826424, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: SyncRotAngleY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911736550935826424, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: SyncRotAngleZ
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2064236050014907509, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: _itemID
       value: 1
@@ -19,6 +31,10 @@ PrefabInstance:
     - target: {fileID: 3707647990738631276, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_Name
       value: BlueKey
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800388519904206915, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: m_Radius
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 6321582309269666200, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,19 +90,19 @@ PrefabInstance:
       objectReference: {fileID: -5546940888850326318, guid: 4830dc5cd534a694a8cf0e61ba36e955, type: 3}
     - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3165
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8050856566196356728, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_ConstrainProportionsScale
