@@ -345,7 +345,7 @@ GameObject:
   m_Layer: 0
   m_Name: LosOriginT
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -425,13 +425,14 @@ MonoBehaviour:
   _maxVerticalAngle: 45
   _maxHorizontalAngle: 130
   _useLineOfSight: 1
-  _losMask:
-    serializedVersion: 2
-    m_Bits: 9
-  _losOriginT: {fileID: 1182604255833935471}
-  _losMaxDistance: 30
-  _losMissTargetLifetime: 0
-  _losTargetYOffset: 1
+  _losData:
+    _mask:
+      serializedVersion: 2
+      m_Bits: 9
+    _originT: {fileID: 1182604255833935471}
+    _maxDistance: 25
+    _targetOffset: 1.2
+  _losTargetLifetime: 0.25
   _onlyTargetSelf: 0
 --- !u!1 &3402032716981716017
 GameObject:
@@ -1580,13 +1581,14 @@ MonoBehaviour:
   _maxVerticalAngle: 90
   _maxHorizontalAngle: 180
   _useLineOfSight: 0
-  _losMask:
-    serializedVersion: 2
-    m_Bits: 9
-  _losOriginT: {fileID: 1182604255833935471}
-  _losMaxDistance: 20
-  _losMissTargetLifetime: 0
-  _losTargetYOffset: 1
+  _losData:
+    _mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    _originT: {fileID: 0}
+    _maxDistance: 10
+    _targetOffset: 0
+  _losTargetLifetime: 0
   _hitboxes:
   - {fileID: 4345151186764015898}
 --- !u!136 &9152657993196972688
