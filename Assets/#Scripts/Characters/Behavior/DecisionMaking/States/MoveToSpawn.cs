@@ -101,7 +101,7 @@ public sealed class MoveToSpawn : FSMState
             else
             {
                 // Kinda has to be spawninfo pos cuz we dont know if target pos is underground or in a wall or smt
-                _char.Movement.RB.MovePosition(_char.Spawner.SpawnInfo.pos);
+                //_char.Movement.RB.MovePosition(_char.Spawner.SpawnInfo.pos);
                 _fixAttempts = 0;
             }
 

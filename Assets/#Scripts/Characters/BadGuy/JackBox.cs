@@ -44,9 +44,7 @@ public sealed class JackBox : BadGuy
             Movement.AddOrUpdateModifier(_preventMoveMod, false);
 
             // Speed changes arent instant so we need to also clear the path for recalculating
-            Vector3 dest = _agent.destination;
             _agent.ResetPath();
-            _agent.SetDestination(dest);
         }
         else Movement.RemoveMod(_preventMoveMod);
 

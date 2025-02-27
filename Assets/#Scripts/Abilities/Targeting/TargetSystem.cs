@@ -190,6 +190,7 @@ public abstract class TargetSystem : MonoBehaviour
             {
                 _targetPairs.RemoveAt(i);
                 i--;
+                continue;
             }
 
             // Recalculate effectiveness
@@ -198,6 +199,7 @@ public abstract class TargetSystem : MonoBehaviour
             {
                 _targetPairs.RemoveAt(i);
                 i--;
+                continue;
             }
         }
     }
@@ -277,6 +279,7 @@ public abstract class TargetSystem : MonoBehaviour
 
     protected bool IsTargetValid(GameObject target)
     {
+        if (!target) return false;
         if (Source && target == Source && !_canIncludeSelf) return false;
 
         if (TargetTags.Count == 0) return _treatNoTagsAsAnyTarget;

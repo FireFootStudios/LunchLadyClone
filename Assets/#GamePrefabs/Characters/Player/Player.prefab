@@ -290,8 +290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetMode: 0
-  _jumpForceMin: {x: 0, y: 7, z: 0}
-  _jumpForceMax: {x: 0, y: 7, z: 0}
+  _jumpForceMin: {x: 0, y: 6, z: 0}
+  _jumpForceMax: {x: 0, y: 6, z: 0}
   _coyoteTime: 0.1
   _needsGrounded: 1
   _resetYVel: 1
@@ -920,11 +920,11 @@ MonoBehaviour:
   _onGroudedVelMultBounds: {x: 1, y: 0}
   _onGroundedVelocityScaleBounds: {x: 0.05, y: 30}
   _disableStepping: 0
-  _disableSteppingAir: 0
+  _disableSteppingAir: 1
   _airStepTime: 0
   _maxYVelForStep: 5
   _stepHeight: 0.5
-  _stepForceBounds: {x: 2, y: 5}
+  _stepForceBounds: {x: 1, y: 4}
   _stepDistanceOffset: 0.5
   _stepAngleCorrection: 0.05
   _stepCooldown: 0.25

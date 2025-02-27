@@ -31,7 +31,7 @@ public sealed class Dead : FSMState
             _char.transform.position = _char.Spawner.SpawnInfo.pos;
 
             // Clear velocity
-            _char.Movement.RB.linearVelocity = Vector3.zero;
+            //_char.Movement.RB.linearVelocity = Vector3.zero;
         }
     }
 }

@@ -106,7 +106,7 @@ public sealed class Patrol : FSMState
         // If distance difference is smaller than threshold, set position to spawnpos and return
         if (_lastCheckedDistance - currentDistance < _stuckDistanceThreshold)
         {
-            _char.Movement.RB.MovePosition(_traverser.CurrentPP.transform.position);
+            //_char.Movement.RB.MovePosition(_traverser.CurrentPP.transform.position);
             //_char.Movement.DesiredMovement = Vector3.zero;
         }
         else

@@ -1,10 +1,9 @@
 
 
 
-* Speed still really inconsistent
-* Still gets stuck sometimes?
-* No jackboxes spawned?
-* Jeseter tries to go to wander points outside of reach (not on navmesh)
+* 
+* Navmesh agent Speed still really inconsistent
+* Jackboxes rotation fucked + dont stop instantly!
 
 
 

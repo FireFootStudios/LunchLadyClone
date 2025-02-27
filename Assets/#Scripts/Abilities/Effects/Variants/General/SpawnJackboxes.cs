@@ -28,7 +28,7 @@ public class SpawnJackboxes : Effect
                 i--;
 
                 // Destroy/despawn
-                if (!jackBox.TryGetComponent(out NetworkObject networkObject)) continue;
+                if (!jackBox || !jackBox.TryGetComponent(out NetworkObject networkObject)) continue;
 
                 networkObject.Despawn(true);
             }

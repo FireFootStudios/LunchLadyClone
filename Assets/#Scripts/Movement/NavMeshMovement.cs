@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 public sealed class NavMeshMovement : MonoBehaviour
 {
@@ -53,7 +52,6 @@ public sealed class NavMeshMovement : MonoBehaviour
     public float DecelerationdAdjusted { get; private set; }
     public float RotationMultiplier { get; private set; }
 
-    public Rigidbody RB { get; private set; }
     public NavMeshAgent Agent { get { return _agent; } }
 
     public Vector3 DesiredMovement { get { return _agent.desiredVelocity; } }
@@ -107,14 +105,16 @@ public sealed class NavMeshMovement : MonoBehaviour
     {
         if (_agent.pathPending) return false;
 
-        // Handle incomplete paths, in thoe cases remaining dist will be infinity...
-        if (_agent.path.status == NavMeshPathStatus.PathInvalid || _agent.path.status == NavMeshPathStatus.PathPartial)
+        // Handle incomplete paths, in thoe cases remaining dist will be infinity... (also checck if remaining dist is not infinty which it tends to become randomly...
+        if (!_agent.hasPath || _agent.path.status == NavMeshPathStatus.PathInvalid || _agent.path.status == NavMeshPathStatus.PathPartial/* || _agent.remainingDistance > 10000.0f*/)
         {
-            if (_agent.desiredVelocity.magnitude > 0.001f) return true;
-            else return false;
+            //if (_agent.desiredVelocity.magnitude > 0.001f) return true;
+            //else return false;
+            return true;
         }
 
-        return _agent.remainingDistance < _agent.stoppingDistance;
+        float remainingDist = RemainingDistance(_agent.path.corners);
+        return remainingDist < _agent.stoppingDistance;
     }
 
     public void AddOrUpdateModifier(MovementModifier templateMod, bool forceCopy = true, bool forceAdd = false)
@@ -185,7 +185,6 @@ public sealed class NavMeshMovement : MonoBehaviour
         IsStopped = true;
         CurrentMoveSpeed = 0.0f;
         CurrentRotationSpeed = 0.0f;
-        RB.linearVelocity = Vector3.zero;
         CurrentMoveVelocity = Vector3.zero;
     }
     #endregion
@@ -196,14 +195,6 @@ public sealed class NavMeshMovement : MonoBehaviour
 
         _agent.updateRotation = false;
         CanRotate = true;
-
-
-        // Get RB and initialize
-        RB = GetComponent<Rigidbody>();
-        RB.maxLinearVelocity = _maxLinearVel;
-
-        // Gravity is handled by this script
-        RB.useGravity = false;
     }
 
     private void Start()
@@ -233,6 +224,15 @@ public sealed class NavMeshMovement : MonoBehaviour
 
         CalculateDataAdjustements();
         UpdateRotation();
+    }
+
+    private float RemainingDistance(Vector3[] points)
+    {
+        if (points.Length < 2) return 0;
+        float distance = 0;
+        for (int i = 0; i < points.Length - 1; i++)
+            distance += Vector3.Distance(points[i], points[i + 1]);
+        return distance;
     }
 
     //private void CalculateAdjustedDesiredMovement()
