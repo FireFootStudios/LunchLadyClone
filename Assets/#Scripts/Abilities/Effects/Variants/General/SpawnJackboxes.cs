@@ -28,7 +28,7 @@ public class SpawnJackboxes : Effect
                 i--;
 
                 // Destroy/despawn
-                if (!jackBox.TryGetComponent(out NetworkObject networkObject)) return;
+                if (!jackBox.TryGetComponent(out NetworkObject networkObject)) continue;
 
                 networkObject.Despawn(true);
             }
@@ -40,6 +40,7 @@ public class SpawnJackboxes : Effect
         if (!_spawnTemplate || !_spawnT) return;
 
         JackBox jackBox = Instantiate(_spawnTemplate, _spawnT.transform.position, _spawnT.transform.rotation);
+        jackBox.gameObject.SetActive(true);
         _currentJackboxes.Add(jackBox);
 
         if (!jackBox.TryGetComponent(out NetworkObject networkObject)) return;

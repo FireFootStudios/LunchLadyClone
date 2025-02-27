@@ -214,8 +214,8 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 0
     maxTargets: 0
-  _cooldown: 60
-  _startCooldown: 60
+  _cooldown: 10
+  _startCooldown: 5
   _generalCooldown: 0
   _randomCooldown: 0
   _ignoreGeneralCooldown: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   _targetMode: 0
   _spawnTemplate: {fileID: 708443842857328422, guid: c9d4c329731213845a47a5763ad03704, type: 3}
   _spawnT: {fileID: 2123934285159615347}
-  _maxAliveSpawns: 10
+  _maxAliveSpawns: 15
 --- !u!1 &2259611382706332045
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +432,9 @@ MonoBehaviour:
     _originT: {fileID: 1182604255833935471}
     _maxDistance: 25
     _targetOffset: 1.2
+    _fromOffset: 0
   _losTargetLifetime: 0.25
+  _reverseTargetValidation: 0
   _onlyTargetSelf: 0
 --- !u!1 &3402032716981716017
 GameObject:
@@ -1173,7 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb99f67f36bceb48ba79319c3631d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxSpeed: 5
+  _baseMaxSpeed: 5.5
   _baseAcceleration: 600
   _maxLinearVel: 100
   _maxRotationSpeed: 1400
@@ -1409,7 +1411,7 @@ MonoBehaviour:
   - {fileID: 8500101951128170744}
   - {fileID: 4831689418555618299}
   _inputBuffer: 0.2
-  _health: {fileID: 0}
+  _health: {fileID: 492961220442352715}
 --- !u!114 &3236823724857446582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1588,7 +1590,9 @@ MonoBehaviour:
     _originT: {fileID: 0}
     _maxDistance: 10
     _targetOffset: 0
+    _fromOffset: 0
   _losTargetLifetime: 0
+  _reverseTargetValidation: 0
   _hitboxes:
   - {fileID: 4345151186764015898}
 --- !u!136 &9152657993196972688

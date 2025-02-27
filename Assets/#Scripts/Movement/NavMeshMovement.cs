@@ -106,7 +106,14 @@ public sealed class NavMeshMovement : MonoBehaviour
     public bool DestinationReached()
     {
         if (_agent.pathPending) return false;
-        
+
+        // Handle incomplete paths, in thoe cases remaining dist will be infinity...
+        if (_agent.path.status == NavMeshPathStatus.PathInvalid || _agent.path.status == NavMeshPathStatus.PathPartial)
+        {
+            if (_agent.desiredVelocity.magnitude > 0.001f) return true;
+            else return false;
+        }
+
         return _agent.remainingDistance < _agent.stoppingDistance;
     }
 

@@ -177,9 +177,9 @@ public abstract class TargetSystem : MonoBehaviour
         {
             TargetPair targetPair = _targetPairs[i];
 
-            if (!targetPair.target || !targetPair.target.activeInHierarchy)
+            if (targetPair == null || !targetPair.target || !targetPair.target.activeInHierarchy)
             {
-                _targetPairs.Remove(targetPair);
+                _targetPairs.RemoveAt(i);
                 i--;
                 continue;
             }
@@ -188,7 +188,7 @@ public abstract class TargetSystem : MonoBehaviour
             targetPair.lifeElapsed += Time.deltaTime;
             if (targetPair.lifeElapsed > targetPair.lifetime)
             {
-                _targetPairs.Remove(targetPair);
+                _targetPairs.RemoveAt(i);
                 i--;
             }
 
@@ -196,7 +196,7 @@ public abstract class TargetSystem : MonoBehaviour
             targetPair.effectiveness = EffectivenessTarget(targetPair.target);
             if (targetPair.effectiveness < _minEffectivenessForValid)
             {
-                _targetPairs.Remove(targetPair);
+                _targetPairs.RemoveAt(i);
                 i--;
             }
         }

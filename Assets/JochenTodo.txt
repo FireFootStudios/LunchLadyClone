@@ -1,6 +1,14 @@
 
 
 
+* Speed still really inconsistent
+* Still gets stuck sometimes?
+* No jackboxes spawned?
+* Jeseter tries to go to wander points outside of reach (not on navmesh)
+
+
+
+
 * Item per player sync
 
 * Light turn on/off + aggro?

@@ -95,9 +95,18 @@ public sealed class BadGuyEvents : MonoBehaviour
     {
         float duration = durBounds.x;
 
+
+
         // Calculate the path to the target position.
         NavMeshPath path = new NavMeshPath();
-        if (NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path))
+
+        // Create and configure the filter.
+        NavMeshQueryFilter filter = new NavMeshQueryFilter();
+        filter.agentTypeID = _badGuy.NavMeshAgent.agentTypeID;
+        // Optionally, set a custom area mask:
+        filter.areaMask = NavMesh.AllAreas;
+
+        if (NavMesh.CalculatePath(transform.position, targetPos, filter, path))
         {
             float distance = 0f;
 
