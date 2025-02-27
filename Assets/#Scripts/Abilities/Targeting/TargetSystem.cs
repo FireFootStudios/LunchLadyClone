@@ -74,7 +74,7 @@ public abstract class TargetSystem : MonoBehaviour
 
         TargetPair targetPair = _targetPairs.Find(p => p.target == target);
         if (targetPair != null)
-            RemoveOverrideTarget(targetPair.target);
+            _targetPairs.Remove(targetPair);
         RePopulateTargetPairs();
     }
 
