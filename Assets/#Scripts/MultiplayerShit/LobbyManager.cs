@@ -10,6 +10,7 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.Services.Vivox;
 using UnityEngine;
 
 public sealed class LobbyManager : SingletonBase<LobbyManager>
@@ -456,6 +457,11 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
         // TODO: Need to create different profiles for testing locally?
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+        await VivoxService.Instance.InitializeAsync();
+        await VivoxService.Instance.LoginAsync();
+        await VivoxService.Instance.JoinGroupChannelAsync("Lobby", ChatCapability.AudioOnly);
+
         _initialized = true;
         _initializing = false;
 

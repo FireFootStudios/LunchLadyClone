@@ -8,8 +8,8 @@ public class JoinVoiceChannel : MonoBehaviour
 
     async void Start()
     {
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        //await UnityServices.InitializeAsync();
+        //await AuthenticationService.Instance.SignInAnonymouslyAsync();
         await VivoxService.Instance.InitializeAsync();
         await VivoxService.Instance.LoginAsync();
         await VivoxService.Instance.JoinGroupChannelAsync("Lobby", ChatCapability.AudioOnly); 
