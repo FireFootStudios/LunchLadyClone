@@ -5,7 +5,7 @@ public class InteractibleObjectN : MonoBehaviour
 {
     [SerializeField] private List<Animator> _animators = new List<Animator>();
     [SerializeField] private string _animTrigger = null;
-    //[SerializeField] private GameObject _itemInsideChest;
+    [SerializeField] private GameObject _itemInsideChest;
 
     public void PlayAnimOnInteract()
     {
@@ -14,14 +14,14 @@ public class InteractibleObjectN : MonoBehaviour
             if(_animTrigger != null)
             {
                 animator.SetTrigger(_animTrigger);
-            }
-               
+                ShowItemWhenOpened();
+            } 
         }
     }
 
-    //private void ShowItemWhenOpened()
-    //{
-    //    if(_itemInsideChest != null)
-    //        _itemInsideChest.SetActive(true);
-    //}
+    private void ShowItemWhenOpened()
+    {
+        if (_itemInsideChest != null)
+            _itemInsideChest.SetActive(true);
+    }
 }

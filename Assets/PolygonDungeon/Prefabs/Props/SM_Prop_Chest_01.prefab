@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 24640395691692427}
   m_Layer: 0
   m_Name: SM_Prop_Chest_01
-  m_TagString: Untagged
+  m_TagString: Interactible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
     TransitionDuration: 0.15991935
     TriggerNameHash: 1554329390
     TransitionIndex: 0
-  m_Animator: {fileID: 0}
+  m_Animator: {fileID: 1620598362883431509}
 --- !u!114 &24640395691692427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,5 +305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animators:
-  - {fileID: 0}
+  - {fileID: 1620598362883431509}
   _animTrigger: OpenChest
+  _itemInsideChest: {fileID: 0}
