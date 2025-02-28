@@ -467,9 +467,9 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
         //#3 audioFadeIntesityByDistanceAudio: The strength of the audio fade effect as the speaker moves away from the listener. Must be >= 0. This value is rounded to three decimal places.
         //#4 audioFadeModel: The model used to determine voice volume at different distances.
         Channel3DProperties channelProperties = new Channel3DProperties(10,5,.5f,AudioFadeModel.InverseByDistance);
-       
 
-        await VivoxService.Instance.JoinPositionalChannelAsync("Lobby", ChatCapability.AudioOnly,channelProperties);
+        await VivoxService.Instance.JoinPositionalChannelAsync("Lobby", ChatCapability.TextAndAudio,channelProperties);
+        //initial set position for testing / this should be done when players join a lobby. Then when players join the game, their position gets updated to the playerGO
         VivoxService.Instance.Set3DPosition(Vector3.zero, Vector3.zero, Vector3.forward, Vector3.up, "Lobby", true);
 
         _initialized = true;
