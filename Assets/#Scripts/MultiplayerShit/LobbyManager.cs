@@ -458,9 +458,17 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
+        //Join voice lobby
         await VivoxService.Instance.InitializeAsync();
         await VivoxService.Instance.LoginAsync();
-        await VivoxService.Instance.JoinGroupChannelAsync("Lobby", ChatCapability.AudioOnly);
+
+        //#1 audibleDistance: The maximum distance from the listener that a speaker can be heard. Must be > 0
+        //#2 conversationalDistance: The distance from the listener within which a speaker’s voice is heard at its original volume. Must be >= 0 and <= audibleDistance.
+        //#3 audioFadeIntesityByDistanceAudio: The strength of the audio fade effect as the speaker moves away from the listener. Must be >= 0. This value is rounded to three decimal places.
+        //#4 audioFadeModel: The model used to determine voice volume at different distances.
+        Channel3DProperties channelProperties = new Channel3DProperties(10,5,.5f,AudioFadeModel.InverseByDistance);
+
+        await VivoxService.Instance.JoinPositionalChannelAsync("Lobby", ChatCapability.AudioOnly,channelProperties);
 
         _initialized = true;
         _initializing = false;
