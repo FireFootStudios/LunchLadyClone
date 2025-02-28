@@ -17,6 +17,7 @@ public sealed class PlayerN : NetworkBehaviour
     [SerializeField] private Health _health = null;
     [SerializeField] private FreeMovement _movement = null;
     [SerializeField] private GameObject _visuals = null;
+    [SerializeField] private Inventory _inventory = null;
 
     [Space]
     [SerializeField] private Transform _rotateToLocalPlayerT = null;
@@ -71,6 +72,7 @@ public sealed class PlayerN : NetworkBehaviour
     public FreeMovement Movement { get { return _movement; } }
     public AbilityManager AbilityManager { get { return _abilityManager; } }
     public Spawner Spawner { get; private set; }
+    public Inventory Inventory { get { return _inventory; } }
 
     public bool HasMoveInput { get; private set; }
 

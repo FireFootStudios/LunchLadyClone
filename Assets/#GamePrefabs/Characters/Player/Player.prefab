@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2105951299276439258
 Transform:
   m_ObjectHideFlags: 0
@@ -438,13 +438,13 @@ MonoBehaviour:
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 90
-  _maxHorizontalAngle: 30
-  _useLineOfSight: 0
+  _maxHorizontalAngle: 180
+  _useLineOfSight: 1
   _losData:
     _mask:
       serializedVersion: 2
-      m_Bits: 4294967295
-    _originT: {fileID: 0}
+      m_Bits: 1
+    _originT: {fileID: 1682781076249970280}
     _maxDistance: 10
     _targetOffset: 0
     _fromOffset: 0
@@ -499,6 +499,7 @@ Transform:
   - {fileID: 7191298136577723872}
   - {fileID: 1682781076249970280}
   - {fileID: 937470681090237907}
+  - {fileID: 5146763742701065125}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3406676780540943883
@@ -543,6 +544,7 @@ MonoBehaviour:
   _health: {fileID: 1279222214755286175}
   _movement: {fileID: 3453840779508927411}
   _visuals: {fileID: 6659949989822315334}
+  _inventory: {fileID: 2099333442720346384}
   _rotateToLocalPlayerT: {fileID: 5213895162056736078}
   _nameTMP: {fileID: 4409051434678130620}
   _ignoreMultiplayer: 0
@@ -560,7 +562,7 @@ MonoBehaviour:
     overrideAnglePauseMove: 0
     anglePauseMove: 0
     elapsed: 0
-  _jumpAbility: {fileID: 3077285191713233538}
+  _jumpAbility: {fileID: 0}
   _sprintAbility: {fileID: 7503288252341767622}
   _reviveAbility: {fileID: 1468077956797238961}
   _grabAbility: {fileID: 1230062294069447796}
@@ -1408,7 +1410,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5269584982422305941
 GameObject:
@@ -1772,8 +1774,53 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7318712552358968990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5146763742701065125}
+  - component: {fileID: 2099333442720346384}
+  m_Layer: 3
+  m_Name: PlayerInventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5146763742701065125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7318712552358968990}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3686492759283014973}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2099333442720346384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7318712552358968990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc4a0587d7b26140891e9624c05ef1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &7680514415738933962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,13 +2356,13 @@ MonoBehaviour:
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 90
-  _maxHorizontalAngle: 30
-  _useLineOfSight: 0
+  _maxHorizontalAngle: 180
+  _useLineOfSight: 1
   _losData:
     _mask:
       serializedVersion: 2
-      m_Bits: 4294967295
-    _originT: {fileID: 0}
+      m_Bits: 1
+    _originT: {fileID: 1682781076249970280}
     _maxDistance: 10
     _targetOffset: 0
     _fromOffset: 0

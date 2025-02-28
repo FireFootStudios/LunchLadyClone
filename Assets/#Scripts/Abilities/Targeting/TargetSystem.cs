@@ -298,12 +298,12 @@ public abstract class TargetSystem : MonoBehaviour
 
         if (!validTag) return validTag;
 
-        GameObject fromGo = Source;
+        GameObject fromGo = _losData._originT ? _losData._originT.gameObject : Source;
         GameObject toTarget = target;
         if (_reverseTargetValidation)
         {
             fromGo = target;
-            toTarget = Source;
+            toTarget = _losData._originT ? _losData._originT.gameObject : Source;
         }
 
         // Validate/Update Line of Sight

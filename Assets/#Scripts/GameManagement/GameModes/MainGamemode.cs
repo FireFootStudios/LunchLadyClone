@@ -57,18 +57,18 @@ public sealed class MainGamemode : GameMode
 
     private void OnItemRegister(ItemN item)
     {
-        if (item.ID != itemID.paper) return;
+        if (item.Data.Type != itemType.paper) return;
         if (!IsHost) return;
 
-        _papersTotal.Value = ItemManager.Instance.GetItemsByType(itemID.paper).Count;
+        _papersTotal.Value = ItemManager.Instance.GetItemsByType(itemType.paper).Count;
     }
 
     private void OnItemPickedUp(ItemN item)
     {
-        if (item.ID != itemID.paper) return;
+        if (item.Data.Type != itemType.paper) return;
         if (!IsHost) return;
 
-        List<ItemN> papers = ItemManager.Instance.GetItemsByType(itemID.paper);
+        List<ItemN> papers = ItemManager.Instance.GetItemsByType(itemType.paper);
         _papersTotal.Value = papers.Count;
 
         int collected = 0;

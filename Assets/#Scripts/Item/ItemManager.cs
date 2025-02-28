@@ -16,8 +16,8 @@ public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
     public static Action<ItemN> OnItemRegister;
 
     // Works for all clients
-    public static Action<itemID> OnItemPickedUpClient; 
-    public static Action<itemID> OnItemRegisterClient; 
+    public static Action<itemType> OnItemPickedUpClient; 
+    public static Action<itemType> OnItemRegisterClient; 
 
 
 
@@ -25,7 +25,7 @@ public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
     {
         if (_registeredItems.Contains(item)) return;
 
-        OnItemRegisteredClientRPC(item.ID);
+        OnItemRegisteredClientRPC(item.Data.Type);
 
         if (!IsHost) return;
 
@@ -41,11 +41,11 @@ public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
         return item.IsPickedUp;
     }
 
-    public List<ItemN> GetItemsByType(itemID id)
+    public List<ItemN> GetItemsByType(itemType type)
     {
         _returnItemsList.Clear();
 
-        _returnItemsList.AddRange(_registeredItems.FindAll(item => item.ID == id));
+        _returnItemsList.AddRange(_registeredItems.FindAll(item => item.Data.Type == type));
         return _returnItemsList;
     }
 
@@ -70,24 +70,24 @@ public sealed class ItemManager : SingletonBaseNetwork<ItemManager>
 
     private void OnItemPickUp(ItemN item)
     {
-        DebugItemPickedUpClientRpc(item.ID, item.name + " has been picked up!");
+        DebugItemPickedUpClientRpc(item.Data.Type, item.name + " has been picked up!");
 
         if (!IsHost) return;
         OnItemPickedUp?.Invoke(item);
     }
 
     [ClientRpc]
-    private void DebugItemPickedUpClientRpc(itemID id, string message)
+    private void DebugItemPickedUpClientRpc(itemType type, string message)
     {
         if (!_debugItemPickUps) return;
 
         Debug.Log(message);
-        OnItemPickedUpClient?.Invoke(id);
+        OnItemPickedUpClient?.Invoke(type);
     }
 
     [ClientRpc]
-    private void OnItemRegisteredClientRPC(itemID id)
+    private void OnItemRegisteredClientRPC(itemType type)
     {
-        OnItemRegisterClient?.Invoke(id);
+        OnItemRegisterClient?.Invoke(type);
     }
 }

@@ -7,12 +7,12 @@ public class ChaseStart : MonoBehaviour
     [SerializeField] private GameObject _whaleGO = null;
 
     private Transform _whaleSpawnT = null;
-    private Inventory _playerInventory = null;
+    private OldInventory _playerInventory = null;
 
     private void Start()
     {
         _whaleSpawnT = GameObject.Find("WhaleSpawnT").transform;
-        _playerInventory = FindFirstObjectByType<Inventory>();
+        _playerInventory = FindFirstObjectByType<OldInventory>();
     }
 
     // Update is called once per frame

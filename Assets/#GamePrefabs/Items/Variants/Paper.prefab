@@ -110,6 +110,14 @@ PrefabInstance:
       propertyPath: _itemID
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2064236050014907509, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: _data._itemName
+      value: Paper
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064236050014907509, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: _data._itemType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3707647990738631276, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_Name
       value: Paper

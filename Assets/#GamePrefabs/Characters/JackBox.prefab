@@ -1183,7 +1183,7 @@ MonoBehaviour:
     anglePauseMove: 0
     elapsed: 0
   _preventMoveTS: {fileID: 4082697429340123416}
-  _disableDelay: 0
+  _disableDelay: 60
 --- !u!114 &9148783348386281351
 MonoBehaviour:
   m_ObjectHideFlags: 0
