@@ -6,13 +6,26 @@
 
 
 
+* Lantern
+	-> Change model + light source
+	-> Lantern turn off/on
+	-> If lantern on, influence monster los radius to that target
 
 
 
 
-* Item per player sync
 
-* Light turn on/off + aggro?
+
+
+
+
+
+
+
+
+
+
+
 
 
 * Crouch
@@ -25,6 +38,17 @@
 - Wander to close point, bad guy should wander around current place more?
 
 - Can try handling player leave
+
+
+
+
+
+* Fix raycasts...
+	-> Use actual camera rotation in case of player  (somehow) (make t on player that mimics camera rot, link this as origin t instead, also use this as direction instead of dir to target)
+	-> sometimes raycast is hitting random object still.....
+
+
+
 
 
 # BUGS

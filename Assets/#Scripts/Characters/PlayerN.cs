@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -397,6 +398,7 @@ public sealed class PlayerN : NetworkBehaviour
         _gameManager.SceneData.LocalPlayer = this;
         //_gameManager.NotifyServerPlayerSpawnedClientRPC();
 
+
         // Set spawned to true, this means this clients is now fully functional on the network
         _isReady.Value = true;
     }
@@ -580,6 +582,7 @@ public sealed class PlayerN : NetworkBehaviour
     {
         UpdateInput();
         UpdateUI();
+        UpdateVivoxVoice();
     }
 
     private void UpdateInput()
@@ -615,6 +618,13 @@ public sealed class PlayerN : NetworkBehaviour
         // Rotate
         Vector3 dir = localPlayer.PlayerCameras.transform.position - _rotateToLocalPlayerT.position;
         _rotateToLocalPlayerT.forward = dir;
+    }
+
+    private void UpdateVivoxVoice()
+    {
+        if (!IsOwner) return;
+
+        VivoxService.Instance.Set3DPosition(this.gameObject, "Lobby");
     }
     #endregion
 }
