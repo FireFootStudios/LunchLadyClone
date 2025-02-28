@@ -75,6 +75,8 @@ MonoBehaviour:
     <Value>k__BackingField: Player
   - <ID>k__BackingField: 4
     <Value>k__BackingField: Item
+  - <ID>k__BackingField: 5
+    <Value>k__BackingField: Interactible
 --- !u!114 &5010576257629682701
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public enum Tag
     Enemy = 2,
     Camera = 3,
     Item = 4,
+    Interactible = 5,
 }
 
 public sealed class TagManager : SingletonBase<TagManager>
