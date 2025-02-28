@@ -31,6 +31,7 @@ public abstract class TargetSystem : MonoBehaviour
 
     [Space]
     [SerializeField] private bool _reverseTargetValidation = false;
+    [SerializeField] private bool _debugLOS = true;
 
 
     private float _updateTargetsTimer = 0.0f;
@@ -299,32 +300,38 @@ public abstract class TargetSystem : MonoBehaviour
         if (!validTag) return validTag;
 
         GameObject fromGo = _losData._originT ? _losData._originT.gameObject : Source;
-        GameObject toTarget = target;
+        GameObject targetGo = target;
+        Vector3 fromPos = fromGo.transform.position;
+        Vector3 targetPos = targetGo.transform.position;
+
         if (_reverseTargetValidation)
         {
+            fromPos = targetGo.transform.position;
+            targetPos = fromGo.transform.position;
+
             fromGo = target;
-            toTarget = _losData._originT ? _losData._originT.gameObject : Source;
+            targetGo = Source; // THIS NEEDS TO BE SOURCE NO MATTER WHAT OR WE WONT EVER HIT IF ORIGIN T WAS USED
         }
 
         // Validate/Update Line of Sight
         bool losValid = true;
         if (_useLineOfSight)
         {
-            losValid = _losData.InLineOfSight(toTarget, toTarget.transform.position, fromGo.transform.position);
+            losValid = _losData.InLineOfSight(targetGo, targetGo.transform.position, fromGo.transform.position, _debugLOS);
 
             // Get target pair to reset timer OR check if still valid
-            LosTarget losTarget = _losTargets.Find(l => l.target == toTarget);
+            LosTarget losTarget = _losTargets.Find(l => l.target == targetGo);
             if (losTarget == null && losValid)
             {
                 // Create new los target
-                losTarget = new LosTarget(toTarget, _losTargetLifetime, toTarget.transform.position);
+                losTarget = new LosTarget(targetGo, _losTargetLifetime, targetGo.transform.position);
                 _losTargets.Add(losTarget);
             }
             else if (losTarget != null && losValid)
             {
                 // Reset timer + update last seen pos
                 losTarget.losTimer = _losTargetLifetime;
-                losTarget.lastSeenPos = toTarget.transform.position;
+                losTarget.lastSeenPos = targetGo.transform.position;
             }
             else if (losTarget != null && losTarget.losTimer > 0.0f && !losValid) losValid = true;
         }
@@ -332,7 +339,7 @@ public abstract class TargetSystem : MonoBehaviour
         if (!losValid) return false;
 
 
-        Vector3 dirToTarget = (toTarget.transform.position - fromGo.transform.position).normalized;
+        Vector3 dirToTarget = (targetGo.transform.position - fromGo.transform.position).normalized;
 
         // Check horizontal angle
         if (_maxHorizontalAngle < 179.0f && fromGo)
@@ -466,7 +473,7 @@ public sealed class LineOfSight
         return InLineOfSight(target, targetPos, _originT.position);
     }
 
-    public bool InLineOfSight(GameObject target, Vector3 targetPos, Vector3 fromPos)
+    public bool InLineOfSight(GameObject target, Vector3 targetPos, Vector3 fromPos, bool debugDraw = false)
     {
         if (!target) return false;
 
@@ -474,11 +481,22 @@ public sealed class LineOfSight
         fromPos.y += _fromOffset;
         Vector3 dirToTarget = (targetPos - fromPos).normalized;
 
-        if (Physics.Raycast(fromPos, dirToTarget, out RaycastHit hitInfo, _maxDistance, _mask) && hitInfo.collider.gameObject == target.gameObject)
+        if (Physics.Raycast(fromPos, dirToTarget, out RaycastHit hitInfo, _maxDistance, _mask))
         {
-            return true;
+            if (hitInfo.collider.gameObject == target.gameObject)
+            {
+                if (debugDraw) Debug.DrawLine(fromPos, hitInfo.point, Color.green, 3.0f);
+                return true;
+            }
+            else
+            {
+                if (debugDraw) Debug.DrawLine(fromPos, hitInfo.point, Color.red, 1.0f);
+                return false;
+            }
         }
 
+        // Hit nothing
+        if (debugDraw) Debug.DrawRay(fromPos, dirToTarget * _maxDistance, Color.black, .5f);
         return false;
     }
 }

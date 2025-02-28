@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public sealed class PlayerLamp : MonoBehaviour
+public class PlayerLookDir : MonoBehaviour
 {
     [SerializeField] private PlayerN _player = null;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!_player || !_player.PlayerCameras) return;
 

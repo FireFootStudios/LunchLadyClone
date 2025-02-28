@@ -1,8 +1,8 @@
 
 
 
-
-
+- How to change monster los dist per target based on light state...
+	-> LOS MULTIPLIE
 
 
 
@@ -13,12 +13,10 @@
 
 
 
-
-
-
-
-
-
+* Voice chat
+	-> Only connect players when game start and more than 1 player
+	-> Use correct (unique) channel instead of hardcoded 'lobby'
+	-> Serialize customization for settings, tweak them as desired
 
 
 

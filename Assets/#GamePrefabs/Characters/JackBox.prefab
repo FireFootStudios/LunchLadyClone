@@ -52,25 +52,26 @@ MonoBehaviour:
   _targetTypeMultipliers: []
   _treatNoTagsAsAnyTarget: 0
   _random: 0
-  _targetLifeTime: 0
+  _targetLifeTime: 1
   _minEffectivenessForValid: 0.01
   _canIncludeSelf: 0
   _updateInterval: 0.2
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
-  _maxVerticalAngle: 75
-  _maxHorizontalAngle: 135
+  _maxVerticalAngle: 90
+  _maxHorizontalAngle: 120
   _useLineOfSight: 1
   _losData:
     _mask:
       serializedVersion: 2
       m_Bits: 9
-    _originT: {fileID: 866609760754574409}
+    _originT: {fileID: 0}
     _maxDistance: 20
-    _targetOffset: 0
+    _targetOffset: 0.3
     _fromOffset: 1.5
-  _losTargetLifetime: 0
+  _losTargetLifetime: 1
   _reverseTargetValidation: 1
+  _debugLOS: 1
   _hitboxes:
   - {fileID: 8689086902142784319}
 --- !u!1 &1099073406124750141
@@ -239,6 +240,7 @@ MonoBehaviour:
     _fromOffset: 0
   _losTargetLifetime: 0
   _reverseTargetValidation: 0
+  _debugLOS: 1
   _hitboxes:
   - {fileID: 6568552953980152695}
 --- !u!1 &3599538194352200516
@@ -735,7 +737,7 @@ Transform:
   m_GameObject: {fileID: 7666074929802127638}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.56}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -778,6 +780,7 @@ MonoBehaviour:
     _fromOffset: 0
   _losTargetLifetime: 0
   _reverseTargetValidation: 0
+  _debugLOS: 1
   _hitboxes:
   - {fileID: 3672878286707926754}
 --- !u!114 &3672878286707926754
@@ -813,8 +816,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.2
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Radius: 0.9
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &7836112906727834169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1005,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 8
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8520392211074572841
 GameObject:

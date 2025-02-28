@@ -45,6 +45,7 @@ public sealed class PlayerN : NetworkBehaviour
     [SerializeField] private Ability _reviveAbility = null;
     [SerializeField] private Ability _grabAbility = null;
     [SerializeField] private Ability _interactAbility = null;
+    [SerializeField] private Ability _toggleLightAbility = null;
 
 
     private PlayerInput _input = null;
@@ -90,7 +91,7 @@ public sealed class PlayerN : NetworkBehaviour
     public Ability ReviveAbility { get { return _reviveAbility; } }
     public Ability GrabAbility { get { return _grabAbility; } }
     public Ability InteractAbility { get { return _interactAbility; } }
-
+    public Ability ToggleLightAbility { get { return _toggleLightAbility; } }
 
     public Action<bool> OnMoveInputChange;
 
@@ -164,6 +165,14 @@ public sealed class PlayerN : NetworkBehaviour
         if (!context.performed || DisableInput || DisableMoveInput) return;
 
         _abilityManager.TryUseAbilityInputBuffer(_interactAbility);
+    }
+
+    public void ToggleLightInput(InputAction.CallbackContext context)
+    {
+        if (!IsOwner && !_ignoreMultiplayer) return;
+        if (!context.performed || DisableInput || DisableMoveInput) return;
+
+        _abilityManager.TryUseAbilityInputBuffer(_toggleLightAbility);
     }
 
     public void SprintInput(InputAction.CallbackContext context)
@@ -425,11 +434,14 @@ public sealed class PlayerN : NetworkBehaviour
         // Grab 
         _controls.Player.Grab.performed += GrabInput;
 
-        //Interact
+        // Interact
         _controls.Player.Interact.performed += InteractInput;
 
         // Revive
         _controls.Player.Revive.performed += ReviveInput;
+
+        // Toggle Light
+        _controls.Player.ToggleLight.performed += ToggleLightInput;
 
         // Sprint
         _controls.Player.Sprint.performed += SprintInput;
@@ -481,8 +493,11 @@ public sealed class PlayerN : NetworkBehaviour
         // Grab 
         _controls.Player.Grab.performed -= GrabInput;
 
-        //
+        // Interact
         _controls.Player.Interact.performed -= InteractInput;
+
+        // Toggle Light
+        _controls.Player.ToggleLight.performed -= ToggleLightInput;
 
         // Revive
         _controls.Player.Revive.performed -= ReviveInput;
@@ -623,6 +638,7 @@ public sealed class PlayerN : NetworkBehaviour
     private void UpdateVivoxVoice()
     {
         if (!IsOwner) return;
+        if (!VivoxService.Instance.IsLoggedIn) return;
 
         VivoxService.Instance.Set3DPosition(this.gameObject, "Lobby");
     }

@@ -462,7 +462,7 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-        //Join voice lobby
+        // Join voice lobby
         await VivoxService.Instance.InitializeAsync();
         await VivoxService.Instance.LoginAsync();
 
