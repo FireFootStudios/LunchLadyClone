@@ -287,6 +287,9 @@ public abstract class TargetSystem : MonoBehaviour
 
         if (TargetTags.Count == 0) return _treatNoTagsAsAnyTarget;
 
+        // Optional
+        TargetInfo targetMultData = target.GetComponent<TargetInfo>();
+
         // Validate tag
         bool validTag = false;
         foreach (Tag tag in TargetTags)
@@ -317,7 +320,11 @@ public abstract class TargetSystem : MonoBehaviour
         bool losValid = true;
         if (_useLineOfSight)
         {
-            losValid = _losData.InLineOfSight(targetGo, targetGo.transform.position, fromGo.transform.position, _debugLOS);
+            float maxDist = _losData._maxDistance;
+            if (targetMultData != null) maxDist *= targetMultData.LosDistanceMult;
+
+            // Line of Sight check
+            losValid = _losData.InLineOfSight(targetGo, targetGo.transform.position, fromGo.transform.position, maxDist, _debugLOS);
 
             // Get target pair to reset timer OR check if still valid
             LosTarget losTarget = _losTargets.Find(l => l.target == targetGo);
@@ -470,10 +477,10 @@ public sealed class LineOfSight
     {
         if (!_originT) return false;
 
-        return InLineOfSight(target, targetPos, _originT.position);
+        return InLineOfSight(target, targetPos, _originT.position, _maxDistance);
     }
 
-    public bool InLineOfSight(GameObject target, Vector3 targetPos, Vector3 fromPos, bool debugDraw = false)
+    public bool InLineOfSight(GameObject target, Vector3 targetPos, Vector3 fromPos, float maxDist, bool debugDraw = false)
     {
         if (!target) return false;
 
@@ -481,7 +488,7 @@ public sealed class LineOfSight
         fromPos.y += _fromOffset;
         Vector3 dirToTarget = (targetPos - fromPos).normalized;
 
-        if (Physics.Raycast(fromPos, dirToTarget, out RaycastHit hitInfo, _maxDistance, _mask))
+        if (Physics.Raycast(fromPos, dirToTarget, out RaycastHit hitInfo, maxDist, _mask))
         {
             if (hitInfo.collider.gameObject == target.gameObject)
             {
@@ -500,3 +507,9 @@ public sealed class LineOfSight
         return false;
     }
 }
+
+//public sealed class TargetMultiplier
+//{
+
+//}
+

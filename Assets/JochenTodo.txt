@@ -1,15 +1,8 @@
 
 
 
-- How to change monster los dist per target based on light state...
-	-> LOS MULTIPLIE
 
 
-
-* Lantern
-	-> Change model + light source
-	-> Lantern turn off/on
-	-> If lantern on, influence monster los radius to that target
 
 
 

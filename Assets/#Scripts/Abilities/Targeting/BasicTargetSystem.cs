@@ -20,6 +20,7 @@ public sealed class BasicTargetSystem : TargetSystem
             return;
         }
 
+        // Players
         foreach (PlayerN player in GameManager.Instance.SceneData.Players)
         {
             if (!player) continue;
@@ -28,18 +29,5 @@ public sealed class BasicTargetSystem : TargetSystem
             effectiveness = EffectivenessTarget(player.gameObject);
             if (effectiveness >= _minEffectivenessForValid) targets.Add(new TargetPair(player.gameObject, effectiveness, DefaultTargetLifeTime));
         }
-
-
-        //TODO -> add targets through character manager
-        //TODO -> add targets through building/targetable environment manager
-
-        //go over all characters, if random add all of them if valid
-        //foreach (Character character in CharacterManager.Instance.Characters)
-        //{
-        //    if (!IsTargetValid(character.gameObject)) continue;
-
-        //    effectiveness = EffectivenessTarget(character.gameObject);
-        //    if (effectiveness > _minEffectivenessForValid) _targetPairs.Add(new TargetPair(character.gameObject, effectiveness));
-        //}
     }
 }
