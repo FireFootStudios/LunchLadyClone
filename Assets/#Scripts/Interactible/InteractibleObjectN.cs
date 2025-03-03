@@ -29,7 +29,7 @@ public class InteractibleObjectN : NetworkBehaviour
 
     public void PlayAnimOnInteract()
     {
-        if (IsSpawned) return;
+        if (!IsSpawned) return;
 
         if (!string.IsNullOrEmpty(_firstAnimTrigger) && !_interacted.Value)
         {
