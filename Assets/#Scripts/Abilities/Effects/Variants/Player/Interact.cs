@@ -16,7 +16,9 @@ public sealed class Interact : Effect
     {
         if (!target) return 0.0f;
 
-        if (!target.TryGetComponent(out InteractibleObjectN item)) return 0.0f;
+        if (!target.TryGetComponent(out InteractibleObjectN interactible)) return 0.0f;
+
+        if (!interactible.CanInteract()) return 0.0f;
 
         return 1.0f;
     }
