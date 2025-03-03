@@ -6,8 +6,16 @@
 
 
 
+* Coffin not synced?
 
+* Ai wander in rooms?
+* Ai doesnt follow in room anymore???
 
+* Step height higher
+* Ambient to loud
+* Jester to slow
+* Zaklamp op
+* Jackbox dont go off + delay
 
 
 * Crouch

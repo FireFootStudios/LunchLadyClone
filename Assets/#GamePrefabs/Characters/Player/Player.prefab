@@ -88,7 +88,7 @@ MonoBehaviour:
   _targetMode: 0
   _light: {fileID: 6241291455217250660}
   _targetInfo: {fileID: 9221243860067414708}
-  _losDistMultLightOff: 0.15
+  _losDistMultLightOff: 0.25
   _losDistMultLightOn: 1
 --- !u!1 &364850463969687378
 GameObject:
@@ -644,6 +644,7 @@ MonoBehaviour:
   _rotateToLocalPlayerT: {fileID: 5213895162056736078}
   _nameTMP: {fileID: 4409051434678130620}
   _ignoreMultiplayer: 0
+  _enableFlying: 0
   _enableFlyModeBuild: 0
   _enableScreenshotBuild: 0
   _enableTPBuild: 0
@@ -1024,8 +1025,8 @@ MonoBehaviour:
   _disableSteppingAir: 1
   _airStepTime: 0
   _maxYVelForStep: 5
-  _stepHeight: 0.5
-  _stepForceBounds: {x: 1, y: 4}
+  _stepHeight: 0.75
+  _stepForceBounds: {x: 1, y: 5.5}
   _stepDistanceOffset: 0.5
   _stepAngleCorrection: 0.05
   _stepCooldown: 0.25
@@ -2558,6 +2559,10 @@ PrefabInstance:
     - target: {fileID: 4600027907991315258, guid: 645dbf6a3e2f33e49b2256e44b76a82e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997609309975107744, guid: 645dbf6a3e2f33e49b2256e44b76a82e, type: 3}
+      propertyPath: _offIntensity
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7987726613737602732, guid: 645dbf6a3e2f33e49b2256e44b76a82e, type: 3}
       propertyPath: m_Name

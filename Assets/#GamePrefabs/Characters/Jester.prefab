@@ -214,7 +214,7 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 0
     maxTargets: 0
-  _cooldown: 90
+  _cooldown: 70
   _startCooldown: 30
   _generalCooldown: 0
   _randomCooldown: 0
@@ -423,17 +423,17 @@ MonoBehaviour:
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 45
-  _maxHorizontalAngle: 130
+  _maxHorizontalAngle: 145
   _useLineOfSight: 1
   _losData:
     _mask:
       serializedVersion: 2
       m_Bits: 9
     _originT: {fileID: 1182604255833935471}
-    _maxDistance: 25
+    _maxDistance: 30
     _targetOffset: 1.2
     _fromOffset: 0
-  _losTargetLifetime: 0.25
+  _losTargetLifetime: 0.5
   _reverseTargetValidation: 0
   _debugLOS: 1
   _onlyTargetSelf: 0
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb99f67f36bceb48ba79319c3631d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxSpeed: 3.25
+  _baseMaxSpeed: 3
   _baseAcceleration: 600
   _maxLinearVel: 100
   _maxRotationSpeed: 1400
@@ -1466,7 +1466,7 @@ MonoBehaviour:
     moveMod:
       priority: 0
       duration: 11111
-      maxSpeedMultiplier: 1.06
+      maxSpeedMultiplier: 1.07
       accelerationMultiplier: 1
       decelerationMultiplier: 1
       rotationMultiplier: 1

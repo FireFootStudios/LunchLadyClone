@@ -27,6 +27,7 @@ public sealed class PlayerN : NetworkBehaviour
     [SerializeField] private bool _ignoreMultiplayer = false;
 
     [Space]
+    [SerializeField] private bool _enableFlying = false;
     [SerializeField] private bool _enableFlyModeBuild = false;
     [SerializeField] private bool _enableScreenshotBuild = false;
     [SerializeField] private bool _enableTPBuild = false;
@@ -220,7 +221,7 @@ public sealed class PlayerN : NetworkBehaviour
     public void ToggleFlyMode(InputAction.CallbackContext context)
     {
         if (!IsOwner && !_ignoreMultiplayer) return;
-
+        if (!_enableFlying) return;
         if (!context.performed || DisableMoveInput) return;
         if (!Application.isEditor && !_enableFlyModeBuild) return;
 
