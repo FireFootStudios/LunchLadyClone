@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Services.Vivox;
 using System.Threading.Tasks;
 using Unity.Netcode;
+using System;
 
 public sealed class PlayerVoiceChat : MonoBehaviour
 {
@@ -15,11 +16,9 @@ public sealed class PlayerVoiceChat : MonoBehaviour
     private string _channelName = default;
     private bool _joinedChannel = false;
 
-    private async void OnEnable()
+    private void Awake()
     {
-        _channelName = LobbyManager.Instance.LobbyName;
-
-        _joinedChannel = await JoinVivoxChannel(_channelName);
+        _player.OnNetworkSpawned += OnPlayerNetworkSpawned;
     }
 
     private void OnDisable()
@@ -38,6 +37,13 @@ public sealed class PlayerVoiceChat : MonoBehaviour
         if (!_joinedChannel) return;
 
         VivoxService.Instance.Set3DPosition(this.gameObject, _channelName);
+    }
+
+    private async void OnPlayerNetworkSpawned()
+    {
+        _channelName = LobbyManager.Instance.LobbyName;
+
+        _joinedChannel = await JoinVivoxChannel(_channelName);
     }
 
     private async Task<bool> JoinVivoxChannel(string lobbyName)

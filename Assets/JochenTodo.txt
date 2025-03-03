@@ -1,7 +1,9 @@
 
 
 
-
+* Voice chat doesnt connect
+* Monster bit fast
+* error play agian
 
 
 
