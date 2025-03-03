@@ -34,7 +34,7 @@ public class InteractibleObjectN : NetworkBehaviour
         InteractServerRPC();
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void InteractServerRPC()
     {
         if (!IsHost) return;
