@@ -8,13 +8,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 911736550935826424, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: SyncRotAngleX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911736550935826424, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: SyncRotAngleY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911736550935826424, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: SyncRotAngleZ
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2064236050014907509, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: _visuals
       value: 
+      objectReference: {fileID: 6477719087075459155}
+    - target: {fileID: 2064236050014907509, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: _data._itemName
+      value: Paper
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064236050014907509, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: _data._itemType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3707647990738631276, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_Name
-      value: Rune Variant
+      value: Rune
       objectReference: {fileID: 0}
     - target: {fileID: 3800388519904206915, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_Radius
@@ -63,6 +83,10 @@ PrefabInstance:
     - target: {fileID: 6321582309269666200, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7511500014216158150, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3130917575
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3800388519904206915, guid: 20943401982db5b43b6c8c9d3aba6ebc, type: 3}
@@ -190,5 +214,10 @@ PrefabInstance:
 --- !u!4 &6477719087075197143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 451534, guid: 6b7c63da8f83bca49b2da996b980802b, type: 3}
+  m_PrefabInstance: {fileID: 6477719087075320601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6477719087075459155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 189258, guid: 6b7c63da8f83bca49b2da996b980802b, type: 3}
   m_PrefabInstance: {fileID: 6477719087075320601}
   m_PrefabAsset: {fileID: 0}
