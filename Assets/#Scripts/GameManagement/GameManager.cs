@@ -109,7 +109,8 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         for (int i = 0; i < clientIDs.Count; i++)
         {
             ulong clientID = clientIDs[i];
-            Transform spawnT = spawnTs[i];
+            Transform spawnT = transform;
+            if(i < spawnTs.Count) spawnT = spawnTs[i];
 
             PlayerN player;
             if (spawnT) player = Instantiate(_playerNetworkingSpawnTemplate, spawnT);

@@ -93,7 +93,7 @@ public sealed class PlayerN : NetworkBehaviour
     public Ability ToggleLightAbility { get { return _toggleLightAbility; } }
 
     public Action<bool> OnMoveInputChange;
-
+    public Action OnNetworkSpawned;
     #endregion
 
     #region InputFunctions
@@ -375,6 +375,8 @@ public sealed class PlayerN : NetworkBehaviour
 
         // Update initially
         if (_nameTMP) _nameTMP.text = _playerName.Value.ToString();
+
+        OnNetworkSpawned?.Invoke();
     }
 
     private void OnPlayerNameValueChanged(FixedString64Bytes previousValue, FixedString64Bytes newValue)

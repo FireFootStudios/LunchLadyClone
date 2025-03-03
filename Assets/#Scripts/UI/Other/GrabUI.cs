@@ -25,7 +25,7 @@ public sealed class GrabUI : MonoBehaviour
         if (!_localPlayer) return;
         if (!_canGrabGo) return;
 
-        bool canRevive = _localPlayer.AbilityManager.CanUseAbility(_localPlayer.GrabAbility);
-        _canGrabGo.SetActive(canRevive);
+        bool canFire = _localPlayer.AbilityManager.CanUseAbility(_localPlayer.GrabAbility);
+        _canGrabGo.SetActive(canFire);
     }
 }

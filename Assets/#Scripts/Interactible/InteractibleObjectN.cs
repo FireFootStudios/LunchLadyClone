@@ -7,23 +7,30 @@ public class InteractibleObjectN : MonoBehaviour
     [SerializeField] private string _firstAnimTrigger = null;
     [SerializeField] private string _secondAnimTrigger = null;
 
-    private bool _isPlayingAnim = false;
+    private bool _playedAnim = false;
 
     public void PlayAnimOnInteract()
     {
         foreach (Animator animator in _animators)
-        { 
-            if(_firstAnimTrigger != null && !_isPlayingAnim)
+        {
+            if (_firstAnimTrigger != null && !_playedAnim)
             {
                 animator.SetTrigger(_firstAnimTrigger);
-                if (_secondAnimTrigger !=null)
-                    _isPlayingAnim = true;
-            } 
-            else if (_secondAnimTrigger != null && _isPlayingAnim)
+                if (_secondAnimTrigger != null)
+                    _playedAnim = true;
+            }
+            else if (_secondAnimTrigger != null && _playedAnim)
             {
                 animator.SetTrigger(_secondAnimTrigger);
-                _isPlayingAnim = false;
+                _playedAnim = false;
             }
         }
+    }
+
+    public bool CanInteract()
+    {
+        if (_firstAnimTrigger == null) return false;
+        if (_playedAnim && _secondAnimTrigger == null) return false;
+        return true;
     }
 }
