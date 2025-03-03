@@ -408,7 +408,6 @@ public sealed class PlayerN : NetworkBehaviour
         _gameManager.SceneData.LocalPlayer = this;
         //_gameManager.NotifyServerPlayerSpawnedClientRPC();
 
-
         // Set spawned to true, this means this clients is now fully functional on the network
         _isReady.Value = true;
     }
