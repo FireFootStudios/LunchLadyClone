@@ -1334,8 +1334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 2083126700030534831}
-  _audibleDistance: 40
-  _conversationalDistance: 25
+  _audibleDistance: 25
+  _conversationalDistance: 3
   _audioFadeIntensityByDistanceaudio: 1
   _audioFadeModel: 1
 --- !u!1 &4657758990532322418

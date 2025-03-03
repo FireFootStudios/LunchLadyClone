@@ -1466,7 +1466,7 @@ MonoBehaviour:
     moveMod:
       priority: 0
       duration: 11111
-      maxSpeedMultiplier: 1.07
+      maxSpeedMultiplier: 1.05
       accelerationMultiplier: 1
       decelerationMultiplier: 1
       rotationMultiplier: 1

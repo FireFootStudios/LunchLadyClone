@@ -6,7 +6,6 @@
 
 
 
-* Coffin not synced?
 
 * Ai wander in rooms?
 * Ai doesnt follow in room anymore???
