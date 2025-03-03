@@ -25,7 +25,7 @@ public class SliderMiniGame : MonoBehaviour
 
     private void Update()
     {
-        AllignSliders();
+        
     }
 
     private void InitSliderSolutions()
@@ -38,10 +38,5 @@ public class SliderMiniGame : MonoBehaviour
             _sliderSolutions.Insert(index, solVal);
             index++;
         }
-    }
-
-    private void AllignSliders()
-    {
-        
     }
 }

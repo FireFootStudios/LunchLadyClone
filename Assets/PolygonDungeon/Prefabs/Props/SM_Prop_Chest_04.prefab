@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 2355134}
   - component: {fileID: 64969059565709082}
   - component: {fileID: 1194328061251967743}
-  - component: {fileID: 2169082652179025151}
-  - component: {fileID: 240034130545972466}
   m_Layer: 0
   m_Name: SM_Prop_Chest_04
   m_TagString: Interactible
@@ -110,9 +108,9 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 43172512927421094, guid: 001bbef7c847fc441adda9d333a71419, type: 2}
+  m_Mesh: {fileID: 4300000, guid: c3fea00227521ec4497d3695dea472b7, type: 3}
 --- !u!114 &1194328061251967743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,53 +127,6 @@ MonoBehaviour:
   - {fileID: 5977918449919200189}
   _firstAnimTrigger: OpenChest
   _secondAnimTrigger: 
---- !u!114 &2169082652179025151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2526700777
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &240034130545972466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -815094747
-    DestinationState: 2138323398
-    TransitionDuration: 0.15991935
-    TriggerNameHash: 1554329390
-    TransitionIndex: 0
-  m_Animator: {fileID: 5977918449919200189}
 --- !u!1 &184818
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +140,8 @@ GameObject:
   - component: {fileID: 2390958}
   - component: {fileID: 64367928825258502}
   - component: {fileID: 5977918449919200189}
+  - component: {fileID: 8321885418425763255}
+  - component: {fileID: 8684659318799711149}
   m_Layer: 0
   m_Name: SM_Prop_Chest_04_Lid
   m_TagString: Interactible
@@ -308,3 +261,50 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8321885418425763255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &8684659318799711149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -815094747
+    DestinationState: 2138323398
+    TransitionDuration: 0.15991935
+    TriggerNameHash: 1554329390
+    TransitionIndex: 0
+  m_Animator: {fileID: 5977918449919200189}
