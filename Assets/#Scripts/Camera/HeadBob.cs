@@ -33,9 +33,9 @@ public sealed class HeadBob : MonoBehaviour
         else
         {
             // If speed is too low, stop tween and reset position
-            _currentBobTween?.Kill();
-            _currentBobTween = null;
-            _targetT.localPosition = Vector3.zero;
+            //_currentBobTween?.Kill();
+            //_currentBobTween = null;
+            //_targetT.localPosition = Vector3.zero;
         }
     }
 
