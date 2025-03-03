@@ -416,7 +416,7 @@ MonoBehaviour:
   _targetTypeMultipliers: []
   _treatNoTagsAsAnyTarget: 0
   _random: 0
-  _targetLifeTime: 8
+  _targetLifeTime: 7
   _minEffectivenessForValid: 0.01
   _canIncludeSelf: 0
   _updateInterval: 0.2

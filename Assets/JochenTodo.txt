@@ -6,14 +6,6 @@
 
 
 
-* Voice chat
-	-> Only connect players when game start and more than 1 player
-	-> Use correct (unique) channel instead of hardcoded 'lobby'
-	-> Serialize customization for settings, tweak them as desired
-	-> Also log out +  leave group when exiting
-
-
-
 
 
 
