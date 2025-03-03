@@ -1026,7 +1026,7 @@ MonoBehaviour:
   _airStepTime: 0
   _maxYVelForStep: 5
   _stepHeight: 0.75
-  _stepForceBounds: {x: 1, y: 5.5}
+  _stepForceBounds: {x: 1, y: 7}
   _stepDistanceOffset: 0.5
   _stepAngleCorrection: 0.05
   _stepCooldown: 0.25
