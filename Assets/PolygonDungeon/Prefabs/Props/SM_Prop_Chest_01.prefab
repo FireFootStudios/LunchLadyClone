@@ -306,5 +306,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animators:
   - {fileID: 1620598362883431509}
-  _animTrigger: OpenChest
-  _itemInsideChest: {fileID: 0}
+  _firstAnimTrigger: OpenChest
+  _secondAnimTrigger: 

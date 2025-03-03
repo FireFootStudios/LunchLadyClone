@@ -174,8 +174,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animators:
   - {fileID: 2389413060113223780}
-  _animTrigger: OpenChest
-  _itemInsideChest: {fileID: 0}
+  _firstAnimTrigger: OpenChest
+  _secondAnimTrigger: 
 --- !u!1 &167976
 GameObject:
   m_ObjectHideFlags: 0
