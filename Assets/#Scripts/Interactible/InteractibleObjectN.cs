@@ -9,7 +9,7 @@ public class InteractibleObjectN : NetworkBehaviour
     [SerializeField] private string _firstAnimTrigger = null;
     [SerializeField] private string _secondAnimTrigger = null;
      
-    private NetworkVariable<bool> _interacted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<bool> _interacted = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     public override void OnNetworkSpawn()
     {
@@ -30,6 +30,14 @@ public class InteractibleObjectN : NetworkBehaviour
     public void PlayAnimOnInteract()
     {
         if (!IsSpawned) return;
+
+        InteractServerRPC();
+    }
+
+    [ServerRpc]
+    public void InteractServerRPC()
+    {
+        if (!IsHost) return;
 
         if (!string.IsNullOrEmpty(_firstAnimTrigger) && !_interacted.Value)
         {
