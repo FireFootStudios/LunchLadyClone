@@ -2,7 +2,6 @@ using System;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
-using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -597,7 +596,6 @@ public sealed class PlayerN : NetworkBehaviour
     {
         UpdateInput();
         UpdateUI();
-        UpdateVivoxVoice();
     }
 
     private void UpdateInput()
@@ -633,14 +631,6 @@ public sealed class PlayerN : NetworkBehaviour
         // Rotate
         Vector3 dir = localPlayer.PlayerCameras.transform.position - _rotateToLocalPlayerT.position;
         _rotateToLocalPlayerT.forward = dir;
-    }
-
-    private void UpdateVivoxVoice()
-    {
-        if (!IsOwner) return;
-        if (!VivoxService.Instance.IsLoggedIn) return;
-
-        VivoxService.Instance.Set3DPosition(this.gameObject, "Lobby");
     }
     #endregion
 }

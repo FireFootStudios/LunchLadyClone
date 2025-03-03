@@ -214,7 +214,7 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 0
     maxTargets: 0
-  _cooldown: 60
+  _cooldown: 90
   _startCooldown: 30
   _generalCooldown: 0
   _randomCooldown: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   _targetTypeMultipliers: []
   _treatNoTagsAsAnyTarget: 0
   _random: 0
-  _targetLifeTime: 5
+  _targetLifeTime: 8
   _minEffectivenessForValid: 0.01
   _canIncludeSelf: 0
   _updateInterval: 0.2
@@ -435,6 +435,7 @@ MonoBehaviour:
     _fromOffset: 0
   _losTargetLifetime: 0.25
   _reverseTargetValidation: 0
+  _debugLOS: 1
   _onlyTargetSelf: 0
 --- !u!1 &3402032716981716017
 GameObject:
@@ -1565,6 +1566,7 @@ MonoBehaviour:
     _fromOffset: 0
   _losTargetLifetime: 0
   _reverseTargetValidation: 0
+  _debugLOS: 1
   _hitboxes:
   - {fileID: 4345151186764015898}
 --- !u!136 &9152657993196972688

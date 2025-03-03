@@ -227,17 +227,17 @@ MonoBehaviour:
   _updateInterval: 0.2
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
-  _maxVerticalAngle: 30
-  _maxHorizontalAngle: 145
-  _useLineOfSight: 0
+  _maxVerticalAngle: 45
+  _maxHorizontalAngle: 120
+  _useLineOfSight: 1
   _losData:
     _mask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 9
     _originT: {fileID: 0}
     _maxDistance: 10
-    _targetOffset: 0
-    _fromOffset: 0
+    _targetOffset: 1
+    _fromOffset: 0.3
   _losTargetLifetime: 0
   _reverseTargetValidation: 0
   _debugLOS: 1
@@ -1393,7 +1393,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

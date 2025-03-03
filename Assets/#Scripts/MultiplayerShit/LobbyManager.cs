@@ -35,7 +35,7 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
     public List<Lobby> FoundLobbies { get; private set; }
 
     public bool IsHost { get; private set; }
-
+    public string LobbyName { get; private set; } // If joined/hosted a lobby, the name is cached here
 
 
     public async Task<bool> CreateLobby(string lobbyName, bool isPrivate)
@@ -77,10 +77,11 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
 
             await LobbyService.Instance.UpdateLobbyAsync(_currentLobby.Id, updateLobbyOptions);
 
-            await JoinVivoxChannel();
+            //await JoinVivoxChannel();
 
             IsHost = true;
             _heartBeatTimer = _heartBeatInterval;
+            LobbyName = _currentLobby.Name;
 
             if (_debug && _currentLobby != null) Debug.Log("Succesfully created lobby!");
             else if (_debug && _currentLobby == null) Debug.LogError("Failed to create lobby!");
@@ -121,8 +122,9 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
             // Start client
             NetworkManager.Singleton.StartClient();
 
-            await JoinVivoxChannel();
+            //await JoinVivoxChannel();
             IsHost = false;
+            LobbyName = _currentLobby.Name;
 
             if (_currentLobby != null) return true;
         }
@@ -162,8 +164,9 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
             // Start client
             NetworkManager.Singleton.StartClient();
 
-            await JoinVivoxChannel();
+            //await JoinVivoxChannel();
             IsHost = false;
+            LobbyName = _currentLobby.Name;
 
             if (_currentLobby != null) return true;
         }
@@ -175,7 +178,7 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
         return false;
     }
 
-    public async Task<bool> Join(string lobbyID )
+    public async Task<bool> Join(string lobbyID)
     {
         await InitIfNeeded();
 
@@ -203,8 +206,9 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
             // Start client
             NetworkManager.Singleton.StartClient();
 
-            await JoinVivoxChannel();
+            //await JoinVivoxChannel();
             IsHost = false;
+            LobbyName = _currentLobby.Name;
 
             if (_currentLobby != null) return true;
         }
@@ -459,13 +463,11 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
         await UnityServices.InitializeAsync();
 
         // TODO: Need to create different profiles for testing locally?
-
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
         // Join voice lobby
         await VivoxService.Instance.InitializeAsync();
         await VivoxService.Instance.LoginAsync();
-
 
         _initialized = true;
         _initializing = false;
@@ -473,17 +475,17 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
         return true;
     }
 
-    private async Task<bool> JoinVivoxChannel()
-    {
-        //#1 audibleDistance: The maximum distance from the listener that a speaker can be heard. Must be > 0
-        //#2 conversationalDistance: The distance from the listener within which a speaker’s voice is heard at its original volume. Must be >= 0 and <= audibleDistance.
-        //#3 audioFadeIntesityByDistanceAudio: The strength of the audio fade effect as the speaker moves away from the listener. Must be >= 0. This value is rounded to three decimal places.
-        //#4 audioFadeModel: The model used to determine voice volume at different distances.
-        Channel3DProperties channelProperties = new Channel3DProperties(10, 5, .5f, AudioFadeModel.InverseByDistance);
+    //private async Task<bool> JoinVivoxChannel()
+    //{
+    //    //#1 audibleDistance: The maximum distance from the listener that a speaker can be heard. Must be > 0
+    //    //#2 conversationalDistance: The distance from the listener within which a speaker’s voice is heard at its original volume. Must be >= 0 and <= audibleDistance.
+    //    //#3 audioFadeIntesityByDistanceAudio: The strength of the audio fade effect as the speaker moves away from the listener. Must be >= 0. This value is rounded to three decimal places.
+    //    //#4 audioFadeModel: The model used to determine voice volume at different distances.
+    //    Channel3DProperties channelProperties = new Channel3DProperties(10, 5, .5f, AudioFadeModel.InverseByDistance);
 
-        await VivoxService.Instance.JoinPositionalChannelAsync("Lobby", ChatCapability.TextAndAudio, channelProperties);
-        //initial set position for testing / this should be done when players join a lobby. Then when players join the game, their position gets updated to the playerGO
-        VivoxService.Instance.Set3DPosition(Vector3.zero, Vector3.zero, Vector3.forward, Vector3.up, "Lobby", true);
-        return true;
-    }
+    //    await VivoxService.Instance.JoinPositionalChannelAsync("Lobby", ChatCapability.TextAndAudio, channelProperties);
+    //    //initial set position for testing / this should be done when players join a lobby. Then when players join the game, their position gets updated to the playerGO
+    //    VivoxService.Instance.Set3DPosition(Vector3.zero, Vector3.zero, Vector3.forward, Vector3.up, "Lobby", true);
+    //    return true;
+    //}
 }
