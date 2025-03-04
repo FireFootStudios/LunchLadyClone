@@ -8,18 +8,11 @@ public class KnightTrapVariation : MonoBehaviour
     [SerializeField] private string _playAnimTrigger;
     [SerializeField] private string _stopAnimTrigger;
 
-    [SerializeField] private bool _isActivated;
+    [SerializeField] private bool _isActivated = true;
 
     private void Awake()
     {
-        if (_isActivated)
-        {
-            foreach (Animator animator in _animators)
-            {
-                animator.SetTrigger(_playAnimTrigger);
-
-            }
-        }
+        ActivateButton();
     }
     private void ActivateButton()
     {
@@ -40,8 +33,6 @@ public class KnightTrapVariation : MonoBehaviour
                 animator.SetTrigger(_playAnimTrigger);
             }
             _isActivated = true;
-
-
         }
     }
 
@@ -49,7 +40,7 @@ public class KnightTrapVariation : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.TryGetComponent<PlayerN>(out PlayerN player))
-        ActivateButton();
+            ActivateButton();
     }
 
 
