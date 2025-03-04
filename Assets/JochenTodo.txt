@@ -4,17 +4,18 @@
 
 
 
-* Oil
 
 
-* Ai wander in rooms?
-* Ai doesnt follow in room anymore???
 
-* Step height higher
-* Ambient to loud
-* Jester to slow
-* Zaklamp op
-* Jackbox dont go off + delay
+
+
+
+
+* Skill check for chests/doors/...
+
+
+
+##########################################################################
 
 
 
@@ -22,7 +23,24 @@
 
 * Crouch
 
+* Aggro sound jester
+* Jackboxes dont move up from behind
 
+
+
+
+
+---------------------------------------------------------------------------
+
+
+
+
+
+
+
+* Oil
+* Ai wander in rooms?
+* Ai doesnt follow in room anymore???
 - For testing (single player), run in local host mode?
 - Make sure to account for pathing issues (if a player is not reachable pick another?)
 - Aggro sound (state feedback)
