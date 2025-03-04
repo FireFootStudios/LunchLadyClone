@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class KnightTrapVariation : MonoBehaviour
     [SerializeField] private string _stopAnimTrigger;
 
     [SerializeField] private bool _isActivated = true;
+
     private void Awake()
     {
         ActivateButton();
@@ -22,6 +24,7 @@ public class KnightTrapVariation : MonoBehaviour
 
             }
             _isActivated = false;
+
         }
         else if (!_isActivated)
         {
@@ -30,6 +33,7 @@ public class KnightTrapVariation : MonoBehaviour
                 animator.SetTrigger(_playAnimTrigger);
             }
             _isActivated = true;
+
 
         }
     }
@@ -40,4 +44,7 @@ public class KnightTrapVariation : MonoBehaviour
         if(other.gameObject.TryGetComponent<PlayerN>(out PlayerN player))
         ActivateButton();
     }
+
+
+
 }
