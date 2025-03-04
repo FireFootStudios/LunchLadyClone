@@ -8,11 +8,18 @@ public class KnightTrapVariation : MonoBehaviour
     [SerializeField] private string _playAnimTrigger;
     [SerializeField] private string _stopAnimTrigger;
 
-    [SerializeField] private bool _isActivated = true;
+    [SerializeField] private bool _isActivated;
 
     private void Awake()
     {
-        ActivateButton();
+        if (_isActivated)
+        {
+            foreach (Animator animator in _animators)
+            {
+                animator.SetTrigger(_playAnimTrigger);
+
+            }
+        }
     }
     private void ActivateButton()
     {
