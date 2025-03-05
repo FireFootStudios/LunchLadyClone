@@ -47,6 +47,7 @@ public sealed class SkillCheck : NetworkBehaviour
     public async Task<bool> DoSkillCheck(PlayerN player)
     {
         if (!player) return false;
+        if (player.Health.IsDead) return false;
 
         // Player only requires setup once, since this is locally only for 1 player anyway
         if (TargetPlayer == null)

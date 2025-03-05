@@ -2,35 +2,32 @@
 
 
 
-- Lock player controls
-- Add timeout on server (equal to mag game duration?)
-- Handle cancelation due to death/jackbox
 
 
-* Create skillcheck base (inherit for actual game implementation)
-	-> Start/end
-	-> Can repeat?
-	-> Network
-	-> Only 1 person can do this at a time (for now)
-	-> Lock player controls while in progress
-	-> Cancel player skillcheck game if attacked (jackbox/jester)
+
+
+
 
 
 
 ##########################################################################
 
 
+* Aggro sound jester
 
 
 
 
 * Door animations + skillchecks
 
+
+
+
+
 * Crouch
 -> Lower player focusT
 -> Jester look at focusT for los (if exist)
 
-* Aggro sound jester
 
 
 

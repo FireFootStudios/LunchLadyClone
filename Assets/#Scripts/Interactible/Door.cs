@@ -4,13 +4,13 @@ using Unity.Netcode;
 using UnityEngine;
 
 
-public sealed class Door : NetworkBehaviour
+public sealed class Door : Interactible
 {
-    [SerializeField] private KinematicMovement _movement = null;
     [SerializeField] private List<ItemN> _unlockItems = null;
     [SerializeField] private bool _requireItemsInInventory = true;
     [SerializeField] private HitBox _openHitbox = null;
     [Space]
+    [SerializeField] private KinematicMovement _movement = null;
     [SerializeField] private Transform _moveTargetT = null;
 
     private Transform _startT = null;

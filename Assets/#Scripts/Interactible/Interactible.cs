@@ -9,6 +9,9 @@ public class Interactible : NetworkBehaviour
     [Space]
     [SerializeField] private SkillCheck _skillCheck = null;
     [Space]
+    [SerializeField] private List<GameObject> _enableOnInteractGos = new List<GameObject>();
+    [SerializeField] private List<GameObject> _disableOnInteractGos = new List<GameObject>();
+    [Space]
     [SerializeField] private List<Animator> _animators = new List<Animator>();
     [SerializeField] private string _firstAnimTrigger = null;
     [SerializeField] private string _secondAnimTrigger = null;
@@ -23,14 +26,21 @@ public class Interactible : NetworkBehaviour
         _interacted.OnValueChanged += OnInteractedChange;
     }
 
-    private void OnInteractedChange(bool previousValue, bool newValue)
+    private void OnInteractedChange(bool previousValue, bool interacted)
     {
         // Handle animations
         foreach (Animator animator in _animators)
         {
-            if (newValue) animator.SetTrigger(_firstAnimTrigger);
+            if (interacted) animator.SetTrigger(_firstAnimTrigger);
             else animator.SetTrigger(_secondAnimTrigger);
         }
+
+
+        foreach (GameObject go in _enableOnInteractGos)
+            go?.gameObject.SetActive(interacted);
+
+        foreach (GameObject go in _disableOnInteractGos)
+            go?.gameObject.SetActive(!interacted);
     }
 
     public async Task Interact(PlayerN player)

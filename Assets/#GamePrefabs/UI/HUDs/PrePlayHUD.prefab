@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startBtn: {fileID: 6404772494222905267}
-  _toLoadLevel: {fileID: 11400000, guid: fc92f402603443242a032eca93ad5c21, type: 2}
+  _toLoadLevel: {fileID: 11400000, guid: e47b5f869744efb43ac94d8bd9806b3c, type: 2}
   _lobbyNameTMP: {fileID: 977983062758370576}
   _lobbyCodeTMP: {fileID: 6175052438493286217}
   _lobbyPlayersTMP: {fileID: 1520443493695012877}
