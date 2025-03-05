@@ -1113,8 +1113,8 @@ MonoBehaviour:
   _data:
     start: 1
     max: 1
-    regen: 0
-    regenCDSinceDamage: 0
+    regen: 1
+    regenCDSinceDamage: 0.25
     canBeDamaged: 1
     autoRevive: 0
     autoReviveTime: 5
