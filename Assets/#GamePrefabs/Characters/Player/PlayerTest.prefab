@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3406676780540943883, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1463671138
+      value: 2673438258
       objectReference: {fileID: 0}
     - target: {fileID: 3686492759283014973, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59,6 +59,14 @@ PrefabInstance:
     - target: {fileID: 4119895581923978553, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
       propertyPath: m_Name
       value: PlayerTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125315498637344738, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020555783282173169, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6374051112411405992, guid: a55e86868c7ccd740ac15bf440d41e07, type: 3}

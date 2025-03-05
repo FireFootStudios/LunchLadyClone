@@ -14533,11 +14533,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 334717346}
   m_LocalEulerAnglesHint: {x: 0, y: -9, z: 0}
---- !u!1 &830999720 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8666016293029110400, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
-  m_PrefabInstance: {fileID: 1043054337}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &840001103
 Mesh:
   m_ObjectHideFlags: 0
@@ -18309,24 +18304,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8234301347175191172, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
   m_PrefabInstance: {fileID: 1043054337}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &907198805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830999720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac098792bb457154aa223744fc308d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1524479939}
-  _moveAnimSpeedScaleBounds: {x: 1, y: 1}
-  _ignoreForAction: []
-  _moveSpeedScaleBounds: {x: 0, y: 8}
-  _moveInputSmoothSpeed: 5
-  _minAirTimeForLandAnim: 0.4
 --- !u!1001 &1043054337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18338,6 +18315,10 @@ PrefabInstance:
     - target: {fileID: 238776878357342900, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454819140355354715, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1116030226343005453, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
       propertyPath: m_IsActive
@@ -18409,10 +18390,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8234301347175191172, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6035013555467778515}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8666016293029110400, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 907198805}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
 --- !u!1 &1059032756
 GameObject:
@@ -27377,11 +27355,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!95 &1524479939 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6621465598282985627, guid: abcd7a004517ddd4aae4d819d7788aa6, type: 3}
-  m_PrefabInstance: {fileID: 1043054337}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1524678727
 GameObject:
   m_ObjectHideFlags: 0
