@@ -21,6 +21,7 @@ public sealed class PlayerAnimation : MonoBehaviour
     private const string _actionLoopingStr = "ActionLooping";
     private const string _moveInputX = "MoveInputX";
     private const string _moveInputY = "MoveInputY";
+    private const string _downStr = "IsDown";
 
     
     
@@ -52,6 +53,9 @@ public sealed class PlayerAnimation : MonoBehaviour
         _player = GetComponent<PlayerN>();
 
         //InitOverrides();
+
+        _player.Health.OnDeath += OnDeath;
+        _player.Health.OnRevive += OnRevive;
     }
 
     private void OnEnable()
@@ -191,5 +195,18 @@ public sealed class PlayerAnimation : MonoBehaviour
         //VELOCITY SCALE
         //Move mod -> Use velocity percontage to calculate final move speed mod (scale between bounds)
         //_animator.SetFloat(_velScaleStr, Mathf.Lerp(_moveAnimSpeedScaleBounds.x, _moveAnimSpeedScaleBounds.y, _player.Movement.VelocityPercentage));
+
+
+        
+    }
+
+    private void OnDeath()
+    {
+        _animator.SetBool(_downStr, true);
+    }
+
+    private void OnRevive()
+    {
+        _animator.SetBool(_downStr, false);
     }
 }
