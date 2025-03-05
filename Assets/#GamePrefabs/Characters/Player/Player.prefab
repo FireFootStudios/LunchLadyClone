@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 56277310964945739}
   - component: {fileID: 9221243860067414708}
   - component: {fileID: 4418550118135072623}
-  - component: {fileID: 734073119428928511}
+  - component: {fileID: 7666260571295080301}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1244,8 +1244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e673985a511932d45adf19440760aafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generalVelScaleBounds: {x: 0, y: 30}
-  _fovChangeScaleBounds: {x: 0, y: 25}
+  _generalVelScaleBounds: {x: 0, y: 6}
+  _fovChangeScaleBounds: {x: 0, y: 15}
   _fovChangeSpeed: 3
   _windVelScaleBounds: {x: 10, y: 50}
   _windSFX:
@@ -1358,7 +1358,7 @@ MonoBehaviour:
   _conversationalDistance: 2
   _audioFadeIntensityByDistanceaudio: 0.5
   _audioFadeModel: 1
---- !u!114 &734073119428928511
+--- !u!114 &7666260571295080301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4119895581923978553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Script: {fileID: 11500000, guid: e5747781e02c52d429f86d33d73a1180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -2619,46 +2619,6 @@ PrefabInstance:
     - target: {fileID: 5755405074765446882, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.146
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.094
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6426539
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.18488616
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.73980135
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.07421009
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 20.331
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -100.009
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -10.954
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
