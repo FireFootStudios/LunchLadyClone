@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5048479859532144402}
   m_Layer: 0
-  m_Name: SmallRoom_01
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

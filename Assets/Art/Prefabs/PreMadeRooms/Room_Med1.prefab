@@ -30,9 +30,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5048479859532144402}
-  - {fileID: 3892213167649400598}
-  - {fileID: 244513137096187378}
-  - {fileID: 8457738402109377280}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5601030017284487587
@@ -45,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5048479859532144402}
   m_Layer: 0
-  m_Name: SmallRoom_01
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,6 +71,9 @@ Transform:
   - {fileID: 6612298310511219517}
   - {fileID: 7045872139019467796}
   - {fileID: 1414477172096693503}
+  - {fileID: 3892213167649400598}
+  - {fileID: 244513137096187378}
+  - {fileID: 8457738402109377280}
   m_Father: {fileID: 4766877021226463354}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &244513137096585482
@@ -82,7 +82,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4766877021226463354}
+    m_TransformParent: {fileID: 5048479859532144402}
     m_Modifications:
     - target: {fileID: 117188, guid: 2f502f470bc99cf40a5d520810ab13c3, type: 3}
       propertyPath: m_Name
@@ -466,7 +466,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4766877021226463354}
+    m_TransformParent: {fileID: 5048479859532144402}
     m_Modifications:
     - target: {fileID: 117188, guid: 2f502f470bc99cf40a5d520810ab13c3, type: 3}
       propertyPath: m_Name
@@ -792,7 +792,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4766877021226463354}
+    m_TransformParent: {fileID: 5048479859532144402}
     m_Modifications:
     - target: {fileID: 168824, guid: 27158b7015c53b545968d0ddc67778ac, type: 3}
       propertyPath: m_Name
