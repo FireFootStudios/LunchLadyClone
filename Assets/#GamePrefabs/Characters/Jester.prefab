@@ -1161,7 +1161,7 @@ MonoBehaviour:
   _useSpawnZoneAsAggroHitbox: 1
   _deAggroOnSpawnExit: 0
   _maxRangeFromSpawn: 100000
-  _spawnDelay: 30
+  _spawnDelay: 90
   _desiredDistanceToTarget: 2
 --- !u!114 &4616724902125020410
 MonoBehaviour:
