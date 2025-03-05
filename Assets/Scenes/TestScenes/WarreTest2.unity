@@ -999,7 +999,7 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}
