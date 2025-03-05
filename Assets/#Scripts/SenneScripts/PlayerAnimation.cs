@@ -186,7 +186,7 @@ public class PlayerAnimation : MonoBehaviour
 
         //VELOCITY SCALE
         //Move mod -> Use velocity percontage to calculate final move speed mod (scale between bounds)
-        _animator.SetFloat(_velScaleStr, Mathf.Lerp(_moveAnimSpeedScaleBounds.x, _moveAnimSpeedScaleBounds.y, _player.Movement.VelocityPercentage));
+        //_animator.SetFloat(_velScaleStr, Mathf.Lerp(_moveAnimSpeedScaleBounds.x, _moveAnimSpeedScaleBounds.y, _player.Movement.VelocityPercentage));
 
     }
 }
