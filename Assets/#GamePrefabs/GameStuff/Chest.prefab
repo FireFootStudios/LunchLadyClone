@@ -389,6 +389,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   _gameType: 0
+  _localCooldown: 2
+  _playerMoveMod:
+    priority: 0
+    duration: 1.1111111e+15
+    maxSpeedMultiplier: 0
+    accelerationMultiplier: 0
+    decelerationMultiplier: 1
+    rotationMultiplier: 1
+    gravityMultiplier: 1
+    overrideAnglePauseMove: 0
+    anglePauseMove: 0
+    elapsed: 0
+  _maxWaitServerPermission: 3
   _skillCheckStartSFX:
     clips:
     - {fileID: 8300000, guid: fb93d879c5877eb4aa5b7d77bdb0fc76, type: 3}

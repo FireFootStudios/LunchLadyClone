@@ -215,6 +215,78 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c3996734f5f43e4c9ada8d6085f3ee6, type: 3}
+--- !u!1 &73651414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 73651415}
+  - component: {fileID: 73651416}
+  m_Layer: 0
+  m_Name: Ambient_Hum
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &73651415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73651414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1799966180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &73651416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73651414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc84a6a0e621d143bb0215c13ef5760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeOutOnDisabled: 0
+  _soundData:
+    clips:
+    - {fileID: 8300000, guid: 699cb5cd8944c3a4192c6a582f8be352, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 73651414}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    randomPitchMultiplier: 1
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 1
+    ignoreReverb: 1
+    soundType: 2
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 1
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
 --- !u!1 &90867687 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8256001188015699051, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
@@ -236,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &127236094
 Transform:
   m_ObjectHideFlags: 0
@@ -568,7 +640,7 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 0.06
+    volume: 0.07
     pitch: 1
     randomPitchMultiplier: 0
     delayBounds: {x: 360, y: 360}
@@ -872,6 +944,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 383917393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &861588123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861588124}
+  - component: {fileID: 861588125}
+  m_Layer: 0
+  m_Name: Ambient_Combo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861588124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861588123}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1799966180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861588125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861588123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc84a6a0e621d143bb0215c13ef5760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeOutOnDisabled: 0
+  _soundData:
+    clips:
+    - {fileID: 8300000, guid: 28ba2f5c5ce2d1a449323d9b83dcf0d4, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 861588123}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    randomPitchMultiplier: 2
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 1
+    ignoreReverb: 1
+    soundType: 2
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 1
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
 --- !u!1 &879022717 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3983990839262100083, guid: 26fa5272eb88d4044ac3a491469f0e5d, type: 3}
@@ -1036,7 +1180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1202833817
 Transform:
   m_ObjectHideFlags: 0
@@ -1188,7 +1332,7 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 0.06
+    volume: 0.08
     pitch: 1
     randomPitchMultiplier: 0
     delayBounds: {x: 600, y: 600}
@@ -1292,7 +1436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundData:
     clips:
-    - {fileID: 8300000, guid: 35e5ba2769897984aafb21734829bb90, type: 3}
+    - {fileID: 8300000, guid: 4e30fb66761daf64dbf6fbf14b959c8d, type: 3}
     randomizeClips: 0
     alwaysUseRandomClip: 1
     randomiseClipsInitially: 1
@@ -1300,10 +1444,10 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 0.1
+    volume: 0.5
     pitch: 1
     randomPitchMultiplier: 1
-    delayBounds: {x: 5, y: 5}
+    delayBounds: {x: 0.5, y: 0.5}
     frequency: 1
     is2D: 1
     ignoreReverb: 1
@@ -2044,6 +2188,8 @@ Transform:
   m_Children:
   - {fileID: 127236094}
   - {fileID: 1202833817}
+  - {fileID: 73651415}
+  - {fileID: 861588124}
   - {fileID: 1636840183}
   - {fileID: 614602235}
   - {fileID: 441374592}

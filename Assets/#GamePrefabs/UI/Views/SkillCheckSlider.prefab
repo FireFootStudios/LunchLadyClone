@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4269701281568207035}
   - component: {fileID: 2774409716519856669}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: SkillCheckSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

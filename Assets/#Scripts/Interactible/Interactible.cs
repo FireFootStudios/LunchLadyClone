@@ -36,6 +36,7 @@ public class Interactible : NetworkBehaviour
     public async Task Interact(PlayerN player)
     {
         if (!IsSpawned) return;
+        if (!CanInteract()) return;
 
         // Start skill check if any
         if (_skillCheck)
@@ -52,7 +53,6 @@ public class Interactible : NetworkBehaviour
     public void InteractServerRPC()
     {
         if (!IsHost) return;
-        if (!CanInteract()) return;
 
         // If not interacted yet, interact
         if (!_interacted.Value) _interacted.Value = true;
