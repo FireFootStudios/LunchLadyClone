@@ -106,7 +106,7 @@ public sealed class SkillCheck : NetworkBehaviour
         WaitingServerResponse = false;
 
         if (PlayingGameTCS != null && PlayingGameTCS.Task != null)
-            PlayingGameTCS.SetCanceled();
+            PlayingGameTCS.TrySetCanceled();
     }
 
     [ServerRpc(RequireOwnership = false)]

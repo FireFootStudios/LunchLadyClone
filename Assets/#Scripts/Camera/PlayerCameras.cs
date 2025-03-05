@@ -176,14 +176,16 @@ public sealed class PlayerCameras : MonoBehaviour
     {
         if (!_player) return;
 
-        Vector3 desiredPos = _player.transform.position + _spawner.SpawnInfo.localPos + _tweenTarget.localPosition;
+        // Localize our local spawn poss offset to the player
+        Vector3 localizedOffset = _player.transform.TransformPoint(_spawner.SpawnInfo.localPos);
+        Vector3 desiredPos = localizedOffset + _tweenTarget.localPosition;
 
         // Smoothly interpolate between current camera position and desired position
         //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPos, _playerFollowSmoothSpeed);
 
         // Smoothly interpolate camera position using Vector3.SmoothDamp
-        if (_playerFollowSmoothSpeed > 0.0f) transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref _velocity, _playerFollowSmoothSpeed);
-        else transform.position = desiredPos;
+        if (_playerFollowSmoothSpeed > 0.0f) transform.localPosition = Vector3.SmoothDamp(transform.position, desiredPos, ref _velocity, _playerFollowSmoothSpeed);
+        else transform.localPosition = desiredPos;
     }
     #endregion
 

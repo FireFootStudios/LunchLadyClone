@@ -13,7 +13,9 @@ using UnityEngine.InputSystem;
 public sealed class PlayerN : NetworkBehaviour
 {
     #region Fields
-    [Header("General"), SerializeField] private PlayerCameras _cameraTemplate = null;
+    [Header("General"), SerializeField] private PlayerCameras _playerCamerasTemplate = null;
+    [SerializeField] private Vector3 _cameraOffset = Vector3.zero;
+
     [SerializeField] private Health _health = null;
     [SerializeField] private FreeMovement _movement = null;
     [SerializeField] private GameObject _visuals = null;
@@ -390,9 +392,12 @@ public sealed class PlayerN : NetworkBehaviour
         if (!_ignoreMultiplayer && !IsOwner) return;
 
         // Firstly, create camera from template and link ourselves, ONLY IF OWNER AS A CAMERA SHOULD ONLY EXIST PER OWNING PLAYER
-        if (_cameraTemplate)
+        if (_playerCamerasTemplate)
         {
-            _playerCameras = Instantiate(_cameraTemplate);
+            //GameObject cameraOffsetGo = new GameObject("Cameras");
+            //cameraOffsetGo.transform.position = _cameraOffset;
+
+            _playerCameras = Instantiate(_playerCamerasTemplate, _cameraOffset, Quaternion.identity);
             _playerCameras.Init(this);
         }
 

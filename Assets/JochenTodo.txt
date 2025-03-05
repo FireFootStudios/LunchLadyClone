@@ -2,12 +2,10 @@
 
 
 
+
 - Lock player controls
 - Add timeout on server (equal to mag game duration?)
 - Handle cancelation due to death/jackbox
-
-
-
 
 
 * Create skillcheck base (inherit for actual game implementation)
@@ -20,14 +18,19 @@
 
 
 
-
 ##########################################################################
 
 
 
 
 
+
+* Door animations + skillchecks
+
 * Crouch
+-> Lower player focusT
+-> Jester look at focusT for los (if exist)
+
 * Aggro sound jester
 
 

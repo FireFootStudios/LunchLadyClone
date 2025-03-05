@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+public sealed class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Animator _animator = null;
     [SerializeField, Tooltip("Bounds for scaling the move animation speed with the velocity percentage")] private Vector2 _moveAnimSpeedScaleBounds = new Vector2(0.5f, 1.0f);
@@ -56,6 +56,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!_player.IsOwner) return;
+
         _animator.ResetTrigger(_actionStr);
     }
 
@@ -168,6 +170,8 @@ public class PlayerAnimation : MonoBehaviour
     */
     private void UpdateVars()
     {
+        if (!_player.IsOwner) return;
+
         //MOVE INPUT
         _animator.SetBool(_hasMoveInputStr, _player.HasMoveInput == true && _player.Movement.CurrentMoveSpeed > 0.25f);
         _animator.SetBool(_sprintingStr, _player.IsSprinting);
@@ -187,6 +191,5 @@ public class PlayerAnimation : MonoBehaviour
         //VELOCITY SCALE
         //Move mod -> Use velocity percontage to calculate final move speed mod (scale between bounds)
         //_animator.SetFloat(_velScaleStr, Mathf.Lerp(_moveAnimSpeedScaleBounds.x, _moveAnimSpeedScaleBounds.y, _player.Movement.VelocityPercentage));
-
     }
 }
