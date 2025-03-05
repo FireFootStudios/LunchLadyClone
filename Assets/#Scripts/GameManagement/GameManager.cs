@@ -474,11 +474,14 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
         _networkSceneLoaded = false;
 
         // Start scene change
-        NetworkManager.Singleton.SceneManager.LoadScene(scenename, LoadSceneMode.Single);
+        SceneEventProgressStatus status = NetworkManager.Singleton.SceneManager.LoadScene(scenename, LoadSceneMode.Single);
 
-        // Wait untill it is loaded
-        while (!_networkSceneLoaded)
-            await Awaitable.NextFrameAsync();
+        if (status == SceneEventProgressStatus.Started)
+        {
+            // Wait untill it is loaded
+            while (!_networkSceneLoaded)
+                await Awaitable.NextFrameAsync();
+        }
 
         SceneChanging = false;
     }

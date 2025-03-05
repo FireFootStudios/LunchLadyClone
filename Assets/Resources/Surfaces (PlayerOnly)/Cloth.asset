@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d4fc28f82333444a4fc5cae6822024, type: 3}
+  m_Name: Cloth
+  m_EditorClassIdentifier: 
+  _overrideVelMultBounds: 0
+  _onGroundedVelMultiplierBounds: {x: 0, y: 0}
+  _kickImpactClips: []
+  _stepClips:
+  - {fileID: 8300000, guid: 1d3a325347c6c0b4ca348cc31419e24d, type: 3}
+  - {fileID: 8300000, guid: 2e7ad0572ef08324a8fb7d5e81aa740b, type: 3}
+  - {fileID: 8300000, guid: 23bb8f5b39ec1c649978eaa20fa74018, type: 3}
+  - {fileID: 8300000, guid: bc525396d22e9b8438440c8844a9c0de, type: 3}
+  - {fileID: 8300000, guid: ab3971485d492d84ca6bfc63c9035375, type: 3}
+  - {fileID: 8300000, guid: f55f40485d549204c95d97f23f9ba5b7, type: 3}
+  - {fileID: 8300000, guid: 8831f3af8f5861b4d9e90694a51f0439, type: 3}
+  - {fileID: 8300000, guid: bfdf05aa57af48244ae424e71288c2c6, type: 3}
+  - {fileID: 8300000, guid: cc32cca1a8df2af469e318b637f018a3, type: 3}
+  - {fileID: 8300000, guid: 392a22ae15cf84c43b0b8b7e5d68eced, type: 3}
+  _landClips: []
+  _jumpClips: []
+  _kickImpactPs: {fileID: 0}

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d4fc28f82333444a4fc5cae6822024, type: 3}
+  m_Name: Stone
+  m_EditorClassIdentifier: 
+  _overrideVelMultBounds: 0
+  _onGroundedVelMultiplierBounds: {x: 0, y: 0}
+  _kickImpactClips: []
+  _stepClips:
+  - {fileID: 8300000, guid: 4011f0de6a214224384fdc2dfc988601, type: 3}
+  - {fileID: 8300000, guid: d12126c80869cf94b8206952da8d0867, type: 3}
+  - {fileID: 8300000, guid: fe1431ac0af065a48964d4a513d05111, type: 3}
+  - {fileID: 8300000, guid: 9fdbb3a3e79e60b468c574642d8dbf97, type: 3}
+  - {fileID: 8300000, guid: e7b0647d09c7cc54389403158d8cfe7e, type: 3}
+  - {fileID: 8300000, guid: 41cb4b835fb0b694996c0d8626e2d666, type: 3}
+  - {fileID: 8300000, guid: cc27c844c53d71340804f2a627065d3e, type: 3}
+  - {fileID: 8300000, guid: 9d974c1d282b31a45a576ec014ce22e0, type: 3}
+  - {fileID: 8300000, guid: 822a01e996ed20f4e86e0297559f909c, type: 3}
+  - {fileID: 8300000, guid: e4cf0dd7a9e856947a988a1766f12d39, type: 3}
+  _landClips: []
+  _jumpClips: []
+  _kickImpactPs: {fileID: 0}

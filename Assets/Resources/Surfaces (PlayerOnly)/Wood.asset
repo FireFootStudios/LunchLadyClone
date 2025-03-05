@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d4fc28f82333444a4fc5cae6822024, type: 3}
+  m_Name: Wood
+  m_EditorClassIdentifier: 
+  _overrideVelMultBounds: 0
+  _onGroundedVelMultiplierBounds: {x: 0, y: 0}
+  _kickImpactClips: []
+  _stepClips:
+  - {fileID: 8300000, guid: 1c4e1207199e91d4fa5cbd6f372409b9, type: 3}
+  - {fileID: 8300000, guid: 09925f332475f944b820dad18bb500f4, type: 3}
+  - {fileID: 8300000, guid: 1e3d9d4511c5f364797e1602708d7a03, type: 3}
+  - {fileID: 8300000, guid: 57f5c7b986234904ab2850da3bea0564, type: 3}
+  - {fileID: 8300000, guid: 4d37a04ddadca8d458d76978016ddea0, type: 3}
+  - {fileID: 8300000, guid: c13454be9e1f65a40a627e7afae1f720, type: 3}
+  - {fileID: 8300000, guid: f2f4b888292666a4bb264770b372ba2e, type: 3}
+  - {fileID: 8300000, guid: 1267bf03d19ee94488d2811369e5eff4, type: 3}
+  - {fileID: 8300000, guid: 297d3528a820acd4c8acbb0c1a72379f, type: 3}
+  - {fileID: 8300000, guid: b9f8f0d283603bf419b030c45d56cbef, type: 3}
+  _landClips: []
+  _jumpClips: []
+  _kickImpactPs: {fileID: 0}

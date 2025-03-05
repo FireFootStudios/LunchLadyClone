@@ -10,16 +10,21 @@
 
 
 
+
+* Fix play again
+* Fix AI stuck in aggro once again (multiple targets maybe swapping? Add cooldown?)
+ 
+* Aggro sound jester
+* Dont lock all chests (script that will lock x amount of chests?)
+-> This script can manage all game difficulty related stuff
+
+
 ##########################################################################
 
 
-* Aggro sound jester
 
-
-
-
-* Door animations + skillchecks
-
+* I like about other map that order of keys was not set, made each game feel a bit different, now the goal is always get the next key...
+* Alt tab breaks game ?
 
 
 
@@ -27,6 +32,21 @@
 * Crouch
 -> Lower player focusT
 -> Jester look at focusT for los (if exist)
+
+* Kick skillcheck
+
+* Skillcheck difficulties (certain chests or objects can be harder to unlock)
+
+
+* AI improve (clear/better aggro + search + chase longer/more consistent + min los time before aggro)
+* Chase music
+* Player name rotate around y only
+
+
+
+
+
+
 
 
 
@@ -66,8 +86,6 @@
 
 # BUGS
 
-* Player name rotate around y only
-* error play agian
 
 
 

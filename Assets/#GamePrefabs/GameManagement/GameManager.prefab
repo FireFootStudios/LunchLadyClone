@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelAssets:
+  - {fileID: 11400000, guid: e47b5f869744efb43ac94d8bd9806b3c, type: 2}
   - {fileID: 11400000, guid: fc92f402603443242a032eca93ad5c21, type: 2}
   - {fileID: 11400000, guid: cafebbce6e4cac040816b3dc048e829f, type: 2}
   _homeLevelAsset: {fileID: 0}
@@ -598,6 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+  _maxDuration: 180
 --- !u!1 &5208427791213155946
 GameObject:
   m_ObjectHideFlags: 0

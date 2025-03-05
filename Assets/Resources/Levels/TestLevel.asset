@@ -14,11 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelName: NotNamed
   _sceneName: AlsoNotNamed...
-  _showIntroMessage: 0
   _isPlayableLevel: 1
-  _isFinalLevel: 0
-  _disable: 1
-  _yPosStartEndBounds: {x: 0, y: 500}
-  _yPosStartEndDisplayBounds: {x: 0, y: 500}
   _backgroundSpritesLoadingView: []
   _backgroundSpritesEndView: []

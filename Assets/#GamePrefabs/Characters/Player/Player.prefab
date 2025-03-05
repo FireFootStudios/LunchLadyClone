@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 2083126700030534831}
-  _audibleDistance: 25
+  _audibleDistance: 30
   _conversationalDistance: 2
   _audioFadeIntensityByDistanceaudio: 0.5
   _audioFadeModel: 1
@@ -2624,13 +2624,72 @@ PrefabInstance:
     - {fileID: -1422045141432560820, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1329883589286985250, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2902759011229699859}
   m_SourcePrefab: {fileID: 100100000, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
 --- !u!95 &1912687554392014626 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5755405074765446882, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
   m_PrefabInstance: {fileID: 6148668439700914624}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5125315498637344738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1329883589286985250, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
+  m_PrefabInstance: {fileID: 6148668439700914624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2902759011229699859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5125315498637344738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04305585036814a4c8660e733ae1aa4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movement: {fileID: 3453840779508927411}
+  _defaultSurfaceAsset: {fileID: 11400000, guid: 0200f068355548e498306a7c5b6e2e02, type: 2}
+  _useSurfaces: 1
+  _stepSpawnData:
+    clips: []
+    randomizeClips: 1
+    alwaysUseRandomClip: 0
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.3
+    pitch: 1
+    randomPitchMultiplier: 2
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 40
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _stepFrequency: 1
+  _maxSpeed: 8
+  _maxAirTimeForStep: 0.2
+  _cooldownOnAbilityFire: []
+  _onAbilityFireCD: 0.5
+  _extraStepSFX: []
+  _landSpawnData: []
+  _minAirTimeForLand: 0.5
+  _jumpSpawnData: []
+  _jumpAbility: {fileID: 0}
 --- !u!4 &5506521249769416024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1819281319287465112, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
