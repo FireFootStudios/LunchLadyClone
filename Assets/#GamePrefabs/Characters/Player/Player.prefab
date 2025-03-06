@@ -281,6 +281,7 @@ Transform:
   - {fileID: 2813632103162975411}
   - {fileID: 8314249542742735076}
   - {fileID: 6620126401436150371}
+  - {fileID: 6556552459075676267}
   m_Father: {fileID: 3686492759283014973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1572008844655193103
@@ -545,6 +546,97 @@ MonoBehaviour:
   _debugLOS: 1
   _hitboxes:
   - {fileID: 5364640831042814042}
+--- !u!1 &3961157711786899876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6556552459075676267}
+  - component: {fileID: 4772701345538362668}
+  - component: {fileID: 716388084747343439}
+  m_Layer: 3
+  m_Name: CrouchAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6556552459075676267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961157711786899876}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7191298136577723872}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4772701345538362668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961157711786899876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ece6f9c39ed2dc45b5ad07332d22190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _childIndex: 3
+  _executeData:
+    executes:
+    - _effects:
+      - {fileID: 716388084747343439}
+      _targettingEffect: {fileID: 0}
+      _time: 0
+      _loops: 0
+      _loopDuration: 0
+      _pickRandomTarget: 1
+      _ignoreTargets: 0
+      _checkInRange: 0
+      _sounds: []
+      _soundRequireTarget: 0
+      _soundUseTargetPos: 0
+      _vfxSpawners: []
+    originT: {fileID: 0}
+    minTargets: 1
+    maxTargets: 1
+  _cooldown: 2
+  _startCooldown: 0
+  _generalCooldown: 0
+  _randomCooldown: 0
+  _ignoreGeneralCooldown: 0
+  _updateCooldownDuringFire: 1
+  _baseAnimationOverride: {fileID: 0}
+  _animationChains: []
+  _cancelAbilities: []
+--- !u!114 &716388084747343439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961157711786899876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13be5db91a58b5348b275d8d3a4de2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMode: 0
+  _staminaUsage: 1
+  _staminaRegen: 1
+  _maxStamina: 7
+  _staminaRegenCD: 1
+  _minStaminaForUse: 0.1
 --- !u!1 &4119895581923978553
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +759,7 @@ MonoBehaviour:
   _grabAbility: {fileID: 1230062294069447796}
   _interactAbility: {fileID: 6211120398785980822}
   _toggleLightAbility: {fileID: 4982501380441686320}
+  _crouchAbility: {fileID: 4772701345538362668}
 --- !u!114 &8103332945508070104
 MonoBehaviour:
   m_ObjectHideFlags: 0

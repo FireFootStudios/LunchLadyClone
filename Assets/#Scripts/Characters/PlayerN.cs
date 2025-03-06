@@ -48,13 +48,17 @@ public sealed class PlayerN : NetworkBehaviour
     [SerializeField] private Ability _grabAbility = null;
     [SerializeField] private Ability _interactAbility = null;
     [SerializeField] private Ability _toggleLightAbility = null;
+    [SerializeField] private Ability _crouchAbility = null;
 
 
     private PlayerInput _input = null;
     private PlayerCameras _playerCameras = null;
     private AbilityManager _abilityManager = null;
+
     private bool _sprintInput = false;
     private bool _sprintIsToggle = false; //setting
+
+    private bool _crouchInput = false;
 
     private PlayingState _playingState = null;
     private GameManager _gameManager = null;
@@ -94,6 +98,8 @@ public sealed class PlayerN : NetworkBehaviour
     public Ability GrabAbility { get { return _grabAbility; } }
     public Ability InteractAbility { get { return _interactAbility; } }
     public Ability ToggleLightAbility { get { return _toggleLightAbility; } }
+    public Ability CrouchAbility { get { return _crouchAbility; } }
+
 
     public Action<bool> OnMoveInputChange;
     public Action OnNetworkSpawned;
@@ -178,6 +184,27 @@ public sealed class PlayerN : NetworkBehaviour
     }
 
     public void SprintInput(InputAction.CallbackContext context)
+    {
+        if (!IsOwner && !_ignoreMultiplayer) return;
+
+        if (!_sprintAbility) return;
+
+        if (context.performed)
+        {
+            _sprintInput = true;
+
+            //If sprint is toggle we either use or cancel ability based on current state
+            if (_sprintIsToggle && _sprintAbility.IsFiring) _sprintAbility.Cancel();
+            else _abilityManager.TryUseAbility(_sprintAbility);
+        }
+        else if (context.canceled)
+        {
+            _sprintInput = false;
+            if (!_sprintIsToggle) _sprintAbility.Cancel();
+        }
+    }
+
+    public void CrouchInput(InputAction.CallbackContext context)
     {
         if (!IsOwner && !_ignoreMultiplayer) return;
 
@@ -445,6 +472,9 @@ public sealed class PlayerN : NetworkBehaviour
 
         // Revive
         _controls.Player.Revive.performed += ReviveInput;
+
+        // Crouch 
+        //_controls.Player.
 
         // Toggle Light
         _controls.Player.ToggleLight.performed += ToggleLightInput;
