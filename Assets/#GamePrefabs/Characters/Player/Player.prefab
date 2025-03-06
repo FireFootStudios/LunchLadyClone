@@ -282,6 +282,7 @@ Transform:
   - {fileID: 8314249542742735076}
   - {fileID: 6620126401436150371}
   - {fileID: 6556552459075676267}
+  - {fileID: 3941213360077321483}
   m_Father: {fileID: 3686492759283014973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1572008844655193103
@@ -610,7 +611,7 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 1
     maxTargets: 1
-  _cooldown: 1
+  _cooldown: 0.5
   _startCooldown: 0
   _generalCooldown: 1
   _randomCooldown: 0
@@ -774,6 +775,7 @@ MonoBehaviour:
   _interactAbility: {fileID: 6211120398785980822}
   _toggleLightAbility: {fileID: 4982501380441686320}
   _crouchAbility: {fileID: 4772701345538362668}
+  _kickAbility: {fileID: 6205382633309151303}
 --- !u!114 &8103332945508070104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,6 +1265,32 @@ MonoBehaviour:
     maxDuration: 0
     cooldown: 0
   _onSpawnSFX:
+    clips: []
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomPitchMultiplier: 1
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _onDamagedSFX:
     clips: []
     randomizeClips: 1
     alwaysUseRandomClip: 1
@@ -1957,6 +1985,188 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6218611060548927299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3941213360077321483}
+  - component: {fileID: 6205382633309151303}
+  - component: {fileID: 7795825026698486566}
+  - component: {fileID: 4745693950850561169}
+  - component: {fileID: 5176967070545722449}
+  - component: {fileID: 7343884643093013487}
+  m_Layer: 3
+  m_Name: KickAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3941213360077321483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218611060548927299}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7191298136577723872}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6205382633309151303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218611060548927299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ece6f9c39ed2dc45b5ad07332d22190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _childIndex: 3
+  _executeData:
+    executes:
+    - _effects:
+      - {fileID: 4745693950850561169}
+      - {fileID: 5176967070545722449}
+      - {fileID: 7343884643093013487}
+      _targettingEffect: {fileID: 7795825026698486566}
+      _time: 0.25
+      _loops: 0
+      _loopDuration: 0
+      _pickRandomTarget: 0
+      _ignoreTargets: 0
+      _checkInRange: 1
+      _sounds: []
+      _soundRequireTarget: 0
+      _soundUseTargetPos: 0
+      _vfxSpawners: []
+    originT: {fileID: 0}
+    minTargets: 1
+    maxTargets: 1
+  _cooldown: 2
+  _startCooldown: 0
+  _generalCooldown: 1
+  _randomCooldown: 0
+  _ignoreGeneralCooldown: 0
+  _updateCooldownDuringFire: 1
+  _baseAnimationOverride: {fileID: 0}
+  _animationChains: []
+  _cancelAbilities:
+  - {fileID: 7503288252341767622}
+--- !u!114 &7795825026698486566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218611060548927299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ee31587d96cd34d8e112e5db5f3b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMode: 0
+  _player: {fileID: 2083126700030534831}
+  _moveModOnKick:
+    priority: 0
+    duration: 0.5
+    maxSpeedMultiplier: 0
+    accelerationMultiplier: 0
+    decelerationMultiplier: 1
+    rotationMultiplier: 1
+    gravityMultiplier: 1
+    overrideAnglePauseMove: 0
+    anglePauseMove: 0
+    elapsed: 0
+  _kickableLayerMask:
+    serializedVersion: 2
+    m_Bits: 9
+  _hitTriggers: 0
+  _applyEffectsDelay: 0
+  _clearVelOnKickStart: 1
+  _range: 2
+  _baseKickForce: 3
+  _multiplierDead: 0
+  _attemptKickBuffer: 0.05
+  _ignoreDead: 0
+  _alwaysCast: 1
+--- !u!114 &4745693950850561169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218611060548927299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b7f819bcf83e24b9e1ccfbc02903ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMode: 0
+  _force: 10
+  _referrerForce: 0
+  _mainRagdollForce: 0
+  _forceMode: 2
+  _resetTargetVelocity: 0
+  _maxSpeedTargetHorizontal: -1
+  _ignoreY: 1
+  _xAngle: 30
+  _useOriginT: 1
+  _directionT: {fileID: 0}
+  _fromT: {fileID: 0}
+--- !u!114 &5176967070545722449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218611060548927299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ea3cfc40c2f064996a7ff7e0bb9daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMode: 0
+  _amount: 0.11
+--- !u!114 &7343884643093013487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218611060548927299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf02f1a7ce6798d41ba260cf9a4fbd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMode: 0
+  _modifier:
+    priority: 0
+    duration: 1
+    maxSpeedMultiplier: 0.5
+    accelerationMultiplier: 0.5
+    decelerationMultiplier: 1
+    rotationMultiplier: 1
+    gravityMultiplier: 1
+    overrideAnglePauseMove: 0
+    anglePauseMove: 0
+    elapsed: 0
+  _stopTarget: 0
+  _abilityDisableTime: 0
+  _cancelAbilities: 1
+  _ignoreDead: 1
 --- !u!1 &6659949989822315334
 GameObject:
   m_ObjectHideFlags: 0

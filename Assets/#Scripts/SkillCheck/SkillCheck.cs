@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
 
-public sealed class SkillCheck : NetworkBehaviour
+public class SkillCheck : NetworkBehaviour
 {
     [SerializeField] private SkillCheckGameType _gameType = default;
     [SerializeField] private float _localCooldown = 2.0f;

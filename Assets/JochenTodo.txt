@@ -2,31 +2,30 @@
 
 
 
+* Fix network rigidbody
 
 
 
-- Crouch move camera to different point (change the offset)
-- Crouch lower collider
-- Lower focusT (also have monster optionally use this instead of target transform pivot)
-- Crouch animation
+
+* Kick feedback
+	-> Animation
+	-> Surfact impact SFX/VFX
+	-> Voice SFX + armor SFX
+	-> Tweens
+
+
+* Kick works on players?
+* Make sure kick doesnt work on Jester
 
 
 
 ##########################################################################
 
-
-* Crouch
--> Lower player focusT
--> Jester look at focusT for los (if exist)
-
  
 
 
 
-* Dont lock all chests (script that will lock x amount of chests?)
--> This script can manage all game difficulty related stuff
 
-* Kick skillcheck
 
 * AI improve (clear/better aggro + search + chase longer/more consistent + min los time before aggro)
 * Skillcheck difficulties (certain chests or objects can be harder to unlock)
@@ -34,8 +33,8 @@
 * Chase music
 * Player name rotate around y only
 
-
-
+* Dont lock all chests (script that will lock x amount of chests?)
+-> This script can manage all game difficulty related stuff
 
 
 
@@ -45,15 +44,13 @@
 * Play again when multiplayer (could be the gamemode immediatly sets back to fialed/end session?)
 * Alt tab breaks game in build
 * Skill check lock casper movement
-
+* Voice channel broke
+* After failing a lot skillcheck it ends instantly (something is building up and not reset )
 
 
 
 
 ---------------------------------------------------------------------------
-
-* I like about other map that order of keys was not set, made each game feel a bit different, now the goal is always get the next key...
-
 
 
 

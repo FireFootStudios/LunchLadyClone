@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 3101262236552929655}
   - component: {fileID: 9151070574856454423}
   - component: {fileID: 4968058492022901710}
-  - component: {fileID: 6207831483159138749}
   - component: {fileID: 69647895180004668}
   m_Layer: 0
   m_Name: CellDoor
@@ -112,6 +111,9 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _pingPong: 0
   _skillCheck: {fileID: 69647895180004668}
+  _health: {fileID: 0}
+  _interactRequireDeath: 1
+  _interactOnDeath: 1
   _enableOnInteractGos: []
   _disableOnInteractGos:
   - {fileID: 2980611919754157132}
@@ -119,6 +121,58 @@ MonoBehaviour:
   _animators: []
   _firstAnimTrigger: 
   _secondAnimTrigger: 
+  _interactSFX:
+    clips: []
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomPitchMultiplier: 1
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _reInteractSFX:
+    clips: []
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomPitchMultiplier: 1
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
   _unlockItems: []
   _requireItemsInInventory: 1
   _openHitbox: {fileID: 0}
@@ -144,27 +198,6 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!65 &6207831483159138749
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1259671180115713936}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 0.4}
-  m_Center: {x: -0.6, y: 1, z: 0}
 --- !u!114 &69647895180004668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Door_Bars_01
       objectReference: {fileID: 0}
+    - target: {fileID: 195692, guid: dd2500919f1e4c64a9dc9604233608a2, type: 3}
+      propertyPath: m_TagString
+      value: Interactible
+      objectReference: {fileID: 0}
     - target: {fileID: 485512, guid: dd2500919f1e4c64a9dc9604233608a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -500,7 +537,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 195692, guid: dd2500919f1e4c64a9dc9604233608a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6027599956855729106}
   m_SourcePrefab: {fileID: 100100000, guid: dd2500919f1e4c64a9dc9604233608a2, type: 3}
 --- !u!4 &2980611919753791656 stripped
 Transform:
@@ -512,3 +552,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 195692, guid: dd2500919f1e4c64a9dc9604233608a2, type: 3}
   m_PrefabInstance: {fileID: 2980611919754240032}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6027599956855729106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2980611919754157132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0cb496effa7aa943929d3a92b62a864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _referToGo: {fileID: 1259671180115713936}

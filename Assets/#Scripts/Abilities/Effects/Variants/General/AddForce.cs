@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public sealed class AddForce : Effect
@@ -21,48 +22,25 @@ public sealed class AddForce : Effect
     public ForceMode ForceMode { get { return _forceMode; } }
 
 
-    public Vector3 CalculateForce(GameObject target, Transform originT, EffectModifiers effectMods)
-    {
-        //calculate direction
-        Vector3 direction = transform.forward;
-        Transform fromT = _useOriginT ? originT : (_fromT ? _fromT : transform);
-        if (_directionT) direction = _directionT.forward;
-        else if (target)
-        {
-            Transform targetT = target.transform;
-            direction = targetT.position - fromT.position;
-        }
-
-        if (_ignoreY) direction.y = 0.0f;
-        direction.Normalize();
-
-        //x angle override?
-        if (!Utils.IsFloatZero(_xAngle)) direction = Vector3.RotateTowards(direction, fromT.up, _xAngle * Mathf.Deg2Rad, 0.0f);
-
-        //Modifier?
-        float effectMod = 1.0f;
-        if (effectMods) effectMod = effectMods.GetModifier(EffectModifierType.knockback);
-
-        Vector3 finalForce = _force * effectMod * direction;
-
-        return finalForce;
-    }
-
     protected override void OnApply(GameObject target, Transform originT, EffectModifiers effectMods)
     {
-        //We require time scale to be bigger than zero (so not paused) cuz unity will stack all of the force for next frame!!!
+        // We require time scale to be bigger than zero (so not paused) cuz unity will stack all of the force for next frame!!!
         if (!target || !(Time.timeScale > 0.0f)) return;
 
-        //Main, original target
-        AddForceToTarget(_force, target, originT, effectMods);
-        
+        if (target.TryGetComponent(out FreeMovement movement))
+        {
+            AddForceToMovementTarget(movement, originT, effectMods);
+        }
+        else AddForceToTarget(target, originT, effectMods);
+
+
         EffectReferrer referrer = target.GetComponent<EffectReferrer>();
 
-        //If target is a referrer, AND a referrer force higher than 0 has been set, add the appropriate force to that GO as well
-        if (_referrerForce > 0.0f && referrer)
-        {
-            AddForceToTarget(_referrerForce, referrer.ReferToGo, originT, effectMods);
-        }
+        //  If target is a referrer, AND a referrer force higher than 0 has been set, add the appropriate force to that GO as well
+        //if (_referrerForce > 0.0f && referrer)
+        //{
+        //    AddForceToTarget(_referrerForce, referrer.ReferToGo, originT, effectMods);
+        //}
 
         //if (_mainRagdollForce > 0.0f)
         //{
@@ -73,7 +51,8 @@ public sealed class AddForce : Effect
         //}
     }
 
-    private void AddForceToTarget(float force, GameObject target, Transform originT, EffectModifiers effectMods)
+
+    private void AddForceToTarget(GameObject target, Transform originT, EffectModifiers effectMods)
     {
         if (!target) return;
 
@@ -93,7 +72,44 @@ public sealed class AddForce : Effect
         targetRB.AddForce(finalForce, _forceMode);
     }
 
-    //Horizontal only
+    private void AddForceToMovementTarget(FreeMovement movement, Transform originT, EffectModifiers effectMods)
+    {
+        if (!movement) return;
+
+        // Calculate final force
+        Vector3 finalForce = CalculateForce(movement.gameObject, originT, effectMods);
+
+        // Movement is networked and needs a RPC to set force
+        movement.AddForceClientRPC(finalForce, _forceMode);
+    }
+
+    public Vector3 CalculateForce(GameObject target, Transform originT, EffectModifiers effectMods)
+    {
+        // Calculate direction
+        Vector3 direction = transform.forward;
+        Transform fromT = _useOriginT ? originT : (_fromT ? _fromT : transform);
+        if (_directionT) direction = _directionT.forward;
+        else if (target)
+        {
+            Transform targetT = target.transform;
+            direction = targetT.position - fromT.position;
+        }
+
+        if (_ignoreY) direction.y = 0.0f;
+        direction.Normalize();
+
+        // X angle override?
+        if (!Utils.IsFloatZero(_xAngle)) direction = Vector3.RotateTowards(direction, fromT.up, _xAngle * Mathf.Deg2Rad, 0.0f);
+
+        // Modifier?
+        float effectMod = 1.0f;
+        if (effectMods) effectMod = effectMods.GetModifier(EffectModifierType.knockback);
+
+        Vector3 finalForce = _force * effectMod * direction;
+        return finalForce;
+    }
+
+    // Horizontal only
     private void ValidateVelocity(Vector3 force, Rigidbody targetRB)
     {
         Vector3 predictedAddedVel = Utils.HorizontalVector(force);
@@ -126,7 +142,8 @@ public sealed class AddForce : Effect
 
     protected override float Effectiveness(GameObject target)
     {
-        return target && target.TryGetComponent(out Rigidbody rb) && !rb.isKinematic ? 1.0f : 0.0f;
+        
+        return target && target.TryGetComponent(out Rigidbody rb)/* && !rb.isKinematic */? 1.0f : 0.0f;
     }
 
     protected override void Copy(Effect effect)

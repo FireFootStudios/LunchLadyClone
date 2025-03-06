@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8788485812481440917
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6856617344918351640, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_Name
+      value: ChestSkillCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856617344918599388, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877017979212919951, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: _skillCheck
+      value: 
+      objectReference: {fileID: 1192670535610189934}
+    - target: {fileID: 8752772920320130676, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1353840323
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6856617344918351640, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1192670535610189934}
+  m_SourcePrefab: {fileID: 100100000, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+--- !u!1 &2797122868098880397 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6856617344918351640, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+  m_PrefabInstance: {fileID: 8788485812481440917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1192670535610189934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797122868098880397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab145f87b3151f043a49034a4ae43ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _gameType: 0
+  _localCooldown: 2
+  _playerMoveMod:
+    priority: 0
+    duration: 1.1111111e+15
+    maxSpeedMultiplier: 0
+    accelerationMultiplier: 0
+    decelerationMultiplier: 1
+    rotationMultiplier: 1
+    gravityMultiplier: 1
+    overrideAnglePauseMove: 0
+    anglePauseMove: 0
+    elapsed: 0
+  _maxWaitServerPermission: 3
+  _timeOutClient: 60
+  _skillCheckStartSFX:
+    clips:
+    - {fileID: 8300000, guid: fb93d879c5877eb4aa5b7d77bdb0fc76, type: 3}
+    - {fileID: 8300000, guid: 3bbecdbd6e3032840981953f3c0fd401, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 0
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomPitchMultiplier: 5
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _skillCheckSucceedSFX:
+    clips:
+    - {fileID: 8300000, guid: 141ab60df387d3749a0124ad169d8369, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 0
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    randomPitchMultiplier: 5
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _skillCheckFailSFX:
+    clips:
+    - {fileID: 8300000, guid: 5c5966c7da3008f429594e0966b45ab6, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 0
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    randomPitchMultiplier: 5
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0

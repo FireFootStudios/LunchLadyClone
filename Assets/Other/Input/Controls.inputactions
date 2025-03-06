@@ -33,10 +33,10 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "BasicKick",
+                    "name": "Kick",
                     "type": "Button",
                     "id": "745d5445-6179-4261-96cd-040135f2f869",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -307,7 +307,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "BasicKick",
+                    "action": "Kick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -318,7 +318,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "BasicKick",
+                    "action": "Kick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

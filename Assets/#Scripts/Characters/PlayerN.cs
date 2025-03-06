@@ -50,6 +50,7 @@ public sealed class PlayerN : NetworkBehaviour
     [SerializeField] private Ability _interactAbility = null;
     [SerializeField] private Ability _toggleLightAbility = null;
     [SerializeField] private Ability _crouchAbility = null;
+    [SerializeField] private Ability _kickAbility = null;
 
 
     private PlayerInput _input = null;
@@ -90,6 +91,7 @@ public sealed class PlayerN : NetworkBehaviour
     public bool DisableInput { get; set; }
     public bool DisableMoveInput { get; set; }
     public bool IsSprinting { get { return _sprintAbility && _sprintAbility.IsFiring; } }
+    public bool IsCrouching { get { return _crouchAbility && _crouchAbility.IsFiring; } }
 
     private Vector2 MoveInputVec { get; set; }
 
@@ -102,6 +104,7 @@ public sealed class PlayerN : NetworkBehaviour
     public Ability InteractAbility { get { return _interactAbility; } }
     public Ability ToggleLightAbility { get { return _toggleLightAbility; } }
     public Ability CrouchAbility { get { return _crouchAbility; } }
+    public Ability KickAbility { get { return _kickAbility; } }
 
 
     public Action<bool> OnMoveInputChange;
@@ -184,6 +187,14 @@ public sealed class PlayerN : NetworkBehaviour
         if (!context.performed || DisableInput || DisableMoveInput) return;
 
         _abilityManager.TryUseAbilityInputBuffer(_toggleLightAbility);
+    }
+
+    public void KickInput(InputAction.CallbackContext context)
+    {
+        if (!IsOwner && !_ignoreMultiplayer) return;
+        if (!context.performed || DisableInput || DisableMoveInput) return;
+
+        _abilityManager.TryUseAbilityInputBuffer(_kickAbility);
     }
 
     public void SprintInput(InputAction.CallbackContext context)
@@ -476,11 +487,11 @@ public sealed class PlayerN : NetworkBehaviour
         // Revive
         _controls.Player.Revive.performed += ReviveInput;
 
-        // Crouch 
-        //_controls.Player.
-
         // Toggle Light
         _controls.Player.ToggleLight.performed += ToggleLightInput;
+
+        // Kick
+        _controls.Player.Kick.performed += KickInput;
 
         // Sprint
         _controls.Player.Sprint.performed += SprintInput;
@@ -538,6 +549,9 @@ public sealed class PlayerN : NetworkBehaviour
 
         // Interact
         _controls.Player.Interact.performed -= InteractInput;
+
+        // Kick
+        _controls.Player.Kick.performed -= KickInput;
 
         // Toggle Light
         _controls.Player.ToggleLight.performed -= ToggleLightInput;
@@ -664,6 +678,9 @@ public sealed class PlayerN : NetworkBehaviour
 
             // Update sprinting with input (sprint might have been disabled but while it is still pressed we keep trying to use it again)
             if (_sprintInput && !_sprintIsToggle && !IsSprinting) _abilityManager.TryUseAbility(_sprintAbility);
+
+            // Update sprinting with input (sprint might have been disabled but while it is still pressed we keep trying to use it again)
+            if (_crouchInput && !_crouchIsToggle && !IsCrouching) _abilityManager.TryUseAbility(_crouchAbility);
         }
     }
 

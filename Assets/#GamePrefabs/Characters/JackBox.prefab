@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 7852623267569379097}
   - component: {fileID: 7553564523720158519}
   - component: {fileID: 952787710396980842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,6 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   _health: {fileID: 2899262902492675971}
+  _targetInfo: {fileID: 0}
   _hostOnlyGos:
   - {fileID: 9015412376695467725}
   - {fileID: 4794675759825954141}
@@ -1322,7 +1323,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   _targettingTypes: 01000000
-  _focusT: {fileID: 0}
   _data:
     start: 1
     max: 1
@@ -1369,6 +1369,32 @@ MonoBehaviour:
     maxDuration: 0
     cooldown: 0
   _onSpawnSFX:
+    clips: []
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomPitchMultiplier: 1
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _onDamagedSFX:
     clips: []
     randomizeClips: 1
     alwaysUseRandomClip: 1

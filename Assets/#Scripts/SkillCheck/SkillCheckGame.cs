@@ -2,7 +2,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public enum SkillCheckGameType { slider, }
+public enum SkillCheckGameType { slider, kick }
 public abstract class SkillCheckGame : MonoBehaviour
 {
     [SerializeField] private SkillCheckGameType _type = default;
@@ -71,6 +71,7 @@ public abstract class SkillCheckGame : MonoBehaviour
     private void StartGame()
     {
         InProgress = true;
+        Elapsed = 0.0f;
 
         GameStarted();
     }

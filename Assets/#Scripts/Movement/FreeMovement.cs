@@ -221,6 +221,11 @@ public sealed class FreeMovement : NetworkBehaviour
         AddOrUpdateModifier(modifier);
     }
 
+    [ClientRpc(RequireOwnership = false)]
+    public void AddForceClientRPC(Vector3 force, ForceMode forceMode)
+    {
+        RB.AddForce(force, forceMode);
+    }
 
     // Removes all mods which have source equal to param
     public void RemoveMod(GameObject source)

@@ -24,6 +24,7 @@ public sealed class Health : NetworkBehaviour
     [Space]
     [SerializeField] private SoundSpawnData _onDeathSFX = null;
     [SerializeField] private SoundSpawnData _onSpawnSFX = null;
+    [SerializeField] private SoundSpawnData _onDamagedSFX = null;
 
     private NetworkVariable<float> _current = new NetworkVariable<float>(0.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private NetworkVariable<bool> _isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -204,6 +205,7 @@ public sealed class Health : NetworkBehaviour
         {
             RegenCooldownTimer = Data.regenCDSinceDamage;
             OnDamaged?.Invoke(change, null);
+            SoundManager.Instance.PlaySound(_onDamagedSFX);
         }
     }
 
