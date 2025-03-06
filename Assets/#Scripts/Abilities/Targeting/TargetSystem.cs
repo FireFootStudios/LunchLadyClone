@@ -300,7 +300,7 @@ public abstract class TargetSystem : MonoBehaviour
         if (TargetTags.Count == 0) return _treatNoTagsAsAnyTarget;
 
         // Optional
-        TargetInfo targetMultData = target.GetComponent<TargetInfo>();
+        TargetInfo targetInfo = target.GetComponent<TargetInfo>();
 
         // Validate tag
         bool validTag = false;
@@ -317,11 +317,11 @@ public abstract class TargetSystem : MonoBehaviour
         GameObject fromGo = _losData._originT ? _losData._originT.gameObject : Source;
         GameObject targetGo = target;
         Vector3 fromPos = fromGo.transform.position;
-        Vector3 targetPos = targetGo.transform.position;
+        Vector3 targetPos = targetInfo ? targetInfo.FocusPos : targetGo.transform.position;
 
         if (_reverseTargetValidation)
         {
-            fromPos = targetGo.transform.position;
+            fromPos = targetInfo ? targetInfo.FocusPos : targetGo.transform.position;
             targetPos = fromGo.transform.position;
 
             fromGo = target;
@@ -333,7 +333,7 @@ public abstract class TargetSystem : MonoBehaviour
         if (_useLineOfSight)
         {
             float maxDist = _losData._maxDistance;
-            if (targetMultData != null) maxDist *= targetMultData.LosDistanceMult;
+            if (targetInfo != null) maxDist *= targetInfo.LosDistanceMult;
 
             // Line of Sight check
             losValid = _losData.InLineOfSight(targetGo, targetGo.transform.position, fromGo.transform.position, maxDist, _debugLOS);

@@ -8,6 +8,7 @@ public abstract class Character : NetworkBehaviour
 {
     #region Fields
     [SerializeField] private Health _health = null;
+    [SerializeField] private TargetInfo _targetInfo = null;
 
     private CharBehaviour _behaviour = null;
     private NavMeshMovement _movement = null;
@@ -17,6 +18,7 @@ public abstract class Character : NetworkBehaviour
 
     #region Properties
     public Health Health { get { return _health; } }
+    public TargetInfo TargetInfo { get { return _targetInfo; } }
     //public DialogueSpeaker DialogueSpeaker { get { return _dialogueSpeaker; } }
 
     public CharBehaviour Behaviour

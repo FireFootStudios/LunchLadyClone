@@ -8,7 +8,6 @@ public sealed class Health : NetworkBehaviour
     #region fields
 
     [SerializeField] private List<TargetType> _targettingTypes = new List<TargetType>();
-    [SerializeField, Tooltip("Used for VFX and targeting")] private Transform _focusT = null;
     [SerializeField] private HealthData _data = new HealthData();
 
     [Space]
@@ -36,13 +35,10 @@ public sealed class Health : NetworkBehaviour
 
     public List<TargetType> TargettingTypes { get { return _targettingTypes; } }
     public HealthData Data { get { return _data; } private set { _data = value; } }
-    public Transform FocusT { get { return _focusT; } }
     public float Current { get { return _current.Value; } }
     public float Max { get { return Data.max; } }
     public bool IsDead { get { return _isDead.Value; } }
     public float Percentage { get { return Data.start / Data.max; } }
-    public Vector3 FocusPos { get { return FocusT ? FocusT.transform.position : transform.position; } }
-    public float FocusScale { get { return FocusT ? FocusT.transform.localScale.x : 1.0f; } }
     public float LifeElapsed { get; private set; }
 
     public float RegenCooldownTimer { get; private set; }
@@ -58,7 +54,7 @@ public sealed class Health : NetworkBehaviour
 
     #endregion
 
-    //this will reset the component
+    // This will reset the component
     public void SetData(HealthData data)
     {
         Data = data;
@@ -222,7 +218,7 @@ public sealed class Health : NetworkBehaviour
 
             // Feedback
             SoundManager.Instance.PlaySound(_onDeathSFX);
-            VFXManager.Instance.PlayVFXSimple(_onDeathPsTemplate, FocusPos, 0.0f, _onDeathPsScale);
+            //VFXManager.Instance.PlayVFXSimple(_onDeathPsTemplate, FocusPos, 0.0f, _onDeathPsScale);
 
             // Destroy
             if (Data.destroyOnDeath) Destroy(this.gameObject, Data.destroyOnDeathDelay);
@@ -235,7 +231,7 @@ public sealed class Health : NetworkBehaviour
         {
             OnRevive?.Invoke();
 
-            VFXManager.Instance.PlayVFXSimple(_onSpawnTemplate, FocusPos, 0.0f, _onSpawnPsScale);
+            //VFXManager.Instance.PlayVFXSimple(_onSpawnTemplate, FocusPos, 0.0f, _onSpawnPsScale);
             SoundManager.Instance.PlaySound(_onSpawnSFX);
         }
         // Reset

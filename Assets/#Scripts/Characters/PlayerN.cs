@@ -16,6 +16,7 @@ public sealed class PlayerN : NetworkBehaviour
     [Header("General"), SerializeField] private PlayerCameras _playerCamerasTemplate = null;
     [SerializeField] private Vector3 _cameraOffset = Vector3.zero;
 
+    [SerializeField] private TargetInfo _targetInfo = null;
     [SerializeField] private Health _health = null;
     [SerializeField] private FreeMovement _movement = null;
     [SerializeField] private GameObject _visuals = null;
@@ -59,6 +60,7 @@ public sealed class PlayerN : NetworkBehaviour
     private bool _sprintIsToggle = false; //setting
 
     private bool _crouchInput = false;
+    private bool _crouchIsToggle = false;
 
     private PlayingState _playingState = null;
     private GameManager _gameManager = null;
@@ -76,6 +78,7 @@ public sealed class PlayerN : NetworkBehaviour
     //public float LookSensitivity { get { return InputManager.ControllerMode ? _lookSensitivityController * _controllerSensMult : _lookSensitivity; } }
     public bool IsReady { get { return _isReady.Value; } }
 
+    public TargetInfo TargetInfo { get { return _targetInfo; } }
     public Health Health { get { return _health; } }
     public FreeMovement Movement { get { return _movement; } }
     public AbilityManager AbilityManager { get { return _abilityManager; } }
@@ -208,20 +211,20 @@ public sealed class PlayerN : NetworkBehaviour
     {
         if (!IsOwner && !_ignoreMultiplayer) return;
 
-        if (!_sprintAbility) return;
+        if (!CrouchAbility) return;
 
         if (context.performed)
         {
-            _sprintInput = true;
+            _crouchInput = true;
 
-            //If sprint is toggle we either use or cancel ability based on current state
-            if (_sprintIsToggle && _sprintAbility.IsFiring) _sprintAbility.Cancel();
-            else _abilityManager.TryUseAbility(_sprintAbility);
+            // If sprint is toggle we either use or cancel ability based on current state
+            if (_crouchIsToggle && CrouchAbility.IsFiring) CrouchAbility.Cancel();
+            else _abilityManager.TryUseAbility(CrouchAbility);
         }
         else if (context.canceled)
         {
-            _sprintInput = false;
-            if (!_sprintIsToggle) _sprintAbility.Cancel();
+            _crouchInput = false;
+            if (!_crouchIsToggle) CrouchAbility.Cancel();
         }
     }
 
@@ -483,6 +486,10 @@ public sealed class PlayerN : NetworkBehaviour
         _controls.Player.Sprint.performed += SprintInput;
         _controls.Player.Sprint.canceled += SprintInput;
 
+        // Crouch
+        _controls.Player.Crouch.performed += CrouchInput;
+        _controls.Player.Crouch.canceled += CrouchInput;
+
         // Toggle Pause
         _controls.Player.TogglePauseMenu.performed += TogglePause;
 
@@ -541,6 +548,10 @@ public sealed class PlayerN : NetworkBehaviour
         // Sprint
         _controls.Player.Sprint.performed -= SprintInput;
         _controls.Player.Sprint.canceled -= SprintInput;
+
+        // Crouch
+        _controls.Player.Crouch.performed -= CrouchInput;
+        _controls.Player.Crouch.canceled -= CrouchInput;
 
         // Toggle Pause
         _controls.Player.TogglePauseMenu.performed -= TogglePause;

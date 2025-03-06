@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetMode: 0
-  _amount: 0.5
+  _amount: 0.1
 --- !u!1 &4794675759825954141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1161,32 @@ MonoBehaviour:
   - {fileID: 7852623267569379097}
   - {fileID: 7553564523720158519}
   _offlineMode: 0
+  _aggroStartSFX:
+    clips: []
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomPitchMultiplier: 1
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
   _activateAbility: {fileID: 6744694507712056679}
   _activateSpawnTemplate: {fileID: 1391118666694959784}
   _activateSFX:
@@ -1237,6 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseMaxSpeed: 1.5
   _baseAcceleration: 100
+  _destReachedRadius: 0.3
   _maxLinearVel: 100
   _maxRotationSpeed: 1400
   _rotationAcceleration: 5000
@@ -1670,10 +1697,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minStateTime: 0.25
+  _aggroDelayBounds: {x: 0, y: 0}
   _allowMove: 1
+  _minTargetAggroTime: 10
+  _updatePathingInterval: 0.5
   _useLastValidPos: 1
   _useLastValidPosTime: 1
-  _aggroDelayBounds: {x: 0, y: 0}
   _mod:
     priority: 0
     duration: 111111110

@@ -60,7 +60,7 @@ public sealed class SkillCheck : NetworkBehaviour
         TimedOut = false;
 
         // Player move mod
-        TargetPlayer.Movement.AddOrUpdateModifier(_playerMoveMod);
+        TargetPlayer.Movement.AddOrUpdateModifier(_playerMoveMod, false);
 
         // Get confirmation from server that we (our clientID) started...
         TryStartServerRpc();
@@ -188,7 +188,10 @@ public sealed class SkillCheck : NetworkBehaviour
     private void TimeOutClientRpc(ClientRpcParams clientRpcParams = default)
     {
         TimedOut = true;
+
+        TargetPlayer.Movement.RemoveMod(_playerMoveMod.Source);
+
         if (PlayingGameTCS != null && PlayingGameTCS.Task != null) 
-            PlayingGameTCS.SetCanceled();
+            PlayingGameTCS.TrySetCanceled();
     }
 }

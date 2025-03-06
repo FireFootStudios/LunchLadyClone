@@ -5,6 +5,13 @@
 
 
 
+- Crouch move camera to different point (change the offset)
+- Crouch lower collider
+- Lower focusT (also have monster optionally use this instead of target transform pivot)
+- Crouch animation
+
+
+
 ##########################################################################
 
 
@@ -37,6 +44,7 @@
 * Wander broken??
 * Play again when multiplayer (could be the gamemode immediatly sets back to fialed/end session?)
 * Alt tab breaks game in build
+* Skill check lock casper movement
 
 
 

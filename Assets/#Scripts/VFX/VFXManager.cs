@@ -193,9 +193,9 @@ public sealed class VFXObject
         LifeElapsed = 0.0f;
 
         //scale
-        PS.transform.localScale = Data.template.transform.localScale * Data.extraScale;
-        if (_sourceHealth && Data.useSourceScale) PS.transform.localScale *= _sourceHealth.FocusT.localScale.x;
-        else if (Data.source && Data.useSourceScale) PS.transform.localScale *= Data.source.transform.localScale.x;
+        //PS.transform.localScale = Data.template.transform.localScale * Data.extraScale;
+        //if (_sourceHealth && Data.useSourceScale) PS.transform.localScale *= _sourceHealth.FocusT.localScale.x;
+        //else if (Data.source && Data.useSourceScale) PS.transform.localScale *= Data.source.transform.localScale.x;
 
         //initial update to prevent rendering before moved correctly
         Update(true);
@@ -229,13 +229,13 @@ public sealed class VFXObject
             //update position (or set initially)
             if (Data.updateSourcePos || initial)
             {
-                //update position with source
-                Vector3 targetPos = _sourceHealth ? _sourceHealth.FocusPos : Data.source.transform.position;
+                ////update position with source
+                //Vector3 targetPos = _sourceHealth ? _sourceHealth.FocusPos : Data.source.transform.position;
 
-                //ignore y?
-                if (_sourceHealth && Data.ignoreFocusTHeight) targetPos.y = Data.source.transform.position.y;
+                ////ignore y?
+                //if (_sourceHealth && Data.ignoreFocusTHeight) targetPos.y = Data.source.transform.position.y;
 
-                PS.transform.position = targetPos + Data.template.transform.localPosition;
+                //PS.transform.position = targetPos + Data.template.transform.localPosition;
             }
 
             //update rotation (or set initially)

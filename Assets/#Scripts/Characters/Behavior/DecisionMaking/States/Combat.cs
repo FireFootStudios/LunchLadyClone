@@ -72,10 +72,10 @@ public sealed class Combat : FSMState
         TargetPair targetP = ability.TargetSystem.GetFirstTarget();
         if (targetP == null || targetP.target == null) return dir;
 
-        Health targetHealth = targetP.target.GetComponent<Health>();
-        if (!targetHealth) return dir;
+        TargetInfo targetInfo = targetP.target.GetComponent<TargetInfo>();
+        if (!targetInfo) return dir;
 
-        dir = (targetHealth.FocusPos - _char.Health.FocusPos).normalized;
+        dir = (targetInfo.FocusPos - _char.TargetInfo.FocusPos).normalized;
 
         return dir;
     }

@@ -116,9 +116,9 @@ public class Projectile : MonoBehaviour
         _health.Resett();
 
         //Initial + last target pos
-        if (_initialTargetHealth) _initialTargetPos = _initialTargetHealth.FocusPos;
-        else if (_initialTarget) _initialTargetPos = _initialTarget.transform.position;
-        else _initialTargetPos = Vector3.zero;
+        //if (_initialTargetHealth) _initialTargetPos = _initialTargetHealth.FocusPos;
+        //else if (_initialTarget) _initialTargetPos = _initialTarget.transform.position;
+        //else _initialTargetPos = Vector3.zero;
 
         //Set this to current target pos
         _lastTargetPos = _initialTargetPos;
@@ -236,7 +236,7 @@ public class Projectile : MonoBehaviour
     private void FixedUpdate()
     {
         //update last target pos
-        if (_initialTarget) _lastTargetPos = _initialTargetHealth ? _initialTargetHealth.FocusPos : _initialTarget.transform.position;
+        //if (_initialTarget) _lastTargetPos = _initialTargetHealth ? _initialTargetHealth.FocusPos : _initialTarget.transform.position;
 
         UpdateAceleration();
         UpdateFollowTarget();
