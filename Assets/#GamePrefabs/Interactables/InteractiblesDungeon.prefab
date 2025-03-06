@@ -796,8 +796,6 @@ MonoBehaviour:
   _paperFiveTrans:
   - {fileID: 1415647132716850794}
   - {fileID: 7467833278346629212}
-  - {fileID: 0}
-  - {fileID: 0}
   _paperSix:
   - {fileID: 9113922095556724293}
   _paperSixTrans:
@@ -818,11 +816,6 @@ MonoBehaviour:
   _paperNineTrans:
   - {fileID: 6926218990975844933}
   - {fileID: 3609792623609712488}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _paperTen:
   - {fileID: 3811385127099641816}
   _paperTenTrans:
