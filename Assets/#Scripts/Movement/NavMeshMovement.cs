@@ -10,7 +10,7 @@ public sealed class NavMeshMovement : MonoBehaviour
     [Header("General")]
     [SerializeField] private float _baseMaxSpeed = 5;
     [SerializeField] private float _baseAcceleration = 100;
-
+    [SerializeField] private float _destReachedRadius = .3f;
 
     [Space]
     //[SerializeField, Tooltip("Stop adding gravity force when y velocity below this value")] private float _maxYVelForGravity = -30.0f;
@@ -106,15 +106,18 @@ public sealed class NavMeshMovement : MonoBehaviour
         if (_agent.pathPending) return false;
 
         // Handle incomplete paths, in thoe cases remaining dist will be infinity... (also checck if remaining dist is not infinty which it tends to become randomly...
-        if (!_agent.hasPath || _agent.path.status == NavMeshPathStatus.PathInvalid || _agent.path.status == NavMeshPathStatus.PathPartial/* || _agent.remainingDistance > 10000.0f*/)
+        if (!_agent.hasPath || _agent.path.status == NavMeshPathStatus.PathInvalid/* || _agent.path.status == NavMeshPathStatus.PathPartial*//* || _agent.remainingDistance > 10000.0f*/)
         {
             //if (_agent.desiredVelocity.magnitude > 0.001f) return true;
             //else return false;
             return true;
         }
 
-        float remainingDist = RemainingDistance(_agent.path.corners);
-        return remainingDist < _agent.stoppingDistance;
+        float remainingDist = RemainingDistance();
+        if (remainingDist < _destReachedRadius)
+            return true;
+        
+        return false;
     }
 
     public void AddOrUpdateModifier(MovementModifier templateMod, bool forceCopy = true, bool forceAdd = false)
@@ -226,14 +229,32 @@ public sealed class NavMeshMovement : MonoBehaviour
         UpdateRotation();
     }
 
-    private float RemainingDistance(Vector3[] points)
+    private float RemainingDistance()
     {
-        if (points.Length < 2) return 0;
-        float distance = 0;
-        for (int i = 0; i < points.Length - 1; i++)
-            distance += Vector3.Distance(points[i], points[i + 1]);
+        //if (points.Length < 2) return 0;
+        //float distance = 0;
+        //for (int i = 0; i < points.Length - 1; i++)
+        //    distance += Vector3.Distance(points[i], points[i + 1]);
+        //return distance;
+
+        // Ensure the agent has a valid path
+        if (_agent.path == null || _agent.path.corners.Length == 0)
+            return 0.0f;
+
+        float distance = 0.0f;
+        Vector3[] corners = _agent.path.corners;
+
+        // Distance from the agent's current position to the first corner
+        distance += Vector3.Distance(_agent.transform.position, corners[0]);
+
+        // Distances between subsequent corners
+        for (int i = 0; i < corners.Length - 1; i++)
+            distance += Vector3.Distance(corners[i], corners[i + 1]);
+
         return distance;
     }
+
+
 
     //private void CalculateAdjustedDesiredMovement()
     //{

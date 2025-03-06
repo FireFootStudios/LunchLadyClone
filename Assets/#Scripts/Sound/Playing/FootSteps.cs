@@ -40,18 +40,14 @@ public sealed class FootSteps : MonoBehaviour
 
     private void Awake()
     {
-        if (!_movement) return;
-
         //Cache stuff
         _soundManager = SoundManager.Instance;
         _animator = GetComponent<Animator>();
 
-        _movement.OnGrounded += OnGrounded;
+        if (_movement) _movement.OnGrounded += OnGrounded;
 
         foreach (Ability ability in _cooldownOnAbilityFire)
-        {
             ability.OnFire += () => _stepElapsed = -_onAbilityFireCD;
-        }
 
         if (_jumpAbility) _jumpAbility.OnFire += OnJump;
     }
@@ -59,7 +55,7 @@ public sealed class FootSteps : MonoBehaviour
     private void Update()
     {
         //Update most recent surface, as it might have changed witout ever grounding
-        if (_movement.CurrentSurface != null) _mostRecentSurface = _movement.CurrentSurface;
+        if (_movement && _movement.CurrentSurface != null) _mostRecentSurface = _movement.CurrentSurface;
 
         UpdateStepSounds();
     }

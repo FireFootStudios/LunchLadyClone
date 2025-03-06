@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class BadGuy : Character
 {
@@ -7,6 +8,10 @@ public class BadGuy : Character
     [SerializeField] private List<MonoBehaviour> _hostOnlyComps = new List<MonoBehaviour>();
     [Space]
     [SerializeField] private bool _offlineMode = false;
+
+    [Space]
+    [SerializeField] private SoundSpawnData _aggroStartSFX = null;
+
 
     protected override void Awake()
     {
@@ -35,5 +40,22 @@ public class BadGuy : Character
 
         foreach (MonoBehaviour comp in _hostOnlyComps)
             comp.enabled = IsHost;
+
+        if (IsHost)
+        {
+            Behaviour.OnAggroChange += OnAggroChange;
+        }
+    }
+
+    private void OnAggroChange(bool isAggro)
+    {
+        // Tell clients aggro changed
+        OnAggroChangeClientRpc(isAggro);
+    }
+
+    [ClientRpc]
+    protected void OnAggroChangeClientRpc(bool isAggro)
+    {
+        if (isAggro) SoundManager.Instance.PlaySound(_aggroStartSFX);
     }
 }

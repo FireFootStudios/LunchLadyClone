@@ -66,24 +66,35 @@ public abstract class TargetSystem : MonoBehaviour
     // Force adds a target to this target system, this does not check if it is a valid target in any way!
     public void AddOverrideTarget(GameObject target, float effectiveness, float duration)
     {
-        AddOrUpdateTarget(target, effectiveness, duration);
+        AddOrUpdateTarget(target, effectiveness, duration, true);
     }
 
-    public void RemoveOverrideTarget(GameObject target)
+    public void RemoveTarget(GameObject target, bool requireOverride)
     {
         if (!target) return;
 
-        TargetPair targetPair = _targetPairs.Find(p => p.target == target);
-        if (targetPair != null)
-            _targetPairs.Remove(targetPair);
+        _targetPairs.RemoveAll(p =>
+        {
+            if (requireOverride && !p.isOverride) return false;
+            return p.target == target;
+        });
+
         RePopulateTargetPairs();
     }
 
     public bool HasSpecificTarget(GameObject target)
     {
+        if (!target) return false;
+
         List<TargetPair> targetPairs = GetTargets();
         return targetPairs.Find(tp => tp.target == target) != null;
     }
+
+    //// See if target is the most effective option
+    //public bool IsBestTarget(GameObject target)
+    //{
+
+    //}
 
     public bool HasTarget()
     {
@@ -149,7 +160,7 @@ public abstract class TargetSystem : MonoBehaviour
         }
     }
 
-    protected void AddOrUpdateTarget(GameObject target, float eff, float lifeTime)
+    protected void AddOrUpdateTarget(GameObject target, float eff, float lifeTime, bool isOverride = false)
     {
         TargetPair pair = _targetPairs.Find(p => p.target == target);
         if (pair == null)
@@ -166,6 +177,8 @@ public abstract class TargetSystem : MonoBehaviour
             // Pick best lifetime
             if (lifeTime > pair.lifetime) pair.lifetime = lifeTime;
         }
+
+        pair.isOverride = isOverride;
     }
 
     protected void AddOrUpdateTarget(TargetPair pair)
@@ -179,7 +192,6 @@ public abstract class TargetSystem : MonoBehaviour
         for (int i = 0; i < _targetPairs.Count; i++)
         {
             TargetPair targetPair = _targetPairs[i];
-
             if (targetPair == null || !targetPair.target || !targetPair.target.activeInHierarchy)
             {
                 _targetPairs.RemoveAt(i);
@@ -415,10 +427,11 @@ public sealed class TargetPair
     public GameObject target = null;
     public float effectiveness = 0.0f;
     public float lifetime = 0.0f;
-    public float lifeElapsed = 0.0f;
+    public float lifeElapsed = 0.0f; // Time since last valid (initial add or update to targetsystem)
 
     // Last target pos while valid
     public Vector3 lastValidPos = Vector3.zero;
+    public bool isOverride = false;
 
     public TargetPair(GameObject target, float effectiveness)
     {

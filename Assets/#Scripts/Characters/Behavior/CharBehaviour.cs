@@ -80,12 +80,22 @@ public abstract class CharBehaviour : MonoBehaviour
         InitFSM();
     }
 
+    protected virtual void Update()
+    {
+        CheckAggro();
+    }
+
     private void CheckAggro()
     {
         bool isAggro = HasAggroTarget;
-        if (_lastAggroCheck == isAggro) return;
 
-        OnAggroChange?.Invoke(isAggro);
+        // Aggro changed?
+        if (_lastAggroCheck != isAggro)
+        {
+            _lastAggroCheck = isAggro;
+            OnAggroChange?.Invoke(isAggro);
+        }
+
         _lastAggroCheck = isAggro;
     }
 

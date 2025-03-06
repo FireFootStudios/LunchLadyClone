@@ -214,8 +214,8 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 0
     maxTargets: 0
-  _cooldown: 70
-  _startCooldown: 30
+  _cooldown: 90
+  _startCooldown: 120
   _generalCooldown: 0
   _randomCooldown: 0
   _ignoreGeneralCooldown: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   _targetMode: 0
   _spawnTemplate: {fileID: 708443842857328422, guid: c9d4c329731213845a47a5763ad03704, type: 3}
   _spawnT: {fileID: 2123934285159615347}
-  _maxAliveSpawns: 8
+  _maxAliveSpawns: 6
 --- !u!1 &2259611382706332045
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,14 +423,14 @@ MonoBehaviour:
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 45
-  _maxHorizontalAngle: 145
+  _maxHorizontalAngle: 80
   _useLineOfSight: 1
   _losData:
     _mask:
       serializedVersion: 2
       m_Bits: 9
     _originT: {fileID: 1182604255833935471}
-    _maxDistance: 30
+    _maxDistance: 40
     _targetOffset: 1.2
     _fromOffset: 0
   _losTargetLifetime: 0.5
@@ -817,12 +817,12 @@ MonoBehaviour:
     - _effects:
       - {fileID: 5522752183835890240}
       _targettingEffect: {fileID: 0}
-      _time: 0.25
+      _time: 0
       _loops: 0
       _loopDuration: 0
       _pickRandomTarget: 0
       _ignoreTargets: 0
-      _checkInRange: 1
+      _checkInRange: 0
       _sounds:
       - clips:
         - {fileID: 8300000, guid: 632948fe049a2e9419a7d6b5cf5795bc, type: 3}
@@ -856,7 +856,7 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 1
     maxTargets: 1
-  _cooldown: 1
+  _cooldown: 3
   _startCooldown: 0
   _generalCooldown: 0
   _randomCooldown: 0
@@ -1026,8 +1026,6 @@ GameObject:
   - component: {fileID: 7790588730286235797}
   - component: {fileID: 4803549052773875441}
   - component: {fileID: 3236823724857446582}
-  - component: {fileID: 1235920103881811791}
-  - component: {fileID: 698674854306870202}
   - component: {fileID: 6091579893311147414}
   m_Layer: 0
   m_Name: Jester
@@ -1143,6 +1141,35 @@ MonoBehaviour:
   - {fileID: 4803549052773875441}
   - {fileID: 3236823724857446582}
   _offlineMode: 0
+  _aggroStartSFX:
+    clips:
+    - {fileID: 8300000, guid: a6cd1c7533ba8eb4190ef7aa8534155f, type: 3}
+    - {fileID: 8300000, guid: 20c258981e0904346a25deeef66443be, type: 3}
+    - {fileID: 8300000, guid: 8ec417a87e0543d49bc815e9d9c4980d, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 9030046931093926502}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 1
+    pitch: 1.25
+    randomPitchMultiplier: 2
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
 --- !u!114 &7923664904724292845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseMaxSpeed: 2.5
   _baseAcceleration: 600
+  _destReachedRadius: 0.25
   _maxLinearVel: 100
   _maxRotationSpeed: 1400
   _rotationAcceleration: 2000
@@ -1200,11 +1228,11 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 5
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 3
+  m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
@@ -1397,58 +1425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a9ed65c09e76543a2e03667e3e104a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1235920103881811791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085150105009024553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5734733dbf54694da666a8f5aeb9c21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &698674854306870202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085150105009024553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bc84a6a0e621d143bb0215c13ef5760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fadeOutOnDisabled: 0
-  _soundData:
-    clips:
-    - {fileID: 8300000, guid: 9c2da425c6b1a584d92fe9c9eac098bb, type: 3}
-    randomizeClips: 1
-    alwaysUseRandomClip: 1
-    randomiseClipsInitially: 1
-    parent: {fileID: 9030046931093926502}
-    setPosToParent: 1
-    parentUp: 0
-    followPlayerAlongCollider: {fileID: 0}
-    volume: 0.1
-    pitch: 2
-    randomPitchMultiplier: 2
-    delayBounds: {x: 0, y: 0}
-    frequency: 1
-    is2D: 0
-    ignoreReverb: 0
-    soundType: 0
-    overideGroup: {fileID: 0}
-    spread: 0
-    maxDistanceOverride: 12
-    minDistanceOverride: 2
-    loopAudioSource: 1
-    fadeIn: 0
-    fadeOut: 0
-    maxDuration: 0
-    cooldown: 0
 --- !u!114 &6091579893311147414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,7 +1526,7 @@ MonoBehaviour:
   _targetLifeTime: 0
   _minEffectivenessForValid: 0.01
   _canIncludeSelf: 0
-  _updateInterval: 0.2
+  _updateInterval: 0.05
   _updateOnAskInstead: 0
   _updateTargetsDuringFire: 0
   _maxVerticalAngle: 90
@@ -1566,7 +1542,7 @@ MonoBehaviour:
     _fromOffset: 0
   _losTargetLifetime: 0
   _reverseTargetValidation: 0
-  _debugLOS: 1
+  _debugLOS: 0
   _hitboxes:
   - {fileID: 4345151186764015898}
 --- !u!136 &9152657993196972688
@@ -1668,11 +1644,11 @@ MonoBehaviour:
   _minStateTime: 0.25
   _randomSeed: {fileID: 0}
   _wanderSterpDurationBounds: {x: 5, y: 50}
-  _wanderPointShuffleCount: 15
+  _wanderPointShuffleCount: 5
   _mod:
     priority: 0
     duration: 1111111
-    maxSpeedMultiplier: 0.9
+    maxSpeedMultiplier: 1
     accelerationMultiplier: 1
     decelerationMultiplier: 1
     rotationMultiplier: 0.5
@@ -1693,10 +1669,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minStateTime: 0.25
+  _aggroDelayBounds: {x: 0.5, y: 0.5}
   _allowMove: 1
+  _minTargetAggroTime: 10
+  _updatePathingInterval: 0.5
   _useLastValidPos: 1
   _useLastValidPosTime: 0.5
-  _aggroDelayBounds: {x: 0.5, y: 0.5}
   _mod:
     priority: 0
     duration: 111111110
@@ -1756,12 +1734,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnMode: 1
-  _intervalBounds: {x: 15, y: 45}
+  _intervalBounds: {x: 60, y: 120}
   _playImmediate: 0
   _maxDistFromPlayer: 50
   _soundData:
     clips:
-    - {fileID: 8300000, guid: 9a64f9d3284a1b24cba23602e069d707, type: 3}
+    - {fileID: 8300000, guid: 810d167728a87ab448140a0d7aa34b67, type: 3}
     randomizeClips: 1
     alwaysUseRandomClip: 1
     randomiseClipsInitially: 1
@@ -1769,9 +1747,9 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 0.4
-    pitch: 1.1
-    randomPitchMultiplier: 5
+    volume: 0.5
+    pitch: 1
+    randomPitchMultiplier: 3
     delayBounds: {x: 0, y: 0}
     frequency: 1
     is2D: 0
@@ -1783,7 +1761,7 @@ MonoBehaviour:
     minDistanceOverride: 0
     loopAudioSource: 0
     fadeIn: 0
-    fadeOut: 0
+    fadeOut: 0.75
     maxDuration: 0
     cooldown: 0
   _visualize: 0
@@ -1858,8 +1836,77 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8734563712699979947, guid: b7234892c7c8d254a9a2be92ba9b345c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5280963498964586394}
   m_SourcePrefab: {fileID: 100100000, guid: b7234892c7c8d254a9a2be92ba9b345c, type: 3}
+--- !u!1 &331588416298275978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8734563712699979947, guid: b7234892c7c8d254a9a2be92ba9b345c, type: 3}
+  m_PrefabInstance: {fileID: 9056015935276059681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5280963498964586394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331588416298275978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04305585036814a4c8660e733ae1aa4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movement: {fileID: 0}
+  _defaultSurfaceAsset: {fileID: 0}
+  _useSurfaces: 0
+  _stepSpawnData:
+    clips:
+    - {fileID: 8300000, guid: b904fd4697052574db026e32feab4b7f, type: 3}
+    - {fileID: 8300000, guid: 0cd320741de322249b699890f045daa6, type: 3}
+    - {fileID: 8300000, guid: 74cd38003a0da4c4cb260ed0e9c2c8f6, type: 3}
+    - {fileID: 8300000, guid: a75591fc6d7526b418d2c2e43dd6e4b2, type: 3}
+    - {fileID: 8300000, guid: 9d9bfb2dc21a8f14ab4e6b646cabce63, type: 3}
+    - {fileID: 8300000, guid: e89e5b271f48786448fcdcf8bdc9c4e3, type: 3}
+    - {fileID: 8300000, guid: d5e212053476d2241848e3fe5197ddd4, type: 3}
+    - {fileID: 8300000, guid: 732a0ca179a15074a97d99868112e590, type: 3}
+    - {fileID: 8300000, guid: 263bac2639bda05489becf410eb73968, type: 3}
+    - {fileID: 8300000, guid: e9e54bb31d7c506408a9b5d22270f837, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 0}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    randomPitchMultiplier: 2
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 20
+    minDistanceOverride: 2
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _stepFrequency: 1
+  _maxSpeed: 8
+  _maxAirTimeForStep: 0.2
+  _cooldownOnAbilityFire: []
+  _onAbilityFireCD: 0.5
+  _extraStepSFX: []
+  _landSpawnData: []
+  _minAirTimeForLand: 0.5
+  _jumpSpawnData: []
+  _jumpAbility: {fileID: 0}
 --- !u!4 &4150636063189824208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4915515170541993713, guid: b7234892c7c8d254a9a2be92ba9b345c, type: 3}

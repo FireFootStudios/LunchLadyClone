@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8133735068919654983, guid: 8c3996734f5f43e4c9ada8d6085f3ee6, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 217283340
+      value: 1338080454
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -803,6 +803,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 4138764530
       objectReference: {fileID: 0}
+    - target: {fileID: 875328329947294067, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3703311159
+      objectReference: {fileID: 0}
     - target: {fileID: 905441042202709918, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3571776799
@@ -839,6 +843,14 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 393834009
       objectReference: {fileID: 0}
+    - target: {fileID: 1903636887565982025, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 865938166
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907409923583829516, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3087521023
+      objectReference: {fileID: 0}
     - target: {fileID: 2342370919104084173, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 48420264
@@ -850,6 +862,10 @@ PrefabInstance:
     - target: {fileID: 3121036838677174594, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4095639146
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299538899440068180, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1347235833
       objectReference: {fileID: 0}
     - target: {fileID: 3401876861154194520, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -871,9 +887,17 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 331476745
       objectReference: {fileID: 0}
+    - target: {fileID: 3981420494454104765, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3260603918
+      objectReference: {fileID: 0}
     - target: {fileID: 4036365702455633037, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 736773963
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149845670472830638, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3234448813
       objectReference: {fileID: 0}
     - target: {fileID: 4245060481381395713, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -883,9 +907,17 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2220094408
       objectReference: {fileID: 0}
+    - target: {fileID: 4517184153270747243, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3901926883
+      objectReference: {fileID: 0}
     - target: {fileID: 4982787600673627524, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1086381518
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206955012928777468, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1657438768
       objectReference: {fileID: 0}
     - target: {fileID: 5261831463262054716, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -898,6 +930,10 @@ PrefabInstance:
     - target: {fileID: 6156847735534682809, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3264128860
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220723482194724297, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 26951673
       objectReference: {fileID: 0}
     - target: {fileID: 6260047017896025274, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -931,6 +967,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1338649235
       objectReference: {fileID: 0}
+    - target: {fileID: 7110843612944624528, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2583967980
+      objectReference: {fileID: 0}
     - target: {fileID: 7414374726097173416, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3378798839
@@ -947,13 +987,25 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2650445742
       objectReference: {fileID: 0}
+    - target: {fileID: 8651049354455485653, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2666526111
+      objectReference: {fileID: 0}
     - target: {fileID: 8702089560092387915, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 538219459
       objectReference: {fileID: 0}
+    - target: {fileID: 8722096415996383893, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1068316201
+      objectReference: {fileID: 0}
     - target: {fileID: 8919042310717341797, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3059061989
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925487733745948539, guid: 19d2acc91e059374bb4bdfbf1cfdd012, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3456609627
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1096,7 +1148,7 @@ MonoBehaviour:
   m_TileSize: 256
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
+  m_MinRegionArea: 1
   m_NavMeshData: {fileID: 23800000, guid: 2b711ddc88abfd24cafb1eb72d437be6, type: 2}
   m_BuildHeightMesh: 1
 --- !u!4 &848080581
@@ -2221,8 +2273,8 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
+  m_VoxelSize: 0.1
+  m_MinRegionArea: 1
   m_NavMeshData: {fileID: 23800000, guid: 2e86f9d334e3ae2499d9c99f086f84a5, type: 2}
   m_BuildHeightMesh: 1
 --- !u!1001 &1915197602

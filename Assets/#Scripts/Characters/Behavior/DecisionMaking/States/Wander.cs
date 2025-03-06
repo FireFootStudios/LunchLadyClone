@@ -36,6 +36,7 @@ public sealed class Wander : FSMState
         _wanderPoints.Shuffle();
         _wanderIndex = 0;
 
+        StopAllCoroutines();
         StartCoroutine(WanderStep());
 
         _char.Movement.CanRotate = true;
@@ -71,7 +72,7 @@ public sealed class Wander : FSMState
 
     private IEnumerator WanderStep()
     {
-        if(_wanderPoints.Count == 0) yield break;
+        if (_wanderPoints.Count == 0) yield break;
         _inStep = true;
 
         // Manage wander index
@@ -84,7 +85,11 @@ public sealed class Wander : FSMState
         Transform wanderT = _wanderPoints[_wanderIndex];
         _wanderIndex++;
 
-        _char.Movement.MoveToPos(wanderT.position);
+        bool destSet = _char.Movement.MoveToPos(wanderT.position);
+        if (!destSet)
+        {
+            Debug.LogError("Failed to move to wanderT!");
+        }
 
         float duration = Utils.GetRandomFromBounds(_wanderSterpDurationBounds);
 
