@@ -111,7 +111,7 @@ public sealed class Health : NetworkBehaviour
         });
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     public void AddClientRpc(float delta, ClientRpcParams clientRpcParams = default)
     {
         Add(delta, null);

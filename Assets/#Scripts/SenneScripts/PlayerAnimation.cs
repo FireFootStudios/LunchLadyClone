@@ -28,6 +28,7 @@ public sealed class PlayerAnimation : MonoBehaviour
     private const string _moveInputY = "MoveInputY";
     private const string _downStr = "IsDown";
     private const string _kickingStr = "IsKicking";
+    //private const string _kickTrigger = "Kic";
     private const string _kickAngleStr = "KickAngle";
 
 
@@ -68,7 +69,7 @@ public sealed class PlayerAnimation : MonoBehaviour
 
     private void OnKickHitOrMiss()
     {
-        _animator.SetBool(_kickingStr, true);
+        _animator.SetTrigger(_kickingStr);
 
         Vector3 kickDir = _playerKick.KickDir;
 
@@ -202,7 +203,7 @@ public sealed class PlayerAnimation : MonoBehaviour
         // MOVE INPUT
         _animator.SetBool(_hasMoveInputStr, _player.HasMoveInput == true && _player.Movement.CurrentMoveSpeed > 0.25f);
         _animator.SetBool(_sprintingStr, _player.IsSprinting);
-        _animator.SetBool(_kickingStr, _player.KickAbility && _player.KickAbility.IsFiring);
+        //_animator.SetBool(_kickingStr, _player.KickAbility && _player.KickAbility.IsFiring);
         _animator.SetBool(_crouchedStr, _player.CrouchAbility && _player.CrouchAbility.IsFiring);
 
         // Calculate move input values (localized to player and scaled to maxspeed)
