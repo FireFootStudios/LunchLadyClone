@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public sealed class Damage : Effect
@@ -12,10 +13,13 @@ public sealed class Damage : Effect
         if (!health || health.IsDead) return;
         if (!health.IsSpawned) return;
 
-        health.Add(-_amount, Ability.Source);
+        //health.Add(-_amount, Ability.Source);
 
         if (health.IsOwner) health.Add(-_amount, Ability.Source);
-        else if (health.IsServer) health.AddClientRpc(-_amount);
+        else if (health.IsServer) health.AddClientRpc(-_amount, new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { health.OwnerClientId } }
+        });
         else health.AddServerRpc(health.OwnerClientId, -_amount);
     }
 
@@ -26,7 +30,6 @@ public sealed class Damage : Effect
         Health health = target.GetComponent<Health>();
         if (!health || health.IsDead) return 0.0f;
         if (!health.IsSpawned) return 0.0f;
-
 
         return 1.0f;
     }
