@@ -116,7 +116,11 @@ public sealed class GameManager : SingletonBaseNetwork<GameManager>
             if (spawnT) player = Instantiate(_playerNetworkingSpawnTemplate, spawnT);
             else player = Instantiate(_playerNetworkingSpawnTemplate);
 
-            if (player.TryGetComponent(out NetworkObject networkObject)) networkObject.SpawnAsPlayerObject(clientID, false);
+            if (player.TryGetComponent(out NetworkObject networkObject))
+            {
+                networkObject.SpawnAsPlayerObject(clientID, false);
+                //networkObject.SpawnWithOwnership(clientID);
+            }
             else Debug.LogError("Player networking template has not network object component!");
 
             _sceneData.Players.Add(player);

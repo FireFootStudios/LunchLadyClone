@@ -215,17 +215,38 @@ public sealed class FreeMovement : NetworkBehaviour
         ReCalculateModifiers();
     }
 
-    [ClientRpc(RequireOwnership = false)]
-    public void AddOrUpdateModifierClientRPC(MovementModifier modifier)
+    [ServerRpc(RequireOwnership = false)]
+    public void AddForceServerRpc(ulong targetClientId, Vector3 force, ForceMode forceMode)
+    {
+        AddForceClientRPC(force, forceMode, new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { targetClientId } }
+        });
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void AddOrUpdateModifierServerRpc(ulong targetClientId, MovementModifier modifier)
+    {
+        if (NetworkManager.Singleton.LocalClientId != targetClientId) return;
+
+        AddOrUpdateModifierClientRPC(modifier, new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { targetClientId } }
+        });
+    }
+
+    [ClientRpc]
+    private void AddOrUpdateModifierClientRPC(MovementModifier modifier, ClientRpcParams clientRpcParams)
     {
         AddOrUpdateModifier(modifier);
     }
 
-    [ClientRpc(RequireOwnership = false)]
-    public void AddForceClientRPC(Vector3 force, ForceMode forceMode)
+    [ClientRpc]
+    private void AddForceClientRPC(Vector3 force, ForceMode forceMode, ClientRpcParams clientRpcParams)
     {
         RB.AddForce(force, forceMode);
     }
+
 
     // Removes all mods which have source equal to param
     public void RemoveMod(GameObject source)

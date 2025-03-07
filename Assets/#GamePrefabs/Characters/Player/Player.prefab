@@ -621,6 +621,7 @@ MonoBehaviour:
   _animationChains: []
   _cancelAbilities:
   - {fileID: 7503288252341767622}
+  - {fileID: 6205382633309151303}
 --- !u!114 &716388084747343439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +721,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 2278844753
   InScenePlacedSourceGlobalObjectIdHash: 2278844753
   DeferredDespawnTick: 0
-  Ownership: 1
+  Ownership: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2041,7 +2042,7 @@ MonoBehaviour:
       - {fileID: 5176967070545722449}
       - {fileID: 7343884643093013487}
       _targettingEffect: {fileID: 7795825026698486566}
-      _time: 0.25
+      _time: 0
       _loops: 0
       _loopDuration: 0
       _pickRandomTarget: 0
@@ -2054,7 +2055,7 @@ MonoBehaviour:
     originT: {fileID: 0}
     minTargets: 1
     maxTargets: 1
-  _cooldown: 2
+  _cooldown: 1
   _startCooldown: 0
   _generalCooldown: 1
   _randomCooldown: 0
@@ -2084,7 +2085,7 @@ MonoBehaviour:
     maxSpeedMultiplier: 0
     accelerationMultiplier: 0
     decelerationMultiplier: 1
-    rotationMultiplier: 1
+    rotationMultiplier: 0
     gravityMultiplier: 1
     overrideAnglePauseMove: 0
     anglePauseMove: 0
@@ -2093,7 +2094,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   _hitTriggers: 0
-  _applyEffectsDelay: 0
+  _applyEffectsDelay: 0.5
   _clearVelOnKickStart: 1
   _range: 2
   _baseKickForce: 3
@@ -2114,7 +2115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetMode: 0
-  _force: 10
+  _force: 5
   _referrerForce: 0
   _mainRagdollForce: 0
   _forceMode: 2
@@ -2154,10 +2155,10 @@ MonoBehaviour:
   _targetMode: 0
   _modifier:
     priority: 0
-    duration: 1
-    maxSpeedMultiplier: 0.5
-    accelerationMultiplier: 0.5
-    decelerationMultiplier: 1
+    duration: 0.6
+    maxSpeedMultiplier: 0
+    accelerationMultiplier: 0
+    decelerationMultiplier: 0
     rotationMultiplier: 1
     gravityMultiplier: 1
     overrideAnglePauseMove: 0

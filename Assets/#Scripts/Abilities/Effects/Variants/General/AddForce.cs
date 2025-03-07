@@ -72,15 +72,17 @@ public sealed class AddForce : Effect
         targetRB.AddForce(finalForce, _forceMode);
     }
 
+    // This requires some checks as movement is networked and thus will need to check ownership
     private void AddForceToMovementTarget(FreeMovement movement, Transform originT, EffectModifiers effectMods)
     {
-        if (!movement) return;
+        if (!movement || !movement.IsSpawned) return;
 
         // Calculate final force
         Vector3 finalForce = CalculateForce(movement.gameObject, originT, effectMods);
 
         // Movement is networked and needs a RPC to set force
-        movement.AddForceClientRPC(finalForce, _forceMode);
+        if (movement.IsOwner) movement.RB.AddForce(finalForce, _forceMode);
+        else movement.AddForceServerRpc(movement.OwnerClientId, finalForce, _forceMode);
     }
 
     public Vector3 CalculateForce(GameObject target, Transform originT, EffectModifiers effectMods)

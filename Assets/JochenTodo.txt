@@ -1,21 +1,26 @@
 
 
+- Test
 
 
-* Fix network rigidbody
+
+- Kick effects are delayed but use initial raycast to hit, this means you cant dodge it!
 
 
+
+
+
+
+* Kick should raycast initially, play animation but apply the effects delays
+	-> But since we use networking, we can do it instantly and >
 
 
 * Kick feedback
-	-> Animation
+	-> Animation (blend with angle)
+	-> Tweens (hit/miss tween)
 	-> Surfact impact SFX/VFX
 	-> Voice SFX + armor SFX
-	-> Tweens
 
-
-* Kick works on players?
-* Make sure kick doesnt work on Jester
 
 
 
@@ -36,6 +41,7 @@
 * Dont lock all chests (script that will lock x amount of chests?)
 -> This script can manage all game difficulty related stuff
 
+* When a server rpc is called by a client to chagne something, do a check if its server owned, in that case we dont need to do a client rpc (movement + health)
 
 
 # BUGS

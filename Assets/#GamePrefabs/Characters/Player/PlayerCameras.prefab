@@ -53,8 +53,8 @@ MonoBehaviour:
   _playerFollowSmoothSpeed: 0
   _rotationSpeed: 0.1
   _lookSensitivity: 1
-  _maxAngleUp: 70
-  _maxAngleDown: 80
+  _maxAngleUp: 60
+  _maxAngleDown: 75
   _shakeRandomnessMode: 1
   _tweenTarget: {fileID: 6258225812348414131}
   _landPunchStrengthMin: {x: 0, y: 0, z: 0}
@@ -78,6 +78,12 @@ MonoBehaviour:
   _JumpPunchVibrato: 10
   _JumpPunchEase: 1
   _JumpPunchOvershoot: 0.5
+  _kickPunchStrength: {x: 0.2, y: 0, z: -0.5}
+  _kickPunchDuration: 0.5
+  _kickPunchVibrato: 5
+  _kickPunchEase: 27
+  _kickPunchOvershoot: 0.5
+  _kickElasticity: 0.5
 --- !u!114 &1078016412946566565
 MonoBehaviour:
   m_ObjectHideFlags: 0

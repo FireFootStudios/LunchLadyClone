@@ -49,6 +49,7 @@ public sealed class PrePlayHUD : MonoBehaviour
     private void Update()
     {
         if (_currentLobby == null) return;
+        if (!NetworkManager.Singleton || !NetworkManager.Singleton.IsConnectedClient) return;
 
         // Lobby player count
         if (_lobbyPlayersTMP) _lobbyPlayersTMP.text = NetworkManager.Singleton.ConnectedClients.Count + "/" + _currentLobby.MaxPlayers;

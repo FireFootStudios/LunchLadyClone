@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public sealed class PlayerCameras : MonoBehaviour
@@ -50,6 +51,17 @@ public sealed class PlayerCameras : MonoBehaviour
     [SerializeField] private Ease _JumpPunchEase = Ease.Linear;
     [SerializeField] private float _JumpPunchOvershoot = 0.5f;
 
+    [Header("Tween Kick")]
+    [SerializeField] private Vector3 _kickPunchStrength = Vector3.zero;
+    //[SerializeField] private Vector3 _kickPunchStrengthMax = Vector3.zero;
+    //[SerializeField, Tooltip("Bounds used to lerp between min and max Punch strength based on kick velocity mag")] private Vector2 _kickPunchScaleBounds = Vector3.zero;
+    [Space]
+    [SerializeField] private float _kickPunchDuration = 0.25f;
+    [SerializeField] private int _kickPunchVibrato = 10;
+    [SerializeField] private Ease _kickPunchEase = Ease.Linear;
+    [SerializeField] private float _kickPunchOvershoot = 0.5f;
+    [SerializeField] private float _kickElasticity = 1.0f;
+
 
     private GameManager _gameManager = null;
     private PlayerN _player = null;
@@ -62,6 +74,9 @@ public sealed class PlayerCameras : MonoBehaviour
     private bool _useScreenShake = false;
 
     private Vector3 _velocity = Vector3.zero;
+
+    private Kick _playerKick = null;
+
 
     #endregion
 
@@ -84,6 +99,10 @@ public sealed class PlayerCameras : MonoBehaviour
         if (!player || _player) return;
 
         _player = player;
+
+
+        _playerKick = _player.GetComponentInChildren<Kick>();
+        if (_playerKick) _playerKick.OnKickHitOrMiss += OnKickHitOrMiss;
 
         // Jump
         if (_player.JumpAbility) _player.JumpAbility.OnFire += OnPlayerJump;
@@ -205,6 +224,57 @@ public sealed class PlayerCameras : MonoBehaviour
 
         _currentTween = _tweenTarget.DOPunchPosition(punchStrength, _landPunchDuration, _landPunchVibrato, _landElasticity, false).SetEase(_landPunchEase, _landPunchOvershoot);
     }
+
+    private void OnKickHitOrMiss()
+    {
+        if (!_player || !_playerKick) return;
+        if (!(_kickPunchDuration > 0.0f)) return;
+
+        ResetCamera();
+
+
+
+        //Vector3 punchStrength = _tweenTarget.InverseTransformDirection(_kickPunchStrength);
+        //Debug.DrawRay(_tweenTarget.position, punchStrength, Color.white, 2.0f);
+
+        //_currentTween = _tweenTarget.DOPunchPosition(punchStrength, _kickPunchDuration, _kickPunchVibrato, _kickElasticity, false).SetEase(_kickPunchEase, _kickPunchOvershoot);
+
+        // Get the camera's right and backward directions
+        //Vector3 cameraRight = Camera.main.transform.right;
+        //Vector3 cameraBackward = -Camera.main.transform.forward;
+
+        //// Scale these directions based on your desired strength (your local space vector)
+        //Vector3 punchDirection = (cameraRight * _kickPunchStrength.x) + (cameraBackward * _kickPunchStrength.z);
+
+        //// Punch in the desired direction using the local space strength vector
+        //_currentTween = _tweenTarget.DOPunchPosition(punchDirection, _kickPunchDuration, _kickPunchVibrato, _kickElasticity, false)
+        //    .SetEase(_kickPunchEase, _kickPunchOvershoot);
+        //float scalePerc = Mathf.InverseLerp(_kickPunchScaleBounds.x, _kickPunchScaleBounds.y, groundedColl.relativeVelocity.magnitude);
+        //Vector3 punchStrength = Vector3.Lerp(_kickPunchStrengthMin, _kickPunchStrengthMax, scalePerc);
+
+        // Localize punch strength to camera
+        //Vector3 punchStrength = _tweenTarget.forward * _kickPunchStrength.z + _tweenTarget.right * _kickPunchStrength.x + _tweenTarget.up * _kickPunchStrength.y;
+        //punchStrength = _tweenTarget.InverseTransformVector(punchStrength);
+        //Debug.DrawRay(_tweenTarget.position, _kickPunchStrength, Color.white, 2.0f);
+        //Debug.DrawRay(_tweenTarget.position, _player.PlayerCameras.transform.TransformDirection(_kickPunchStrength), Color.red, 2.0f);
+        //Debug.DrawRay(_tweenTarget.position, _player.PlayerCameras.transform.InverseTransformDirection(_kickPunchStrength), Color.green, 2.0f);
+
+        //_currentTween = _tweenTarget.DOPunchPosition(punchStrength, _kickPunchDuration, _kickPunchVibrato, _kickElasticity, false).SetEase(_kickPunchEase, _kickPunchOvershoot);
+
+
+
+        //Vector3 punchPos = _tweenTarget.forward * _kickPunchStrength.z + _tweenTarget.right * _kickPunchStrength.x + _tweenTarget.up * _kickPunchStrength.y;
+        ////punchStrength = _tweenTarget.InverseTransformVector(punchStrength);
+        //Debug.DrawLine(_tweenTarget.position, punchPos, Color.white, 2.0f);
+
+        //_currentTween = _tweenTarget.DOLocalMove(punchPos, _kickPunchDuration / 2.0f, false).SetEase(_kickPunchEase, _kickPunchOvershoot);
+        ////_currentTween = _tweenTarget.DOLocalMove(Vector3.zero, _kickPunchDuration / 2.0f, false).SetEase(_kickPunchEase, _kickPunchOvershoot).SetDelay(_kickPunchDuration / 2.0f);
+
+        //_currentTween = _tweenTarget.DOShakePosition(_kickPunchDuration, _kickPunchStrength, _kickPunchVibrato, 0.0f, false);/*.SetEase(_kickPunchEase, _kickPunchOvershoot);*/
+        //_currentTween = _mainCamera.DOShakePosition(_kickPunchDuration, _kickPunchStrength, _kickPunchVibrato, 90, _kickPunchVibrato, _shakeRandomnessMode)
+        //    .SetEase(_kickShakeEase, _kickShakeOvershoot).SetUpdate(true);
+    }
+
 
     private void OnPlayerDamaged(float amount, GameObject source)
     {

@@ -26,13 +26,15 @@ public sealed class Modifier : Effect
 
         // Create and add modifer to target movement (copy from template)
         FreeMovement movement = target.GetComponent<FreeMovement>();
-        if (movement)
+        if (movement && movement.IsSpawned)
         {
             // If target is networked and not the host, we have to add the modifier through a client rpc
             //if (movement.IsSpawned && !movement.IsHost) movement.AddOrUpdateModifierClientRPC(_modifier);
             //else movement.AddOrUpdateModifier(_modifier);
 
-            movement.AddOrUpdateModifierClientRPC(_modifier);
+            // If we are owner, we can just directly apply the mod
+            if (movement.IsOwner) movement.AddOrUpdateModifier(_modifier);
+            else movement.AddOrUpdateModifierServerRpc(movement.OwnerClientId, _modifier);
 
             if (_stopTarget) movement.RB.linearVelocity = Vector3.zero;
         }

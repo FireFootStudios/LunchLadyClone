@@ -429,7 +429,7 @@ public sealed class LobbyManager : SingletonBase<LobbyManager>
 
         await InitIfNeeded();
 
-        await GetLobbies();
+        //await GetLobbies();
     }
 
     private void OnDestroy()

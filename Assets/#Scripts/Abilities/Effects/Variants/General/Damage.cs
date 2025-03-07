@@ -10,8 +10,12 @@ public sealed class Damage : Effect
 
         Health health = target.GetComponent<Health>();
         if (!health || health.IsDead) return;
+        if (!health.IsSpawned) return;
 
-        health.Add_Server(-_amount, Ability.Source);
+        health.Add(-_amount, Ability.Source);
+
+        if (health.IsOwner) health.Add(-_amount, Ability.Source);
+        else health.AddServerRpc(health.OwnerClientId, -_amount);
     }
 
     protected override float Effectiveness(GameObject target)
@@ -20,6 +24,8 @@ public sealed class Damage : Effect
 
         Health health = target.GetComponent<Health>();
         if (!health || health.IsDead) return 0.0f;
+        if (!health.IsSpawned) return 0.0f;
+
 
         return 1.0f;
     }

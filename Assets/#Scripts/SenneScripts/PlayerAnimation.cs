@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ public sealed class PlayerAnimation : MonoBehaviour
 
     [SerializeField] private Vector2 _moveSpeedScaleBounds = new Vector2(0.0f, 8.0f);
     [SerializeField] private float _moveInputSmoothSpeed = 2.0f;
+
+    [Space]
+    [SerializeField] private Vector2 _kickAngleBlendBounds = new Vector2(15.0f, 120.0f);
 
     [Space]
     [SerializeField] private float _minAirTimeForLandAnim = 0.4f;
@@ -24,9 +28,7 @@ public sealed class PlayerAnimation : MonoBehaviour
     private const string _moveInputY = "MoveInputY";
     private const string _downStr = "IsDown";
     private const string _kickingStr = "IsKicking";
-
-    
-    
+    private const string _kickAngleStr = "KickAngle";
 
 
     private const string _actionStr = "Action";
@@ -40,12 +42,13 @@ public sealed class PlayerAnimation : MonoBehaviour
     private const string _actionClipKeyName = "Armature|Grab";//dont change this (its the name of the animation linked in the base animator controller)
     private int _actionOverrideIndex = -1;
 
-    //current chains
+    // Current chains
     private List<AnimationClip> _actionChains = null;
     private int _chainCount = 0;
     private bool _chainProcessed = false;
 
     private Ability _lastActionAbility = null;
+    private Kick _playerKick = null;
 
     private Vector2 _currentMoveInput = Vector2.zero;
 
@@ -58,6 +61,24 @@ public sealed class PlayerAnimation : MonoBehaviour
 
         _player.Health.OnDeath += OnDeath;
         _player.Health.OnRevive += OnRevive;
+
+        _playerKick = _player.GetComponentInChildren<Kick>();
+        if (_playerKick) _playerKick.OnKickHitOrMiss += OnKickHitOrMiss;
+    }
+
+    private void OnKickHitOrMiss()
+    {
+        _animator.SetBool(_kickingStr, true);
+
+        Vector3 kickDir = _playerKick.KickDir;
+
+        // Calculate the angle between the kick direction and the vertical axis (up direction)
+        float angle = Vector3.Angle(kickDir, Vector3.down);
+
+        // Normalize the angle [0,1]
+        float normalizedAngle = Mathf.InverseLerp(_kickAngleBlendBounds.x, _kickAngleBlendBounds.y, angle);
+        Debug.Log("Kick angle: " + normalizedAngle);
+        _animator.SetFloat(_kickAngleStr, normalizedAngle);
     }
 
     private void OnEnable()
@@ -178,18 +199,18 @@ public sealed class PlayerAnimation : MonoBehaviour
     {
         if (!_player.IsOwner) return;
 
-        //MOVE INPUT
+        // MOVE INPUT
         _animator.SetBool(_hasMoveInputStr, _player.HasMoveInput == true && _player.Movement.CurrentMoveSpeed > 0.25f);
         _animator.SetBool(_sprintingStr, _player.IsSprinting);
         _animator.SetBool(_kickingStr, _player.KickAbility && _player.KickAbility.IsFiring);
         _animator.SetBool(_crouchedStr, _player.CrouchAbility && _player.CrouchAbility.IsFiring);
 
-        //Calculate move input values (localized to player and scaled to maxspeed)
+        // Calculate move input values (localized to player and scaled to maxspeed)
         Vector3 targetMoveInput = Vector3.zero;
         if (_player.Movement.MaxSpeedAdjusted > 0.0f)
             targetMoveInput = _player.transform.InverseTransformVector(_player.Movement.CurrentMoveVelocity) / _player.Movement.MaxSpeedAdjusted;
 
-        //Lerp towards target move input values for smooth transitions
+        // Lerp towards target move input values for smooth transitions
         _currentMoveInput = Vector2.Lerp(_currentMoveInput, new Vector2(targetMoveInput.x, targetMoveInput.z), Time.deltaTime * _moveInputSmoothSpeed);
 
         _animator.SetFloat(_moveInputX, _currentMoveInput.x);
@@ -198,9 +219,6 @@ public sealed class PlayerAnimation : MonoBehaviour
         //VELOCITY SCALE
         //Move mod -> Use velocity percontage to calculate final move speed mod (scale between bounds)
         //_animator.SetFloat(_velScaleStr, Mathf.Lerp(_moveAnimSpeedScaleBounds.x, _moveAnimSpeedScaleBounds.y, _player.Movement.VelocityPercentage));
-
-
-        
     }
 
     private void OnDeath()

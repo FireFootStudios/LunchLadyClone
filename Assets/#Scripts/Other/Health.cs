@@ -31,6 +31,8 @@ public sealed class Health : NetworkBehaviour
 
     private const string _reviveStr = "Revive";
 
+    private bool _isFullHealth = false;
+
     #endregion
     #region Properties
 
@@ -62,12 +64,12 @@ public sealed class Health : NetworkBehaviour
         Resett();
     }
 
-    public void Add_Server(float delta, GameObject source)
+    public void Add(float delta, GameObject source)
     {
         if (IsDead) return;
 
-        // Prevent changing if not host for now 
-        if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
+        // Prevent changing if not the owner
+        if (/*NetworkManager && NetworkManager.Singleton.IsListening && */!IsOwner) return;
 
         // float prev = Current;
         float newCurrent = Current;
@@ -92,19 +94,37 @@ public sealed class Health : NetworkBehaviour
         Resett();
     }
 
-    // Call when a client needs to make a health change, this will go through the server first
-    [ServerRpc]
-    public void Add_ClientServerRpc(float delta)
-    {
-        Add_Server(delta, null);
-    }
+
+    //[ServerRpc]
+    //public void Add_ClientServerRpc(float delta)
+    //{
+    //    Add(delta, null);
+    //}
 
     // Call when a client needs to make a health change, this will go through the server first
     [ServerRpc(RequireOwnership = false)]
-    public void Set_ClientServerRpc(float newValue)
+    public void AddServerRpc(ulong targetClientId, float delta)
     {
-        _current.Value = newValue;
+        if (NetworkManager.Singleton.LocalClientId != targetClientId) return;
+
+        AddClientRpc(delta, new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { targetClientId } }
+        });
     }
+
+    [ClientRpc]
+    private void AddClientRpc(float delta, ClientRpcParams clientRpcParams)
+    {
+        Add(delta, null);
+    }
+
+    //// Call when a client needs to make a health change, this will go through the server first
+    //[ServerRpc(RequireOwnership = false)]
+    //public void Set_ClientServerRpc(float newValue)
+    //{
+    //    _current.Value = newValue;
+    //}
 
     public void Kill()
     {
@@ -133,6 +153,8 @@ public sealed class Health : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        if (IsOwner) _current.Value = _data.start;
+
         // Subscribe to Network changes
         _current.OnValueChanged += OnHealthChangedNetwork;
         _isDead.OnValueChanged += OnIsDeadChangedNetwork;
@@ -152,11 +174,6 @@ public sealed class Health : NetworkBehaviour
         }
     }
 
-    private void Start()
-    {
-        Set_ClientServerRpc(_data.start);
-    }
-
     private void Update()
     {
         LifeElapsed += Time.deltaTime;
@@ -170,13 +187,13 @@ public sealed class Health : NetworkBehaviour
     private void UpdateRegen()
     {
         if (IsDead) return;
-
-        if (!(Data.regen > 0.0f)) return;
+        if (_isFullHealth) return;
 
         RegenCooldownTimer -= Time.deltaTime;
         if (RegenCooldownTimer > 0.0f) return;
 
-        Add_Server(Data.regen * Time.deltaTime, this.gameObject);
+        if (!(Data.regen > 0.0f)) return;
+        Add(Data.regen * Time.deltaTime, this.gameObject);
     }
 
     private void EvaluateWhileDeathOrAlive()
@@ -190,13 +207,13 @@ public sealed class Health : NetworkBehaviour
         if (_toDisableColliderOnDeath) _toDisableColliderOnDeath.enabled = !IsDead;
     }
 
-    private void OnHealthChangedNetwork(float previousValue, float newValue)
+    private void OnHealthChangedNetwork(float previousValue, float current)
     {
         // If host return, as he already changed this initially
         //if (IsHost) return;
 
         // Calculate the actual change in health
-        float delta = newValue - previousValue;
+        float delta = current - previousValue;
         float change = Mathf.Abs(delta);
 
         // Events -> fired when delta != 0, doesnt mean that health change might not be 0
@@ -206,6 +223,8 @@ public sealed class Health : NetworkBehaviour
             RegenCooldownTimer = Data.regenCDSinceDamage;
             OnDamaged?.Invoke(change, null);
             SoundManager.Instance.PlaySound(_onDamagedSFX);
+
+            _isFullHealth = Utils.AreFloatsEqual(current, Max);
         }
     }
 
@@ -227,6 +246,8 @@ public sealed class Health : NetworkBehaviour
 
             // Invoke revive method if auto revive is checked
             if (Data.autoRevive) Invoke(_reviveStr, Data.autoReviveTime);
+
+            _isFullHealth = false;
         }
         // Did we revive
         else if (newValue == false && previousValue == true)
@@ -258,6 +279,7 @@ public sealed class HealthData
     [SerializeField] public float max = 1.0f;
     [SerializeField] public float regen = 0.25f;
     [SerializeField] public float regenCDSinceDamage = 3.0f;
+    //[SerializeField] public float regenInterval = 1.0f;
 
     [Header("Death/Revive"), SerializeField, Tooltip("If false, cannot die through damage.")] public bool canBeDamaged = true;
     [SerializeField] public bool autoRevive = true;

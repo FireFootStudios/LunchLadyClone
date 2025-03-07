@@ -29,7 +29,18 @@ public sealed class Kick : TargettingEffect
     public bool PerformingKick { get; private set; }
 
     public RaycastHit LastKickedHit {  get; private set; }
+    public Vector3 LastKickOrigin { get; private set; }
+    public Vector3 LastKickDir { get; private set; }
 
+
+    public Vector3 KickDir
+    {
+        get
+        {
+            if (!_player || !_player.PlayerCameras) return Vector3.zero;
+            return _player.PlayerCameras.transform.forward;
+        }
+    }
 
 
     public Action<RaycastHit, GameObject, float> OnHit; // => hitInfo + target + kickinfo + kickforce
@@ -88,7 +99,7 @@ public sealed class Kick : TargettingEffect
         AttemptKick();
     }
 
-    public bool DoKickCast(out RaycastHit hitInfo, out GameObject hitGo, out bool isDead)
+    public bool DoKickCast(out RaycastHit hitInfo, out GameObject hitGo, out bool isDead, bool save = false)
     {
         hitGo = null;
         isDead = false;
@@ -101,6 +112,12 @@ public sealed class Kick : TargettingEffect
         {
             origin = _player.PlayerCameras.transform.position;
             dir = _player.PlayerCameras.transform.forward;
+        }
+
+        if (save)
+        {
+            LastKickDir = dir;
+            LastKickOrigin = origin;
         }
 
         // Raycast
@@ -119,13 +136,18 @@ public sealed class Kick : TargettingEffect
 
     public override bool CanApply()
     {
-        if (_alwaysCast) return true;
+        if (PerformingKick) return false;
+        if (AttemptingKick) return false;
 
+        if (_alwaysCast) return true;
         return DoKickCast(out _, out _, out _);
     }
 
     protected override float Effectiveness(GameObject target)
     {
+        if (PerformingKick) return 0.0f;
+        if (AttemptingKick) return 0.0f;
+
         return DoKickCast(out _, out _, out bool isDead) ? (isDead && _ignoreDead ? 0.0f : 1.0f) : 0.0f;
     }
 
@@ -151,7 +173,7 @@ public sealed class Kick : TargettingEffect
         // Clear velocity before 
         if (_clearVelOnKickStart) _player.Movement.RB.linearVelocity = Vector3.zero;
 
-        if (DoKickCast(out RaycastHit hitInfo, out GameObject hitGo, out bool isDead))
+        if (DoKickCast(out RaycastHit hitInfo, out GameObject hitGo, out bool isDead, true))
         {
             AttemptingKick = false;
             StopAllCoroutines();
