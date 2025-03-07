@@ -1239,8 +1239,7 @@ MonoBehaviour:
   _onSpawnTemplate: {fileID: 0}
   _onSpawnPsScale: 1
   _onDeathSFX:
-    clips:
-    - {fileID: 8300000, guid: 632948fe049a2e9419a7d6b5cf5795bc, type: 3}
+    clips: []
     randomizeClips: 1
     alwaysUseRandomClip: 1
     randomiseClipsInitially: 1
@@ -2097,8 +2096,8 @@ MonoBehaviour:
   _hitTriggers: 0
   _applyEffectsDelay: 0.25
   _clearVelOnKickStart: 1
-  _range: 2
-  _baseKickForce: 3
+  _range: 1.5
+  _baseKickForce: 0
   _multiplierDead: 0
   _attemptKickBuffer: 0.05
   _ignoreDead: 0
@@ -2569,7 +2568,8 @@ MonoBehaviour:
   _updateCooldownDuringFire: 1
   _baseAnimationOverride: {fileID: 0}
   _animationChains: []
-  _cancelAbilities: []
+  _cancelAbilities:
+  - {fileID: 6205382633309151303}
 --- !u!114 &465131937790754531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2734,6 +2734,7 @@ MonoBehaviour:
   _animationChains: []
   _cancelAbilities:
   - {fileID: 4772701345538362668}
+  - {fileID: 6205382633309151303}
 --- !u!114 &1635430967625505057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2876,6 +2877,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3013622326676581722}
     m_Modifications:
+    - target: {fileID: 273014083637276836, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
+      propertyPath: _onIntensity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1329883589286985250, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
       propertyPath: m_Name
       value: T-Pose
@@ -2983,7 +2988,7 @@ MonoBehaviour:
     setPosToParent: 1
     parentUp: 1
     followPlayerAlongCollider: {fileID: 0}
-    volume: 0.3
+    volume: 0.15
     pitch: 1
     randomPitchMultiplier: 2
     delayBounds: {x: 0, y: 0}

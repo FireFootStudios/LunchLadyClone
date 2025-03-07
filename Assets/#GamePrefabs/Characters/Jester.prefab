@@ -430,7 +430,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 9
     _originT: {fileID: 1182604255833935471}
-    _maxDistance: 40
+    _maxDistance: 25
     _targetOffset: 1.2
     _fromOffset: 0
   _losTargetLifetime: 0.5
@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 3199338451676257458}
   - component: {fileID: 8133735068919654983}
   - component: {fileID: 7405872244775946537}
-  - component: {fileID: 5821440926944999368}
+  - component: {fileID: 583666527086540044}
   - component: {fileID: 7923664904724292845}
   - component: {fileID: 4616724902125020410}
   - component: {fileID: 5074546901398792836}
@@ -1116,7 +1116,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 0
   SlerpPosition: 0
---- !u!114 &5821440926944999368
+--- !u!114 &583666527086540044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7085150105009024553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a2fec9349c0584084d2e2e9505075a, type: 3}
+  m_Script: {fileID: 11500000, guid: ee0286cff2f06fe4cb0fd11a45b3e737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -1171,6 +1171,34 @@ MonoBehaviour:
     fadeOut: 0
     maxDuration: 0
     cooldown: 0
+  _killPlayerSFX:
+    clips:
+    - {fileID: 8300000, guid: 632948fe049a2e9419a7d6b5cf5795bc, type: 3}
+    randomizeClips: 1
+    alwaysUseRandomClip: 1
+    randomiseClipsInitially: 1
+    parent: {fileID: 9030046931093926502}
+    setPosToParent: 1
+    parentUp: 1
+    followPlayerAlongCollider: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    randomPitchMultiplier: 2
+    delayBounds: {x: 0, y: 0}
+    frequency: 1
+    is2D: 0
+    ignoreReverb: 0
+    soundType: 0
+    overideGroup: {fileID: 0}
+    spread: 0
+    maxDistanceOverride: 0
+    minDistanceOverride: 0
+    loopAudioSource: 0
+    fadeIn: 0
+    fadeOut: 0
+    maxDuration: 0
+    cooldown: 0
+  _killPlayerAbility: {fileID: 8500101951128170744}
 --- !u!114 &7923664904724292845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb3a15fe2f42f54bbfa4f3aa772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _badGuy: {fileID: 5821440926944999368}
+  _badGuy: {fileID: 583666527086540044}
   _paperEventData:
     moveMod:
       priority: 0

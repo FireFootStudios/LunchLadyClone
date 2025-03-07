@@ -1,22 +1,45 @@
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Fix skillcheck game (cancel not working)
+
+
+
+
+
+* Smooth crouch
+* Better kick
+* kicknhell shader
+
+
 - Test
+
+- Go thru miro
+
+
 
 
 
 - Kick effects are delayed but use initial raycast to hit, this means you cant dodge it!
 
-
-- Revive works???
-
-
-
-* Kick should raycast initially, play animation but apply the effects delays
-	-> But since we use networking, we can do it instantly and >
-
-
 * Kick feedback
-	-> Animation (blend with angle)
 	-> Tweens (hit/miss tween)
 	-> Surfact impact SFX/VFX
 	-> Voice SFX + armor SFX
@@ -30,7 +53,7 @@
 
 
 
-
+* Downed state (camera move?)
 
 * AI improve (clear/better aggro + search + chase longer/more consistent + min los time before aggro)
 * Skillcheck difficulties (certain chests or objects can be harder to unlock)

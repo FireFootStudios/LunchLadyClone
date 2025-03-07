@@ -69,7 +69,7 @@ public sealed class Spawner : MonoBehaviour
         if (_rigidbody && !_rigidbody.isKinematic) _rigidbody.linearVelocity = Vector3.zero;
 
         //Revive if dead, else just reset
-        if (_linkedHealth && _linkedHealth.IsDead) _linkedHealth.Revive_Server();
+        if (_linkedHealth && _linkedHealth.IsDead) _linkedHealth.Revive();
         else if (_linkedHealth) _linkedHealth.Resett();
     }
 

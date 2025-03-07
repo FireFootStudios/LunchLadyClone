@@ -16,16 +16,16 @@ MonoBehaviour:
   _onGroundedVelMultiplierBounds: {x: 0, y: 0}
   _kickImpactClips: []
   _stepClips:
-  - {fileID: 8300000, guid: 4011f0de6a214224384fdc2dfc988601, type: 3}
-  - {fileID: 8300000, guid: d12126c80869cf94b8206952da8d0867, type: 3}
-  - {fileID: 8300000, guid: fe1431ac0af065a48964d4a513d05111, type: 3}
-  - {fileID: 8300000, guid: 9fdbb3a3e79e60b468c574642d8dbf97, type: 3}
-  - {fileID: 8300000, guid: e7b0647d09c7cc54389403158d8cfe7e, type: 3}
-  - {fileID: 8300000, guid: 41cb4b835fb0b694996c0d8626e2d666, type: 3}
-  - {fileID: 8300000, guid: cc27c844c53d71340804f2a627065d3e, type: 3}
-  - {fileID: 8300000, guid: 9d974c1d282b31a45a576ec014ce22e0, type: 3}
-  - {fileID: 8300000, guid: 822a01e996ed20f4e86e0297559f909c, type: 3}
-  - {fileID: 8300000, guid: e4cf0dd7a9e856947a988a1766f12d39, type: 3}
+  - {fileID: 8300000, guid: 3aa71e5a72204964a96e5f2f51662753, type: 3}
+  - {fileID: 8300000, guid: 5ae1c396241358a45a9e9959a77f0d83, type: 3}
+  - {fileID: 8300000, guid: 55b1651aeafb98e46aae16fc3c56b131, type: 3}
+  - {fileID: 8300000, guid: 42ef883d923a7fd4a8b94490b3b3a6c3, type: 3}
+  - {fileID: 8300000, guid: 2360d984ffcf7234ea2c97439e12ab91, type: 3}
+  - {fileID: 8300000, guid: ed3abab7bc7dcb04fb38f52b557d70cb, type: 3}
+  - {fileID: 8300000, guid: 0cb88653b5373344f80dadd81bf36e9b, type: 3}
+  - {fileID: 8300000, guid: 4c6db3371f7e8af4fa7d902a0d53b18b, type: 3}
+  - {fileID: 8300000, guid: cc4aa9ec664bad842a5e87a9e87486d4, type: 3}
+  - {fileID: 8300000, guid: 014edc84de26c114d897996e9542f272, type: 3}
   _landClips: []
   _jumpClips: []
   _kickImpactPs: {fileID: 0}

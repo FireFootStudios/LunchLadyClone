@@ -87,12 +87,21 @@ public sealed class Health : NetworkBehaviour
         _current.Value = newCurrent;
     }
 
-    // Call when a client needs to revive someone
     [ServerRpc(RequireOwnership = false)]
-    public void ReviveClientServerRpc()
+    public void ReviveServerRpc(ulong targetClientId)
     {
-        Resett();
+        ReviveClientRpc(new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { targetClientId } }
+        });
     }
+
+    [ClientRpc(RequireOwnership = false)]
+    public void ReviveClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        Revive();
+    }
+
 
 
     //[ServerRpc]
@@ -134,7 +143,7 @@ public sealed class Health : NetworkBehaviour
     }
 
     // Same as Reset() but is ignored if not dead
-    public void Revive_Server()
+    public void Revive()
     {
         if (!IsDead) return;
         //if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
@@ -145,7 +154,7 @@ public sealed class Health : NetworkBehaviour
 
     public void Resett()
     {
-        if (!IsHost) return;
+        if (!IsSpawned || !IsOwner) return;
 
         _isDead.Value = false;
         _current.Value = _data.start;

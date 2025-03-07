@@ -47,14 +47,14 @@ public class BadGuy : Character
         }
     }
 
-    private void OnAggroChange(bool isAggro)
+    protected virtual void OnAggroChange(bool isAggro)
     {
         // Tell clients aggro changed
         OnAggroChangeClientRpc(isAggro);
     }
 
     [ClientRpc]
-    protected void OnAggroChangeClientRpc(bool isAggro)
+    protected virtual void OnAggroChangeClientRpc(bool isAggro)
     {
         if (isAggro) SoundManager.Instance.PlaySound(_aggroStartSFX);
     }

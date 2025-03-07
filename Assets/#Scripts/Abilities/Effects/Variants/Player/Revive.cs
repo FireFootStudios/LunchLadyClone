@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public sealed class Revive : Effect
@@ -33,9 +34,14 @@ public sealed class Revive : Effect
         if (_reviveElapsed < _reviveDuration) return;
 
         // Revive
-        _revivingPlayer.Health.ReviveClientServerRpc();
+        if (_revivingPlayer.IsOwner) _revivingPlayer.Health.Revive();
+        else if (_revivingPlayer.IsServer) _revivingPlayer.Health.ReviveClientRpc(new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { _revivingPlayer.OwnerClientId } }
+        });
+        else _revivingPlayer.Health.ReviveServerRpc(_revivingPlayer.OwnerClientId);
+
         Debug.Log("Revive Completed");
-        
         _revivingPlayer = null;
     }
 
