@@ -8,6 +8,7 @@ public sealed class Door : Interactible
 {
     [SerializeField] private List<ItemN> _unlockItems = null;
     [SerializeField] private bool _requireItemsInInventory = true;
+    [SerializeField] private bool _interactOnUnlock = true;
     [SerializeField] private HitBox _openHitbox = null;
     [Space]
     [SerializeField] private KinematicMovement _movement = null;
@@ -75,6 +76,9 @@ public sealed class Door : Interactible
         }
 
         _isUnlocked.Value = true;
+
+        if (_interactOnUnlock) 
+            Interact(null);
         return true;
     }
 
