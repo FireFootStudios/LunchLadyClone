@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b8129414fef5a0b4f959124d8e84419a
+guid: 831d68c55b995444bacdea42fae4ec1d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: KickingV2
+      name: KickingV3High
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 56
+      lastFrame: 65
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
