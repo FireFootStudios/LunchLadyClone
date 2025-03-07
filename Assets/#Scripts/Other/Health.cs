@@ -78,7 +78,7 @@ public sealed class Health : NetworkBehaviour
         newCurrent += delta;
 
         // Kill if close to 0 or negative
-        if (newCurrent <= 0.0f && Data.canBeDamaged) Kill();
+        if (newCurrent <= 0.001f && Data.canBeDamaged) Kill();
 
         // Clamp between 0 and max
         newCurrent = Mathf.Clamp(newCurrent, 0.0f, Max);
