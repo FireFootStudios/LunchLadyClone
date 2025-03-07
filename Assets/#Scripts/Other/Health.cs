@@ -112,7 +112,7 @@ public sealed class Health : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void AddClientRpc(float delta, ClientRpcParams clientRpcParams)
+    public void AddClientRpc(float delta, ClientRpcParams clientRpcParams = default)
     {
         Add(delta, null);
     }

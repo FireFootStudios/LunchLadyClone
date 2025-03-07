@@ -15,7 +15,9 @@ public sealed class Damage : Effect
         health.Add(-_amount, Ability.Source);
 
         if (health.IsOwner) health.Add(-_amount, Ability.Source);
-        else health.AddServerRpc(health.OwnerClientId, -_amount);
+        else health.AddClientRpc(-_amount);
+        //else if(health.IsServer) health.add 
+        //    health.AddServerRpc(health.OwnerClientId, -_amount);
     }
 
     protected override float Effectiveness(GameObject target)
