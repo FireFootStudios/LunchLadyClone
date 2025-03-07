@@ -1462,6 +1462,7 @@ MonoBehaviour:
   _ignoreForAction: []
   _moveSpeedScaleBounds: {x: 0, y: 8}
   _moveInputSmoothSpeed: 5
+  _kickAngleBlendBounds: {x: 15, y: 120}
   _minAirTimeForLandAnim: 0.4
 --- !u!114 &9221243860067414708
 MonoBehaviour:
@@ -2094,7 +2095,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   _hitTriggers: 0
-  _applyEffectsDelay: 0.5
+  _applyEffectsDelay: 0.25
   _clearVelOnKickStart: 1
   _range: 2
   _baseKickForce: 3
@@ -2115,7 +2116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetMode: 0
-  _force: 5
+  _force: 10
   _referrerForce: 0
   _mainRagdollForce: 0
   _forceMode: 2
@@ -2155,11 +2156,11 @@ MonoBehaviour:
   _targetMode: 0
   _modifier:
     priority: 0
-    duration: 0.6
+    duration: 1
     maxSpeedMultiplier: 0
     accelerationMultiplier: 0
     decelerationMultiplier: 0
-    rotationMultiplier: 1
+    rotationMultiplier: 0
     gravityMultiplier: 1
     overrideAnglePauseMove: 0
     anglePauseMove: 0

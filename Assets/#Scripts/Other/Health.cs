@@ -105,8 +105,6 @@ public sealed class Health : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void AddServerRpc(ulong targetClientId, float delta)
     {
-        if (NetworkManager.Singleton.LocalClientId != targetClientId) return;
-
         AddClientRpc(delta, new ClientRpcParams
         {
             Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { targetClientId } }

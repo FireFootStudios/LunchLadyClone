@@ -227,8 +227,6 @@ public sealed class FreeMovement : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void AddOrUpdateModifierServerRpc(ulong targetClientId, MovementModifier modifier)
     {
-        if (NetworkManager.Singleton.LocalClientId != targetClientId) return;
-
         AddOrUpdateModifierClientRPC(modifier, new ClientRpcParams
         {
             Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { targetClientId } }
