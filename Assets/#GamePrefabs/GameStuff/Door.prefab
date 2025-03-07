@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4563594867894888420}
   - component: {fileID: 7858493066303111667}
   - component: {fileID: 5816279655997086450}
-  - component: {fileID: 6941116800506824852}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -87,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6941116800506824852
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955589611551133314}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1259671180115713936
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,8 +164,8 @@ MonoBehaviour:
   _pingPong: 0
   _skillCheck: {fileID: 0}
   _health: {fileID: 0}
-  _interactRequireDeath: 1
-  _interactOnDeath: 1
+  _interactRequireDeath: 0
+  _interactOnDeath: 0
   _enableOnInteractGos: []
   _disableOnInteractGos: []
   _animators:
@@ -482,6 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8237533158876335669}
   - component: {fileID: 2454967724474256440}
+  - component: {fileID: 4562558996516387183}
   m_Layer: 0
   m_Name: DungeonGate
   m_TagString: Untagged
@@ -530,6 +509,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4562558996516387183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247741547369189832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -142073583
+    DestinationState: 1049714800
+    TransitionDuration: 0.25
+    TriggerNameHash: 1049714800
+    TransitionIndex: 0
+  m_Animator: {fileID: 2454967724474256440}
 --- !u!1 &7597619440201796291
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +591,7 @@ Transform:
   m_GameObject: {fileID: 7764425929019917644}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.73, z: 0.34}
   m_LocalScale: {x: 1.1201, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
