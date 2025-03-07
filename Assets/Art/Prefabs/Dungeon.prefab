@@ -8356,7 +8356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 433144, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09486604
+      value: 0.014
       objectReference: {fileID: 0}
     - target: {fileID: 433144, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8388,6 +8388,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 433144, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64396236601553590, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: b75922d16c88e6445bb0a596b880214e, type: 3}
+    - target: {fileID: 64396236601553590, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64396236601553590, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64993018719199570, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -42715,6 +42731,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64396236601553590, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: b75922d16c88e6445bb0a596b880214e, type: 3}
+    - target: {fileID: 64396236601553590, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54205,6 +54229,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 433144, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64396236601553590, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: b75922d16c88e6445bb0a596b880214e, type: 3}
+    - target: {fileID: 64396236601553590, guid: 2a9cc51d30a6d32458c4d4217b768640, type: 3}
+      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
