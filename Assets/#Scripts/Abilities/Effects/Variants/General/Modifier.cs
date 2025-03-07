@@ -36,6 +36,10 @@ public sealed class Modifier : Effect
             if (movement.IsOwner) movement.AddOrUpdateModifier(_modifier);
             else movement.AddOrUpdateModifierServerRpc(movement.OwnerClientId, _modifier);
 
+            if (movement.IsOwner) movement.AddOrUpdateModifier(_modifier);
+            else if (movement.IsServer) movement.AddOrUpdateModifierClientRPC(_modifier);
+            else movement.AddOrUpdateModifierServerRpc(movement.OwnerClientId, _modifier);
+
             if (_stopTarget) movement.RB.linearVelocity = Vector3.zero;
         }
 

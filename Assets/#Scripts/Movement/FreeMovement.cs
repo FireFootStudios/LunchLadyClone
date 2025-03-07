@@ -234,13 +234,13 @@ public sealed class FreeMovement : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void AddOrUpdateModifierClientRPC(MovementModifier modifier, ClientRpcParams clientRpcParams)
+    public void AddOrUpdateModifierClientRPC(MovementModifier modifier, ClientRpcParams clientRpcParams = default)
     {
         AddOrUpdateModifier(modifier);
     }
 
     [ClientRpc]
-    private void AddForceClientRPC(Vector3 force, ForceMode forceMode, ClientRpcParams clientRpcParams)
+    public void AddForceClientRPC(Vector3 force, ForceMode forceMode, ClientRpcParams clientRpcParams = default)
     {
         RB.AddForce(force, forceMode);
     }

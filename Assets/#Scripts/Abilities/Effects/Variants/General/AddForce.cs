@@ -83,6 +83,10 @@ public sealed class AddForce : Effect
         // Movement is networked and needs a RPC to set force
         if (movement.IsOwner) movement.RB.AddForce(finalForce, _forceMode);
         else movement.AddForceServerRpc(movement.OwnerClientId, finalForce, _forceMode);
+
+        if (movement.IsOwner) movement.RB.AddForce(finalForce, _forceMode);
+        else if (movement.IsServer) movement.AddForceClientRPC(finalForce, _forceMode);
+        else movement.AddForceServerRpc(movement.OwnerClientId, finalForce, _forceMode);
     }
 
     public Vector3 CalculateForce(GameObject target, Transform originT, EffectModifiers effectMods)
