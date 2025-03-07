@@ -886,7 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetMode: 0
-  _amount: 1
+  _amount: 1.01
 --- !u!1 &6717525166634254892
 GameObject:
   m_ObjectHideFlags: 0

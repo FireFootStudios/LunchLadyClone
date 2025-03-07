@@ -7,7 +7,7 @@
 - Kick effects are delayed but use initial raycast to hit, this means you cant dodge it!
 
 
-
+- Revive works???
 
 
 

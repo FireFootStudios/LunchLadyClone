@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public sealed class Modifier : Effect
@@ -33,11 +34,14 @@ public sealed class Modifier : Effect
             //else movement.AddOrUpdateModifier(_modifier);
 
             // If we are owner, we can just directly apply the mod
-            if (movement.IsOwner) movement.AddOrUpdateModifier(_modifier);
-            else movement.AddOrUpdateModifierServerRpc(movement.OwnerClientId, _modifier);
+            //if (movement.IsOwner) movement.AddOrUpdateModifier(_modifier);
+            //else movement.AddOrUpdateModifierServerRpc(movement.OwnerClientId, _modifier);
 
             if (movement.IsOwner) movement.AddOrUpdateModifier(_modifier);
-            else if (movement.IsServer) movement.AddOrUpdateModifierClientRPC(_modifier);
+            else if (movement.IsServer) movement.AddOrUpdateModifierClientRPC(_modifier, new ClientRpcParams
+            {
+                Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { movement.OwnerClientId } }
+            }););
             else movement.AddOrUpdateModifierServerRpc(movement.OwnerClientId, _modifier);
 
             if (_stopTarget) movement.RB.linearVelocity = Vector3.zero;
