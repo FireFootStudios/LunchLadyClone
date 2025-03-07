@@ -17,12 +17,13 @@ public sealed class PlayerAnimation : MonoBehaviour
 
     private const string _hasMoveInputStr = "HasMoveInput";
     private const string _velScaleStr = "VelScale";
-    private const string _sprintingStr = "Sprinting";
+    private const string _sprintingStr = "IsSprinting";
     private const string _crouchedStr = "IsCrouching";
     private const string _actionLoopingStr = "ActionLooping";
     private const string _moveInputX = "MoveInputX";
     private const string _moveInputY = "MoveInputY";
     private const string _downStr = "IsDown";
+    private const string _kickingStr = "IsKicking";
 
     
     
@@ -180,6 +181,7 @@ public sealed class PlayerAnimation : MonoBehaviour
         //MOVE INPUT
         _animator.SetBool(_hasMoveInputStr, _player.HasMoveInput == true && _player.Movement.CurrentMoveSpeed > 0.25f);
         _animator.SetBool(_sprintingStr, _player.IsSprinting);
+        _animator.SetBool(_kickingStr, _player.KickAbility && _player.KickAbility.IsFiring);
         _animator.SetBool(_crouchedStr, _player.CrouchAbility && _player.CrouchAbility.IsFiring);
 
         //Calculate move input values (localized to player and scaled to maxspeed)
