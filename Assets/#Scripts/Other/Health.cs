@@ -78,7 +78,7 @@ public sealed class Health : NetworkBehaviour
         newCurrent += delta;
 
         // Kill if close to 0 or negative
-        if (newCurrent <= 0.001f && Data.canBeDamaged) Kill();
+        if (newCurrent <= 0.001f && Data.canBeDamaged) Kill ();
 
         // Clamp between 0 and max
         newCurrent = Mathf.Clamp(newCurrent, 0.0f, Max);
@@ -127,7 +127,8 @@ public sealed class Health : NetworkBehaviour
     public void Kill()
     {
         if (IsDead) return;
-        if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
+        //if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
+        if (!IsSpawned || !IsOwner) return;
 
         _isDead.Value = true;
     }
@@ -136,7 +137,8 @@ public sealed class Health : NetworkBehaviour
     public void Revive_Server()
     {
         if (!IsDead) return;
-        if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
+        //if (NetworkManager && NetworkManager.Singleton.IsListening && !IsHost) return;
+        if (!IsSpawned || !IsOwner) return;
 
         Resett();
     }
