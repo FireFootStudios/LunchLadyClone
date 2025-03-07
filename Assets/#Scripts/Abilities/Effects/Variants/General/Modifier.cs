@@ -41,7 +41,7 @@ public sealed class Modifier : Effect
             else if (movement.IsServer) movement.AddOrUpdateModifierClientRPC(_modifier, new ClientRpcParams
             {
                 Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { movement.OwnerClientId } }
-            }););
+            });
             else movement.AddOrUpdateModifierServerRpc(movement.OwnerClientId, _modifier);
 
             if (_stopTarget) movement.RB.linearVelocity = Vector3.zero;
