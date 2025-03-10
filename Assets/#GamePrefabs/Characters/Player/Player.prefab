@@ -648,6 +648,8 @@ MonoBehaviour:
     elapsed: 0
   _player: {fileID: 2083126700030534831}
   _collider: {fileID: 3372922694264074156}
+  _smoothTimeDown: 0.2
+  _smoothTimeUp: 0.2
   _crouchedCameraOffset: {x: 0, y: 1, z: 0.3}
   _crouchedFocusTPos: {x: 0, y: 1, z: 0}
   _crouchedColliderHeight: 1
@@ -2096,7 +2098,7 @@ MonoBehaviour:
   _hitTriggers: 0
   _applyEffectsDelay: 0.25
   _clearVelOnKickStart: 1
-  _range: 1.5
+  _range: 2
   _baseKickForce: 0
   _multiplierDead: 0
   _attemptKickBuffer: 0.05
@@ -3004,6 +3006,18 @@ PrefabInstance:
     - target: {fileID: 6702452775833045822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997608876170334822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997608876170334822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997608876170334822, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1422045141432560820, guid: d1b956e55eb0c9e4a8fb55bdaf86b52e, type: 3}

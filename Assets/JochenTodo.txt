@@ -18,7 +18,6 @@
 
 
 
-- Fix skillcheck game (cancel not working)
 
 
 
@@ -26,7 +25,6 @@
 
 * Smooth crouch
 * Better kick
-* kicknhell shader
 
 
 - Test
@@ -45,6 +43,7 @@
 	-> Voice SFX + armor SFX
 
 
+- Fix skillcheck game (cancel not working)
 
 
 ##########################################################################
