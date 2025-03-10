@@ -1,10 +1,6 @@
 
 
 
-- Kick surface impact sfx/vfx
-	-> Metal
-	-> Stone
-	-> Wood
 
 
 
@@ -12,22 +8,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-* Kick feedback
-	-> Surfact impact SFX/VFX
-	-> Voice SFX + armor SFX
 
 
 
@@ -35,6 +15,13 @@
 ##########################################################################
 
  
+
+
+ 
+* Kick feedback
+	-> Surfact impact SFX/VFX
+	-> Voice SFX + armor SFX
+
 
 * Camera offset coroutien scale with speed instead of when press sprint button
 
