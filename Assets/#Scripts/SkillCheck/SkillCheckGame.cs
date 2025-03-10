@@ -91,7 +91,9 @@ public abstract class SkillCheckGame : MonoBehaviour
         if (delay > 0.0f)
             yield return new WaitForSeconds(delay);
 
-        _resultTCS.SetResult(succes);
+        if (_resultTCS != null && _resultTCS.Task != null && _resultTCS.Task.Status == TaskStatus.Running)
+            _resultTCS.SetResult(succes);
+
         InProgress = false;
         GameEnded(succes);
 

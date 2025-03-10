@@ -281,8 +281,8 @@ public sealed class PlayerCameras : MonoBehaviour
         if (!_player) return;
 
         // Localize our local spawn poss offset to the player
-        Vector3 localizedOffset = _player.transform.TransformPoint(_spawner.SpawnInfo.localPos);
-        Vector3 desiredPos = localizedOffset + _tweenTarget.localPosition + _extraOffset;
+        Vector3 localizedOffset = _player.transform.TransformPoint(_spawner.SpawnInfo.localPos + _extraOffset);
+        Vector3 desiredPos = localizedOffset + _tweenTarget.localPosition;
 
         // Smoothly interpolate between current camera position and desired position
         //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPos, _playerFollowSmoothSpeed);

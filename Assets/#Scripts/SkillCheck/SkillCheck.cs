@@ -108,8 +108,8 @@ public class SkillCheck : NetworkBehaviour
 
         TargetPlayer.Movement.RemoveMod(_playerMoveMod.Source);
 
-        if (PlayingGameTCS != null && PlayingGameTCS.Task != null)
-            PlayingGameTCS.TrySetResult(false);
+        SkillCheckManager.Instance.TryEndGame();
+        PlayingGameTCS = null;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -192,8 +192,8 @@ public class SkillCheck : NetworkBehaviour
         TimedOut = true;
 
         TargetPlayer.Movement.RemoveMod(_playerMoveMod.Source);
-
-        if (PlayingGameTCS != null && PlayingGameTCS.Task != null) 
-            PlayingGameTCS.TrySetResult(false);
+        
+        SkillCheckManager.Instance.TryEndGame();
+        PlayingGameTCS = null;
     }
 }

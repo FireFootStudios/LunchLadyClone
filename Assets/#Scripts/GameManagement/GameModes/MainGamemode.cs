@@ -99,6 +99,7 @@ public sealed class MainGamemode : GameMode
         if (!IsHost) return;
 
         //_gameManager.SceneData.EscapeHitBox.OnTargetEnter += OnEnterEscapeHB;
+        _gameManager.SceneData.EscapeHitBox.OnTargetsChange -= OnEscapeHBChange;
         _gameManager.SceneData.EscapeHitBox.OnTargetsChange += OnEscapeHBChange;
 
         _papersCollected.Value = 0;

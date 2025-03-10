@@ -6,9 +6,9 @@
 
 
 
-
-
-
+* Kick feedback
+	-> Surfact impact SFX/VFX
+	-> Voice SFX + armor SFX
 
 
 
@@ -18,32 +18,27 @@
 
 
  
-* Camera offset coroutien scale with speed instead of when press sprint button
-* Kick feedback
-	-> Surfact impact SFX/VFX
-	-> Voice SFX + armor SFX
+
 
 
 
 * AI improve (clear/better aggro + search + chase longer/more consistent + min los time before aggro)
 
-* Downed state (camera move?)
-* Skillcheck difficulties (certain chests or objects can be harder to unlock)
-* Chase music
-* Player name rotate around y only
 
-* Dont lock all chests (script that will lock x amount of chests?)
--> This script can manage all game difficulty related stuff
 
-* When a server rpc is called by a client to chagne something, do a check if its server owned, in that case we dont need to do a client rpc (movement + health)
-* Interactable feedback
+
+
+
+
+
 
 # BUGS
 
 * Play again when multiplayer (could be the gamemode immediatly sets back to fialed/end session?)
 * Alt tab breaks game in build
 * Voice channel brakes if someone disconnects?
-
+* Jester ran away randomly at end gate after killing target (there were many others)
+* Play again too many players
 
 
 
@@ -53,27 +48,43 @@
 
 
 
-* Oil
-* Ai wander in rooms?
-* Ai doesnt follow in room anymore???
-- For testing (single player), run in local host mode?
-- Spawn in enemy via scene data after players?
-- Wander to close point, bad guy should wander around current place more?
-
-- Can try handling player leave
-
-
-
-
-
 * Fix raycasts...
 	-> Use actual camera rotation in case of player  (somehow) (make t on player that mimics camera rot, link this as origin t instead, also use this as direction instead of dir to target)
 	-> sometimes raycast is hitting random object still.....
 
+* Setup session (based on difficulty)
+	-> Dont lock all chests
+	-> Randomise health
+	-> This script can manage all game difficulty related stuff
+
+MAYBE
+
+* Oil
+* Ai wander in rooms?
+* For testing (single player), run in local host mode?
+* Spawn in enemy via scene data after players?
+* Wander to close point, bad guy should wander around current place more?
+* Try handling player leave
+* Player name rotate around y only
+* Chase music
+* Downed state (camera move?)
+* Skillcheck difficulties (certain chests or objects can be harder to unlock)
 
 
 
 
+
+
+
+
+* TODO full game
+
+- Add pausing
+- Add settings + save functionality
+- Add steamworks functionality
+- Achievements
+- Character selection screeen (3D lobby)
+- Different difficulty gamemodes
 
 
 

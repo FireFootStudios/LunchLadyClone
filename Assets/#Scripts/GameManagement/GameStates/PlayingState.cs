@@ -37,12 +37,12 @@ public sealed class PlayingState : GameState
 #if !UNITY_EDITOR
     private void OnApplicationFocus(bool focus)
     {
-        if (!focus) SetPause(true);
+        //if (!focus) SetPause(true);
     }
 
     private void OnApplicationPause(bool pause)
     {
-        if (pause) SetPause(true);
+        //if (pause) SetPause(true);
     }
 
 #endif

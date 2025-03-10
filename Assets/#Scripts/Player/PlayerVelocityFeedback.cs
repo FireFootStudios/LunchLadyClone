@@ -47,6 +47,8 @@ public sealed class PlayerVelocityFeedback : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!_player || !_player.PlayerCameras || !_player.IsOwner) return;
+
         float velPerc = Mathf.InverseLerp(_generalVelScaleBounds.x, _generalVelScaleBounds.y, _player.Movement.RB.linearVelocity.magnitude);
 
         UpdateFOV(velPerc);

@@ -1414,8 +1414,8 @@ MonoBehaviour:
   _windPitchBounds: {x: 0.8, y: 1.5}
   _windChangeSpeed: 1
   _cameraOffsetVelScaleBounds: {x: 0, y: 6}
-  _maxCameraOffset: {x: 0, y: -0.1, z: 0.25}
-  _cameraOffsetSmoothSpeed: 0.15
+  _maxCameraOffset: {x: 0, y: -0.15, z: 0.3}
+  _cameraOffsetSmoothSpeed: 5
 --- !u!114 &6857161997436102270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2090,7 +2090,7 @@ MonoBehaviour:
     maxSpeedMultiplier: 0
     accelerationMultiplier: 0
     decelerationMultiplier: 1
-    rotationMultiplier: 0
+    rotationMultiplier: 1
     gravityMultiplier: 1
     overrideAnglePauseMove: 0
     anglePauseMove: 0

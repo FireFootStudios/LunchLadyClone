@@ -43,6 +43,6 @@ public sealed class SkillCheckManager : SingletonBaseNetwork<SkillCheckManager>
     {
         if (!CurrentGame) return false;
 
-        return CurrentGame.ForceEnd();
+        return CurrentGame.ForceEnd(false);
     }
 }
