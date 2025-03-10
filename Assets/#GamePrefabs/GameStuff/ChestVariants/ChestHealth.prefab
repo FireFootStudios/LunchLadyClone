@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5654469319831245947, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
+      propertyPath: _onDamage
+      value: 
+      objectReference: {fileID: 5242753226797094234}
     - target: {fileID: 6856617344918351640, guid: 09d43012d2d693b4f87ebbf600c13f08, type: 3}
       propertyPath: m_Name
       value: ChestHealth

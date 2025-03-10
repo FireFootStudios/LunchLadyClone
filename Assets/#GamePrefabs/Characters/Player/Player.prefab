@@ -2096,7 +2096,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   _hitTriggers: 0
-  _applyEffectsDelay: 0.25
+  _applyEffectsDelay: 0.5
+  _checkInRangeAfterDelay: 1
   _clearVelOnKickStart: 1
   _range: 2
   _baseKickForce: 0
@@ -2750,6 +2751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetMode: 0
+  _player: {fileID: 2083126700030534831}
   _overrideMoveData:
   - MoveType: 0
     MoveID: 0
@@ -2793,6 +2795,9 @@ MonoBehaviour:
     maxSpeedBufferDeceleration: 300
     maxSpeedBufferMinTime: 1
     maxSpeedBufferAccuracy: 0
+  _cameraOffset: {x: 0, y: 1.65, z: 0.4}
+  _smoothTimeIn: 0.15
+  _smoothTimeOut: 0.15
   _staminaUsage: 0
   _staminaRegen: 2
   _maxStamina: 7

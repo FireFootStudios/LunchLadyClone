@@ -3,7 +3,13 @@ using UnityEngine;
 
 public sealed class Sprint : Effect
 {
+    [SerializeField] private PlayerN _player = null;
     [SerializeField, Tooltip("Target move data for when ability is active")] private List<MoveData> _overrideMoveData = new List<MoveData>();
+
+    [Space]
+    [SerializeField] private Vector3 _cameraOffset = new Vector3(0.0f, 1.0f, 0.0f);
+    [SerializeField] private float _smoothTimeIn = 0.1f;
+    [SerializeField] private float _smoothTimeOut = 0.1f;
 
     [Header("Stamina")]
     [SerializeField] private float _staminaUsage = 1.0f;
@@ -85,11 +91,13 @@ public sealed class Sprint : Effect
         if (!_movement) return;
 
         _movement.MoveData = _overrideMoveData;
+        _player.PlayerCameras.DoOffsetCo(_cameraOffset, _smoothTimeIn);
     }
 
     public override void OnCancel()
     {
         _movement.MoveData = _defaultMoveData;
+        _player.PlayerCameras.DoOffsetCo(_player.DefaultCameraOffset, _smoothTimeOut, 100, false);
     }
 
     public override bool IsFinished()

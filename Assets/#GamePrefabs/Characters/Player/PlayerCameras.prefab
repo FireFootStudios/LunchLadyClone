@@ -66,7 +66,7 @@ MonoBehaviour:
   _landPunchOvershoot: 0.5
   _landElasticity: 0.5
   _dmgShakeStrengthMin: {x: 0, y: 0, z: 0}
-  _dmgShakeStrengthMax: {x: 2, y: 2, z: 0.5}
+  _dmgShakeStrengthMax: {x: 0.25, y: 0.25, z: 0.25}
   _dmgShakeScaleBounds: {x: 0, y: 1}
   _dmgShakeDuration: 1
   _dmgShakeVibrato: 17
@@ -78,12 +78,15 @@ MonoBehaviour:
   _JumpPunchVibrato: 10
   _JumpPunchEase: 1
   _JumpPunchOvershoot: 0.5
-  _kickPunchStrength: {x: 0.2, y: 0, z: -0.5}
-  _kickPunchDuration: 0.5
-  _kickPunchVibrato: 5
-  _kickPunchEase: 27
-  _kickPunchOvershoot: 0.5
-  _kickElasticity: 0.5
+  _kickTargetOffset: {x: 0, y: 1.6, z: 0}
+  _kickSmoothIn: 0.25
+  _kickSmoothOut: 0.15
+  _kickHitStrength: {x: 0.05, y: 0.05, z: 0.05}
+  _kickHitShakeDuration: 0.5
+  _kickHitShakeVibrato: 10
+  _kickHitShakeEase: 27
+  _kickHitShakeOvershoot: 0.5
+  _kickHitShakeFadeOut: 0
 --- !u!114 &1078016412946566565
 MonoBehaviour:
   m_ObjectHideFlags: 0

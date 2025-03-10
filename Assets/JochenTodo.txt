@@ -1,6 +1,10 @@
 
 
 
+- Kick surface impact sfx/vfx
+	-> Metal
+	-> Stone
+	-> Wood
 
 
 
@@ -20,37 +24,19 @@
 
 
 
-
-
-
-* Smooth crouch
-* Better kick
-
-
-- Test
-
-- Go thru miro
-
-
-
-
-
-- Kick effects are delayed but use initial raycast to hit, this means you cant dodge it!
 
 * Kick feedback
-	-> Tweens (hit/miss tween)
 	-> Surfact impact SFX/VFX
 	-> Voice SFX + armor SFX
 
 
-- Fix skillcheck game (cancel not working)
 
 
 ##########################################################################
 
  
 
-
+* Camera offset coroutien scale with speed instead of when press sprint button
 
 * Downed state (camera move?)
 
@@ -64,7 +50,7 @@
 -> This script can manage all game difficulty related stuff
 
 * When a server rpc is called by a client to chagne something, do a check if its server owned, in that case we dont need to do a client rpc (movement + health)
-
+* Interactable feedback
 
 # BUGS
 

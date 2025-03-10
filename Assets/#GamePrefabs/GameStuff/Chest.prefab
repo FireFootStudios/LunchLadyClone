@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 8752772920320130676}
   - component: {fileID: 6877017979212919951}
   - component: {fileID: 8356646777211736431}
+  - component: {fileID: 5654469319831245947}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Interactible
@@ -378,6 +379,8 @@ MonoBehaviour:
   _pingPong: 0
   _skillCheck: {fileID: 0}
   _health: {fileID: 0}
+  _interactRequireDeath: 1
+  _interactOnDeath: 1
   _enableOnInteractGos: []
   _disableOnInteractGos: []
   _animators:
@@ -459,3 +462,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 0.25, z: 0.1}
   m_Center: {x: 0, y: 0.15, z: 0.22}
+--- !u!114 &5654469319831245947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856617344918351640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b552c9b17876ee347879d099e32ef8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetT: {fileID: 6856617344918599388}
+  _onDamage: {fileID: 0}
+  _strength: {x: 0.05, y: 0.05, z: 0.05}
+  _duration: 0.5
+  _vibrato: 20
+  _ease: 30
+  _overshoot: 1
+  _fadeOut: 1
+  _randomness: 90
+  _randomnessMod: 1
+  _snapping: 0

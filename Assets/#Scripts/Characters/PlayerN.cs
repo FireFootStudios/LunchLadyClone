@@ -96,6 +96,7 @@ public sealed class PlayerN : NetworkBehaviour
     private Vector2 MoveInputVec { get; set; }
 
     public PlayerCameras PlayerCameras { get { return _playerCameras; } }
+    public Vector3 DefaultCameraOffset { get { return _cameraOffset; } }
 
     public Ability JumpAbility { get { return _jumpAbility; } }
     public Ability SprintAbility { get { return _sprintAbility; } }

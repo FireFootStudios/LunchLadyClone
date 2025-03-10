@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public sealed class PlayerCameras : MonoBehaviour
@@ -51,27 +52,31 @@ public sealed class PlayerCameras : MonoBehaviour
     [SerializeField] private Ease _JumpPunchEase = Ease.Linear;
     [SerializeField] private float _JumpPunchOvershoot = 0.5f;
 
-    [Header("Tween Kick")]
-    [SerializeField] private Vector3 _kickPunchStrength = Vector3.zero;
-    //[SerializeField] private Vector3 _kickPunchStrengthMax = Vector3.zero;
-    //[SerializeField, Tooltip("Bounds used to lerp between min and max Punch strength based on kick velocity mag")] private Vector2 _kickPunchScaleBounds = Vector3.zero;
+    [Header("Tween Kick General")]
+    [SerializeField] private Vector3 _kickTargetOffset = Vector3.zero;
+    [SerializeField] private float _kickSmoothIn = 0.25f;
+    [SerializeField] private float _kickSmoothOut = 0.25f;
+
+    [Header("Tween Kick hit")]
+    [SerializeField] private Vector3 _kickHitStrength = Vector3.zero;
     [Space]
-    [SerializeField] private float _kickPunchDuration = 0.25f;
-    [SerializeField] private int _kickPunchVibrato = 10;
-    [SerializeField] private Ease _kickPunchEase = Ease.Linear;
-    [SerializeField] private float _kickPunchOvershoot = 0.5f;
-    [SerializeField] private float _kickElasticity = 1.0f;
+    [SerializeField] private float _kickHitShakeDuration = 0.25f;
+    [SerializeField] private int _kickHitShakeVibrato = 10;
+    [SerializeField] private Ease _kickHitShakeEase = Ease.Linear;
+    [SerializeField] private float _kickHitShakeOvershoot = 0.5f;
+    [SerializeField] private bool _kickHitShakeFadeOut = false;
 
 
     private GameManager _gameManager = null;
     private PlayerN _player = null;
 
     private Tween _currentTween = null;
+    private Coroutine _offsetCo = null;
 
     // Synced with settings
     private bool _invertX = false;
     private bool _invertY = false;
-    private bool _useScreenShake = false;
+    private bool _useScreenShake = true;
 
     private Vector3 _velocity = Vector3.zero;
 
@@ -100,9 +105,12 @@ public sealed class PlayerCameras : MonoBehaviour
 
         _player = player;
 
-
         _playerKick = _player.GetComponentInChildren<Kick>();
-        if (_playerKick) _playerKick.OnKickHitOrMiss += OnKickHitOrMiss;
+        if (_playerKick)
+        {
+            _playerKick.OnKickHitOrMiss += OnKickHitOrMiss;
+            _playerKick.OnHit += OnKickHit;
+        } 
 
         // Jump
         if (_player.JumpAbility) _player.JumpAbility.OnFire += OnPlayerJump;
@@ -112,6 +120,23 @@ public sealed class PlayerCameras : MonoBehaviour
 
         // Health
         _player.Health.OnDamaged += OnPlayerDamaged;
+    }
+
+    // Auto goes back to default
+    public void DoOffsetCoPunch(Vector3 targetOffset, float smoothIn, float smoothOut, float maxSpeed = 100.0f, bool resetFirst = true)
+    {
+        if (!_player) return;
+
+        if (_offsetCo != null) StopCoroutine(_offsetCo);
+        _offsetCo = StartCoroutine(OffsetCoPunch(targetOffset, smoothIn, smoothOut, maxSpeed, resetFirst));
+    }
+
+    public void DoOffsetCo(Vector3 targetOffset, float smoothIn, float maxSpeed = 100.0f, bool resetFirst = true)
+    {
+        if (!_player) return;
+
+        if (_offsetCo != null) StopCoroutine(_offsetCo);
+        _offsetCo = StartCoroutine(OffsetCo(targetOffset, smoothIn, maxSpeed, resetFirst));
     }
 
     private void Awake()
@@ -208,6 +233,57 @@ public sealed class PlayerCameras : MonoBehaviour
     }
     #endregion
 
+
+    private IEnumerator OffsetCoPunch(Vector3 targetOffset, float smoothIn, float smoothOut, float maxSpeed = 100.0f, bool resetFirst = true)
+    {
+        // Smooth camera transition
+        Vector3 velocity = Vector3.zero;
+        SpawnInfo spawnInfo = _spawner.SpawnInfo;
+        Vector3 defaultOffset = _player.DefaultCameraOffset;
+
+        // Reset
+        if (resetFirst)
+            spawnInfo.localPos = defaultOffset;
+
+        // To target pos
+        while (!Utils.AreVectorsEqual(spawnInfo.localPos, targetOffset))
+        {
+            spawnInfo.localPos = Vector3.SmoothDamp(spawnInfo.localPos, targetOffset, ref velocity, smoothIn, maxSpeed);
+            yield return null;
+        }
+
+        // Back to default
+        while (!Utils.AreVectorsEqual(spawnInfo.localPos, defaultOffset))
+        {
+            spawnInfo.localPos = Vector3.SmoothDamp(spawnInfo.localPos, defaultOffset, ref velocity, smoothOut, maxSpeed);
+            yield return null;
+        }
+
+        spawnInfo.localPos = defaultOffset;
+        yield return null;
+    }
+
+    private IEnumerator OffsetCo(Vector3 targetOffset, float smooth, float maxSpeed = 100.0f, bool resetFirst = true)
+    {
+        // Smooth camera transition
+        Vector3 velocity = Vector3.zero;
+        SpawnInfo spawnInfo = _spawner.SpawnInfo;
+        Vector3 defaultOffset = _player.DefaultCameraOffset;
+
+        // Reset
+        if (resetFirst)
+            spawnInfo.localPos = defaultOffset;
+
+        // To target pos
+        while (!Utils.AreVectorsEqual(spawnInfo.localPos, targetOffset))
+        {
+            spawnInfo.localPos = Vector3.SmoothDamp(spawnInfo.localPos, targetOffset, ref velocity, smooth, maxSpeed);
+            yield return null;
+        }
+        spawnInfo.localPos = targetOffset;
+        yield return null;
+    }
+
     private void OnPlayerGrounded()
     {
         if (!_player) return;
@@ -228,53 +304,19 @@ public sealed class PlayerCameras : MonoBehaviour
     private void OnKickHitOrMiss()
     {
         if (!_player || !_playerKick) return;
-        if (!(_kickPunchDuration > 0.0f)) return;
+
+        DoOffsetCoPunch(_kickTargetOffset, _kickSmoothIn, _kickSmoothOut);
+    }
+
+    private void OnKickHit(RaycastHit arg1, GameObject arg2, float arg3)
+    {
+        if (!_useScreenShake) return;
 
         ResetCamera();
 
-
-
-        //Vector3 punchStrength = _tweenTarget.InverseTransformDirection(_kickPunchStrength);
-        //Debug.DrawRay(_tweenTarget.position, punchStrength, Color.white, 2.0f);
-
-        //_currentTween = _tweenTarget.DOPunchPosition(punchStrength, _kickPunchDuration, _kickPunchVibrato, _kickElasticity, false).SetEase(_kickPunchEase, _kickPunchOvershoot);
-
-        // Get the camera's right and backward directions
-        //Vector3 cameraRight = Camera.main.transform.right;
-        //Vector3 cameraBackward = -Camera.main.transform.forward;
-
-        //// Scale these directions based on your desired strength (your local space vector)
-        //Vector3 punchDirection = (cameraRight * _kickPunchStrength.x) + (cameraBackward * _kickPunchStrength.z);
-
-        //// Punch in the desired direction using the local space strength vector
-        //_currentTween = _tweenTarget.DOPunchPosition(punchDirection, _kickPunchDuration, _kickPunchVibrato, _kickElasticity, false)
-        //    .SetEase(_kickPunchEase, _kickPunchOvershoot);
-        //float scalePerc = Mathf.InverseLerp(_kickPunchScaleBounds.x, _kickPunchScaleBounds.y, groundedColl.relativeVelocity.magnitude);
-        //Vector3 punchStrength = Vector3.Lerp(_kickPunchStrengthMin, _kickPunchStrengthMax, scalePerc);
-
-        // Localize punch strength to camera
-        //Vector3 punchStrength = _tweenTarget.forward * _kickPunchStrength.z + _tweenTarget.right * _kickPunchStrength.x + _tweenTarget.up * _kickPunchStrength.y;
-        //punchStrength = _tweenTarget.InverseTransformVector(punchStrength);
-        //Debug.DrawRay(_tweenTarget.position, _kickPunchStrength, Color.white, 2.0f);
-        //Debug.DrawRay(_tweenTarget.position, _player.PlayerCameras.transform.TransformDirection(_kickPunchStrength), Color.red, 2.0f);
-        //Debug.DrawRay(_tweenTarget.position, _player.PlayerCameras.transform.InverseTransformDirection(_kickPunchStrength), Color.green, 2.0f);
-
-        //_currentTween = _tweenTarget.DOPunchPosition(punchStrength, _kickPunchDuration, _kickPunchVibrato, _kickElasticity, false).SetEase(_kickPunchEase, _kickPunchOvershoot);
-
-
-
-        //Vector3 punchPos = _tweenTarget.forward * _kickPunchStrength.z + _tweenTarget.right * _kickPunchStrength.x + _tweenTarget.up * _kickPunchStrength.y;
-        ////punchStrength = _tweenTarget.InverseTransformVector(punchStrength);
-        //Debug.DrawLine(_tweenTarget.position, punchPos, Color.white, 2.0f);
-
-        //_currentTween = _tweenTarget.DOLocalMove(punchPos, _kickPunchDuration / 2.0f, false).SetEase(_kickPunchEase, _kickPunchOvershoot);
-        ////_currentTween = _tweenTarget.DOLocalMove(Vector3.zero, _kickPunchDuration / 2.0f, false).SetEase(_kickPunchEase, _kickPunchOvershoot).SetDelay(_kickPunchDuration / 2.0f);
-
-        //_currentTween = _tweenTarget.DOShakePosition(_kickPunchDuration, _kickPunchStrength, _kickPunchVibrato, 0.0f, false);/*.SetEase(_kickPunchEase, _kickPunchOvershoot);*/
-        //_currentTween = _mainCamera.DOShakePosition(_kickPunchDuration, _kickPunchStrength, _kickPunchVibrato, 90, _kickPunchVibrato, _shakeRandomnessMode)
-        //    .SetEase(_kickShakeEase, _kickShakeOvershoot).SetUpdate(true);
+        _currentTween = _mainCamera.DOShakePosition(_kickHitShakeDuration, _kickHitStrength, _kickHitShakeVibrato, 90, _kickHitShakeFadeOut, _shakeRandomnessMode)
+            .SetEase(_kickHitShakeEase, _kickHitShakeOvershoot);
     }
-
 
     private void OnPlayerDamaged(float amount, GameObject source)
     {
@@ -282,12 +324,12 @@ public sealed class PlayerCameras : MonoBehaviour
 
         ResetCamera();
 
-        float scalePerc = Mathf.InverseLerp(_dmgShakeScaleBounds.x, _dmgShakeScaleBounds.y, amount);
+        float scalePerc = Mathf.InverseLerp(_dmgShakeStrengthMin.x, _dmgShakeScaleBounds.y, amount);
         Vector3 shakeStrength = Vector3.Lerp(_dmgShakeStrengthMin, _dmgShakeStrengthMax, scalePerc);
         //shakeStrength = _tweenTarget.InverseTransformVector(shakeStrength);
 
         _currentTween = _mainCamera.DOShakePosition(_dmgShakeDuration, shakeStrength, _dmgShakeVibrato, 90, _dmgShakeFadeOut, _shakeRandomnessMode)
-            .SetEase(_dmgShakeEase, _dmgShakeOvershoot).SetUpdate(true);
+            .SetEase(_dmgShakeEase, _dmgShakeOvershoot);
     }
 
     private void OnPlayerJump()

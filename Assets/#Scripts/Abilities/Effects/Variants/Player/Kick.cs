@@ -10,6 +10,7 @@ public sealed class Kick : TargettingEffect
     [SerializeField] private LayerMask _kickableLayerMask = 0;
     [SerializeField] private bool _hitTriggers = false;
     [SerializeField] private float _applyEffectsDelay = 0.05f;
+    [SerializeField] private bool _checkInRangeAfterDelay = true;
     [SerializeField, Tooltip("Before delay")] private bool _clearVelOnKickStart = true;
 
     [Space]
@@ -190,6 +191,14 @@ public sealed class Kick : TargettingEffect
         {
             float delay = _applyEffectsDelay - Ability.ElapsedFiring;
             if (delay > 0.0f) yield return new WaitForSeconds(delay);
+        }
+
+        // Can miss still
+        if (_checkInRangeAfterDelay && !DoKickCast(out hitInfo, out hitGo, out isDead, true))
+        {
+            PerformingKick = false;
+            OnFail?.Invoke();
+            yield break;
         }
 
         // Add force

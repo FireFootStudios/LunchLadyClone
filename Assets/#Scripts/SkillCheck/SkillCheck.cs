@@ -106,8 +106,10 @@ public class SkillCheck : NetworkBehaviour
         // Cancel skillcheck
         WaitingServerResponse = false;
 
+        TargetPlayer.Movement.RemoveMod(_playerMoveMod.Source);
+
         if (PlayingGameTCS != null && PlayingGameTCS.Task != null)
-            PlayingGameTCS.TrySetCanceled();
+            PlayingGameTCS.TrySetResult(false);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -192,6 +194,6 @@ public class SkillCheck : NetworkBehaviour
         TargetPlayer.Movement.RemoveMod(_playerMoveMod.Source);
 
         if (PlayingGameTCS != null && PlayingGameTCS.Task != null) 
-            PlayingGameTCS.TrySetCanceled();
+            PlayingGameTCS.TrySetResult(false);
     }
 }

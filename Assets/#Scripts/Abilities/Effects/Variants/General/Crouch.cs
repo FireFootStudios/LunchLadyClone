@@ -20,7 +20,6 @@ public sealed class Crouch : Effect
     [SerializeField] private Vector3 _crouchedColliderCenter = Vector3.zero;
 
     private bool _defaultsInitialized = false;
-    private Vector3 _defaultCameraOffset = Vector3.zero;
     private Vector3 _defaultFocusTPos = Vector3.zero;
 
     private float _defaultColliderHeight = 0.0f;
@@ -46,8 +45,14 @@ public sealed class Crouch : Effect
     {
         if (!_defaultsInitialized) return;
 
-        StopAllCoroutines();
-        StartCoroutine(SmoothDown());
+        _player.Movement.AddOrUpdateModifier(_moveMod, false);
+
+        // These are instant for now
+        _player.TargetInfo.FocusT.localPosition = _crouchedFocusTPos;
+        _collider.center = _crouchedColliderCenter;
+        _collider.height = _crouchedColliderHeight;
+
+        _player.PlayerCameras.DoOffsetCo(_crouchedCameraOffset, _smoothTimeDown);
     }
 
     private void InitDefaults()
@@ -56,7 +61,6 @@ public sealed class Crouch : Effect
         if (!_player || !_player.PlayerCameras) return;
 
         _defaultFocusTPos = _player.TargetInfo.FocusT.localPosition;
-        _defaultCameraOffset = _player.PlayerCameras.Spawner.SpawnInfo.localPos;
         _defaultsInitialized = true;
 
         _defaultColliderCenter = _collider.center;
@@ -65,8 +69,13 @@ public sealed class Crouch : Effect
 
     public override void OnCancel()
     {
-        StopAllCoroutines();
-        StartCoroutine(SmoothUp());
+        _player.Movement.RemoveMod(_moveMod);
+
+        _player.TargetInfo.FocusT.localPosition = _defaultFocusTPos;
+        _collider.center = _defaultColliderCenter;
+        _collider.height = _defaultColliderHeight;
+
+        _player.PlayerCameras.DoOffsetCo(_player.DefaultCameraOffset, _smoothTimeUp, 100, false);
     }
 
     public override bool IsFinished()
@@ -74,50 +83,50 @@ public sealed class Crouch : Effect
         return false;
     }
 
-    private IEnumerator SmoothDown()
-    {
-        _player.Movement.AddOrUpdateModifier(_moveMod, false);
+    //private IEnumerator SmoothDown()
+    //{
+    //    _player.Movement.AddOrUpdateModifier(_moveMod, false);
 
-        // These are instant for now
-        _player.TargetInfo.FocusT.localPosition = _crouchedFocusTPos;
-        _collider.center = _crouchedColliderCenter;
-        _collider.height = _crouchedColliderHeight;
+    //    // These are instant for now
+    //    _player.TargetInfo.FocusT.localPosition = _crouchedFocusTPos;
+    //    _collider.center = _crouchedColliderCenter;
+    //    _collider.height = _crouchedColliderHeight;
 
-        // Smooth camera transition
-        Vector3 velocity = Vector3.zero;
-        SpawnInfo spawnInfoCamera = _player.PlayerCameras.Spawner.SpawnInfo;
+    //    // Smooth camera transition
+    //    Vector3 velocity = Vector3.zero;
+    //    SpawnInfo spawnInfoCamera = _player.PlayerCameras.Spawner.SpawnInfo;
 
-        while (!Utils.AreVectorsEqual(spawnInfoCamera.localPos, _crouchedCameraOffset))
-        {
-            spawnInfoCamera.localPos = Vector3.SmoothDamp(spawnInfoCamera.localPos, _crouchedCameraOffset, ref velocity, _smoothTimeDown);
-            yield return null;
-        }
-        spawnInfoCamera.localPos = _crouchedCameraOffset;
+    //    while (!Utils.AreVectorsEqual(spawnInfoCamera.localPos, _crouchedCameraOffset))
+    //    {
+    //        spawnInfoCamera.localPos = Vector3.SmoothDamp(spawnInfoCamera.localPos, _crouchedCameraOffset, ref velocity, _smoothTimeDown);
+    //        yield return null;
+    //    }
+    //    spawnInfoCamera.localPos = _crouchedCameraOffset;
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 
-    private IEnumerator SmoothUp()
-    {
-        _player.Movement.RemoveMod(_moveMod);
+    //private IEnumerator SmoothUp()
+    //{
+    //    _player.Movement.RemoveMod(_moveMod);
 
-        _player.TargetInfo.FocusT.localPosition = _defaultFocusTPos;
-        _collider.center = _defaultColliderCenter;
-        _collider.height = _defaultColliderHeight;
+    //    _player.TargetInfo.FocusT.localPosition = _defaultFocusTPos;
+    //    _collider.center = _defaultColliderCenter;
+    //    _collider.height = _defaultColliderHeight;
 
-        // Smooth camera transition
-        Vector3 velocity = Vector3.zero;
-        SpawnInfo spawnInfoCamera = _player.PlayerCameras.Spawner.SpawnInfo;
+    //    // Smooth camera transition
+    //    Vector3 velocity = Vector3.zero;
+    //    SpawnInfo spawnInfoCamera = _player.PlayerCameras.Spawner.SpawnInfo;
 
-        while (!Utils.AreVectorsEqual(spawnInfoCamera.localPos, _defaultCameraOffset))
-        {
-            spawnInfoCamera.localPos = Vector3.SmoothDamp(spawnInfoCamera.localPos, _defaultCameraOffset, ref velocity, _smoothTimeUp);
-            yield return null;
-        }
-        spawnInfoCamera.localPos = _defaultCameraOffset;
+    //    while (!Utils.AreVectorsEqual(spawnInfoCamera.localPos, _defaultCameraOffset))
+    //    {
+    //        spawnInfoCamera.localPos = Vector3.SmoothDamp(spawnInfoCamera.localPos, _defaultCameraOffset, ref velocity, _smoothTimeUp);
+    //        yield return null;
+    //    }
+    //    spawnInfoCamera.localPos = _defaultCameraOffset;
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 
     public override bool CanApply()
     {
