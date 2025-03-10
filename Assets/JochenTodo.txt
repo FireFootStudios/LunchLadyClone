@@ -18,18 +18,17 @@
 
 
  
+* Camera offset coroutien scale with speed instead of when press sprint button
 * Kick feedback
 	-> Surfact impact SFX/VFX
 	-> Voice SFX + armor SFX
 
 
-* Camera offset coroutien scale with speed instead of when press sprint button
-
-* Downed state (camera move?)
 
 * AI improve (clear/better aggro + search + chase longer/more consistent + min los time before aggro)
-* Skillcheck difficulties (certain chests or objects can be harder to unlock)
 
+* Downed state (camera move?)
+* Skillcheck difficulties (certain chests or objects can be harder to unlock)
 * Chase music
 * Player name rotate around y only
 
@@ -41,12 +40,9 @@
 
 # BUGS
 
-* Wander broken??
 * Play again when multiplayer (could be the gamemode immediatly sets back to fialed/end session?)
 * Alt tab breaks game in build
-* Skill check lock casper movement
-* Voice channel broke
-* After failing a lot skillcheck it ends instantly (something is building up and not reset )
+* Voice channel brakes if someone disconnects?
 
 
 
@@ -61,8 +57,6 @@
 * Ai wander in rooms?
 * Ai doesnt follow in room anymore???
 - For testing (single player), run in local host mode?
-- Make sure to account for pathing issues (if a player is not reachable pick another?)
-- Aggro sound (state feedback)
 - Spawn in enemy via scene data after players?
 - Wander to close point, bad guy should wander around current place more?
 

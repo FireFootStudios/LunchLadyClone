@@ -91,13 +91,13 @@ public sealed class Sprint : Effect
         if (!_movement) return;
 
         _movement.MoveData = _overrideMoveData;
-        _player.PlayerCameras.DoOffsetCo(_cameraOffset, _smoothTimeIn);
+        //_player.PlayerCameras.DoOffsetCo(_cameraOffset, _smoothTimeIn);
     }
 
     public override void OnCancel()
     {
         _movement.MoveData = _defaultMoveData;
-        _player.PlayerCameras.DoOffsetCo(_player.DefaultCameraOffset, _smoothTimeOut, 100, false);
+        //_player.PlayerCameras.DoOffsetCo(_player.DefaultCameraOffset, _smoothTimeOut, 100, false);
     }
 
     public override bool IsFinished()

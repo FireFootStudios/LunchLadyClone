@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class PlayerCameras : MonoBehaviour
@@ -82,6 +83,9 @@ public sealed class PlayerCameras : MonoBehaviour
 
     private Kick _playerKick = null;
 
+    private List<CameraOffset> _offsets = new List<CameraOffset>();
+    private Vector3 _extraOffset = Vector3.zero;
+
 
     #endregion
 
@@ -139,6 +143,61 @@ public sealed class PlayerCameras : MonoBehaviour
         _offsetCo = StartCoroutine(OffsetCo(targetOffset, smoothIn, maxSpeed, resetFirst));
     }
 
+    public void AddOrUpdateOffset(CameraOffset template, bool forceCopy = true, bool forceAdd = false)
+    {
+        if (!(template.duration > 0.0f)) return;
+
+        // Check if modifier exists and update it instead of creating new one (needs to be same source)
+        CameraOffset offset = forceAdd ? null : _offsets.Find(o => o.Source == template.Source);
+
+        if (offset == null)
+        {
+            offset = forceCopy ? template.Copy() : template;
+            _offsets.Add(offset);
+        }
+
+        // Reset elapsed in case it was reused
+        offset.Elapsed = 0.0f;
+
+        ReCalculateOffsets();
+    }
+
+    // Removes all mods which have source equal to param
+    public void RemoveOffset(GameObject source)
+    {
+        for (int i = 0; i < _offsets.Count; i++)
+        {
+            CameraOffset offset = _offsets[i];
+            if (offset.Source != source) continue;
+
+            _offsets.RemoveAt(i);
+            i--;
+        }
+
+        ReCalculateOffsets();
+    }
+
+    public void RemoveOffset(CameraOffset targetOffset)
+    {
+        for (int i = 0; i < _offsets.Count; i++)
+        {
+            CameraOffset offset = _offsets[i];
+            if (offset != targetOffset) continue;
+
+            _offsets.RemoveAt(i);
+            i--;
+        }
+
+        ReCalculateOffsets();
+    }
+
+    public void ClearOffsets()
+    {
+        _offsets.Clear();
+        ReCalculateOffsets();
+    }
+
+
     private void Awake()
     {
         _gameManager = GameManager.Instance;
@@ -158,6 +217,7 @@ public sealed class PlayerCameras : MonoBehaviour
     {
         UpdateRotation();
         SyncPlayerRotation();
+        UpdateOffsets();
     }
 
     private void LateUpdate()
@@ -222,7 +282,7 @@ public sealed class PlayerCameras : MonoBehaviour
 
         // Localize our local spawn poss offset to the player
         Vector3 localizedOffset = _player.transform.TransformPoint(_spawner.SpawnInfo.localPos);
-        Vector3 desiredPos = localizedOffset + _tweenTarget.localPosition;
+        Vector3 desiredPos = localizedOffset + _tweenTarget.localPosition + _extraOffset;
 
         // Smoothly interpolate between current camera position and desired position
         //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPos, _playerFollowSmoothSpeed);
@@ -230,6 +290,42 @@ public sealed class PlayerCameras : MonoBehaviour
         // Smoothly interpolate camera position using Vector3.SmoothDamp
         if (_playerFollowSmoothSpeed > 0.0f) transform.localPosition = Vector3.SmoothDamp(transform.position, desiredPos, ref _velocity, _playerFollowSmoothSpeed);
         else transform.localPosition = desiredPos;
+    }
+
+    private void UpdateOffsets()
+    {
+        int count = _offsets.Count;
+        for (int i = 0; i < _offsets.Count; i++)
+        {
+            CameraOffset offset = _offsets[i];
+
+            // Update mod activeness
+            offset.Elapsed += Time.deltaTime;
+            if (offset.Elapsed >= offset.duration /*&& !mod.keepAlive*/)
+            {
+                _offsets.Remove(offset);
+                i--;
+            }
+        }
+
+        // If any were removed, recalculate modifiers
+        if (count != _offsets.Count)
+            ReCalculateOffsets();
+    }
+
+    private void ReCalculateOffsets()
+    {
+        // Reset
+        _extraOffset = Vector3.zero;
+
+        // Loop over active mods (sorted on priority)
+        for (int i = 0; i < _offsets.Count; i++)
+        {
+            CameraOffset offset = _offsets[i];
+
+            // Apply mod
+            _extraOffset += offset.offset;
+        }
     }
     #endregion
 
@@ -356,12 +452,35 @@ public sealed class PlayerCameras : MonoBehaviour
 
     private void ResetCamera()
     {
-        //Kill tweens
+        // Kill tweens
         if (_currentTween != null) DOTween.Kill(_currentTween);
 
-        //Reset local pos of camera
+        // Reset local pos of camera
         _tweenTarget.localPosition = Vector3.zero;
 
         if (_mainCamera) _mainCamera.transform.localPosition = Vector3.zero;
+    }
+}
+
+[System.Serializable]
+public sealed class CameraOffset
+{
+    public Vector3 offset;
+    public float duration;
+
+    public float Elapsed { get; set; }
+    public GameObject Source { get; set; }
+
+
+    public CameraOffset Copy()
+    {
+        CameraOffset modifier = new CameraOffset();
+
+        modifier.duration = duration;
+
+        modifier.Elapsed = 0.0f;
+        modifier.Source = Source;
+
+        return modifier;
     }
 }

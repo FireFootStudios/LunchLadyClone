@@ -190,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774409716519856669, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: _moveSpeed
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4269701281568207035, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_Pivot.x
@@ -273,8 +273,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5403893291488258171, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 82.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403893291488258171, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -250
+      value: -231.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -315,7 +319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774409716519856669, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: _moveSpeed
-      value: 2.8
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 4269701281568207035, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_Pivot.x
@@ -396,6 +400,10 @@ PrefabInstance:
     - target: {fileID: 4269701281568207035, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403893291488258171, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 67.29
       objectReference: {fileID: 0}
     - target: {fileID: 5403893291488258171, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -648,6 +656,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5403893291488258171, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 71.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403893291488258171, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -100
       objectReference: {fileID: 0}
@@ -683,6 +695,10 @@ PrefabInstance:
     - target: {fileID: 1451606691889717298, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_Name
       value: Slider_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774409716519856669, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
+      propertyPath: _moveSpeed
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 4269701281568207035, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_Pivot.x
@@ -763,6 +779,10 @@ PrefabInstance:
     - target: {fileID: 4269701281568207035, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403893291488258171, guid: 1c4ec42e9c6ba2b4b81e0dcd3ecde255, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 59.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

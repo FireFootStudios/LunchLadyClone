@@ -16,19 +16,28 @@ public sealed class PlayerVelocityFeedback : MonoBehaviour
     [SerializeField] private Vector2 _windPitchBounds = new Vector2(0.8f, 1.5f);
     [SerializeField] private float _windChangeSpeed = 1.0f;
 
+    [Header("CameraOffset")]
+    [SerializeField] private Vector2 _cameraOffsetVelScaleBounds = new Vector2(0.0f, 5.0f);
+    [SerializeField] private Vector3 _maxCameraOffset = new Vector3(0.0f, -0.1f, 0.25f);
+    [SerializeField] private float _cameraOffsetSmoothSpeed = .15f;
+
+    private CameraOffset _velocityCameraOffset = null;
     //camera shake? (falling only)
     //Pitch certain sounds?
     //Blur screen edges?
 
 
     private PlayerN _player = null;
-
     private Sound _windSound = null;
 
 
     private void Awake()
     {
         _player = GetComponent<PlayerN>();
+
+        _velocityCameraOffset = new CameraOffset();
+        _velocityCameraOffset.Source = this.gameObject;
+        _velocityCameraOffset.duration = 10000000.0f;
     }
 
     private void OnDisable()
@@ -42,6 +51,7 @@ public sealed class PlayerVelocityFeedback : MonoBehaviour
 
         UpdateFOV(velPerc);
         UpdateWindSFX();
+        UpdateCameraOffset();
     }
 
     private void UpdateFOV(float velPerc)
@@ -89,5 +99,20 @@ public sealed class PlayerVelocityFeedback : MonoBehaviour
             _windSound.AudioSource.volume = Mathf.Lerp(_windSound.AudioSource.volume, targetVolume, _windChangeSpeed * Time.deltaTime);
             _windSound.AudioSource.pitch = Mathf.Lerp(_windSound.AudioSource.pitch, targetPitch, _windChangeSpeed * Time.deltaTime);
         }
+    }
+
+    private void UpdateCameraOffset()
+    {
+        // Scale actual offset with velocity
+        Vector3 velocity = _player.Movement.RB.linearVelocity;
+        float velPerc = Mathf.InverseLerp(_cameraOffsetVelScaleBounds.x, _cameraOffsetVelScaleBounds.y, velocity.magnitude);
+
+        Vector3 targetOffset = Vector3.zero;
+        targetOffset = Vector3.Lerp(Vector3.zero, _maxCameraOffset, velPerc);
+
+        _velocityCameraOffset.offset = Vector3.Lerp(_velocityCameraOffset.offset, targetOffset, _cameraOffsetSmoothSpeed * Time.deltaTime);
+
+        // Resets the elapsed
+        _player.PlayerCameras.AddOrUpdateOffset(_velocityCameraOffset, false, false);
     }
 }
